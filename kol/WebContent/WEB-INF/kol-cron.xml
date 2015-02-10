@@ -17,7 +17,7 @@
   <property name="allowCoreThreadTimeOut" value="true"/>
  </bean>
 
- <bean id="cronServiceManager" class="com.org.directdb.cron.CronServiceManager" scope="singleton">
+ <bean id="cronServiceManager" class="com.org.cron.CronServiceManager" scope="singleton">
   <property name="taskExecutor" ref="taskExecutor"/>
  </bean>
 
@@ -31,6 +31,6 @@
 </bean>
 
 <!-- ******************************************计划任务服务****************************************  -->
-<bean id="cronServcie" class="com.org.directdb.cron.CronService" abstract="true"/>
+<bean id="cronServcie" class="com.org.cron.CronService" abstract="true"/>
 
 </beans>

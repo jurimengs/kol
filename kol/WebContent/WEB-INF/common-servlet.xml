@@ -11,5 +11,5 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	
-	<context:component-scan base-package="com.org.directdb,JUnit4" />
+	<context:component-scan base-package="com.org,JUnit4" />
 </beans>

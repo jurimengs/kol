@@ -1,0 +1,192 @@
+.navbar-inverse .navbar-inner{
+	.bg-1;
+	box-shadow:none;
+	border:none;
+}
+.navbar-sandao .nav{
+	margin-top:10px;
+	margin-bottom:0;
+	height:30px;
+}
+.navbar-sandao .nav li{
+	.inline-block;
+	height:30px;
+	line-height:30px;
+	padding:0;
+	margin-right:3px;
+	vertical-align:top;
+}
+.navbar-sandao .nav li a{
+	padding:0 15px;
+	background:@color-1-s;
+	color:@color-3;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a{
+	color:@white;
+	text-shadow:none;
+}
+
+.navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
+	border-bottom-color: @color-3;
+    border-top-color: @color-3;
+}
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus, #menu1 .nav li.menu1 > a, #menu2 .nav li.menu2 > a, #menu3 .nav li.menu3 > a, #menu4 .nav li.menu4 > a, #menu5 .nav li.menu5 > a, #menu6 .nav li.menu6 > a, #menu7 .nav li.menu7 > a,{
+	.background-fade-top(@startColor: @white, @endColor: @light-gray-b);
+	color:@gray;
+	border:1px solid #ddd;
+	border-bottom:none;
+	margin-top:-4px;
+	padding:10px 14px;
+	height:23px;
+}
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li:hover > a{
+	background:@color-5;
+	color:@white;
+}
+.sub-nav{
+	margin:-22px 0 10px 0;
+	padding:3px 10px;
+	background:@light-gray-b;
+	.border-radius(@borderColor: @color-2)
+}
+.sub-nav .nav{
+	margin:0;
+}
+.sub-nav .nav a{
+	padding:5px 10px;
+	color:@gray;
+}
+.sub-nav .nav-pills > .active > a, .sub-nav .nav-pills > .active > a:hover{
+	background:@gray;
+	color:#fff;
+}
+.navbar-sandao .dropdown-toggle .caret{
+	margin-top:15px;
+	border-bottom-color: @color-3;
+    border-top-color: @color-3;
+}
+.navbar-sandao .dropdown-menu li{
+	height: auto;
+	display:block;
+	margin:0;
+}
+.navbar-sandao .dropdown-menu li a{
+	background:none;
+	color:@black;
+	line-height: 20px;
+    padding: 3px 20px;
+}
+#subnav1, #subnav2, #subnav3, #subnav4, #subnav5, #subnav6{
+	display:none
+}
+.menu1:hover #subnav1, .menu2:hover #subnav2, .menu3:hover #subnav3, .menu4:hover #subnav4, .menu5:hover #subnav5, .menu6:hover #subnav6{
+	display:block;
+	width:938px;
+	z-index:100;
+	background:#f1f2f3;
+	padding:0;
+}
+.menu1:hover #subnav1 .sub-content, .menu2:hover #subnav2 .sub-content, .menu3:hover #subnav3 .sub-content, .menu4:hover #subnav4 .sub-content, .menu5:hover #subnav5 .sub-content, .menu6:hover #subnav6 .sub-content{
+	padding:15px 10px;
+	background:#f1f2f3;
+	display:inline-block;
+}
+.menu2:hover #subnav2 .sub-content,{
+	margin-left:76px;
+}
+.menu3:hover #subnav3 .sub-content,{
+	margin-left:162px;
+}
+.menu4:hover #subnav4 .sub-content,{
+	margin-left:262px;
+}
+.menu5:hover #subnav5 .sub-content,{
+	margin-left:290px;
+}
+.menu6:hover #subnav6 .sub-content,{
+	margin-left:490px;
+}
+#menu1 #subnav1, #menu2 #subnav2, #menu3 #subnav3, #menu4 #subnav4, #menu5 #subnav5, #menu6 #subnav6{
+	display:block;
+	width:918px;
+	z-index:10;
+}
+#menu2 #subnav1, #menu3 #subnav1, #menu4 #subnav1, #menu5 #subnav1, #menu6 #subnav1,{
+	height:101px;
+}
+#subnav1, #menu1 #subnav1{
+	margin-left:-20px;
+}
+#subnav2{
+	margin-left:-78px;
+}
+#subnav3{
+	margin-left:-164px;
+}
+#subnav4{
+	margin-left:-264px;
+}
+#subnav5{
+	margin-left:-392px;
+}
+#subnav6{
+	margin-left:-492px;
+}
+#menu1 #subnav2, #menu1 #subnav3, #menu1 #subnav4, #menu1 #subnav5, #menu1 #subnav6, #menu1 #subnav7, {
+	margin-left:0;
+}
+#menu1 #subnav2 .sub-content, #menu1 #subnav3 .sub-content, #menu1 #subnav4 .sub-content, #menu1 #subnav5 .sub-content, #menu1 #subnav6 .sub-content, #menu1 #subnav7 .sub-content, {
+	margin-left:0;
+}
+#menu1 #subnav2{
+	width:93px;
+}
+#menu1 #subnav3{
+	width:282px;
+}
+#menu1 #subnav4{
+	width:349px;
+}
+#menu1 #subnav5{
+	width:330px;
+}
+#menu1 #subnav6{
+	width:93px;
+}
+#menu1:hover #subnav1, #menu2:hover #subnav2, #menu3:hover #subnav3, #menu4:hover #subnav4, #menu5:hover #subnav5, #menu6:hover #subnav6{
+	padding:10px;
+	background:#f1f2f3;
+}
+#menu1:hover #subnav1 .sub-content, #menu2:hover #subnav2 .sub-content, #menu3:hover #subnav3 .sub-content, #menu4:hover #subnav4 .sub-content, #menu5:hover #subnav5 .sub-content, #menu6:hover #subnav6 .sub-content{
+	padding:0;
+	background:none;
+	margin-left:0;
+}
+#ma1 .navbar, #ma2 .navbar, #ma3 .navbar, #ma4 .navbar, #ma5 .navbar, #ma6 .navbar, #ma7 .navbar, #ma8 .navbar, #ma9 .navbar{
+	margin-bottom:110px;
+}
+#menu1 #ma1 .navbar{
+	margin-bottom:32px;
+}
+.dropdown{
+	position:relative;
+	z-index:1;
+}
+.dropdown:hover{
+	position:relative;
+	z-index:10;
+}
+.top-nav{
+	line-height:27px;
+}
+.top-nav a{
+	color:#fff;
+	font-size:12px;
+}
+.sub-content{
+	font-size:0;
+}
+.sub-content a{
+	font-size:12px;
+}
