@@ -165,7 +165,18 @@ public class HikaricpConnection implements Connection {
 		HikariDataSource temp = new HikariDataSource(dbConfig);
 		this.template = temp;
 	}
+
+	@Override
+	public Object getRealConnection() {
+		try {
+			return template.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	private DataSource template;
+
 
 }

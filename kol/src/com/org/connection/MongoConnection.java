@@ -162,4 +162,9 @@ public class MongoConnection implements Connection {
 	
 	private Mongo mongo;
 	private String databaseName;
+	@Override
+	public Object getRealConnection() {
+		// TODO mongo数据源应该用不上这个
+		return null;
+	}
 }

@@ -15,12 +15,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.org.Connection;
 import com.org.common.CommonConstant;
-import com.org.services.DataSourceContainer;
-import com.org.utils.JSONUtils;
+import com.org.services.UserService;
+import com.org.util.SpringUtil;
 import com.org.utils.RequestUtils;
-import com.org.utils.SmpPropertyUtil;
 import com.org.utils.StringUtil;
 
 @Controller
@@ -35,7 +33,15 @@ public class CommentsController {
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
 			/* 1.获得商户端请求的值  默认设置数据处理成功 */
-			String loginName = request.getParameter("");
+			String loginName = request.getParameter("loginName");
+			String mobile = request.getParameter("mobile");
+			
+			JSONObject newUser = new JSONObject();
+			newUser.put("loginName", loginName);
+			newUser.put("mobile", mobile);
+			
+			UserService userService = (UserService)SpringUtil.getBean("userService");
+			
 			HttpSession session = request.getSession(true);
 			
 			JSONObject sessionUser = (JSONObject)session.getAttribute(CommonConstant.SESSION_USER);

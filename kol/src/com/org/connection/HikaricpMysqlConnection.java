@@ -172,4 +172,15 @@ public class HikaricpMysqlConnection implements Connection {
 	
 	private DataSource template;
 
+	@Override
+	public Object getRealConnection() {
+		try {
+			return template.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
