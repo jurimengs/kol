@@ -36,7 +36,7 @@
 	      <div class="form-list">
 	      	<label class="form-label t-right"></label>
 	        <div class="form-content">
-	        	<a href="javascript:void(0);" onclick="openTestimonials();">新的感悟</a>
+	        	<a href="javascript:void(0);" onclick="openTestimonials();">新的感言</a>
 	        </div>
 	      </div>
 	      <div class="form-list">
@@ -68,7 +68,10 @@ function openComments(){
 }
 
 function openTestimonials(){
-	$d("maskDiv").dialogTestimonials();
+	var submitBtnId = $d("maskDiv").dialogTestimonials();
+	$d(submitBtnId).onclick(function(){
+		alert("sfsdf");
+	});
 }
 
 $("#userLogin").click(function(){
