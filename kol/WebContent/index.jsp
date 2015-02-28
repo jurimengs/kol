@@ -9,8 +9,9 @@
 <meta name="renderer" content="ie-comp">
 <title>首页</title>
 <link rel="stylesheet" type="text/css" href="${ctx }/css/main.css">
+<link rel="stylesheet" type="text/css" href="${ctx }/css/mask.css">
 
-<script src="${ctx }/images/js/jquery.min.js" type="text/javascript"></script>
+<script src="${ctx }/js/jquery.min.js" type="text/javascript"></script>
 <script src="${ctx }/js/common.js" type="text/javascript"></script>
 
 <style type="text/css">
@@ -35,25 +36,14 @@
 	      <div class="form-list">
 	      	<label class="form-label t-right"></label>
 	        <div class="form-content">
-	        	<a href="javascript:void(0);">新的感悟</a>
+	        	<a href="javascript:void(0);" onclick="openTestimonials();">新的感言</a>
 	        </div>
 	      </div>
 	      <div class="form-list">
 	      	<label class="form-label t-right"></label>
 	        <div class="form-content">
-	        	<a href="javascript:void(0);">新的感悟</a>
-	        </div>
-	      </div>
-	      <div class="form-list">
-	      	<label class="form-label t-right"></label>
-	        <div class="form-content">
-	        	<a href="javascript:void(0);">新的感悟</a>
-	        </div>
-	      </div>
-	      <div class="form-list">
-	      	<label class="form-label t-right"></label>
-	        <div class="form-content">
-	        	<a href="javascript:void(0);">新的感悟</a>
+	        	<a href="javascript:void(0);" onclick="openComments();">评论</a>
+	        	<a href="javascript:void(0);">点赞</a>
 	        </div>
 	      </div>
 			</div>
@@ -72,6 +62,18 @@
 
 <script type="text/javascript" >
 //alert("${ctx}");
+//$d("maskDiv").commentsModule();
+function openComments(){
+	$d("maskDiv").dialogComments();
+}
+
+function openTestimonials(){
+	var submitBtnId = $d("maskDiv").dialogTestimonials();
+	$d(submitBtnId).onclick(function(){
+		alert("sfsdf");
+	});
+}
+
 $("#userLogin").click(function(){
 	$("#realLoginName").val($("#username").val());
 	$("#realLoginPwd").val($("#loginpwd").val());
