@@ -9,16 +9,8 @@
 	    return false;
 	};
 	
-	Object.prototype.containsKey = function(item){
-		for (var k in this) {
-			if(k === item){
-				return true;
-			}
-		}
-		return false;
-	};
-	
 	var session = {};
+
 	var $_d = function(i, fromSession){
 		if ( window == this ){
 			return new $d(i);
@@ -40,7 +32,7 @@
 	$$ = function(id, fromSession){
 		if(fromSession){
 			var o = document.getElementById(id);
-			if(session.containsKey(id) && (!! o)){
+			if(!! session[id] && (!! o)){
 				//alert("已缓存");
 			} else {
 				session[id] = o;
