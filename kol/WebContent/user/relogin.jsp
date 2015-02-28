@@ -10,7 +10,7 @@
 <title>首页</title>
 <link rel="stylesheet" type="text/css" href="${ctx }/css/main.css">
 
-<script src="${ctx }/images/js/jquery.min.js" type="text/javascript"></script>
+<script src="${ctx }/js/jquery.min.js" type="text/javascript"></script>
 <script src="${ctx }/js/common.js" type="text/javascript"></script>
 
 <style type="text/css">

@@ -1,20 +1,52 @@
 
 (function(window){
-	var $_d = function(i){
+	Array.prototype.contains = function(item){
+		for (var i=0; i < this.length; i++) {
+			if (this[i] === item){
+	            return true;
+			}
+	    }
+	    return false;
+	};
+	
+	Object.prototype.containsKey = function(item){
+		for (var k in this) {
+			if(k === item){
+				return true;
+			}
+		}
+		return false;
+	};
+	
+	var session = {};
+	var $_d = function(i, fromSession){
 		if ( window == this ){
 			return new $d(i);
 		}
 		if(typeof i == "object"){
 			this._$_d = i;
 		} else if(typeof i == "string"){
-			this._$_d = $$(i);
+			if(!!! fromSession){
+				// 如果fromSession为空, 则默认方案为从缓存取
+				fromSession = true;
+			}
+			this._$_d = $$(i, fromSession);
 		} else {
 			// for array
 			this._$_d = i;
 		}
 		this.copyAttr();
 	},
-	$$ = function(id){
+	$$ = function(id, fromSession){
+		if(fromSession){
+			var o = document.getElementById(id);
+			if(session.containsKey(id) && (!! o)){
+				//alert("已缓存");
+			} else {
+				session[id] = o;
+			}
+			return session[id];
+		}
 		return document.getElementById(id);
 	};
 
@@ -52,6 +84,78 @@
 	$_d.prototype.submit = function() {
 		// 经过属性复制后,已经有一切属性
 		$$(this.id).submit();
+	};
+
+	/**
+	 * 评论对话框
+	 */
+	$_d.prototype.dialogComments = function() {
+		// 经过属性复制后,已经有一切属性
+		var o = $$("maskDiv");
+		if(!!! o){
+			var h = 
+				'<div class="message" id="maskDiv">' +
+					'<div class="modal">' +
+						'<div class="modal-header" id="maskHeadDiv">' +
+							'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
+							'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
+						'</div>' +
+						'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
+							'请输入标题:'+
+							'<br />'+
+							'<input class="input-small commentsTitle" id="commentsTitle" placeholder="标题" />'+
+							'<br />'+
+							'请输入内容:'+
+							'<br />'+
+							'<textarea class="maskContent" id="content" placeholder="内容"></textarea>'+
+							'<br />'+
+							'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
+						'</div>' +
+					'</div>' +
+				'</div>';
+			o = getObjFromHtml(h);
+			document.body.appendChild(o);
+		}
+		o.style.display = "block";
+	};
+	
+	/**
+	 * 感言对话框
+	 */
+	$_d.prototype.dialogTestimonials = function() {
+		// 经过属性复制后,已经有一切属性
+		var o = $$("maskDiv");
+		if(!!! o){
+			var h = 
+				'<div class="message" id="maskDiv">' +
+					'<div class="modal">' +
+						'<div class="modal-header" id="maskHeadDiv">' +
+							'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
+							'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
+						'</div>' +
+						'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
+							'请输入标题:'+
+							'<br />'+
+							'<input class="input-small commentsTitle" id="commentsTitle" placeholder="标题" />'+
+							'<br />'+
+							'请输入内容:'+
+							'<br />'+
+							'<textarea class="maskContent" id="content" placeholder="内容"></textarea>'+
+							'<br />'+
+							'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
+						'</div>' +
+					'</div>' +
+				'</div>';
+			o = getObjFromHtml(h);
+			document.body.appendChild(o);
+		}
+		o.style.display = "block";
+	};
+	
+	$_d.prototype.css = function(sName, sValue) {
+		// 经过属性复制后,已经有一切属性
+		this.style[sName] = this._$_d.style[sName] = sValue;
+		return this;
 	};
 	
 	$_d.prototype.hide = function() {
