@@ -44,8 +44,8 @@ public class DataSourceContainer {
 	}
 	
 	public void initAllDataSource(){
-		HikaricpDataSourceService.getInstance().loadDataSource(CommonConstant.DB_HIKARICP, null);
-		MongodbDataSourceService.getInstance().loadDataSource(CommonConstant.DB_MONGO, null);
+//		HikaricpDataSourceService.getInstance().loadDataSource(CommonConstant.DB_HIKARICP, null);
+//		MongodbDataSourceService.getInstance().loadDataSource(CommonConstant.DB_MONGO, null);
 		HikaricpMysqlDataSourceService.getInstance().loadDataSource(CommonConstant.DB_MYSQL, null);
 	}
 	

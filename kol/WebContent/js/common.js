@@ -92,7 +92,7 @@
 	/**
 	 * 评论对话框
 	 */
-	$_d.prototype.dialogComments = function() {
+	$_d.prototype.dialogComments = function(id) {
 		// 经过属性复制后,已经有一切属性
 		var o = $$("maskDiv");
 		if(!!! o){
@@ -104,22 +104,27 @@
 							'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
 						'</div>' +
 						'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
-							'请输入标题:'+
-							'<br />'+
-							'<input class="input-small commentsTitle" id="commentsTitle" placeholder="标题" />'+
-							'<br />'+
-							'请输入内容:'+
-							'<br />'+
-							'<textarea class="maskContent" id="content" placeholder="内容"></textarea>'+
-							'<br />'+
-							'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
+							'<form action="" id="commentsForm">&nbsp;'+
+								'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
+								'请输入标题:'+
+								'<br />'+
+								'<input class="input-small commentsTitle" id="commentsTitle" name="commentsTitle" placeholder="标题" />'+
+								'<br />'+
+								'请输入内容:'+
+								'<br />'+
+								'<textarea class="maskContent" id="content" name="commentContent" placeholder="内容"></textarea>'+
+								'<br />'+
+								'<a href="javascript:void(0);" id="commentsBtn" class="btn orange" onclick="">发表</a>'+
+							'</form>'+
 						'</div>' +
 					'</div>' +
 				'</div>';
 			o = getObjFromHtml(h);
 			document.body.appendChild(o);
 		}
+		$$("testimonialsId").value=id;
 		o.style.display = "block";
+		return "commentsBtn";
 	};
 	
 	/**
@@ -137,24 +142,26 @@
 							'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
 						'</div>' +
 						'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
-							'主题:'+
-							'<br />'+
-							'<input class="input-small commentsTitle" id="commentsTitle" placeholder="主题" />'+
-							'<br />'+
-							'感言类型:'+
-							'<br />'+
-							'<select>'+
-								'<option value="job">工作频道</option>'+
-								'<option value="emotion">情感频道</option>'+
-								'<option value="other">其他频道</option>'+
-								'<option value="other">其他频道</option>'+
-							'</select>'+
-							'<br />'+
-							'您的感言:'+
-							'<br />'+
-							'<textarea class="maskContent" id="content" placeholder="内容"></textarea>'+
-							'<br />'+
-							'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
+							'<form action="" id="commentsForm">&nbsp;'+
+								'主题:'+
+								'<br />'+
+								'<input class="input-small commentsTitle" id="commentsTitle" name="commentsTitle" placeholder="主题" />'+
+								'<br />'+
+								'感言类型:'+
+								'<br />'+
+								'<select id="channel" name="channel">'+
+									'<option value="0">工作频道</option>'+
+									'<option value="1">情感频道</option>'+
+									'<option value="2">生活频道</option>'+
+									'<option value="3">其他频道</option>'+
+								'</select>'+
+								'<br />'+
+								'您的感言:'+
+								'<br />'+
+								'<textarea class="maskContent" id="testimonialsContent" name="testimonialsContent" placeholder="内容"></textarea>'+
+								'<br />'+
+								'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
+							'</form>'+
 						'</div>' +
 					'</div>' +
 				'</div>';

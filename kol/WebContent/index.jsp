@@ -34,46 +34,32 @@
 </head>
 
 <body>
-	<header>
+	<header style="">
 		<div id="logo" class="fl">
-			<a href="#">
+			<a href="javascript:void(0);">
 				人生<span>BAI</span>科
 			</a>
 		</div>
 		<nav class="fr">
 			<div class="btn-gp fr">
-				<a href="#">
-					登录
-				</a>
-				<a href="#">
-					注册
-				</a>
+				<a href="javascript:void(0);">登录</a>
+				<a href="javascript:void(0);">注册</a>
 			</div>
 			<ul class="fr">
 				<li>
-					<a href="#">
-						吐槽吧
-					</a>
+					<a href="javascript:void(0);" onclick="turnToTuCaoBa();">吐槽吧</a>
 				</li>
 				<li>
-					<a href="#">
-						其他
-					</a>
+					<a href="javascript:void(0);" onclick="turnToOther();">其他</a>
 				</li>
 				<li>
-					<a href="#">
-						事业
-					</a>
+					<a href="javascript:void(0);" onclick="turnToCareer();">事业</a>
 				</li>
 				<li>
-					<a href="#">
-						情感
-					</a>
+					<a href="javascript:void(0);" onclick="turnToEmotion();">情感</a>
 				</li>
 				<li>
-					<a href="#">
-						生活
-					</a>
+					<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
 				</li>
 			</ul>
 		</nav>
@@ -84,21 +70,14 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<li>
-						<a href="#">
-							<img src="images/banner1.jpg">
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<img src="images/banner2.jpg">
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<img src="images/banner3.jpg">
-						</a>
-					</li>
+					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg', ',') }" />
+					<c:forEach var="banner" items="${bannerArray }">
+						<li>
+							<a href="javascript:void(0);">
+								<img src="${ctx }/${banner}">
+							</a>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -106,336 +85,114 @@
 	<div class="container">
 		<div class="comwidth">
 			<h1>
-				感知生活
-				<span>
-					100%
-				</span>
-				了解您、
-				<span>
-					No.1
-				</span>
-				国内首页人生BAI科平台、
-				<span>
-					1,000,000
-				</span>
-				位的访问者即将来临
+				感知生活<span>100%</span>了解您、<span>No.1</span>
+				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
 			</h1>
+			<!-- section one -->
 			<section class="first left">
-				<article>
-					<div class="zhuti-bar">
-						<a href="#" class="zhuti">
-							<img src="images/aimg1.jpg" alt="zhuti">
-						</a>
-						<p>
-							<a href="javascript:void(0);" onclick="openComments();">
-								评价
-							</a>
-						</p>
-					</div>
-					<ul class="pinglun">
-						<li class="first">
-							<a href="#" class="touxiang">
-								<img src="images/30.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#" class="name">
-									Jack
+				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
+					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
+					<c:if test="${positionFlag eq 0}">
+						<article>
+							<div class="zhuti-bar">
+								<a href="javascript:void(0);" class="zhuti">
+									<strong>${tms.title }:</strong><br />
+									<%-- <img src="${ctx }/images/aimg1.jpg" alt="zhuti"> --%>
 								</a>
-								分享到
-								<a href="#">
-									网站模板
-								</a>
+								<p>${tms.contents}</p>
+								<p>
+									<span>
+										发表时间：${tms.createDate }<br/>
+									</span>
+									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
+										评价
+									</a>
+								</p>
 							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									0032032
-								</a>
-								看看
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-					</ul>
-				</article>
+						</article>
+						<br />
+					</c:if>
+				</c:forEach>
 			</section>
+			
+			<!-- section two -->
 			<section>
-				<article>
-					<div class="zhuti-bar">
-						<a href="#" class="zhuti">
-							<img src="images/aimg2.jpg" alt="zhuti">
-						</a>
-						<p>
-							<a href="#">
-								jQuery选项卡形式图片瀑布流布局选项卡切换效果代码
-							</a>
-						</p>
-					</div>
-					<ul class="pinglun">
-						<li class="first">
-							<a href="#" class="touxiang">
-								<img src="images/30.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#" class="name">
-									Jack
+				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
+					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
+					<c:if test="${positionFlag eq 1}">
+						<article>
+							<div class="zhuti-bar">
+								<a href="javascript:void(0);" class="zhuti">
+									<strong>${tms.title }:</strong><br />
+									<%-- <img src="${ctx }/images/aimg2.jpg" alt="zhuti"> --%>
 								</a>
-								分享到
-								<a href="#">
-									Jquery
-								</a>
+								<p>${tms.contents}</p>
+								<p>
+									<span>
+										发表时间：${tms.createDate }<br/>
+									</span>
+									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
+										评价
+									</a>
+								</p>
 							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									甜心
-								</a>
-								谢谢分享！
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									笑对人生
-								</a>
-								挺好的
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									女孩无忧
-								</a>
-								谢谢
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									万林
-								</a>
-								很棒
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									烟雨楼台
-								</a>
-								感谢分享非常好
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									死马破车
-								</a>
-								好
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-					</ul>
-				</article>
+						</article>
+						<br />
+					</c:if>
+				</c:forEach>
 			</section>
+			
+			<!-- section three -->
 			<section class="left">
-				<article>
-					<div class="zhuti-bar">
-						<a href="#" class="zhuti">
-							<img src="images/aimg3.jpg" alt="zhuti">
-						</a>
-						<p>
-							<a href="#">
-								html5 modernizr图片瀑布流布局点击弹出图片滑动预览
-							</a>
-							<a href="#" class="fenlei">
-								css3
-							</a>
-							<a href="#" class="fenlei">
-								html5
-							</a>
-							<a href="#" class="fenlei">
-								瀑布流
-							</a>
-						</p>
-					</div>
-					<ul class="pinglun">
-						<li class="first">
-							<a href="#" class="touxiang">
-								<img src="images/30.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#" class="name">
-									孙俊杰
+				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
+					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
+					<c:if test="${positionFlag eq 2}">
+						<article>
+							<div class="zhuti-bar">
+								<a href="javascript:void(0);" class="zhuti">
+									<strong>${tms.title }:</strong><br />
+									<%-- <img src="${ctx }/images/aimg3.jpg" alt="zhuti"> --%>
 								</a>
-								分享到
-								<a href="#">
-								</a>
+								<p>${tms.contents}</p>
+								<p>
+									<span>
+										发表时间：${tms.createDate }<br/>
+									</span>
+									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
+										评价
+									</a>
+								</p>
 							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									嘉盛
-								</a>
-								修改起来不是很方便
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									花儿对我笑
-								</a>
-								好
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									在路上
-								</a>
-								真不错，就是不兼容IE9一下的浏览器
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-					</ul>
-				</article>
+						</article>
+						<br />
+					</c:if>
+				</c:forEach>
 			</section>
+			<!-- section four -->
 			<section>
-				<article>
-					<div class="zhuti-bar">
-						<a href="#" class="zhuti">
-							<img src="images/aimg4.jpg" alt="zhuti">
-						</a>
-						<p>
-							<a href="#">
-								html5 CSS3模拟视差图片跳动瀑布流布局效果
-							</a>
-							<a href="#" class="fenlei">
-								瀑布流式布局
-							</a>
-							<a href="#" class="fenlei">
-								css3
-							</a>
-							<a href="#" class="fenlei">
-								html5
-							</a>
-							<a href="#" class="fenlei">
-								视差效果
-							</a>
-						</p>
-					</div>
-					<ul class="pinglun">
-						<li class="first">
-							<a href="#" class="touxiang">
-								<img src="images/30.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#" class="name">
-									黑暗中的舞者
+				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
+					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
+					<c:if test="${positionFlag eq 3}">
+						<article>
+							<div class="zhuti-bar">
+								<a href="javascript:void(0);" class="zhuti">
+									<strong>${tms.title }:</strong><br />
+									<%-- <img src="${ctx }/images/aimg4.jpg" alt="zhuti"> --%>
 								</a>
-								分享到
-								<a href="#">
-									图片代码
-								</a>
+								<p>${tms.contents}</p>
+								<p>
+									<span>
+										发表时间：${tms.createDate }<br/>
+									</span>
+									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
+										评价
+									</a>
+								</p>
 							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									苏醒
-								</a>
-								好用
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									宅男福利
-								</a>
-								不错呀感谢
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-						<li>
-							<a href="#" class="touxiang">
-								<img src="images/29.jpg" alt="touxiang">
-							</a>
-							<div>
-								<a href="#">
-									幸福来敲门
-								</a>
-								不错，好用
-							</div>
-							<p class="clear">
-							</p>
-						</li>
-					</ul>
-				</article>
+						</article>
+						<br />
+					</c:if>
+				</c:forEach>
 			</section>
 			<div class="clear">
 			</div>
@@ -448,18 +205,18 @@
 				<span>
 					|
 				</span>
-				<a href="#">
+				<a href="javascript:void(0);">
 					联系我们
 				</a>
 			</p>
 			<ul class="foot-nav fr">
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						排行榜
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						标签搜索
 					</a>
 					<span>
@@ -467,7 +224,7 @@
 					</span>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						联系我们
 					</a>
 					<span>
@@ -475,7 +232,7 @@
 					</span>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						积分获取
 					</a>
 					<span>
@@ -483,7 +240,7 @@
 					</span>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						关于我们
 					</a>
 					<span>
@@ -497,35 +254,52 @@
 	</footer>
 </body>
 
-
+<form id="channelForm" action="${ctx }/channel/life.do">
+</form>
 <script type="text/javascript">
-	//alert("${ctx}");
-	//$d("maskDiv").commentsModule();
-	function openComments() {
-		$d("maskDiv").dialogComments();
-	}
+// 
+jQuery(".slideBox").slide({
+	mainCell : ".bd ul",
+	autoPlay : true
+});
 
-	function openTestimonials() {
-		var submitBtnId = $d("maskDiv").dialogTestimonials();
-		$d(submitBtnId).onclick(function() {
-			alert("sfsdf");
-		});
-	}
-
-	$("#userLogin").click(function() {
-		$("#realLoginName").val($("#username").val());
-		$("#realLoginPwd").val($("#loginpwd").val());
-		$("#loginForm").prop("action", "${ctx}/user/userLogin.do");
-
-		var ids = [ 'username', 'loginpwd' ];
-		if (notNullArr(ids)) {
-			$("#loginForm").submit();
-		}
+//alert("${ctx}");
+//$d("maskDiv").commentsModule();
+function openComments(testimonialsId) {
+	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
+	$d(commentsBtn).onclick(function() {
+		alert("commentsBtn");
 	});
-	// 
-	jQuery(".slideBox").slide({
-		mainCell : ".bd ul",
-		autoPlay : true
+	
+}
+
+function openTestimonials() {
+	var submitBtnId = $d("maskDiv").dialogTestimonials();
+	$d(submitBtnId).onclick(function() {
+		alert("sfsdf");
 	});
+}
+	
+function turnToTuCaoBa(){
+	$("#channelForm").prop("action", "${ctx }/channel/tucaoba.do");
+	$("#channelForm").submit();
+}
+function turnToOther(){
+	$("#channelForm").prop("action", "${ctx }/channel/other.do");
+	$("#channelForm").submit();
+}
+function turnToCareer(){
+	$("#channelForm").prop("action", "${ctx }/channel/career.do");
+	$("#channelForm").submit();
+}
+function turnToEmotion(){
+	$("#channelForm").prop("action", "${ctx }/channel/emotion.do");
+	$("#channelForm").submit();
+}
+function turnToLife(){
+	$("#channelForm").prop("action", "${ctx }/channel/life.do");
+	$("#channelForm").submit();
+}
+
 </script>
 </html>

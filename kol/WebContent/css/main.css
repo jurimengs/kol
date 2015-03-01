@@ -10,6 +10,7 @@ html {font-size: 625%;}
 body {width: 100%; font-size: 12px; font-size: .12rem; background: url(../images/bg.jpg);}
 .comwidth {width: 91.6234214759%; margin: 0 auto;}
 /*导航栏*/
+.tucaoba {color: white;}
 header {line-height: 55px; background-color: #2e3138;}
 #logo {margin-left: 4.89251297257%;}
 header nav  {margin-right: 2.14974054855%;}

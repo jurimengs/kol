@@ -1,13 +1,13 @@
 package com.org.dao;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Repository;
@@ -76,6 +76,25 @@ public class CommonDao extends BaseDao {
 		return null;
 	}
 
+	public JSONArray queryJSONArray(String sql, 
+			Map<Integer, Object> params){
+		JSONArray list = null;
+		try {
+			ResultSet rs = getResultSet(sql, params);
+			list = parseResultSetToJSONArray(rs, true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	/**
 	 * @param entityClass
 	 * @param sql
