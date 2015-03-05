@@ -137,6 +137,9 @@ public class HikaricpMysqlConnection implements Connection {
 		config.addDataSourceProperty("user", user);
 		config.addDataSourceProperty("password", password);
 		
+		config.addDataSourceProperty("useUnicode", "true");
+		config.addDataSourceProperty("characterEncoding", "utf8");
+		
 		config.setConnectionTimeout(Long.valueOf(connectionTimeout));
 		config.setIdleTimeout(Long.valueOf(idleTimeout));
 		config.setMaxLifetime(Long.valueOf(maxLifetime));

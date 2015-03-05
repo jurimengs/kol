@@ -162,6 +162,7 @@ public class CommonDao extends BaseDao {
 		try {
 			ps.execute();
 		} catch (SQLException e) {
+			conn.setAutoCommit(false);
 			conn.rollback();
 			e.printStackTrace();
 			ps.close();

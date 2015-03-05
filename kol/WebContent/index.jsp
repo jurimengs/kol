@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>人生百科</title>
 <meta name="description" content="">
@@ -53,13 +53,19 @@
 					<a href="javascript:void(0);" onclick="turnToOther();">其他</a>
 				</li>
 				<li>
-					<a href="javascript:void(0);" onclick="turnToCareer();">事业</a>
+					<a href="javascript:void(0);" onclick="turnToCareer();">工作</a>
 				</li>
 				<li>
 					<a href="javascript:void(0);" onclick="turnToEmotion();">情感</a>
 				</li>
 				<li>
 					<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" onclick="openTestimonials();">发表感慨</a>
 				</li>
 			</ul>
 		</nav>
@@ -257,6 +263,11 @@
 <form id="channelForm" action="${ctx }/channel/life.do">
 </form>
 <script type="text/javascript">
+function formTo(formId, href){
+	$("#"+formId).prop("action", href);
+	$("#"+formId).submit();	
+}
+
 // 
 jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
@@ -267,39 +278,42 @@ jQuery(".slideBox").slide({
 //$d("maskDiv").commentsModule();
 function openComments(testimonialsId) {
 	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
-	$d(commentsBtn).onclick(function() {
-		alert("commentsBtn");
+	$("#"+commentsBtn).click(function() {
+		//alert("commentsBtn");
+		formTo("commentsForm", "${ctx }/comments/saveComments.do");
 	});
-	
 }
 
 function openTestimonials() {
 	var submitBtnId = $d("maskDiv").dialogTestimonials();
-	$d(submitBtnId).onclick(function() {
-		alert("sfsdf");
+	$("#"+submitBtnId).click(function() {
+		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
 	});
 }
 	
 function turnToTuCaoBa(){
-	$("#channelForm").prop("action", "${ctx }/channel/tucaoba.do");
-	$("#channelForm").submit();
+	formTo("channelForm", "${ctx }/channel/tucaoba.do");
 }
 function turnToOther(){
-	$("#channelForm").prop("action", "${ctx }/channel/other.do");
-	$("#channelForm").submit();
+	formTo("channelForm", "${ctx }/channel/other.do");
 }
 function turnToCareer(){
-	$("#channelForm").prop("action", "${ctx }/channel/career.do");
-	$("#channelForm").submit();
+	formTo("channelForm", "${ctx }/channel/career.do");
 }
 function turnToEmotion(){
-	$("#channelForm").prop("action", "${ctx }/channel/emotion.do");
-	$("#channelForm").submit();
+	formTo("channelForm", "${ctx }/channel/emotion.do");
 }
 function turnToLife(){
-	$("#channelForm").prop("action", "${ctx }/channel/life.do");
-	$("#channelForm").submit();
+	formTo("channelForm", "${ctx }/channel/life.do");
+}
+function turnToIndex(){
+	formTo("channelForm", "${ctx }/channel/index.do");
 }
 
+var ohmg = "${ohmg}";
+//alert(ohmg);
+if(ohmg == "null" || !!! ohmg){
+	turnToIndex();
+}
 </script>
 </html>

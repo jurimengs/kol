@@ -64,7 +64,7 @@ public class ContextLoaderListener implements ServletContextListener{
 	    /*10. start socket server */
 //	    IServerSocket serverSocket = (IServerSocket)sc.getBean(CT.SPRING_BEANNAME_JNIOSERVERSOCKET);//SPRING_BEANNAME_JNIOSERVERSOCKET,SPRING_BEANNAME_SERVERSOCKET
 //	    serverSocket.start();
-	    
+		
 		log.info("Integrate Smp With Spring Container End....");
 		
 		/*11. start kestrel message */

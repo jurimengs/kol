@@ -17,16 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.org.common.CommonConstant;
 import com.org.services.CommentsService;
+import com.org.services.TestimonialsService;
 import com.org.util.SpringUtil;
 import com.org.utils.RequestUtils;
 import com.org.utils.StringUtil;
 
 @Controller
-@RequestMapping("/comments")
-public class CommentsController {
+@RequestMapping("/testionials")
+public class TestimonialsController {
 	
-	@RequestMapping("/saveComments")
-	public String regist(HttpServletRequest request,HttpServletResponse response) 
+	@RequestMapping("/saveContents")
+	public String saveContents(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
 			response.setHeader("Pragma","no-cache"); 
@@ -36,14 +37,18 @@ public class CommentsController {
 			HttpSession session = request.getSession(true);
 			JSONObject sessionUser = (JSONObject)session.getAttribute(CommonConstant.SESSION_USER);
 			
-			/* 1.获得商户端请求的值  默认设置数据处理成功 */
-			String testimonialsId = request.getParameter("testimonialsId");
-			String commentContent = request.getParameter("commentContent");
+			// TODO
 //			String userId = sessionUser.getString("id");
 			String userId = "1";
+			String contents = request.getParameter("testimonialsContent");
+			contents = new String(contents.getBytes("ISO-8859-1"),"utf-8");
 			
-			CommentsService commentsService = (CommentsService)SpringUtil.getBean("commentsService");
-			commentsService.saveComments(testimonialsId, commentContent, userId);
+			String channelId = request.getParameter("channelId");
+			String title = request.getParameter("testimonialsTitle");
+			title = new String(title.getBytes("ISO-8859-1"),"utf-8");
+			
+			TestimonialsService tService = (TestimonialsService)SpringUtil.getBean("testimonialsService");
+			tService.saveContents(userId, contents, channelId, title);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,5 +57,5 @@ public class CommentsController {
 		return "/index.jsp";
 	}
 	
-	private Log log = LogFactory.getLog(CommentsController.class);
+	private Log log = LogFactory.getLog(TestimonialsController.class);
 }

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/org=gbk
 encoding//src/com/org/utils/RSASignature.java=UTF-8
-encoding/<project>=gbk
+encoding/<project>=UTF-8
 encoding/WebContent=UTF-8
