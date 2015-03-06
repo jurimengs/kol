@@ -71,7 +71,7 @@ public class ChannelController {
 			return "/error.jsp";
 		}
 		
-		return "/index.jsp";
+		return "/channel/life.jsp";
 	}
 	
 	@RequestMapping("/emotion")
@@ -96,7 +96,7 @@ public class ChannelController {
 			return "/error.jsp";
 		}
 		
-		return "/index.jsp";
+		return "/channel/emotion.jsp";
 	}
 	
 	@RequestMapping("/career")
@@ -121,7 +121,7 @@ public class ChannelController {
 			return "/error.jsp";
 		}
 		
-		return "/index.jsp";
+		return "/channel/career.jsp";
 	}
 	
 	@RequestMapping("/other")
@@ -146,7 +146,7 @@ public class ChannelController {
 			return "/error.jsp";
 		}
 		
-		return "/index.jsp";
+		return "/channel/other.jsp";
 	}
 	
 	private Log log = LogFactory.getLog(ChannelController.class);
