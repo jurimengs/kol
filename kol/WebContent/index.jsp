@@ -90,9 +90,13 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
+			<!-- <h1>
 				感知生活<span>100%</span>了解您、<span>No.1</span>
 				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
+			</h1> -->
+			<h1>
+				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>未来</span>怎样我们无法预料但，
+				<span>可以</span>记录你的人生，这里的所有人将会见证你的成长
 			</h1>
 			<!-- section one -->
 			<section class="first left">

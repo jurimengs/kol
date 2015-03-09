@@ -27,6 +27,7 @@ public class ChannelController {
 	public String index(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
+			log.info("index。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
@@ -53,6 +54,7 @@ public class ChannelController {
 	public String life(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
+			log.info("life。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
@@ -63,7 +65,6 @@ public class ChannelController {
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
-			log.info("收到请求参数：　" );
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
@@ -78,6 +79,7 @@ public class ChannelController {
 	public String emotion(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
+			log.info("emotion。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
@@ -88,7 +90,6 @@ public class ChannelController {
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
-			log.info("收到请求参数：　" );
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
@@ -103,6 +104,7 @@ public class ChannelController {
 	public String career(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
+			log.info("career。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
@@ -113,7 +115,6 @@ public class ChannelController {
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
-			log.info("收到请求参数：　" );
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
@@ -128,6 +129,7 @@ public class ChannelController {
 	public String other(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 		try {
+			log.info("other。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
@@ -138,7 +140,6 @@ public class ChannelController {
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
-			log.info("收到请求参数：　" );
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
