@@ -45,29 +45,7 @@
 				<a href="javascript:void(0);">登录</a>
 				<a href="javascript:void(0);">注册</a>
 			</div>
-			<ul class="fr">
-				<li>
-					<a href="javascript:void(0);" onclick="turnToTuCaoBa();">吐槽吧</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToOther();">其他</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToCareer();">工作</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToEmotion();">情感</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="openTestimonials();">发表感慨</a>
-				</li>
-			</ul>
+			<%@ include file="/common/menu.jsp"%>
 		</nav>
 		<div class="clear">
 		</div>

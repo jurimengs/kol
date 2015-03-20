@@ -1,4 +1,4 @@
-package com.org.services;
+package com.org.services.busi;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.org.common.CommonConstant;
 import com.org.dao.CommonDao;
+import com.org.exception.SvcException;
 import com.org.util.DateUtil;
 import com.org.util.SpringUtil;
 
@@ -41,4 +42,19 @@ public class TestimonialsService {
 			res.put(CommonConstant.RESP_MSG, "数据库保存异常");
 		}
 		return res;
-	}}
+	}
+	
+	public JSONObject getTestimonialById(String id){
+		String sql = "select * from kol_testimonials where id = ?";
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, Integer.valueOf(id));
+		JSONObject testimonial = new JSONObject();
+		try {
+			testimonial = commonDao.querySingle(sql, params);
+		} catch (SvcException e) {
+			e.printStackTrace();
+		}
+		return testimonial;
+	}
+}

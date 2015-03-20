@@ -99,7 +99,7 @@
 			'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
 			'</div>' +
 			'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
-			'<form action="" id="commentsForm">&nbsp;'+
+			'<form action="" id="commentsForm" method="post">&nbsp;'+
 			'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
 			'<br />'+
 			'请输入内容:'+
@@ -138,7 +138,7 @@
 						'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
 					'</div>' +
 					'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
-						'<form action="" id="commentsForm" method="">&nbsp;'+
+						'<form action="" id="commentsForm" method="post">&nbsp;'+
 							'主题:'+
 							'<br />'+
 							'<input class="input-small commentsTitle" id="testimonialsTitle" name="testimonialsTitle" placeholder="主题" />'+

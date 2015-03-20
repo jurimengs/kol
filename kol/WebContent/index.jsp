@@ -36,7 +36,7 @@
 <body>
 	<header style="">
 		<div id="logo" class="fl">
-			<a href="javascript:void(0);">
+			<a href="javascript:void(0);" onclick="turnToIndex();">
 				人生<span>BAI</span>科
 			</a>
 		</div>
@@ -45,29 +45,7 @@
 				<a href="javascript:void(0);">登录</a>
 				<a href="javascript:void(0);">注册</a>
 			</div>
-			<ul class="fr">
-				<li>
-					<a href="javascript:void(0);" onclick="turnToTuCaoBa();">吐槽吧</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToOther();">其他</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToCareer();">工作</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToEmotion();">情感</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" onclick="openTestimonials();">发表感慨</a>
-				</li>
-			</ul>
+			<%@ include file="/common/menu.jsp"%>
 		</nav>
 		<div class="clear">
 		</div>
@@ -96,30 +74,14 @@
 			</h1> -->
 			<h1>
 				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>未来</span>怎样我们无法预料但，
-				<span>可以</span>记录你的人生，这里的所有人将会见证你的成长
+				<span>但我们</span>会记录你的人生，这里的所有人将会见证你的成长
 			</h1>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 0}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg1.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -130,23 +92,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 1}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg2.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -157,23 +103,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 2}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg3.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -183,23 +113,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 3}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg4.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -264,7 +178,7 @@
 	</footer>
 </body>
 
-<form id="channelForm" action="${ctx }/channel/life.do">
+<form id="channelForm" action="${ctx }/channel/life.do" method="post" >
 </form>
 <script type="text/javascript">
 function formTo(formId, href){
@@ -286,6 +200,15 @@ function openComments(testimonialsId) {
 		//alert("commentsBtn");
 		formTo("commentsForm", "${ctx }/comments/saveComments.do");
 	});
+}
+
+/**
+ * 查看发言的所有评论
+ */
+function allCommentsAbout(testimonialsId){
+	var newInput = $("<input type='hidden' name='testimonialsId' value='"+testimonialsId+"'>");
+	$("#channelForm").append(newInput);
+	formTo("channelForm", "${ctx }/comments/queryComments.do");
 }
 
 function openTestimonials() {

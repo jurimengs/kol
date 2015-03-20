@@ -149,7 +149,7 @@ public class CommonDao extends BaseDao {
 	 * @throws SQLException 
 	 * @throws SvcException 
 	 */
-	public synchronized <T> void addSingle(String sql, Map<Integer, Object> params) throws SQLException {
+	public synchronized <T> boolean addSingle(String sql, Map<Integer, Object> params) throws SQLException {
 		java.sql.Connection conn = getConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		try {
@@ -157,7 +157,7 @@ public class CommonDao extends BaseDao {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			ps.close();
-			return;
+			return false;
 		}
 		try {
 			ps.execute();
@@ -166,8 +166,9 @@ public class CommonDao extends BaseDao {
 			conn.rollback();
 			e.printStackTrace();
 			ps.close();
-			return;
+			return false;
 		}
+		return true;
 	}
 	
 	public synchronized <T> void update(String sql, Map<Integer, Object> params) throws SQLException {

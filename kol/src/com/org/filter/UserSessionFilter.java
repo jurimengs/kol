@@ -2,12 +2,10 @@ package com.org.filter;
 
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -15,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
-import com.org.common.CommonConstant;
-import com.org.common.JspConstant;
+import com.org.common.UserConstant;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
+import com.org.services.busi.UserService;
 import com.org.util.CT;
+import com.org.util.SpringUtil;
 import com.org.utils.SmpPropertyUtil;
+import com.org.utils.UserUtil;
 
 /**
  * @author zhou.m
@@ -64,19 +64,24 @@ public class UserSessionFilter implements Filter {
 				chain.doFilter(request, response);
 				return;
 			}
-			JSONObject sessionUser = (JSONObject)req.getSession(true).getAttribute(CommonConstant.SESSION_USER);
+			JSONObject sessionUser = (JSONObject)req.getSession(true).getAttribute(UserConstant.SESSION_USER);
 			
+			UserService ss = (UserService)SpringUtil.getBean("userService");
 			if(sessionUser == null){
-				request.setAttribute(CT.RESP_CODE_NAME, "");
-				request.setAttribute(CT.RESP_RESULT_NAME, "请先登录");
-				String targetUrl = JspConstant.ERROR_PAGE;
-				try {
-					RequestDispatcher rd = request.getRequestDispatcher(targetUrl);
-					rd.forward(request, response);
-					return;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+//				request.setAttribute(CT.RESP_CODE_NAME, "");
+//				request.setAttribute(CT.RESP_RESULT_NAME, "请先登录");
+//				String targetUrl = JspConstant.ERROR_PAGE;
+//				try {
+//					RequestDispatcher rd = request.getRequestDispatcher(targetUrl);
+//					rd.forward(request, response);
+//					return;
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+				// 创建一个新的临时用户
+				sessionUser = ss.createTempUser();
+				req.getSession(true).setAttribute(UserConstant.SESSION_USER, sessionUser);
+				
 			}
 		} catch (Exception e) { 
 			LogUtil.log(CT.LOG_CATEGORY_ERR, "验证过程失败：" + e.getMessage(), e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);

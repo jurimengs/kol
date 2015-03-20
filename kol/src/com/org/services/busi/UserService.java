@@ -1,5 +1,6 @@
-package com.org.services;
+package com.org.services.busi;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,9 +10,12 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.org.common.CommonConstant;
+import com.org.common.UserConstant;
 import com.org.dao.CommonDao;
 import com.org.util.MD5;
 import com.org.util.SpringUtil;
+import com.org.utils.UserUtil;
 
 /**
  * 通用
@@ -19,7 +23,7 @@ import com.org.util.SpringUtil;
  *
  */
 @Service
-public class ChannelService {
+public class UserService {
 	public JSONObject checkLogin(String loginName, String LoginPwd){
 		// 先查session有没有用户　
 		JSONObject result = new JSONObject();
@@ -106,39 +110,49 @@ public class ChannelService {
 
 	
 	/**
+	 * 获取已发布职位
 	 * @param loginName
 	 * @return
 	 */
-	public JSONArray getTestimonialsByChannelId(String channelId){
-		String sql = "select * from kol_testimonials where channel_id = ? order by id desc"; 
-		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
-		Map<Integer , Object> params = new HashMap<Integer, Object>();
-		params.put(1, channelId);
-		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
-		return testimonials;
+	public JSONArray getAllPublishedPosition(String loginName){
+		// TODO 
+		return null;
 	}
 	
-	public JSONArray getTestimonialsByChannelId(String channelId, String limit){
-		String sql = "select * from kol_testimonials where channel_id = ? order by id desc limit ?";
-		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+	public boolean saveUser(String loginName, String mail, String mobile, String registType, String nickName){
+		String sql = "insert into kol_user (login_name, mail, mobile, regist_type, nick_name) values (?,?,?,?,?)";
+		
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
-		params.put(1, channelId);
-		params.put(2, Integer.valueOf(limit));
-		if(StringUtils.isEmpty(channelId)){
-			params = new HashMap<Integer, Object>();
-			sql = "select * from kol_testimonials order by id desc limit ?";
-			params.put(1, Integer.valueOf(limit));
+		params.put(1, loginName);
+		params.put(2, mail);
+		params.put(3, mobile);
+		params.put(4, registType);
+		params.put(5, nickName);
+		
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		JSONObject res = new JSONObject();
+		boolean success = false;
+		try {
+			success = commonDao.addSingle(sql, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			res.put(CommonConstant.RESP_CODE, "DB00001");
+			res.put(CommonConstant.RESP_MSG, "数据库保存异常");
 		}
-		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
-		return testimonials;
+		return success;
 	}
 	
-	public JSONArray getTestimonialsByChannelId(String channelId, String limitFrom, String limitTo){
-		String sql = "select * from kol_testimonials where channel_id = ? order by id desc"; 
-		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
-		Map<Integer , Object> params = new HashMap<Integer, Object>();
-		params.put(1, channelId);
-		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
-		return testimonials;
+	public JSONObject createTempUser(){
+		JSONObject user = new JSONObject();
+		String loginName = UserUtil.randomLoginName(), mail ="", mobile="", registType="", nickName="";
+		user.put(UserConstant.LOGIN_NAME, loginName);
+		user.put(UserConstant.MAIL, mail);
+		user.put(UserConstant.MOBILE, mobile);
+		user.put(UserConstant.REGIST_TYPE, registType);
+		user.put(UserConstant.NICK, nickName);
+		
+		saveUser(loginName, mail, mobile, registType, nickName);
+		//同时保存用户
+		return user;
 	}
 }

@@ -1,4 +1,4 @@
-package com.org.services;
+package com.org.services.busi;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import com.org.util.SpringUtil;
  *
  */
 @Service
-public class UserService {
+public class ChannelService {
 	public JSONObject checkLogin(String loginName, String LoginPwd){
 		// 先查session有没有用户　
 		JSONObject result = new JSONObject();
@@ -106,12 +106,39 @@ public class UserService {
 
 	
 	/**
-	 * 获取已发布职位
 	 * @param loginName
 	 * @return
 	 */
-	public JSONArray getAllPublishedPosition(String loginName){
-		// TODO 
-		return null;
+	public JSONArray getTestimonialsByChannelId(String channelId){
+		String sql = "select * from kol_testimonials where channel_id = ? order by id desc"; 
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, channelId);
+		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
+		return testimonials;
+	}
+	
+	public JSONArray getTestimonialsByChannelId(String channelId, String limit){
+		String sql = "select * from kol_testimonials where channel_id = ? order by id desc limit ?";
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, channelId);
+		params.put(2, Integer.valueOf(limit));
+		if(StringUtils.isEmpty(channelId)){
+			params = new HashMap<Integer, Object>();
+			sql = "select * from kol_testimonials order by id desc limit ?";
+			params.put(1, Integer.valueOf(limit));
+		}
+		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
+		return testimonials;
+	}
+	
+	public JSONArray getTestimonialsByChannelId(String channelId, String limitFrom, String limitTo){
+		String sql = "select * from kol_testimonials where channel_id = ? order by id desc"; 
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, channelId);
+		JSONArray testimonials = commonDao.queryJSONArray(sql, params);
+		return testimonials;
 	}
 }
