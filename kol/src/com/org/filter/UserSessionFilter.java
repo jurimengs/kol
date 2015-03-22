@@ -20,7 +20,6 @@ import com.org.services.busi.UserService;
 import com.org.util.CT;
 import com.org.util.SpringUtil;
 import com.org.utils.SmpPropertyUtil;
-import com.org.utils.UserUtil;
 
 /**
  * @author zhou.m
@@ -81,8 +80,9 @@ public class UserSessionFilter implements Filter {
 				// 创建一个新的临时用户
 				sessionUser = ss.createTempUser();
 				req.getSession(true).setAttribute(UserConstant.SESSION_USER, sessionUser);
-				
 			}
+			chain.doFilter(request, response);
+			return;
 		} catch (Exception e) { 
 			LogUtil.log(CT.LOG_CATEGORY_ERR, "验证过程失败：" + e.getMessage(), e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);
 		}

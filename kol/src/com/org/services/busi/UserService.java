@@ -119,8 +119,8 @@ public class UserService {
 		return null;
 	}
 	
-	public boolean saveUser(String loginName, String mail, String mobile, String registType, String nickName){
-		String sql = "insert into kol_user (login_name, mail, mobile, regist_type, nick_name) values (?,?,?,?,?)";
+	public boolean saveUser(String loginName, String mail, String mobile, String registType, String nickName, String pwd){
+		String sql = "insert into kol_user (login_name, mail, mobile, regist_type, nick_name, pwd) values (?,?,?,?,?,?)";
 		
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, loginName);
@@ -128,6 +128,7 @@ public class UserService {
 		params.put(3, mobile);
 		params.put(4, registType);
 		params.put(5, nickName);
+		params.put(6, pwd);
 		
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		JSONObject res = new JSONObject();
@@ -144,14 +145,15 @@ public class UserService {
 	
 	public JSONObject createTempUser(){
 		JSONObject user = new JSONObject();
-		String loginName = UserUtil.randomLoginName(), mail ="", mobile="", registType="", nickName="";
+		String loginName = UserUtil.randomLoginName(), mail ="", mobile="", registType="", nickName="", pwd="";
 		user.put(UserConstant.LOGIN_NAME, loginName);
 		user.put(UserConstant.MAIL, mail);
 		user.put(UserConstant.MOBILE, mobile);
 		user.put(UserConstant.REGIST_TYPE, registType);
 		user.put(UserConstant.NICK, nickName);
+		user.put(UserConstant.PWD, pwd);
 		
-		saveUser(loginName, mail, mobile, registType, nickName);
+		saveUser(loginName, mail, mobile, registType, nickName, pwd);
 		//同时保存用户
 		return user;
 	}

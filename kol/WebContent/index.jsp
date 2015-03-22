@@ -40,13 +40,7 @@
 				人生<span>BAI</span>科
 			</a>
 		</div>
-		<nav class="fr">
-			<div class="btn-gp fr">
-				<a href="javascript:void(0);">登录</a>
-				<a href="javascript:void(0);">注册</a>
-			</div>
-			<%@ include file="/common/menu.jsp"%>
-		</nav>
+		<%@ include file="/common/menu.jsp"%>
 		<div class="clear">
 		</div>
 	</header>
@@ -74,7 +68,7 @@
 			</h1> -->
 			<h1>
 				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>未来</span>怎样我们无法预料但，
-				<span>但我们</span>会记录你的人生，这里的所有人将会见证你的成长
+				<span>但我们</span>会记录你的人生，这里的所有人将陪你喜怒哀乐
 			</h1>
 			<!-- section one -->
 			<section class="first left">
@@ -212,7 +206,8 @@ function allCommentsAbout(testimonialsId){
 }
 
 function openTestimonials() {
-	var submitBtnId = $d("maskDiv").dialogTestimonials();
+	var currentChannelId = '${currentChannelId}';
+	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
 		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
 	});

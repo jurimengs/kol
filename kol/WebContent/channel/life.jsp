@@ -40,13 +40,7 @@
 				人生<span>BAI</span>科
 			</a>
 		</div>
-		<nav class="fr">
-			<div class="btn-gp fr">
-				<a href="javascript:void(0);">登录</a>
-				<a href="javascript:void(0);">注册</a>
-			</div>
-			<%@ include file="/common/menu.jsp"%>
-		</nav>
+		<%@ include file="/common/menu.jsp"%>
 		<div class="clear">
 		</div>
 	</header>
@@ -69,8 +63,7 @@
 	<div class="container">
 		<div class="comwidth">
 			<h1>
-				感知生活<span>100%</span>了解您、<span>No.1</span>
-				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
+				生活象百味罐，<span>酸</span>的让人精神饱满，<span>甜</span>的让人幸福快乐，<span>苦</span>的让人痛苦万分，而<span>辣</span>的，让你想起了什么？
 			</h1>
 			<!-- section one -->
 			<section class="first left">
@@ -263,7 +256,8 @@ function openComments(testimonialsId) {
 }
 
 function openTestimonials() {
-	var submitBtnId = $d("maskDiv").dialogTestimonials();
+	var currentChannelId = '${currentChannelId}';
+	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
 		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
 	});

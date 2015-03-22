@@ -121,7 +121,7 @@
 	/**
 	 * 感言对话框
 	 */
-	$_d.prototype.dialogTestimonials = function() {
+	$_d.prototype.dialogTestimonials = function(currentChannelId) {
 		// 经过属性复制后,已经有一切属性
 		var o = $$("maskDiv");
 		if(!! o){
@@ -163,6 +163,9 @@
 			'</div>';
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
+		if(!! currentChannelId && currentChannelId != "null"){
+			$("#channelId").val(currentChannelId);
+		}
 		o.style.display = "block";
 		// dialog完成后，将submitBtn 的id返回
 		return "submitBtn";

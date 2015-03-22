@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.org.common.CommonConstant;
 import com.org.services.busi.ChannelService;
 import com.org.util.SpringUtil;
 
@@ -41,6 +42,7 @@ public class ChannelController {
 			log.info("收到请求参数：　" );
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, "index");
 			request.getSession(true).setAttribute("ohmg", "true");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,6 +69,7 @@ public class ChannelController {
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error.jsp";
@@ -92,6 +95,7 @@ public class ChannelController {
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error.jsp";
@@ -116,6 +120,7 @@ public class ChannelController {
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
+			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,6 +147,7 @@ public class ChannelController {
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error.jsp";

@@ -48,7 +48,7 @@ public class DateUtil
 //        return date.replaceAll("-", "");
 //    }
     
-    public static String getCurrentShortDateStr(String format){
+    public static String getDateStringByFormat(String format){
         SimpleDateFormat df = new SimpleDateFormat(format);// 设置日期格式
         return df.format(new Date());
     }

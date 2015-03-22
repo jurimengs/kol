@@ -24,6 +24,10 @@ public class UserConstant {
 	/**
 	 * 用户注册类型 0: 系统  1：用户
 	 */
-	public final static String REGIST_TYPE = "mail";
+	public final static String REGIST_TYPE = "registType";
+	/**
+	 * 
+	 */
+	public final static String PWD = "pwd";
 	
 }
