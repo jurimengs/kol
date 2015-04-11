@@ -48,7 +48,7 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg', ',') }" />
+					<c:set var="bannerArray" value="${fn:split('images/banner-emotion.jpg,images/banner-emotion.jpg,images/banner-emotion.jpg', ',') }" />
 					<c:forEach var="banner" items="${bannerArray }">
 						<li>
 							<a href="javascript:void(0);">
