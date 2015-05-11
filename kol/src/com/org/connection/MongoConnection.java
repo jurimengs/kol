@@ -1,6 +1,7 @@
 package com.org.connection;
 
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import com.org.Connection;
 import com.org.common.CommonConstant;
 import com.org.utils.JSONUtils;
 
-public class MongoConnection implements Connection {
+public class MongoConnection implements Connection<Void> {
 
 	@Override
 	public String getId() {
@@ -163,8 +164,12 @@ public class MongoConnection implements Connection {
 	private Mongo mongo;
 	private String databaseName;
 	@Override
-	public Object getRealConnection() {
+	public Void getRealConnection() {
 		// TODO mongo数据源应该用不上这个
 		return null;
+	}
+	
+	public void close(Void obj) {
+	
 	}
 }

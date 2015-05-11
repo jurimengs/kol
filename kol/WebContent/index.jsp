@@ -48,7 +48,7 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg', ',') }" />
+					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg,images/banner4.jpg,images/banner5.jpg', ',') }" />
 					<c:forEach var="banner" items="${bannerArray }">
 						<li>
 							<a href="javascript:void(0);">
@@ -67,8 +67,8 @@
 				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
 			</h1> -->
 			<h1>
-				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>未来</span>怎样我们无法预料但，
-				<span>但我们</span>会记录你的人生，这里的所有人将陪你喜怒哀乐
+				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>时光</span>飞逝光阴似箭时间如白驹过隙，
+				<span>让我们</span>记录你的人生，留下属于你的每时每刻
 			</h1>
 			<!-- section one -->
 			<section class="first left">
@@ -116,60 +116,7 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-		<div class="comwidth">
-			<p class="fl">
-				人生BAI科 © 2015 www.rsbk.com 版权所有
-				<span>
-					|
-				</span>
-				<a href="javascript:void(0);">
-					联系我们
-				</a>
-			</p>
-			<ul class="foot-nav fr">
-				<li>
-					<a href="javascript:void(0);">
-						排行榜
-					</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						标签搜索
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						联系我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						积分获取
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						关于我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-			</ul>
-			<div class="clear">
-			</div>
-		</div>
-	</footer>
+	<%@ include file="/common/footer.jsp"%> 
 </body>
 
 <form id="channelForm" action="${ctx }/channel/life.do" method="post" >

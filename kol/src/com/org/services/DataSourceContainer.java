@@ -15,31 +15,36 @@ import com.org.common.CommonConstant;
  *
  */
 public class DataSourceContainer {
-	protected Map<String, Connection> sourceMap= new HashMap<String, Connection>();
-	protected static Connection currentConnection = null;
+	protected Map<String, Connection<?>> sourceMap= new HashMap<String, Connection<?>>();
+	protected static Connection<?> currentConnection = null;
 
-	public Connection switchDataSource(String dataSourceId){
-		if(sourceMap.containsKey(dataSourceId)){
-			Connection ds = sourceMap.get(dataSourceId);
+	/**
+	 * 切换不同数据源链接
+	 * @param dataSourceId
+	 * @return
+	 */
+	public Connection<?> switchConnectionType(String connectionName){
+		if(sourceMap.containsKey(connectionName)){
+			Connection<?> ds = sourceMap.get(connectionName);
 			if(ds != null){
 				//ConnectionManager.getInstance().setDataSource(ds);
 				currentConnection = ds;
-				log.info("切换数据源成功:" + dataSourceId);
+				log.info("切换数据源连接类型成功:" + connectionName);
 			} else {
-				log.info("切换数据源失败，不存在数据源:" + dataSourceId);
+				log.info("切换数据源连接类型失败，不存在数据源:" + connectionName);
 			}
 		}
 		return currentConnection;
 	}
 	
-	public Connection getCurrentConnection(){
+	public Connection<?> getCurrentConnection(){
 		if(currentConnection == null){
-			currentConnection = sourceMap.get(CommonConstant.DB_MONGO);
+			currentConnection = sourceMap.get(CommonConstant.DB_MYSQL);
 		}
 		return currentConnection;
 	}
 	
-	public Connection getConnection(String key){
+	public Connection<?> getConnection(String key){
 		return sourceMap.get(key);
 	}
 	
@@ -56,8 +61,8 @@ public class DataSourceContainer {
 		return container;
 	}
 	
-	public void store(String dataSourceName, Connection ds) {
-		sourceMap.put(dataSourceName, ds);
+	public void store(String connectionName, Connection<?> con) {
+		sourceMap.put(connectionName, con);
 	}
 	
 	private DataSourceContainer(){}

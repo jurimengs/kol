@@ -110,7 +110,7 @@ public class ChannelService {
 	 * @return
 	 */
 	public JSONArray getTestimonialsByChannelId(String channelId){
-		String sql = "select * from kol_testimonials where channel_id = ? order by id desc"; 
+		String sql = "select * from kol_testimonials where channel_id = ? order by id desc limit 100"; 
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, channelId);

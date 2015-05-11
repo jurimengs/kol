@@ -48,7 +48,7 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner-career.jpg,images/banner-career.jpg,images/banner-career.jpg', ',') }" />
+					<c:set var="bannerArray" value="${fn:split('images/banner-career.jpg', ',') }" />
 					<c:forEach var="banner" items="${bannerArray }">
 						<li>
 							<a href="javascript:void(0);">
@@ -175,60 +175,7 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-		<div class="comwidth">
-			<p class="fl">
-				人生BAI科 © 2015 www.rsbk.com 版权所有
-				<span>
-					|
-				</span>
-				<a href="javascript:void(0);">
-					联系我们
-				</a>
-			</p>
-			<ul class="foot-nav fr">
-				<li>
-					<a href="javascript:void(0);">
-						排行榜
-					</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						标签搜索
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						联系我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						积分获取
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						关于我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-			</ul>
-			<div class="clear">
-			</div>
-		</div>
-	</footer>
+	<%@ include file="/common/footer.jsp"%> 
 </body>
 
 <form id="channelForm" action="${ctx }/channel/life.do">
@@ -240,10 +187,10 @@ function formTo(formId, href){
 }
 
 // 
-jQuery(".slideBox").slide({
+/* jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
 	autoPlay : true
-});
+}); */
 
 //alert("${ctx}");
 //$d("maskDiv").commentsModule();

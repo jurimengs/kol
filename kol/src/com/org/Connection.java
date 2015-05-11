@@ -2,7 +2,7 @@ package com.org;
 
 import net.sf.json.JSONObject;
 
-public interface Connection {
+public interface Connection<T> {
 	public String getId();
 
 	public JSONObject executeQuery(JSONObject requestJson);
@@ -11,6 +11,7 @@ public interface Connection {
 	 * 返回对应数据库的实际连接对象
 	 * @return
 	 */
-	public Object getRealConnection();
+	public T getRealConnection();
 
+	public void close(T obj);
 }

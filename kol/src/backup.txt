@@ -1,0 +1,9 @@
+建立数据库的时候要注册中文乱码：
+数据库名：
+kol
+
+字符集：
+utf8 -- UTF-8 Unicode
+
+排序规则：
+utf8_general_ci

@@ -21,103 +21,116 @@ import com.org.util.StringUtil;
 import com.org.utils.SmpPropertyUtil;
 
 public class BaseDao {
+	
+	@SuppressWarnings("unchecked")
+	public static Connection<java.sql.Connection> conn = (Connection<java.sql.Connection>) DataSourceContainer.getInstance().getConnection(SmpPropertyUtil.getValue("identify_db_relation", "kol"));
 	protected java.sql.Connection getConnection(){
-		// 这里的连接不用管连接数，连接数是由数据源管理的
-		Connection conn = null;
-		conn = DataSourceContainer.getInstance().getConnection(SmpPropertyUtil.getValue("identify_db_relation", "kol"));
 		java.sql.Connection res = (java.sql.Connection)conn.getRealConnection();
 		return res;
 	}
-	
-	protected PreparedStatement prepareStatement(String sql, Connection conn) {
-		PreparedStatement ps = null;
-		try {
-			ps = ((java.sql.Connection)conn.getRealConnection()).prepareStatement(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return ps;
-	}
 
-	protected static <T> List<T> parseResultSet(ResultSet rs, T entity)
+	protected <T> List<T> queryListByT(String sql, Map<Integer, Object> params, T entity)
 			throws SQLException, IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
+		
+		java.sql.Connection connection = null;
 		List<T> list = new ArrayList<T>();
-		ResultSetMetaData rsmd = rs.getMetaData();
-		// 列数
-		int columnCounts = rsmd.getColumnCount();
-		//
-		ReflectDbModel model = new ReflectDbModel();
-		Method m = null;
-		while (rs.next()) {
-			// 这个地方相当于每用一次就new一次,否则数据会覆盖上一次的数据
-			for (int i = 1; i <= columnCounts; i++) {
-				initReflectDbModel(rs, model, i);
-				if (model.getValue() != null && model.getValue() != "") {
-					try {
-						m = entity.getClass().getDeclaredMethod("set" + model.getKey(),
-								model.getValue().getClass());
-						m.invoke(entity, model.getValue());
-					} catch (SecurityException e) {
-						e.printStackTrace();
-					} catch (NoSuchMethodException e) {
-						System.out.println(e.getMessage() + ": NoSuchMethodException");
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try{
+			connection = getConnection();
+			ps = connection.prepareStatement(sql);
+			setStatmentParams(ps, params);
+			rs = ps.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			// 列数
+			int columnCounts = rsmd.getColumnCount();
+			//
+			ReflectDbModel model = new ReflectDbModel();
+			Method m = null;
+			while (rs.next()) {
+				// 这个地方相当于每用一次就new一次,否则数据会覆盖上一次的数据
+				for (int i = 1; i <= columnCounts; i++) {
+					initReflectDbModel(rs, model, i);
+					if (model.getValue() != null && model.getValue() != "") {
+						try {
+							m = entity.getClass().getDeclaredMethod("set" + model.getKey(), model.getValue().getClass());
+							m.invoke(entity, model.getValue());
+						} catch (SecurityException e) {
+							e.printStackTrace();
+						} catch (NoSuchMethodException e) {
+							System.out.println(e.getMessage() + ": NoSuchMethodException");
+						}
 					}
 				}
+				list.add(entity);
 			}
-			list.add(entity);
-		}
+		}finally{
+			releaseAll(rs, ps, connection);
+		}			
 		return list;
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @param params
+	 * @param collumToUpper 是否遵守驼峰
+	 * @return
+	 * @throws SQLException
+	 */
+	protected JSONArray queryList(String sql, Map<Integer, Object> params, boolean collumToUpper) throws SQLException{
+		JSONArray list = new JSONArray();
+		java.sql.Connection connection = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try{
+			connection = getConnection();
+			ps = connection.prepareStatement(sql);
+			setStatmentParams(ps, params);
+			rs = ps.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			// 列数
+			int columnCounts = rsmd.getColumnCount();
+			//
+			JSONObject jo = null;
+			while (rs.next()) {
+				jo = new JSONObject();
+				for (int i = 1; i <= columnCounts; i++) {
+					String key = rsmd.getColumnName(i);
+					//  转实例名
+					key = StringUtil.toEntityName(rsmd.getColumnName(i), collumToUpper);
+					Object value = rs.getObject(i);
+					value = (value == null) ? "" : value.toString();
+					jo.put(key, value);
+				}
+				list.add(jo);
+			}
+		}finally{
+			releaseAll(rs, ps, connection);
+		}			
+		return list;		
 	}
 
-	protected static List<JSONObject> parseResultSetToJSON(ResultSet rs, boolean collumToUpper)
-			throws SQLException, IllegalArgumentException, IllegalAccessException,
-			InvocationTargetException {
-		List<JSONObject> list = new ArrayList<JSONObject>();
-		ResultSetMetaData rsmd = rs.getMetaData();
-		// 列数
-		int columnCounts = rsmd.getColumnCount();
-		//
-		JSONObject jo = null;
-		while (rs.next()) {
-			jo = new JSONObject();
-			for (int i = 1; i <= columnCounts; i++) {
-				String key = rsmd.getColumnName(i);
-				//  转实例名
-				key = StringUtil.toEntityName(rsmd.getColumnName(i), collumToUpper);
-				Object value = rs.getObject(i);
-				value = (value == null) ? "" : value.toString();
-				jo.put(key, value);
-			}
-			list.add(jo);
-		}
-		return list;
+	private void releaseAll(ResultSet rs, PreparedStatement ps,
+			java.sql.Connection connection) throws SQLException {
+		rs.close();
+		ps.close();
+		conn.close(connection);
+	}
+
+	protected JSONArray queryList(String sql, Map<Integer, Object> params) throws SQLException{
+		return queryList(sql, params, true);		
 	}
 	
-	protected static JSONArray parseResultSetToJSONArray(ResultSet rs, boolean collumToUpper)
-			throws SQLException, IllegalArgumentException, IllegalAccessException,
-			InvocationTargetException {
-		JSONArray list = new JSONArray();
-		ResultSetMetaData rsmd = rs.getMetaData();
-		// 列数
-		int columnCounts = rsmd.getColumnCount();
-		//
-		JSONObject jo = null;
-		while (rs.next()) {
-			jo = new JSONObject();
-			for (int i = 1; i <= columnCounts; i++) {
-				String key = rsmd.getColumnName(i);
-				//  转实例名
-				key = StringUtil.toEntityName(rsmd.getColumnName(i), collumToUpper);
-				Object value = rs.getObject(i);
-				value = (value == null) ? "" : value.toString();
-				jo.put(key, value);
-			}
-			list.add(jo);
+	protected void setStatmentParams(PreparedStatement ps, Map<Integer, Object> params) throws SQLException{
+		for (Iterator<Integer> iterator = params.keySet().iterator(); iterator
+				.hasNext();) {
+			Integer key = iterator.next();
+			ps.setObject(key, params.get(key));
 		}
-		return list;
 	}
-	
+
 	protected static void initReflectDbModel(ResultSet rs, ReflectDbModel model,
 			int index) throws SQLException {
 		ResultSetMetaData rsmd = rs.getMetaData();
@@ -135,21 +148,5 @@ public class BaseDao {
 		model.setKey(key);
 		model.setParamType(paramType);
 		model.setValue(value);
-	}
-	
-	protected ResultSet getResultSet(String sql, 
-		Map<Integer, Object> params) throws SQLException{
-		PreparedStatement ps = getConnection().prepareStatement(sql);
-		setStatmentParams(ps, params);
-		ResultSet rs = ps.executeQuery();
-		return rs;
-	}
-	
-	protected void setStatmentParams(PreparedStatement ps, Map<Integer, Object> params) throws SQLException{
-		for (Iterator<Integer> iterator = params.keySet().iterator(); iterator
-				.hasNext();) {
-			Integer key = iterator.next();
-			ps.setObject(key, params.get(key));
-		}
 	}
 }

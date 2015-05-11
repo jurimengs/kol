@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.org.common.CommonConstant;
 import com.org.services.busi.ChannelService;
 import com.org.util.SpringUtil;
-
-import net.sf.json.JSONArray;
 
 
 @Controller
@@ -35,7 +33,7 @@ public class ChannelController {
 			/* 1.获得商户端请求的值  默认设置数据处理成功 */
 			//JSONArray testimonialsArray = new JSONArray();
 			ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
-			String limit = "20";
+			String limit = "100";
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, limit);
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
@@ -112,12 +110,10 @@ public class ChannelController {
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
-			/* 1.获得商户端请求的值  默认设置数据处理成功 */
 			//JSONArray testimonialsArray = new JSONArray();
 			ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 			String channelId = "2";
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
-			// 测试方法
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
 			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);

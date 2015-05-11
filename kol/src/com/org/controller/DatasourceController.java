@@ -17,8 +17,8 @@ public class DatasourceController {
 	
 	@RequestMapping("/switch")
 	public void start(HttpServletRequest request,HttpServletResponse response){
-		String dataSourceId = request.getParameter("dataSourceId");
-		DataSourceContainer.getInstance().switchDataSource(dataSourceId);
+		String connectionName = request.getParameter("dataSourceId");
+		DataSourceContainer.getInstance().switchConnectionType(connectionName);
 	}
 	
 	@RequestMapping("/dsList")

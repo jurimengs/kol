@@ -14,8 +14,6 @@ import javax.sql.DataSource;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.springframework.util.StringUtils;
-
 import com.org.Connection;
 import com.org.common.CommonConstant;
 import com.org.container.CommonContainer;
@@ -25,7 +23,7 @@ import com.org.utils.ResultSetUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class HikaricpConnection implements Connection {
+public class HikaricpConnection implements Connection<java.sql.Connection> {
 
 	@Override
 	public String getId() {
@@ -167,7 +165,7 @@ public class HikaricpConnection implements Connection {
 	}
 
 	@Override
-	public Object getRealConnection() {
+	public java.sql.Connection getRealConnection() {
 		try {
 			return template.getConnection();
 		} catch (SQLException e) {
@@ -175,6 +173,15 @@ public class HikaricpConnection implements Connection {
 			return null;
 		}
 	}
+	
+	public void close(java.sql.Connection obj) {
+		try {
+			if(!obj.isClosed())			obj.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+}
 	
 	private DataSource template;
 
