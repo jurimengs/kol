@@ -132,25 +132,21 @@ public class CommonDao extends BaseDao {
 	 * @throws SQLException
 	 * @throws SvcException
 	 */
-	public synchronized <T> boolean addSingle(String sql,
-			Map<Integer, Object> params) throws SQLException {
+	public synchronized <T> boolean addSingle(String sql, Map<Integer, Object> params) throws SQLException {
 		java.sql.Connection conn = getConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		try {
 			setStatmentParams(ps, params);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			ps.close();
-			return false;
-		}
-		try {
 			ps.execute();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			conn.setAutoCommit(false);
 			conn.rollback();
-			e.printStackTrace();
 			ps.close();
 			return false;
+		} finally {
+			conn.close();
+			ps.close();
 		}
 		return true;
 	}
@@ -162,19 +158,16 @@ public class CommonDao extends BaseDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		try {
 			setStatmentParams(ps, params);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			ps.close();
-			return;
-		}
-		try {
 			ps.executeUpdate();
 			conn.commit();
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			conn.setAutoCommit(false);
 			conn.rollback();
-			e.printStackTrace();
-			ps.close();
 			return;
+		} finally {
+			conn.close();
+			ps.close();
 		}
 	}
 

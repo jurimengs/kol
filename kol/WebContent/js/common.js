@@ -1,5 +1,38 @@
 
 (function(window){
+	
+	var deviceType = function(){
+		var sUserAgent= navigator.userAgent.toLowerCase();
+		var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+		var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+		var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+		var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+		var bIsAndroid= sUserAgent.match(/android/i) == "android";
+		var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+		var bIsWinPhone= sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+		if (bIsIpad) {
+			return "ipad";
+		} else if (bIsIphoneOs) {
+			return "iphone";
+		} else if (bIsMidp) {
+			return "Midp";
+		} else if (bIsUc7) {
+			return "Uc7";
+		} else if (bIsUc) {
+			return "Uc";
+		} else if (bIsAndroid) {
+			return "Android";
+		} else if (bIsCE) {
+			return "CE";
+		} else if (bIsWinPhone) {
+			return "windows mobile";
+		} else {
+			return "PC";
+		}
+	};
+
 	Array.prototype.contains = function(item){
 		for (var i=0; i < this.length; i++) {
 			if (this[i] === item){
@@ -83,7 +116,6 @@
 	 * @id 目标感言ID
 	 */
 	$_d.prototype.dialogComments = function(id) {
-		// 经过属性复制后,已经有一切属性
 		var o = $$("maskDiv");
 		if(!! o){
 			try {
@@ -100,6 +132,7 @@
 			'</div>' +
 			'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
 			'<form action="" id="commentsForm" method="post">&nbsp;'+
+			'<input type="hidden" id="deviceType" name="deviceType" />'+
 			'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
 			'<br />'+
 			'请输入内容:'+
@@ -139,6 +172,7 @@
 					'</div>' +
 					'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
 						'<form action="" id="commentsForm" method="post">&nbsp;'+
+							'<input type="hidden" id="deviceType" name="deviceType" placeholder="主题" />'+
 							'主题:'+
 							'<br />'+
 							'<input class="input-small commentsTitle" id="testimonialsTitle" name="testimonialsTitle" placeholder="主题" />'+

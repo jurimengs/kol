@@ -153,7 +153,7 @@ public class UserService {
 		user.put(UserConstant.NICK, nickName);
 		user.put(UserConstant.PWD, pwd);
 		
-		saveUser(loginName, mail, mobile, registType, nickName, pwd);
+		//saveUser(loginName, mail, mobile, registType, nickName, pwd);
 		//同时保存用户
 		return user;
 	}
