@@ -14,6 +14,16 @@ utf8_general_ci
 下一个功能:
 纪念板
 用户可以发起一个纪念活动, 定下纪念日, 系统将自己发送纪念邮件到参与者的邮箱. 参与者,一定要是完善资料的人
+kol_commemorate_board
+createrid, -- 创建者ID
+comments,  -- 纪念描述
+picid,  --图片id
+viewtimes, --查看次数
+createtime, --创建时间
+updatetime, --更新时间
+updaterid, --更新人ID
+toptimes, -- 被顶次数
+
 
 
 
