@@ -46,7 +46,7 @@ public class CommentsController {
 			e.printStackTrace();
 			return "/error.jsp";
 		}
-		return "/index.jsp";
+		return "/home.jsp";
 	}
 	
 	@RequestMapping("/queryComments")
@@ -74,7 +74,7 @@ public class CommentsController {
 			e.printStackTrace();
 			return "/error.jsp";
 		}
-		return "/commonts/comments.jsp";
+		return "/comments/comments.jsp";
 	}
 	
 	private Log log = LogFactory.getLog(CommentsController.class);

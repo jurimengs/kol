@@ -87,7 +87,9 @@ public class BaseDao {
 		try{
 			connection = getConnection();
 			ps = connection.prepareStatement(sql);
-			setStatmentParams(ps, params);
+			if(params != null){
+				setStatmentParams(ps, params);
+			}
 			rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			// ÁÐÊý
@@ -114,8 +116,12 @@ public class BaseDao {
 
 	private void releaseAll(ResultSet rs, PreparedStatement ps,
 			java.sql.Connection connection) throws SQLException {
-		rs.close();
-		ps.close();
+		if(rs != null){
+			rs.close();
+		}
+		if(ps != null){
+			ps.close();
+		}
 		conn.close(connection);
 	}
 

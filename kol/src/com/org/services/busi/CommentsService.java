@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.org.common.CommonConstant;
 import com.org.dao.CommonDao;
-import com.org.exception.SvcException;
 import com.org.util.DateUtil;
 import com.org.util.SpringUtil;
 
@@ -21,10 +20,11 @@ import com.org.util.SpringUtil;
  */
 @Service
 public class CommentsService {
+	private final String sql_insert = "insert into kol_comment (testimonials_id, user_id, contents, create_date, update_date) values (?,?,?,?,?)";
+	private final String sql_getById = "select * from kol_comment where testimonials_id = ?";
 	public synchronized JSONObject saveComments(String testimonialsId, String commentContent, String userId){
 		String createDate = DateUtil.getDate(DateUtil.DATE_FORMAT_SHORT_DATE);
 		
-		String sql = "insert into kol_comment (testimonials_id, user_id, contents, create_date, update_date) values (?,?,?,?,?)"; 
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(testimonialsId));
@@ -35,7 +35,7 @@ public class CommentsService {
 		
 		JSONObject res = new JSONObject();
 		try {
-			commonDao.addSingle(sql, params);
+			commonDao.addSingle(sql_insert, params);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			res.put(CommonConstant.RESP_CODE, "DB00001");
@@ -54,11 +54,10 @@ public class CommentsService {
 
 		JSONArray commentsArray = new JSONArray();
 		
-		String sql = "select * from kol_comment where testimonials_id = ?";
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(id));
-		commentsArray = commonDao.queryJSONArray(sql, params);
+		commentsArray = commonDao.queryJSONArray(sql_getById, params);
 		res.put("commentsArray", commentsArray);
 		return res;
 	}

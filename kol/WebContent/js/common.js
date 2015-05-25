@@ -50,12 +50,14 @@
 		}
 		if(typeof i == "object"){
 			this._$_d = i;
+			this.id = i.id;
 		} else if(typeof i == "string"){
 			if(!!! fromSession){
 				// 如果fromSession为空, 则默认方案为从缓存取
 				fromSession = true;
 			}
 			this._$_d = $$(i, fromSession);
+			this.id = i;
 		} else {
 			// for array
 			this._$_d = i;
@@ -65,7 +67,10 @@
 	$$ = function(id, fromSession){
 		if(fromSession){
 			var o = document.getElementById(id);
-			if(!! session[id] && (!! o)){
+			if(!!! o) {
+				return null;
+			}
+			if(!! session[id]){
 				//alert("已缓存");
 			} else {
 				session[id] = o;
@@ -90,6 +95,19 @@
 		}
 		return this;
 	};
+
+	$_d.prototype.copyAttrTo = function(from, to) {
+		if(!!! from) {
+			return false;
+		}
+		if(!!! to) {
+			return false;
+		}
+		for(var k in from) {
+			to.style[k] = from[k];
+		}
+		return to;
+	};
 	
 	$_d.prototype.remove = function() {
 		if(!!! this._$_d){
@@ -111,12 +129,17 @@
 		$$(this.id).submit();
 	};
 	
+	$_d.prototype.append = function(obj) {
+		// 经过属性复制后,已经有一切属性
+		$$(this.id).appendChild(obj);
+	};
+	
 	/**
 	 * 评论对话框
 	 * @id 目标感言ID
 	 */
 	$_d.prototype.dialogComments = function(id) {
-		var o = $$("maskDiv");
+		var o = $$(this.id);
 		if(!! o){
 			try {
 				document.body.removeChild(o);
@@ -125,28 +148,31 @@
 		}
 		var h = 
 			'<div class="message" id="maskDiv">' +
-			'<div class="modal">' +
-			'<div class="modal-header" id="maskHeadDiv">' +
-			'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
-			'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
-			'</div>' +
-			'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
-			'<form action="" id="commentsForm" method="post">&nbsp;'+
-			'<input type="hidden" id="deviceType" name="deviceType" />'+
-			'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
-			'<br />'+
-			'请输入内容:'+
-			'<br />'+
-			'<textarea class="maskContent" id="content" name="commentContent" placeholder="内容"></textarea>'+
-			'<br />'+
-			'<a href="javascript:void(0);" id="commentsBtn" class="btn orange" onclick="">发表</a>'+
-			'</form>'+
-			'</div>' +
-			'</div>' +
+				'<div class="modal" id="modalDiv">' +
+					'<div class="pop_up_box">' +
+						'<div class="modal-header" id="maskHeadDiv">' +
+							'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
+							'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;评论</div>' +
+						'</div>' +
+						'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
+							'<form action="" id="commentsForm" method="post">&nbsp;'+
+							'<input type="hidden" id="deviceType" name="deviceType" />'+
+							'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
+							'<br />'+
+							'请输入内容:'+
+							'<br />'+
+							'<textarea class="maskContent" id="content" name="commentContent" placeholder="内容"></textarea>'+
+							'<br />'+
+							'<a href="javascript:void(0);" id="commentsBtn" class="btn orange" onclick="">发表</a>'+
+							'</form>'+
+						'</div>' +
+					'</div>' +
+				'</div>' +
 			'</div>';
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
 		document.getElementById("testimonialsId").value=id;
+		$d("modalDiv").adjustCenter({"width":"720px", "marginLeft":"270px"});
 		o.style.display = "block";
 		return "commentsBtn";
 	};
@@ -156,7 +182,7 @@
 	 */
 	$_d.prototype.dialogTestimonials = function(currentChannelId) {
 		// 经过属性复制后,已经有一切属性
-		var o = $$("maskDiv");
+		var o = $$(this.id);
 		if(!! o){
 			try {
 				document.body.removeChild(o);
@@ -165,12 +191,13 @@
 		}
 		var h = 
 			'<div class="message" id="maskDiv">' +
-				'<div class="modal">' +
+				'<div class="modal" id="modalDiv">' +
+					'<div class="pop_up_box">' +
 					'<div class="modal-header" id="maskHeadDiv">' +
 						'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
-						'<div style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
+						'<div class="pop_title" style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
 					'</div>' +
-					'<div class="modal-body grey" id="maskContentDiv">&nbsp;'+
+					'<div class="modal-body" id="maskContentDiv">&nbsp;'+
 						'<form action="" id="commentsForm" method="post">&nbsp;'+
 							'<input type="hidden" id="deviceType" name="deviceType" placeholder="主题" />'+
 							'主题:'+
@@ -193,6 +220,7 @@
 							'<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick="">发表</a>'+
 						'</form>'+
 					'</div>' +
+					'</div>' +
 				'</div>' +
 			'</div>';
 		o = getObjFromHtml(h);
@@ -200,9 +228,67 @@
 		if(!! currentChannelId && currentChannelId != "null"){
 			$("#channelId").val(currentChannelId);
 		}
+		$d("modalDiv").adjustCenter({"width":"720px", "marginLeft":"270px"});
 		o.style.display = "block";
 		// dialog完成后，将submitBtn 的id返回
 		return "submitBtn";
+	};
+	
+	/**
+	 * 首页纪念板
+	 */
+	$_d.prototype.dialogCommemorate = function(args) {
+		// 经过属性复制后,已经有一切属性
+		var o = $$(this.id);
+		if(!! o){
+			try {
+				document.body.removeChild(o);
+			} catch (e) {
+			}
+		}
+		var h = 
+			'<div class="message" id="maskDiv">' +
+				'<div class="modal" id="modalDiv">' +
+					'<div class="pop_up_box">' +
+					'<div class="modal-header" id="maskHeadDiv">' +
+						'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
+						'<div class="pop_title" style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;纪念板</div>' +
+					'</div>' +
+					'<div class="modal-body auto-scroll" id="maskContentDiv">&nbsp;'+
+					'</div>' +
+					'</div>' +
+				'</div>' +
+			'</div>';
+		o = getObjFromHtml(h);
+		document.body.appendChild(o);
+		this.copyAttrTo(args, $$("modalDiv"));
+		//alert(screen.availWidth);
+		$d("modalDiv").adjustCenter();
+		o.style.display = "block";
+		// dialog完成后，将maskContentDiv 的id返回, 便于页面向其添加内容
+		return "maskContentDiv";
+	};
+	
+	$_d.prototype.adjustCenter = function(args) {
+		var width = document.body.scrollWidth;
+		//var height = screen.availHeight;
+		var fixed = 20;
+		var realWidth = width - fixed * 2;
+		
+		args = args || {};
+		if(!!! args["width"]){
+			args["width"] = realWidth+"px";
+		}
+		//this._$_d.style.height = realHeight+"px";
+		if(!!! args["marginLeft"]){
+			args["marginLeft"] = fixed + "px";
+		}
+		if(!!! args["marginTop"]){
+			args["marginTop"] = fixed + "px";
+		}
+		this.copyAttrTo(args, this._$_d);
+		
+		return this;
 	};
 	
 	$_d.prototype.css = function(sName, sValue) {

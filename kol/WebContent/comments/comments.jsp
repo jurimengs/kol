@@ -120,10 +120,6 @@
 <form id="channelForm" action="${ctx }/channel/life.do">
 </form>
 <script type="text/javascript">
-function formTo(formId, href){
-	$("#"+formId).prop("action", href);
-	$("#"+formId).submit();	
-}
 
 // 
 jQuery(".slideBox").slide({
@@ -155,31 +151,6 @@ function openTestimonials() {
 	$("#"+submitBtnId).click(function() {
 		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
 	});
-}
-	
-function turnToTuCaoBa(){
-	formTo("channelForm", "${ctx }/channel/tucaoba.do");
-}
-function turnToOther(){
-	formTo("channelForm", "${ctx }/channel/other.do");
-}
-function turnToCareer(){
-	formTo("channelForm", "${ctx }/channel/career.do");
-}
-function turnToEmotion(){
-	formTo("channelForm", "${ctx }/channel/emotion.do");
-}
-function turnToLife(){
-	formTo("channelForm", "${ctx }/channel/life.do");
-}
-function turnToIndex(){
-	formTo("channelForm", "${ctx }/channel/index.do");
-}
-
-var ohmg = "${ohmg}";
-//alert(ohmg);
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
 }
 </script>
 </html>

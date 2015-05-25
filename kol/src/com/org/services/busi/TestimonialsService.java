@@ -20,10 +20,12 @@ import com.org.util.SpringUtil;
  */
 @Service
 public class TestimonialsService {
+	private final String sql_insert = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title) values (?,?,?,?,?,?)";
+	private final String sql_getById = "select * from kol_testimonials where id = ?";
+	
 	public synchronized JSONObject saveContents(String userId, String contents, String channelId, String title){
 		String createDate = DateUtil.getDate(DateUtil.DATE_FORMAT_SHORT_DATE);
 		
-		String sql = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title) values (?,?,?,?,?,?)"; 
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(userId));
@@ -35,7 +37,7 @@ public class TestimonialsService {
 		
 		JSONObject res = new JSONObject();
 		try {
-			commonDao.addSingle(sql, params);
+			commonDao.addSingle(sql_insert, params);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			res.put(CommonConstant.RESP_CODE, "DB00001");
@@ -45,13 +47,12 @@ public class TestimonialsService {
 	}
 	
 	public JSONObject getTestimonialById(String id){
-		String sql = "select * from kol_testimonials where id = ?";
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(id));
 		JSONObject testimonial = new JSONObject();
 		try {
-			testimonial = commonDao.querySingle(sql, params);
+			testimonial = commonDao.querySingle(sql_getById, params);
 		} catch (SvcException e) {
 			e.printStackTrace();
 		}

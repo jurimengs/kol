@@ -79,6 +79,19 @@ public class CommonDao extends BaseDao {
 		return list;
 	}
 
+	public JSONArray queryJSONArray(String sql) {
+		JSONArray list = null;
+		try {
+			list = queryList(sql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	/**
 	 * @param entityClass
 	 * @param sql

@@ -50,7 +50,7 @@ public class TestimonialsController {
 			e.printStackTrace();
 			return "/error.jsp";
 		}
-		return "/index.jsp";
+		return "/home.jsp";
 	}
 	
 	private Log log = LogFactory.getLog(TestimonialsController.class);

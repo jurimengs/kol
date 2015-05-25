@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="${ctx }/css/mask.css">
 <link rel="stylesheet" href="${ctx }/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
 
-<script type="text/javascript" src="${ctx }/js/common.js"></script>
 <script type="text/javascript" src="${ctx }/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/jquery.SuperSlide.2.1.1.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -34,16 +33,7 @@
 </head>
 
 <body>
-	<header style="">
-		<div id="logo" class="fl">
-			<a href="javascript:void(0);">
-				人生<span>BAI</span>科
-			</a>
-		</div>
-		<%@ include file="/common/menu.jsp"%>
-		<div class="clear">
-		</div>
-	</header>
+	<%@ include file="/common/menu.jsp"%>
 	<div id="banner">
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
@@ -180,11 +170,11 @@
 
 <form id="channelForm" action="${ctx }/channel/life.do">
 </form>
+
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/business.js"></script>
+
 <script type="text/javascript">
-function formTo(formId, href){
-	$("#"+formId).prop("action", href);
-	$("#"+formId).submit();	
-}
 
 /* jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
@@ -207,31 +197,6 @@ function openTestimonials() {
 	$("#"+submitBtnId).click(function() {
 		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
 	});
-}
-	
-function turnToTuCaoBa(){
-	formTo("channelForm", "${ctx }/channel/tucaoba.do");
-}
-function turnToOther(){
-	formTo("channelForm", "${ctx }/channel/other.do");
-}
-function turnToCareer(){
-	formTo("channelForm", "${ctx }/channel/career.do");
-}
-function turnToEmotion(){
-	formTo("channelForm", "${ctx }/channel/emotion.do");
-}
-function turnToLife(){
-	formTo("channelForm", "${ctx }/channel/life.do");
-}
-function turnToIndex(){
-	formTo("channelForm", "${ctx }/channel/index.do");
-}
-
-var ohmg = "${ohmg}";
-//alert(ohmg);
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
 }
 </script>
 </html>

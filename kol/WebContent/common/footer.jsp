@@ -6,7 +6,7 @@
 	<footer>
 		<div class="comwidth">
 			<p class="fl">
-				人生BAI科 © 2015 www.rsbk.com 版权所有
+				人生BAI科 © 2015 www.rsbk.cc 版权所有
 				<span>
 					|
 				</span>

@@ -7,18 +7,18 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>${channerName }</title>
+<title>人生百科</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 
-<link href="${ctx }/css/base.css" rel="stylesheet">
-<link rel="stylesheet" href="${ctx }/css/main.css">
-<link rel="stylesheet" href="${ctx }/css/mask.css">
-<link rel="stylesheet" href="${ctx }/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
+<link href="/css/base.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/mask.css">
+<link rel="stylesheet" href="/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
 
-<script type="text/javascript" src="${ctx }/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="${ctx }/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -38,11 +38,11 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner-career.png', ',') }" />
+					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg,images/banner4.jpg,images/banner5.jpg', ',') }" />
 					<c:forEach var="banner" items="${bannerArray }">
 						<li>
 							<a href="javascript:void(0);">
-								<img src="${ctx }/${banner}">
+								<img src="/${banner}">
 							</a>
 						</li>
 					</c:forEach>
@@ -52,8 +52,13 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
+			<!-- <h1>
+				感知生活<span>100%</span>了解您、<span>No.1</span>
+				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
+			</h1> -->
 			<h1>
-				也许你满腹<span>牢骚</span>无处抱怨， 也许你无法<span>忍受</span>你的同事， 也许老板让你<span>无奈</span>到了极点。来跟大家诉<span>诉苦</span>吧，你需要排解！
+				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>时光</span>飞逝光阴似箭时间如白驹过隙，
+				<span>让我们</span>记录你的人生，留下属于你的每时每刻
 			</h1>
 			<!-- section one -->
 			<section class="first left">
@@ -78,7 +83,7 @@
 			</section>
 			
 			<!-- section three -->
-			<section class="left">
+			<section class="">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 2}">
@@ -104,18 +109,18 @@
 	<%@ include file="/common/footer.jsp"%> 
 </body>
 
-<form id="channelForm" action="${ctx }/channel/life.do">
+<form id="channelForm" action="/channel/life.do" method="post" >
 </form>
 
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
-
 <script type="text/javascript">
+
 // 
-/* jQuery(".slideBox").slide({
+jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
 	autoPlay : true
-}); */
+});
 
 //alert("${ctx}");
 //$d("maskDiv").commentsModule();
@@ -123,7 +128,7 @@ function openComments(testimonialsId) {
 	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
 	$("#"+commentsBtn).click(function() {
 		//alert("commentsBtn");
-		formTo("commentsForm", "${ctx }/comments/saveComments.do");
+		formTo("commentsForm", "/comments/saveComments.do");
 	});
 }
 
@@ -131,14 +136,18 @@ function openTestimonials() {
 	var currentChannelId = '${currentChannelId}';
 	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
+		formTo("commentsForm", "/testionials/saveContents.do");
 	});
 }
-	
-var ohmg = "${ohmg}";
-//alert(ohmg);
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
-}
+
+var maskContentDiv = $d("maskDiv").dialogCommemorate();
+var imgHtml = "<span>";
+imgHtml += "<span style='padding-right:150px;width:300px;display:block;float: right;'>${commemorate.comments}</span>";
+//imgHtml += "<img style='max-height:450px;float:left;' src='${commemorate.filePath}'>";
+imgHtml += "<img style='max-height:450px;float:left;' src='${commemorate.filePath}'>";
+imgHtml += "</span>";
+var imgObj = getObjFromHtml(imgHtml);
+$d(maskContentDiv).append(imgObj);
+
 </script>
 </html>

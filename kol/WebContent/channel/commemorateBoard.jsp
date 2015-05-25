@@ -38,7 +38,7 @@
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
 				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner-career.png', ',') }" />
+					<c:set var="bannerArray" value="${fn:split('images/banner-career.jpg', ',') }" />
 					<c:forEach var="banner" items="${bannerArray }">
 						<li>
 							<a href="javascript:void(0);">
@@ -53,50 +53,8 @@
 	<div class="container">
 		<div class="comwidth">
 			<h1>
-				也许你满腹<span>牢骚</span>无处抱怨， 也许你无法<span>忍受</span>你的同事， 也许老板让你<span>无奈</span>到了极点。来跟大家诉<span>诉苦</span>吧，你需要排解！
 			</h1>
-			<!-- section one -->
-			<section class="first left">
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 0}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
 			
-			<!-- section two -->
-			<section>
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 1}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
-			
-			<!-- section three -->
-			<section class="left">
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 2}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
-			<!-- section four -->
-			<section>
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 3}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
 			<div class="clear">
 			</div>
 		</div>
@@ -111,6 +69,7 @@
 <script type="text/javascript" src="/js/business.js"></script>
 
 <script type="text/javascript">
+
 // 
 /* jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
@@ -135,10 +94,5 @@ function openTestimonials() {
 	});
 }
 	
-var ohmg = "${ohmg}";
-//alert(ohmg);
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
-}
 </script>
 </html>

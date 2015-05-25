@@ -183,8 +183,9 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 	@Override
 	public void close(java.sql.Connection obj) {
 		try {
-			if (!obj.isClosed())
+			if (obj != null && !obj.isClosed()){
 				obj.close();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
