@@ -190,7 +190,7 @@ public class ChannelController {
 			
 			CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
 			JSONArray resultArray = commemorateService.getLimitCommemorate("50");
-			request.getSession(true).setAttribute("resultArray", resultArray);
+			request.getSession(true).setAttribute("commemorateArray", resultArray);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/error.jsp";

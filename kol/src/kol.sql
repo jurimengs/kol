@@ -114,8 +114,8 @@ CREATE TABLE `kol_commemorate_board` (
   `comments` varchar(4000),-- 纪念描述
   `file_id` bigint(20), -- 图片id
   `view_times` bigint(20), -- 查看次数
-  `create_time` varchar(14) NOT NULL,
-  `update_time` varchar(14) NOT NULL,
+  `create_date` varchar(14) NOT NULL,
+  `update_date` varchar(14) NOT NULL,
   `top_times` bigint(20) DEFAULT 0, -- 被顶次数
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

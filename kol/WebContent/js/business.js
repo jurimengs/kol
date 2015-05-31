@@ -34,3 +34,23 @@ function turnToIndex(){
 function turnTo(href){
 	formTo("channelForm", href);
 }
+/**
+ * 顶一次
+ * @param id
+ */
+function topOnce(id) {
+	//alert(id);
+	$.ajax({
+		url:"/commemorate/topOnce.do",
+		cache:true,
+		data:{
+			id:id
+		},
+		dataType:"json",
+		success: function(data){
+			
+		},
+		error: function(){}
+		
+	});
+}

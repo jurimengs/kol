@@ -30,6 +30,9 @@
 <script type="text/javascript">DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <!--修复IE6下PNG图片背景透明-->
+<style type="text/css">
+.commemorateDiv tr td {vertical-align: top; padding-left:20px;}
+</style>
 </head>
 
 <body>
@@ -112,6 +115,9 @@
 <form id="channelForm" action="/channel/life.do" method="post" >
 </form>
 
+<fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
+<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
+
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
@@ -141,11 +147,22 @@ function openTestimonials() {
 }
 
 var maskContentDiv = $d("maskDiv").dialogCommemorate();
-var imgHtml = "<span>";
-imgHtml += "<span style='padding-right:150px;width:300px;display:block;float: right;'>${commemorate.comments}</span>";
-//imgHtml += "<img style='max-height:450px;float:left;' src='${commemorate.filePath}'>";
-imgHtml += "<img style='max-height:450px;float:left;' src='${commemorate.filePath}'>";
-imgHtml += "</span>";
+var imgHtml = "<table width='100%' class='commemorateDiv'>";
+imgHtml += "<tr>";
+imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
+imgHtml += "<td>${commemorate.comments}</td>";
+imgHtml += "</tr>";
+// 底行
+imgHtml += "<tr>";
+imgHtml += "<td>";
+imgHtml += "被查看次数：${commemorate.viewTimes} 被顶次数：${commemorate.topTimes}";
+imgHtml += "<br>";
+imgHtml += "${createDate}";
+imgHtml += "<br>";
+imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\');">顶一下</a>';
+imgHtml += "</td>";
+imgHtml += "</tr>";
+imgHtml += "</table>";
 var imgObj = getObjFromHtml(imgHtml);
 $d(maskContentDiv).append(imgObj);
 

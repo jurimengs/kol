@@ -34,16 +34,7 @@
 </head>
 
 <body>
-	<header style="">
-		<div id="logo" class="fl">
-			<a href="javascript:void(0);">
-				人生<span>BAI</span>科
-			</a>
-		</div>
-		<%@ include file="/common/menu.jsp"%>
-		<div class="clear">
-		</div>
-	</header>
+	<%@ include file="/common/menu.jsp"%>
 	<div class="container">
 		<div class="comwidth">
 			<c:set var="tesTimonial" value="${res.tesTimonial }" scope="page" />
@@ -53,72 +44,23 @@
 			</h1>
 			<h1 style="text-align:left; padding-left:20px;">所有评论：<br /><br />
 				<c:forEach var="comment" items="${commentsArray }">
-					${comment.contents } <br /> ${comment.createDate } <br /><br />
+					<fmt:parseDate var="dateTemp" value="${comment.createDate }" pattern="yyyyMMddHHmmss" />
+					<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
+					${comment.contents } <br /> ${createDate } <br /><br />
 				</c:forEach>
 			</h1>
 		<div class="clear">
 		</div>
 		</div>
 	</div>
-	<footer>
-		<div class="comwidth">
-			<p class="fl">
-				人生BAI科 © 2015 www.rsbk.com 版权所有
-				<span>
-					|
-				</span>
-				<a href="javascript:void(0);">
-					联系我们
-				</a>
-			</p>
-			<ul class="foot-nav fr">
-				<li>
-					<a href="javascript:void(0);">
-						排行榜
-					</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						标签搜索
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						联系我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						积分获取
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-				<li>
-					<a href="javascript:void(0);">
-						关于我们
-					</a>
-					<span>
-						|
-					</span>
-				</li>
-			</ul>
-			<div class="clear">
-			</div>
-		</div>
-	</footer>
+	<%@ include file="/common/footer.jsp"%> 
 </body>
 <c:remove var="res" scope="session"/>
 
 <form id="channelForm" action="${ctx }/channel/life.do">
 </form>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
 
 // 

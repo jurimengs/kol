@@ -12,13 +12,11 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 
-<link href="${ctx }/css/base.css" rel="stylesheet">
-<link rel="stylesheet" href="${ctx }/css/main.css">
-<link rel="stylesheet" href="${ctx }/css/mask.css">
-<link rel="stylesheet" href="${ctx }/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
+<link href="/css/base.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/mask.css">
+<link rel="stylesheet" href="/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
 
-<script type="text/javascript" src="${ctx }/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="${ctx }/js/jquery.SuperSlide.2.1.1.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -34,29 +32,25 @@
 
 <body>
 	<%@ include file="/common/menu.jsp"%>
-	<div id="banner">
-		<div id="slideBox" class="slideBox">
-			<div class="bd">
-				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner-career.jpg', ',') }" />
-					<c:forEach var="banner" items="${bannerArray }">
-						<li>
-							<a href="javascript:void(0);">
-								<img src="${ctx }/${banner}">
-							</a>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
-			</h1>
-			
-			<div class="clear">
-			</div>
+			<c:forEach var="commemorate" items="${commemorateArray }">
+				<h1 style="text-align:left; padding-left:20px;">
+					<fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
+					<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
+					<div><a href="javascript:void(0);" onclick="">${commemorate.comments }</a></div>
+					<br />
+					<div>
+						${createDate }
+						<i>被查看次数：${commemorate.viewTimes}</i>
+						<i>被顶次数：${commemorate.topTimes}</i>
+					</div>
+					<%-- <div><img alt="" src="${commemorate.filePath }"></div> --%>
+					<br />
+					<a href="javascript:void(0);" class="topOnce" onclick="topOnce('${commemorate.id }');">顶一下</a>
+				</h1>
+			</c:forEach>
+			<div class="clear"></div>
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp"%> 
@@ -65,34 +59,12 @@
 <form id="channelForm" action="${ctx }/channel/life.do">
 </form>
 
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 
 <script type="text/javascript">
 
-// 
-/* jQuery(".slideBox").slide({
-	mainCell : ".bd ul",
-	autoPlay : true
-}); */
-
-//alert("${ctx}");
-//$d("maskDiv").commentsModule();
-function openComments(testimonialsId) {
-	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
-	$("#"+commentsBtn).click(function() {
-		//alert("commentsBtn");
-		formTo("commentsForm", "${ctx }/comments/saveComments.do");
-	});
-}
-
-function openTestimonials() {
-	var currentChannelId = '${currentChannelId}';
-	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
-	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
-	});
-}
 	
 </script>
 </html>
