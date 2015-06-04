@@ -145,6 +145,7 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 
 		config.addDataSourceProperty("useUnicode", "true");
 		config.addDataSourceProperty("characterEncoding", "utf8");
+		//config.addDataSourceProperty("connectionTestQuery", "select 1");
 
 		config.setConnectionTimeout(Long.valueOf(connectionTimeout));
 		config.setIdleTimeout(Long.valueOf(idleTimeout));
@@ -163,20 +164,7 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 	}
 
 	public HikaricpMysqlConnection() throws BusinessException {
-		InputStream pin = null;
-
-		Properties pro = new Properties();
-		String fileName = "/WEB-INF/config/directdb_spring_db.properties";
-		try {
-			pin = CommonContainer.getServletContext().getResourceAsStream(
-					fileName);
-			pro.load(pin);
-		} catch (IOException e) {
-			throw new BusinessException("load properties error : " + fileName);
-		}
-
-		HikariConfig dbConfig = new HikariConfig(pro);
-		HikariDataSource temp = new HikariDataSource(dbConfig);
+		HikariDataSource temp = loadHikariDataSource();
 		this.template = temp;
 	}
 
@@ -194,12 +182,39 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 	@Override
 	public java.sql.Connection getRealConnection() {
 		try {
+			if(template == null || template.getConnection() == null){
+				// template“— ß–ß
+				System.out.println("template == null || template.getConnection() == null");
+				template = loadHikariDataSource();
+			}
 			return template.getConnection();
 		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (BusinessException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	private HikariDataSource loadHikariDataSource() throws BusinessException{
+
+		InputStream pin = null;
+
+		Properties pro = new Properties();
+		String fileName = "/WEB-INF/config/directdb_spring_db.properties";
+		try {
+			pin = CommonContainer.getServletContext().getResourceAsStream(
+					fileName);
+			pro.load(pin);
+		} catch (IOException e) {
+			throw new BusinessException("load properties error : " + fileName);
+		}
+
+		HikariConfig dbConfig = new HikariConfig(pro);
+		HikariDataSource temp = new HikariDataSource(dbConfig);
+		return temp;
+	}
+	
 	private DataSource template;
 }

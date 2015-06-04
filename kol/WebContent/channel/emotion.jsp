@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/common.jsp"%>
 
 <!DOCTYPE html>
+<%@ include file="/common/common.jsp"%>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -62,23 +62,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 0}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg1.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -89,23 +73,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 1}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg2.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -116,23 +84,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 2}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg3.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -142,23 +94,7 @@
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
 					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
 					<c:if test="${positionFlag eq 3}">
-						<article>
-							<div class="zhuti-bar">
-								<a href="javascript:void(0);" class="zhuti">
-									<strong>${tms.title }:</strong><br />
-									<%-- <img src="${ctx }/images/aimg4.jpg" alt="zhuti"> --%>
-								</a>
-								<p>${tms.contents}</p>
-								<p>
-									<span>
-										发表时间：${tms.createDate }<br/>
-									</span>
-									<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-										评价
-									</a>
-								</p>
-							</div>
-						</article>
+						<%@ include file="/common/articleDiv.jsp"%>
 						<br />
 					</c:if>
 				</c:forEach>

@@ -46,13 +46,13 @@
 	      <div class="form-list">
 	      	<label class="form-label t-right">错误码：</label>
 	        <div class="form-content">
-	        ${result.respCode }
+	        ${respCode }
 	        </div>
 	      </div>
 	      <div class="form-list">
 	      	<label class="form-label t-right">错误信息</label>
 	        <div class="form-content">
-	        	${result.respMsg }
+	        	${respMsg }
 	        </div>
 	      </div>
 	      

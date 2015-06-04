@@ -45,11 +45,9 @@ public class ChannelController {
 			
 			// 纪念板的第一个
 			CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
-			JSONArray commemorateArray = commemorateService.getLimitCommemorate("1");
+			JSONArray commemorateArray = commemorateService.getCurrentCommemorate("1");
 			if(commemorateArray.size() > 0){
 				session.setAttribute("commemorate", commemorateArray.getJSONObject(0));
-			} else {
-				session.setAttribute("commemorate","{}");
 			}
 			
 			// 测试方法
@@ -60,6 +58,8 @@ public class ChannelController {
 			session.setAttribute("ohmg", "true");
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		
@@ -69,7 +69,8 @@ public class ChannelController {
 	@RequestMapping("/life")
 	public String life(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
-		request.getSession(true).setAttribute(CommonConstant.CHANNEL_NAME, "生活");
+		HttpSession session = request.getSession(true);
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "生活");
 		try {
 			log.info("life。。。" );
 			response.setHeader("Pragma","no-cache"); 
@@ -84,9 +85,11 @@ public class ChannelController {
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
-			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			session.setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		
@@ -96,14 +99,15 @@ public class ChannelController {
 	@RequestMapping("/emotion")
 	public String emotion(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
-		request.getSession(true).setAttribute(CommonConstant.CHANNEL_NAME, "情感");
+		HttpSession session = request.getSession(true);
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "情感");
 		try {
 			log.info("emotion。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
 			String channelId = CommonConstant.EMOTION;
-			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
+			session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 			
 			//JSONArray testimonialsArray = new JSONArray();
 			ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
@@ -111,9 +115,11 @@ public class ChannelController {
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
-			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			session.setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		
@@ -123,23 +129,26 @@ public class ChannelController {
 	@RequestMapping("/career")
 	public String career(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
-		request.getSession(true).setAttribute(CommonConstant.CHANNEL_NAME, "职场");
+		HttpSession session = request.getSession(true);
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "职场");
 		try {
 			log.info("career。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
 			String channelId = CommonConstant.CAREER;
-			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
+			session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 			
 			//JSONArray testimonialsArray = new JSONArray();
 			ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 			JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(channelId);
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
-			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			session.setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		
@@ -149,14 +158,15 @@ public class ChannelController {
 	@RequestMapping("/other")
 	public String other(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
-		request.getSession(true).setAttribute(CommonConstant.CHANNEL_NAME, "其他");
+		HttpSession session = request.getSession(true);
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "其他");
 		try {
 			log.info("other。。。" );
 			response.setHeader("Pragma","no-cache"); 
 			response.setHeader("Cache-Control","no-cache"); 
 			response.setDateHeader("Expires", 0); 
 			String channelId = CommonConstant.OTHER;
-			request.getSession(true).setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
+			session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, channelId);
 			
 			//JSONArray testimonialsArray = new JSONArray();
 			ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
@@ -164,9 +174,11 @@ public class ChannelController {
 			// 测试方法
 			//AddDataByTest(testimonialsArray);
 			// 假设查询到的永远只有100条数据，每列分25条数据
-			request.getSession(true).setAttribute("testimonialsArray", testimonialsArray);
+			session.setAttribute("testimonialsArray", testimonialsArray);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		
@@ -179,7 +191,8 @@ public class ChannelController {
 	@RequestMapping("/commemorateBoard")
 	public String commemorateBoard(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
-		request.getSession(true).setAttribute(CommonConstant.CHANNEL_NAME, "纪念板");
+		HttpSession session = request.getSession(true);
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "纪念板");
 		try {
 			log.info("纪念板。。。" );
 			response.setHeader("Pragma","no-cache"); 
@@ -190,9 +203,11 @@ public class ChannelController {
 			
 			CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
 			JSONArray resultArray = commemorateService.getLimitCommemorate("50");
-			request.getSession(true).setAttribute("commemorateArray", resultArray);
+			session.setAttribute("commemorateArray", resultArray);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("respCode", "exception");
+			session.setAttribute("respMsg", e.getMessage());
 			return "/error.jsp";
 		}
 		

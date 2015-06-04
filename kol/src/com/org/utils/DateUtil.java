@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class DateUtil
 {
-    public static final String DATE_FORMAT_MONTH     = "yyyyMM";
-    public static final String DATE_FORMAT_SHORT_DAY = "yyyyMMdd";
+    public static final String yyyyMM     = "yyyyMM";
+    public static final String yyyyMMdd = "yyyyMMdd";
     public static final String DATE_FORMAT_DAY = "yyyy-MM-dd";
     public static final String DATE_FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_SHORT_DATE = "yyyyMMddHHmmss";
@@ -55,7 +55,7 @@ public class DateUtil
 
     public static String getCurrentShortDateStr()
     {
-        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);// 设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat(yyyyMMdd);// 设置日期格式
         return df.format(new Date());
     }
 
@@ -67,7 +67,7 @@ public class DateUtil
     public static String getBeforeMonth()
     {
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);// 格式化对象
+        SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);// 格式化对象
         Calendar calendar = Calendar.getInstance();// 日历对象
         calendar.setTime(date);// 设置当前日期
         calendar.add(Calendar.MONTH, -1);// 月份减一
@@ -99,7 +99,7 @@ public class DateUtil
     {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);
+        SimpleDateFormat format = new SimpleDateFormat(yyyyMMdd);
         return format.format(calendar.getTime());
     }
 
@@ -111,9 +111,9 @@ public class DateUtil
     public static String getFirstDateByMonth(String date)
     {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(strFormatToDate(date, DATE_FORMAT_MONTH));
+        calendar.setTime(strFormatToDate(date, yyyyMM));
         calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DATE));
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);
+        SimpleDateFormat format = new SimpleDateFormat(yyyyMMdd);
         return format.format(calendar.getTime());
     }
 
@@ -140,7 +140,7 @@ public class DateUtil
     public static String getBeforeWeek()
     {
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);// 格式化对象
+        SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);// 格式化对象
         Calendar calendar = Calendar.getInstance();// 日历对象
         calendar.setTime(date);// 设置当前日期
         calendar.add(Calendar.DAY_OF_WEEK, -7);
@@ -153,7 +153,7 @@ public class DateUtil
         for (int i = 1; i <= 7; i++)
         {
             Date date = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_SHORT_DAY);// 格式化对象
+            SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);// 格式化对象
             Calendar calendar = Calendar.getInstance();// 日历对象
             calendar.setTime(date);// 设置当前日期
             calendar.add(Calendar.DATE, -i);
@@ -167,7 +167,7 @@ public class DateUtil
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < 6; i++)
         {
-            list.add(getBeforeMonth(-i, DATE_FORMAT_MONTH));
+            list.add(getBeforeMonth(-i, yyyyMM));
         }
         return list;
     }
@@ -180,6 +180,6 @@ public class DateUtil
 
             System.out.println(list.get(i));
         }
-        System.out.println(DateUtil.getFirstDateByMonth(DateUtil.getBeforeMonth(-6, DATE_FORMAT_MONTH)));
+        System.out.println(DateUtil.getFirstDateByMonth(DateUtil.getBeforeMonth(-6, yyyyMM)));
     }
 }

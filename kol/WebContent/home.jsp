@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/common.jsp"%>
 
 <!DOCTYPE html>
+<%@ include file="/common/common.jsp"%>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -115,9 +115,10 @@
 <form id="channelForm" action="/channel/life.do" method="post" >
 </form>
 
+<c:if test="${! empty commemorate }">
 <fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
 <fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
-
+</c:if>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
@@ -125,6 +126,8 @@
 // 
 jQuery(".slideBox").slide({
 	mainCell : ".bd ul",
+	interTime : "3000",
+	delayTime : "2000",
 	autoPlay : true
 });
 
@@ -146,25 +149,31 @@ function openTestimonials() {
 	});
 }
 
-var maskContentDiv = $d("maskDiv").dialogCommemorate();
-var imgHtml = "<table width='100%' class='commemorateDiv'>";
-imgHtml += "<tr>";
-imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
-imgHtml += "<td>${commemorate.comments}</td>";
-imgHtml += "</tr>";
-// 底行
-imgHtml += "<tr>";
-imgHtml += "<td>";
-imgHtml += "被查看次数：${commemorate.viewTimes} 被顶次数：${commemorate.topTimes}";
-imgHtml += "<br>";
-imgHtml += "${createDate}";
-imgHtml += "<br>";
-imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\');">顶一下</a>';
-imgHtml += "</td>";
-imgHtml += "</tr>";
-imgHtml += "</table>";
-var imgObj = getObjFromHtml(imgHtml);
-$d(maskContentDiv).append(imgObj);
+function createCommemorateDiv(){
+	if(!! "${dateTemp}"){
+		var maskContentDiv = $d("maskDiv").dialogCommemorate();
+		var imgHtml = "<table width='100%' class='commemorateDiv'>";
+		imgHtml += "<tr>";
+		imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
+		imgHtml += "<td>${commemorate.comments}</td>";
+		imgHtml += "</tr>";
+		// 底行
+		imgHtml += "<tr>";
+		imgHtml += "<td>";
+		imgHtml += "被查看次数：${commemorate.viewTimes} 被顶次数：${commemorate.topTimes}";
+		imgHtml += "<br>";
+		imgHtml += "${createDate}";
+		imgHtml += "<br>";
+		imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\');">顶一下</a>';
+		imgHtml += "</td>";
+		imgHtml += "</tr>";
+		imgHtml += "</table>";
+		var imgObj = getObjFromHtml(imgHtml);
+		$d(maskContentDiv).append(imgObj);
+	}
+}
+
+createCommemorateDiv();
 
 </script>
 </html>
