@@ -16,16 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.org.Connection;
 import com.org.common.CommonConstant;
-import com.org.services.DataSourceContainer;
 import com.org.utils.JSONUtils;
 import com.org.utils.RequestUtils;
-import com.org.utils.SmpPropertyUtil;
 import com.org.utils.StringUtil;
 
 @Controller
 @RequestMapping("/query")
 public class QueryController {
-	private final static DataSourceContainer dsc = DataSourceContainer.getInstance();
 	
 	private Log log = LogFactory.getLog(QueryController.class);
 	@RequestMapping("/executeQuery")
@@ -51,7 +48,6 @@ public class QueryController {
 		String identityFlag = requestJson.getString("identityFlag");
 		// 根据身份，路由到指定的数据库
 		Connection con = null;
-		con = dsc.getConnection(SmpPropertyUtil.getValue("identify_db_relation", identityFlag));
 		if(con == null){
 			// 尝试从请求中获取数据库参数，动态加载数据源，成功后返回con
 			

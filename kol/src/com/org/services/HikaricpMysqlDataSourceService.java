@@ -2,23 +2,25 @@ package com.org.services;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
-import net.sf.json.JSONObject;
+import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.org.Connection;
-import com.org.connection.HikaricpMysqlConnection;
 import com.org.container.CommonContainer;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * hikaricp数据源服务
  * @author Administrator
  *
  */
-public class HikaricpMysqlDataSourceService extends CommonDataSourceService{
+public class HikaricpMysqlDataSourceService {
 	
 	public static HikaricpMysqlDataSourceService getInstance(){
 		if(hds == null){
@@ -26,19 +28,19 @@ public class HikaricpMysqlDataSourceService extends CommonDataSourceService{
 		}
 		return hds;
 	}
-
-	@Override
-	public Connection loadDataSourceByParam(JSONObject extendsParam) {
-		log.info("HikaricpDataSourceService: 按参数加载Hikaricp连接");
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Connection getConnection(){
+		try {
+			return template.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	@Override
-	public Connection loadDefaultDataSource() {
-		log.info("HikaricpMysqlDataSourceService: 加载默认Hikaricp Mysql连接");
-		HikaricpMysqlConnection con = null;
-		
+	private static HikaricpMysqlDataSourceService hds = null;
+	
+	private HikaricpMysqlDataSourceService(){
 		Properties pro = new Properties();
 		try {
 			String fileName = "/WEB-INF/config/mysql_db.properties";
@@ -46,7 +48,7 @@ public class HikaricpMysqlDataSourceService extends CommonDataSourceService{
 			pro.load(in);
 		} catch (IOException e1) {
 			e1.printStackTrace();
-			return con;
+			return;
 		}
 		String driverClassName = pro.getProperty("driverClassName");
 		String serverName = pro.getProperty("serverName");
@@ -59,15 +61,28 @@ public class HikaricpMysqlDataSourceService extends CommonDataSourceService{
 		String idleTimeout = pro.getProperty("idleTimeout");
 		String maximumPoolSize = pro.getProperty("maximumPoolSize");
 		String minimumIdle = pro.getProperty("minimumIdle");
+		String connectionTestQuery = pro.getProperty("connectionTestQuery");
 		
-		con = new HikaricpMysqlConnection(driverClassName, serverName, port, databaseName, user, password, 
-				connectionTimeout, maxLifetime, idleTimeout, maximumPoolSize, minimumIdle);
-		return con;
+		HikariConfig config = new HikariConfig();
+
+		config.setMaximumPoolSize(100);
+		config.setDataSourceClassName(driverClassName);
+		config.addDataSourceProperty("serverName", serverName);
+		config.addDataSourceProperty("port", port);
+		config.addDataSourceProperty("databaseName", databaseName);
+		config.addDataSourceProperty("user", user);
+		config.addDataSourceProperty("password", password);
+		
+		config.setConnectionTimeout(Long.valueOf(connectionTimeout));
+		config.setIdleTimeout(Long.valueOf(idleTimeout));
+		config.setMaxLifetime(Long.valueOf(maxLifetime));
+		config.setMaximumPoolSize(Integer.valueOf(maximumPoolSize));
+		config.setMinimumIdle(Integer.valueOf(minimumIdle));
+		config.setConnectionTestQuery(connectionTestQuery);
+		
+		HikariDataSource temp = new HikariDataSource(config);
+		this.template = temp;
 	}
-	
-	private static HikaricpMysqlDataSourceService hds = null;
-	private HikaricpMysqlDataSourceService(){
-		super(HikaricpMysqlDataSourceService.class);
-	}
+	private DataSource template;
 	private Log log = LogFactory.getLog(HikaricpMysqlDataSourceService.class);
 }

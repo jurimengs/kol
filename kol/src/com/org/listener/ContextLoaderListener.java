@@ -10,7 +10,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.org.container.CommonContainer;
-import com.org.services.DataSourceContainer;
 import com.org.utils.SmpContext;
 import com.org.utils.SmpPropertyUtil;
 
@@ -87,7 +86,7 @@ public class ContextLoaderListener implements ServletContextListener{
 			e.printStackTrace();
 		}*/
 		// 初始化数据源
-		DataSourceContainer.getInstance().initAllDataSource();
+		//DataSourceContainer.getInstance().initAllDataSource();
 	}
 	
 	
