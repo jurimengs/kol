@@ -7,13 +7,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.org.Connection;
 import com.org.common.CommonConstant;
-import com.org.services.DataSourceContainer;
 import com.org.utils.JSONUtils;
 import com.org.utils.RequestUtils;
 
 // TODO 
 public class RemoteServiceImpl implements RemoteService {
-	private final static DataSourceContainer dsc = DataSourceContainer.getInstance();
+	//private final static DataSourceContainer dsc = DataSourceContainer.getInstance();
 	private Log log = LogFactory.getLog(RemoteServiceImpl.class);
 
 	@Override
@@ -31,11 +30,11 @@ public class RemoteServiceImpl implements RemoteService {
 		String identityFlag = requestJson.getString("identityFlag");
 		// 根据身份，路由到指定的数据库
 		Connection con = null;
-		if(identityFlag.equals("monitor")){
-			con = dsc.getConnection(CommonConstant.DB_MONGO);
-		} else {
-			con = dsc.getConnection(CommonConstant.DB_HIKARICP);
-		}
+//		if(identityFlag.equals("monitor")){
+//			con = dsc.getConnection(CommonConstant.DB_MONGO);
+//		} else {
+//			con = dsc.getConnection(CommonConstant.DB_HIKARICP);
+//		}
 		
 		// 二、执行查询
 		result = executeQuery(requestJson, con);

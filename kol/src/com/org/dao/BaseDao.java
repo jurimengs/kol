@@ -14,18 +14,16 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.org.Connection;
 import com.org.model.reflect.ReflectDbModel;
-import com.org.services.DataSourceContainer;
+import com.org.services.HikaricpMysqlDataSourceService;
 import com.org.util.StringUtil;
-import com.org.utils.SmpPropertyUtil;
 
+// TODO 重新做分页
 public class BaseDao {
+	private static HikaricpMysqlDataSourceService dataSource = HikaricpMysqlDataSourceService.getInstance();
 	
-	@SuppressWarnings("unchecked")
-	public static Connection<java.sql.Connection> conn = (Connection<java.sql.Connection>) DataSourceContainer.getInstance().getConnection(SmpPropertyUtil.getValue("identify_db_relation", "kol"));
 	protected java.sql.Connection getConnection(){
-		java.sql.Connection res = (java.sql.Connection)conn.getRealConnection();
+		java.sql.Connection res = dataSource.getConnection();
 		return res;
 	}
 
@@ -122,7 +120,9 @@ public class BaseDao {
 		if(ps != null){
 			ps.close();
 		}
-		conn.close(connection);
+		if(connection != null){
+			connection.close();
+		}
 	}
 
 	protected JSONArray queryList(String sql, Map<Integer, Object> params) throws SQLException{
