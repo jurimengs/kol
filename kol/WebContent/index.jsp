@@ -36,7 +36,7 @@
 	<div id="banner">
 		<div id="slideBox" class="slideBox">
 			<div class="bd">
-				<a id="enter" href="javascript:void(0);" onclick="turnToIndex()"><img src="/images/commemorate1.png"></a>
+				<a id="enter" href="javascript:void(0);" onclick="turnToIndex()"><img src="/images/commemorate1.jpg"></a>
 			</div>
 		</div>
 	</div>
