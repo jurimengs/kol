@@ -31,10 +31,10 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 	}
 
 	public JSONObject queryList(JSONObject param, String sql) {
-		// µ¥Ò³¼ÇÂ¼Êı
+		// å•é¡µè®°å½•æ•°
 		Integer pageCounts = Integer.valueOf(param.getString("pageCounts"));
 		param.remove("pageCounts");
-		// Ò³Âë
+		// é¡µç 
 		Integer currentPage = Integer.valueOf(param.getString("currentPage"));
 		param.remove("currentPage");
 
@@ -50,17 +50,17 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSetUtil.setStatmentParams(ps, sqlParams);
 
-			// ²éÑ¯²»ĞèÒªrollback¡¡Èç¹ûÒª¿ª·¢¸üĞÂ¾ÍµÃrollback
+			// æŸ¥è¯¢ä¸éœ€è¦rollbackã€€å¦‚æœè¦å¼€å‘æ›´æ–°å°±å¾—rollback
 			ResultSet rs = ps.executeQuery();
 
 			res.put(CommonConstant.RESP_CODE, "10000");
-			res.put(CommonConstant.RESP_MSG, "²éÑ¯³É¹¦");
+			res.put(CommonConstant.RESP_MSG, "æŸ¥è¯¢æˆåŠŸ");
 
 			JSONArray list = ResultSetUtil.parseResultSetToJSONArray(rs, true);
 			JSONObject totalObj = new JSONObject();
-			// ĞÅÏ¢¼ÇÂ¼
+			// ä¿¡æ¯è®°å½•
 			res.put("record", list);
-			// ¼ÆËã×ÜÊıµÄ¸½¼ÓĞÅÏ¢
+			// è®¡ç®—æ€»æ•°çš„é™„åŠ ä¿¡æ¯
 			res.put("totalObj", totalObj);
 		} catch (SQLException e) {
 			try {
@@ -70,7 +70,7 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 			} catch (SQLException e1) {
 
 				res.put(CommonConstant.RESP_CODE, "10001");
-				res.put(CommonConstant.RESP_MSG, "²éÑ¯¹ı³ÌÒì³£" + e.getMessage());
+				res.put(CommonConstant.RESP_MSG, "æŸ¥è¯¢è¿‡ç¨‹å¼‚å¸¸" + e.getMessage());
 				res.put("record", "");
 				res.put("totalObj", new JSONObject());
 			}
@@ -119,7 +119,7 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 		result.put("memo1", "");
 		result.put("memo2", "");
 		result.put(CommonConstant.RESP_CODE, "10000");
-		result.put(CommonConstant.RESP_MSG, "²Ù×÷³É¹¦");
+		result.put(CommonConstant.RESP_MSG, "æ“ä½œæˆåŠŸ");
 		result.put("busiInfo", record);
 		return result;
 	}
@@ -183,7 +183,7 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 	public java.sql.Connection getRealConnection() {
 		try {
 			if(template == null || template.getConnection() == null){
-				// templateÒÑÊ§Ğ§
+				// templateå·²å¤±æ•ˆ
 				System.out.println("template == null || template.getConnection() == null");
 				template = loadHikariDataSource();
 			}

@@ -45,6 +45,17 @@ public class TestimonialsController {
 			
 			TestimonialsService tService = (TestimonialsService)SpringUtil.getBean("testimonialsService");
 			tService.saveContents(userId, contents, channelId, title);
+//			
+//			contents = "1"+new String(contents.getBytes("ISO-8859-1"),"utf-8");
+//			tService.saveContents(userId, contents, channelId, title);
+//			contents = "2"+new String(contents.getBytes("ISO-8859-1"),"gbk");tService.saveContents(userId, contents, channelId, title);
+//			contents ="3"+ new String(contents.getBytes("gbk"),"ISO-8859-1");tService.saveContents(userId, contents, channelId, title);
+//			contents = "4"+new String(contents.getBytes("gbk"),"utf-8");tService.saveContents(userId, contents, channelId, title);
+//			contents = "5"+new String(contents.getBytes("utf-8"),"ISO-8859-1");tService.saveContents(userId, contents, channelId, title);
+//			contents = "6"+new String(contents.getBytes("utf-8"),"gbk");tService.saveContents(userId, contents, channelId, title);
+//			contents = "7"+new String(contents.getBytes(),"utf-8");tService.saveContents(userId, contents, channelId, title);
+//			contents = "8"+new String(contents.getBytes(),"ISO-8859-1");tService.saveContents(userId, contents, channelId, title);
+//			contents = "9"+new String(contents.getBytes(),"gbk");tService.saveContents(userId, contents, channelId, title);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

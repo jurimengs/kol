@@ -43,7 +43,7 @@ CREATE TABLE `kol_comment` (
   `update_date` varchar(14) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of kol_comment
@@ -79,7 +79,7 @@ CREATE TABLE `kol_testimonials` (
   `channel_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of kol_testimonials
@@ -116,10 +116,10 @@ CREATE TABLE `kol_commemorate_board` (
   `view_times` bigint(20), -- 查看次数
   `create_date` varchar(14) NOT NULL,
   `update_date` varchar(14) NOT NULL,
+  `commemorate_date` varchar(8) DEFAULT NULL, -- 展示日期
   `top_times` bigint(20) DEFAULT 0, -- 被顶次数
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 -- ----------------------------
 -- Table structure for `kol_files` 纪念册
