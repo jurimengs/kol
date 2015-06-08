@@ -72,6 +72,8 @@ public class HikaricpMysqlDataSourceService {
 		config.addDataSourceProperty("databaseName", databaseName);
 		config.addDataSourceProperty("user", user);
 		config.addDataSourceProperty("password", password);
+		config.addDataSourceProperty("useUnicode", "true");
+		config.addDataSourceProperty("characterEncoding", "utf8");
 		
 		config.setConnectionTimeout(Long.valueOf(connectionTimeout));
 		config.setIdleTimeout(Long.valueOf(idleTimeout));
