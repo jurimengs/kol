@@ -10,7 +10,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.util.StringUtils;
 
-import com.org.Connection;
 import com.org.common.CommonConstant;
 
 public class RequestUtils {

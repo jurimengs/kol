@@ -271,7 +271,9 @@
 	
 	$_d.prototype.adjustCenter = function(args) {
 		var width = document.body.scrollWidth;
-		//var height = screen.availHeight;
+		// 获取屏幕高度
+		//var height = screen.height ;
+		//alert(height);
 		var fixed = 20;
 		var realWidth = width - fixed * 2;
 		
@@ -285,6 +287,9 @@
 		}
 		if(!!! args["marginTop"]){
 			args["marginTop"] = fixed + "px";
+		}
+		if(!!! args["top"]){
+			args["top"] = 150 + "px";
 		}
 		this.copyAttrTo(args, this._$_d);
 		

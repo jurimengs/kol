@@ -9,8 +9,7 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
  
-<!-- ******************************************计划任务**************************************** -->
- <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+ <!-- <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
   <property name="corePoolSize" value="2" />
   <property name="maxPoolSize" value="2" />
   <property name="queueCapacity" value="2" />
@@ -24,13 +23,25 @@
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
-<!--             <ref local="stepCronTrigger0"/> -->
-<!--             <ref local="stepCronTrigger1"/>           -->
+            <ref local="stepCronTrigger0"/>
         </list>
     </property>
 </bean>
 
-<!-- ******************************************计划任务服务****************************************  -->
-<bean id="cronServcie" class="com.org.cron.CronService" abstract="true"/>
+<bean id="stepCronTrigger0" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="stepJobDetail" />
+    <property name="cronExpression" >
+        <value>${cron.task.time0}</value>
+    </property>
+</bean>
 
+<bean id="stepJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="cronServiceManager"></property>
+    <property name="targetMethod" value="service_step0"></property>
+    <property name="concurrent" value="false"></property>
+</bean>
+
+
+<bean id="cronServcie" class="com.org.cron.CronService" abstract="true"/>
+ -->
 </beans>

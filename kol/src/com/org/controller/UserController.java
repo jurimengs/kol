@@ -12,44 +12,40 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.org.servlet.CommonController;
+import com.org.servlet.SmpHttpServlet;
 import com.org.utils.RequestUtils;
 import com.org.utils.StringUtil;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
-	
-	private Log log = LogFactory.getLog(UserController.class);
-	@RequestMapping("/toregist")
-	public String toregist(HttpServletRequest request,HttpServletResponse response) 
-			throws UnsupportedEncodingException, IOException{
-		// 一、加载数据源
-		/* 0. 设置数据部缓存  */
+public class UserController extends SmpHttpServlet implements CommonController{
+	private static final long serialVersionUID = -6419478230418815050L;
+
+	public void toregist(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
 		response.setHeader("Pragma","no-cache"); 
 		response.setHeader("Cache-Control","no-cache"); 
-		response.setDateHeader("Expires", 0); 
-		return "/user/regist.jsp";
+		response.setDateHeader("Expires", 0);
+		this.forward("/user/regist.jsp", request, response);
+		return;
 	}
 	
-	@RequestMapping("/regist")
-	public String regist(HttpServletRequest request,HttpServletResponse response) 
-			throws UnsupportedEncodingException, IOException{
-		// 一、加载数据源
-		/* 0. 设置数据部缓存  */
-		try {
-			response.setHeader("Pragma","no-cache"); 
-			response.setHeader("Cache-Control","no-cache"); 
-			response.setDateHeader("Expires", 0); 
-			/* 1.获得商户端请求的值  默认设置数据处理成功 */
-			String loginName = request.getParameter("");
-			Map<String,String> paramMap = RequestUtils.getParamMap(request);
-			log.info("收到请求参数：　" + StringUtil.mapStringToString(paramMap));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "error.jsp";
-		}
-		
-		return "/user/usercenter.jsp";
-	}
+	public void regist(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
+		//String loginName = request.getParameter("");
+		Map<String,String> paramMap = RequestUtils.getParamMap(request);
+		log.info("收到请求参数：　" + StringUtil.mapStringToString(paramMap));
 
+		this.forward("/user/usercenter.jsp", request, response);
+		return;
+	}
+	
+	private Log log = LogFactory.getLog(UserController.class);
+
+	@Override
+	public void post(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

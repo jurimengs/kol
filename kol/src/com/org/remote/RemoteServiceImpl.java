@@ -6,9 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.org.Connection;
-import com.org.common.CommonConstant;
 import com.org.utils.JSONUtils;
-import com.org.utils.RequestUtils;
 
 // TODO 
 public class RemoteServiceImpl implements RemoteService {
@@ -21,12 +19,6 @@ public class RemoteServiceImpl implements RemoteService {
 
 		JSONObject requestJson = JSONUtils.getJsonFromString(request);
 		
-		JSONObject result = RequestUtils.precheckParmas(requestJson);
-		if(! result.getString(CommonConstant.RESP_CODE).equals("10000")){
-			log.info(result.getString(CommonConstant.RESP_CODE) +": " + result.getString(CommonConstant.RESP_MSG));
-			return result.toString();
-		}
-
 		String identityFlag = requestJson.getString("identityFlag");
 		// 根据身份，路由到指定的数据库
 		Connection con = null;
@@ -37,7 +29,7 @@ public class RemoteServiceImpl implements RemoteService {
 //		}
 		
 		// 二、执行查询
-		result = executeQuery(requestJson, con);
+		JSONObject result = executeQuery(requestJson, con);
 		
 		// 三、返回数据
 		return result.toString();

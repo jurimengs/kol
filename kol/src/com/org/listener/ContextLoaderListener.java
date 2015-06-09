@@ -7,10 +7,8 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.org.container.CommonContainer;
-import com.org.utils.SmpContext;
 import com.org.utils.SmpPropertyUtil;
 
 public class ContextLoaderListener implements ServletContextListener{
@@ -36,28 +34,21 @@ public class ContextLoaderListener implements ServletContextListener{
 
 	public void contextInitialized(ServletContextEvent arg0) {
 		log.info("Integrate Smp With Spring Container Begin....");
-	    /* 1. init log */
-	    
-	    /* 2. start log */
 		
-	    /* 3. load properties */
 		ServletContext servletContext =	arg0.getServletContext();
 	    SmpPropertyUtil.initProperties(servletContext);
 	    
 	    CommonContainer.saveContext(servletContext);
 	    
-	    /* 4. init code manager */
-//	    CodeManagerContainer.initCodeManagerContainer(arg0.getServletContext());
-	    
-	    /* 5. init workflow */
-		
 		/* 6.init spring context */
 		this.contextLoader = createContextLoader();
-		WebApplicationContext context = this.contextLoader.initWebApplicationContext(servletContext);
-			
+		//WebApplicationContext context = this.contextLoader.initWebApplicationContext(servletContext);
+		this.contextLoader.initWebApplicationContext(servletContext);
+		
+		//SpringUtil.initApplicationContext(context);
 		/* 7.init smp context */
-		SmpContext sc = SmpContext.getInstance();
-		sc.initApplicationContext(context,servletContext);	
+//		SmpContext sc = SmpContext.getInstance();
+//		sc.initApplicationContext(context,servletContext);	
 	    /* 8. load cache */
 	   
 	    /*10. start socket server */

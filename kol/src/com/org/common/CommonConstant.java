@@ -49,5 +49,9 @@ public class CommonConstant {
 	 * 
 	 */
 	public static final String CHANNEL_NAME = "channerName";
+	/**
+	 * 
+	 */
+	public static final String SERVLET = "servlet-dispatcher";
 		
 }

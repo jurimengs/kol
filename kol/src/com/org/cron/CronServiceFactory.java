@@ -3,7 +3,7 @@ package com.org.cron;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.org.utils.SmpContext;
+import com.org.util.SpringUtil;
 
 public class CronServiceFactory {
 	private Log log = LogFactory.getLog(CronServiceFactory.class);
@@ -22,7 +22,7 @@ public class CronServiceFactory {
 	
 	public CronService  createCronService(String beanName){
 		CronService cs = null;
-		cs = (CronService)SmpContext.getInstance().getBean(beanName);
+		cs = (CronService)SpringUtil.getBean(beanName);
 		return cs;
 	}
 
