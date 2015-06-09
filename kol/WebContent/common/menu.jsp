@@ -48,3 +48,21 @@
 	<div class="clear">
 	</div>
 </header>
+
+<script type="text/javascript">
+function openComments(testimonialsId) {
+	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
+	$("#"+commentsBtn).click(function() {
+		//alert("commentsBtn");
+		formTo("commentsForm", "${ctx }/comments/saveComments.do");
+	});
+}
+
+function openTestimonials() {
+	var currentChannelId = '${currentChannelId}';
+	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
+	$("#"+submitBtnId).click(function() {
+		formTo("commentsForm", "${ctx }/testimonials/saveContents.do");
+	});
+}
+</script>

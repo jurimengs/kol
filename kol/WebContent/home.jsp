@@ -116,8 +116,8 @@
 </form>
 
 <c:if test="${! empty commemorate }">
-<fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
-<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
+<fmt:parseDate var="commemorateDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMddHHmmss" />
+<fmt:formatDate var="commemorateDate" value="${commemorateDateTemp }" type="both"/>
 </c:if>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
@@ -131,26 +131,8 @@ jQuery(".slideBox").slide({
 	autoPlay : true
 });
 
-//alert("${ctx}");
-//$d("maskDiv").commentsModule();
-function openComments(testimonialsId) {
-	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
-	$("#"+commentsBtn).click(function() {
-		//alert("commentsBtn");
-		formTo("commentsForm", "/comments/saveComments.do");
-	});
-}
-
-function openTestimonials() {
-	var currentChannelId = '${currentChannelId}';
-	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
-	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "/testionials/saveContents.do");
-	});
-}
-
 function createCommemorateDiv(){
-	if(!! "${dateTemp}"){
+	if(!! "${commemorateDateTemp}"){
 		var maskContentDiv = $d("maskDiv").dialogCommemorate();
 		var imgHtml = "<table width='100%' class='commemorateDiv'>";
 		imgHtml += "<tr>";

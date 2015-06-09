@@ -17,7 +17,6 @@ import org.springframework.util.StringUtils;
 
 import com.org.common.CommonConstant;
 import com.org.common.PageConstant;
-import com.org.listener.ContextLoaderListener;
 import com.org.util.SpringUtil;
 
 public class DispatcherServlet extends HttpServlet {

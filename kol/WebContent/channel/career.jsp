@@ -110,35 +110,4 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 
-<script type="text/javascript">
-// 
-/* jQuery(".slideBox").slide({
-	mainCell : ".bd ul",
-	autoPlay : true
-}); */
-
-//alert("${ctx}");
-//$d("maskDiv").commentsModule();
-function openComments(testimonialsId) {
-	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
-	$("#"+commentsBtn).click(function() {
-		//alert("commentsBtn");
-		formTo("commentsForm", "${ctx }/comments/saveComments.do");
-	});
-}
-
-function openTestimonials() {
-	var currentChannelId = '${currentChannelId}';
-	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
-	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
-	});
-}
-	
-var ohmg = "${ohmg}";
-//alert(ohmg);
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
-}
-</script>
 </html>

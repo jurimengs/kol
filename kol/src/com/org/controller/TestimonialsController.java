@@ -11,16 +11,16 @@ import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.org.services.busi.TestimonialsService;
+import com.org.servlet.CommonController;
+import com.org.servlet.SmpHttpServlet;
 import com.org.util.SpringUtil;
 
 @Controller
-@RequestMapping("/testionials")
-public class TestimonialsController {
-	
-	@RequestMapping("/saveContents")
+public class TestimonialsController extends SmpHttpServlet implements CommonController{
+	private static final long serialVersionUID = -2554067244094241952L;
+
 	public void saveContents(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 
@@ -43,4 +43,11 @@ public class TestimonialsController {
 	}
 	
 	private Log log = LogFactory.getLog(TestimonialsController.class);
+
+	@Override
+	public void post(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

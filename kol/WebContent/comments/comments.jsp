@@ -61,38 +61,4 @@
 </form>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
-<script type="text/javascript">
-
-// 
-jQuery(".slideBox").slide({
-	mainCell : ".bd ul",
-	autoPlay : true
-});
-
-//alert("${ctx}");
-//$d("maskDiv").commentsModule();
-function openComments(testimonialsId) {
-	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
-	$("#"+commentsBtn).click(function() {
-		//alert("commentsBtn");
-		formTo("commentsForm", "${ctx }/comments/saveComments.do");
-	});
-}
-
-/**
- * 查看发言的所有评论
- */
-function allCommentsAbout(testimonialsId){
-	var newInput = $("<input type='hidden' name='testimonialsId' value='"+testimonialsId+"'>");
-	$("#channelForm").append(newInput);
-	formTo("commentsForm", "${ctx }/comments/saveComments.do");
-}
-
-function openTestimonials() {
-	var currentChannelId = '${currentChannelId}';
-	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "${ctx }/testionials/saveContents.do");
-	});
-}
-</script>
 </html>
