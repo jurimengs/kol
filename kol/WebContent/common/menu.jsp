@@ -54,7 +54,7 @@ function openComments(testimonialsId) {
 	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
 	$("#"+commentsBtn).click(function() {
 		//alert("commentsBtn");
-		formTo("commentsForm", "${ctx }/comments/saveComments.do");
+		formTo("commentsForm", "/comments/saveComments.do");
 	});
 }
 
@@ -62,7 +62,7 @@ function openTestimonials() {
 	var currentChannelId = '${currentChannelId}';
 	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "${ctx }/testimonials/saveContents.do");
+		formTo("commentsForm", "/testimonials/saveContents.do");
 	});
 }
 </script>

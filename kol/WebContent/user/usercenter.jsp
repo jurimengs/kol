@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="ie-comp">
 <title>用户中心</title>
-<link rel="stylesheet" type="text/css" href="${ctx }/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 
-<script src="${ctx }/js/jquery.min.js" type="text/javascript"></script>
-<script src="${ctx }/js/common.js" type="text/javascript"></script>
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/common.js" type="text/javascript"></script>
 
 <style type="text/css">
 .rightmsg {
@@ -51,11 +51,11 @@
 </body>
 
 <script type="text/javascript" >
-//alert("${ctx}");
+//alert("");
 $("#userLogin").click(function(){
 	$("#realLoginName").val($("#username").val());
 	$("#realLoginPwd").val($("#loginpwd").val());
-	$("#loginForm").prop("action","${ctx}/user/userLogin.do");
+	$("#loginForm").prop("action","/user/userLogin.do");
 
 	var ids = ['username','loginpwd'];
 	if(notNullArr(ids)){
@@ -66,7 +66,7 @@ $("#userLogin").click(function(){
 $("#companyLogin").click(function(){
 	$("#realLoginName").val($("#username-comp").val());
 	$("#realLoginPwd").val($("#loginpwd-comp").val());
-	$("#loginForm").attr("action","${ctx}/user/companyLogin.do");
+	$("#loginForm").attr("action","/user/companyLogin.do");
 
 	var ids = ['username-comp','loginpwd-comp'];
 	if(notNullArr(ids)){

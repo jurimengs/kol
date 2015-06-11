@@ -12,20 +12,20 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 
-<link rel="stylesheet" type="text/css" href="${ctx }/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 
-<script type="text/javascript" src="${ctx }/js/jquery-1.11.1.min.js"></script>
-<script src="${ctx }/js/common.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/common.js" type="text/javascript"></script>
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-<script src="js/html5shiv.min.js"></script>
-<script src="js/respond.min.js"></script>
+<script src="/js/html5shiv.min.js"></script>
+<script src="/js/respond.min.js"></script>
 <![endif]-->
 <!--[if IE 6]>
-<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+<script type="text/javascript" src="/js/DD_belatedPNG.js"></script>
 <script type="text/javascript">DD_belatedPNG.fix('*');</script>
 <![endif]--><!--修复IE6下PNG图片背景透明-->
 
@@ -67,18 +67,18 @@
 </body>
 
 <script type="text/javascript" >
-//alert("${ctx}");
+//alert("");
 $("#userLogin").click(function(){
 	$("#realLoginName").val($("#username").val());
 	$("#realLoginPwd").val($("#loginpwd").val());
-	$("loginForm").attr("action","${ctx}/user/userLogin.do");
+	$("loginForm").attr("action","/user/userLogin.do");
 	$("loginForm").submit();
 });
 
 $("#companyLogin").click(function(){
 	$("#realLoginName").val($("#username-comp").val());
 	$("#realLoginPwd").val($("#loginpwd-comp").val());
-	$("loginForm").attr("action","${ctx}/user/companyLogin.do");
+	$("loginForm").attr("action","/user/companyLogin.do");
 	$("loginForm").submit();
 });
 

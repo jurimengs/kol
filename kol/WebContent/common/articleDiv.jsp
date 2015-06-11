@@ -7,7 +7,7 @@
 	<div class="zhuti-bar">
 		<a href="javascript:void(0);" class="zhuti">
 			<strong>${tms.title }:</strong><br />
-			<%-- <img src="${ctx }/images/aimg1.jpg" alt="zhuti"> --%>
+			<%-- <img src="/images/aimg1.jpg" alt="zhuti"> --%>
 		</a>
 		<p>${tms.contents}</p>
 		<p>
