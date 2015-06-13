@@ -2,7 +2,6 @@ package com.org.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
@@ -15,22 +14,34 @@ import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
 import com.org.util.SpringUtil;
 
+/**
+ * ¼ÍÄî°å
+ * @author Administrator
+ *
+ */
 @Controller
 public class CommemorateController extends SmpHttpServlet implements CommonController{
 	private static final long serialVersionUID = -3498132823103396194L;
 
 	public void queryComments(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
-		HttpSession session = request.getSession(true);
-		//JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
-//			String userId = sessionUser.getString("id");
 		
 		String testimonialsId = request.getParameter("testimonialsId");
 		
 		CommentsService commentsService = (CommentsService)SpringUtil.getBean("commentsService");
 		JSONObject res = commentsService.getCommentsByTesTimonialId(testimonialsId);
-		session.setAttribute("res", res);
-		this.redirect("/comments/comments.jsp", response);
+		request.setAttribute("res", res);
+		
+		this.forward("/comments/comments.jsp", request, response);
+		return;
+	}
+	
+
+	public void toAddPage(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
+		//JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
+//			String userId = sessionUser.getString("id");
+		this.forward("/channel/addCommemorate.jsp", request, response);
 		return;
 	}
 	

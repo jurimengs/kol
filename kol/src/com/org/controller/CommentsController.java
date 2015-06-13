@@ -31,7 +31,7 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 		JSONObject res = commentsService.getCommentsByTesTimonialId(testimonialsId);
 		session.setAttribute("res", res);
 
-		this.redirect("/comments/comments.jsp", response);
+		this.forward("/comments/comments.jsp", request, response);
 		return;
 	}
 	
@@ -40,7 +40,6 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 	@Override
 	public void post(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 }

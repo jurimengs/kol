@@ -28,7 +28,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 	public void home(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("index。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "首页");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.HOME);
 		
@@ -40,74 +40,78 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
 		JSONArray commemorateArray = commemorateService.getCurrentCommemorate("1");
 		if(commemorateArray.size() > 0){
-			session.setAttribute("commemorate", commemorateArray.getJSONObject(0));
+			request.setAttribute("commemorate", commemorateArray.getJSONObject(0));
 		}
 		
 		// 假设查询到的永远只有100条数据，每列分25条数据
-		session.setAttribute("testimonialsArray", testimonialsArray);
-		session.setAttribute("ohmg", "true");
+		request.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("ohmg", "true");
 		
-		this.redirect("/home.jsp", response);
+		this.forward("/home.jsp", request, response);
 		return;
 	}
 	
 	public void life(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("life。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "生活");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.LIFE);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.LIFE);
-		session.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("testimonialsArray", testimonialsArray);
 
-		this.redirect("/channel/life.jsp", response);
+		this.forward("/channel/life.jsp", request, response);
 		return;
 	}
 	
 	public void emotion(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("emotion。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "情感");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.EMOTION);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.EMOTION);
-		session.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("testimonialsArray", testimonialsArray);
 
-		this.redirect("/channel/emotion.jsp", response);
+		// 如果是必需要长期存放于session的, 则使用session. 否则只要使用request就行了
+		// 如果使用request, 则只能forward到页面, 才能拿到数据
+
+		this.forward("/channel/emotion.jsp", request, response);
 		return;
 	}
 	
 	public void career(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("career。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "职场");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.CAREER);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.CAREER);
-		session.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("testimonialsArray", testimonialsArray);
 
-		this.redirect("/channel/career.jsp", response);
+		//this.redirect("/channel/career.jsp", response);
+		this.forward("/channel/career.jsp", request, response);
 		return;
 	}
 	
 	public void other(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("other。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "其他");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.OTHER);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.OTHER);
-		session.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("testimonialsArray", testimonialsArray);
 
-		this.redirect("/channel/other.jsp", response);
+		this.forward("/channel/other.jsp", request, response);
 		return;
 	}
 	
@@ -117,15 +121,15 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 	public void commemorateBoard(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("纪念板。。。" );
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "纪念板");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.COMMEMORATE_BOARD);
 		
 		CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
 		JSONArray resultArray = commemorateService.getLimitCommemorate("50");
-		session.setAttribute("commemorateArray", resultArray);
+		request.setAttribute("commemorateArray", resultArray);
 
-		this.redirect("/channel/commemorateBoard.jsp", response);
+		this.forward("/channel/commemorateBoard.jsp", request, response);
 		return;
 	}
 	
