@@ -2,6 +2,7 @@ package com.org.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
@@ -9,9 +10,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
+import com.org.common.UserConstant;
+import com.org.services.busi.CommemorateService;
 import com.org.services.busi.CommentsService;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
+import com.org.util.DateUtil;
 import com.org.util.SpringUtil;
 
 /**
@@ -23,16 +27,21 @@ import com.org.util.SpringUtil;
 public class CommemorateController extends SmpHttpServlet implements CommonController{
 	private static final long serialVersionUID = -3498132823103396194L;
 
-	public void queryComments(HttpServletRequest request,HttpServletResponse response) 
+	public void addCommemorate(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
+		HttpSession session = request.getSession();
+
+		JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
+		String userId = sessionUser.getString(UserConstant.USERID);
+		String comments = request.getParameter("comments");
+		// TODO 上传图片先不管
+		//String fileId = request.getParameter("fileId");
+		String fileId = "";
+		String commemorateDate = request.getParameter("commemorateDate");
+		CommemorateService service = (CommemorateService)SpringUtil.getBean("commemorateService");
+		service.save(userId, comments, fileId, commemorateDate);
 		
-		String testimonialsId = request.getParameter("testimonialsId");
-		
-		CommentsService commentsService = (CommentsService)SpringUtil.getBean("commentsService");
-		JSONObject res = commentsService.getCommentsByTesTimonialId(testimonialsId);
-		request.setAttribute("res", res);
-		
-		this.forward("/comments/comments.jsp", request, response);
+		this.forward("/channel/commemorateBoard.do", request, response);
 		return;
 	}
 	

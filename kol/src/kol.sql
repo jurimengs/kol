@@ -112,7 +112,7 @@ CREATE TABLE `kol_commemorate_board` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL, -- 创建者ID
   `comments` varchar(4000),-- 纪念描述
-  `file_id` bigint(20), -- 图片id
+  `file_id` varchar(20), -- 图片id
   `view_times` bigint(20), -- 查看次数
   `create_date` varchar(14) NOT NULL,
   `update_date` varchar(14) NOT NULL,

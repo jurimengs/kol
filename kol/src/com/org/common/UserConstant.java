@@ -29,5 +29,9 @@ public class UserConstant {
 	 * 
 	 */
 	public final static String PWD = "pwd";
+	/**
+	 * 
+	 */
+	public final static String USERID = "id";
 	
 }

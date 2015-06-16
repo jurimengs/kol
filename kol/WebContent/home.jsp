@@ -116,7 +116,7 @@
 </form>
 
 <c:if test="${! empty commemorate }">
-<fmt:parseDate var="commemorateDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMddHHmmss" />
+<fmt:parseDate var="commemorateDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMdd" />
 <fmt:formatDate var="commemorateDate" value="${commemorateDateTemp }" type="both"/>
 </c:if>
 <script type="text/javascript" src="/js/common.js"></script>

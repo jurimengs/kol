@@ -6,7 +6,7 @@ package com.org.utils;
  */
 public class UserUtil {
 	public static synchronized String randomLoginName(){
-		String rn = DateUtil.getDateStringByFormat(DateUtil.DATE_FORMAT_SHORT_DATE);
+		String rn = DateUtil.getDateStringByFormat(DateUtil.yyyyMMddHHmmss);
 		return rn;
 	}
 	

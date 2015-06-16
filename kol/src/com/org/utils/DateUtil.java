@@ -30,7 +30,7 @@ public class DateUtil
     public static final String yyyyMMdd = "yyyyMMdd";
     public static final String DATE_FORMAT_DAY = "yyyy-MM-dd";
     public static final String DATE_FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
-    public static final String DATE_FORMAT_SHORT_DATE = "yyyyMMddHHmmss";
+    public static final String yyyyMMddHHmmss = "yyyyMMddHHmmss";
 
     /**
      * 获得系统当前时间

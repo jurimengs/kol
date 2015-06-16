@@ -16,6 +16,7 @@ import com.org.services.busi.CommemorateService;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
 import com.org.util.SpringUtil;
+import com.org.utils.SmpPropertyUtil;
 
 @Controller
 public class ChannelController extends SmpHttpServlet implements CommonController{
@@ -27,18 +28,19 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 	
 	public void home(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
-		log.info("index。。。" );
+		log.info("home。。。" );
 		HttpSession session = request.getSession();
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "首页");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.HOME);
 		
 		String t_limit = "100";
+		String topTimesGoal = SmpPropertyUtil.getValue("business", "topTimesGoal");
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
 		
 		// 纪念板的第一个
 		CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
-		JSONArray commemorateArray = commemorateService.getCurrentCommemorate("1");
+		JSONArray commemorateArray = commemorateService.getCurrentCommemorate("1", topTimesGoal);
 		if(commemorateArray.size() > 0){
 			request.setAttribute("commemorate", commemorateArray.getJSONObject(0));
 		}

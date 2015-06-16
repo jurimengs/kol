@@ -37,8 +37,11 @@
 			<c:forEach var="commemorate" items="${commemorateArray }">
 				<h1 style="text-align:left; padding-left:20px;">
 					<fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
+					<fmt:parseDate var="commemorateBDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMdd" />
 					<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
+					<fmt:formatDate var="commemorateDate" value="${commemorateBDateTemp }" pattern="yyyy－MM－dd"/>
 					<div><a href="javascript:void(0);" onclick="">${commemorate.comments }</a></div>
+					<div><span style="font-size:12px;">纪念日 : ${commemorateDate }</span></div>
 					<br />
 					<div>
 						${createDate }

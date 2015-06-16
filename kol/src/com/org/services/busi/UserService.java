@@ -152,6 +152,7 @@ public class UserService {
 		user.put(UserConstant.REGIST_TYPE, registType);
 		user.put(UserConstant.NICK, nickName);
 		user.put(UserConstant.PWD, pwd);
+		user.put(UserConstant.USERID, 9999);
 		
 		//saveUser(loginName, mail, mobile, registType, nickName, pwd);
 		//同时保存用户
