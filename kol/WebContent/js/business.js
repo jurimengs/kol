@@ -38,19 +38,29 @@ function turnTo(href){
  * 顶一次
  * @param id
  */
-function topOnce(id) {
+function topOnce(id, changeAim) {
+	var idtemp = id;
 	//alert(id);
 	$.ajax({
 		url:"/commemorate/topOnce.do",
 		cache:true,
 		data:{
-			id:id
+			id: idtemp
 		},
-		dataType:"json",
+		dataType:"text",
 		success: function(data){
-			
+			if("success" == data){
+				var pagetopTimes = $("#"+changeAim).text();
+				if(!!! pagetopTimes) {
+					pagetopTimes = 0;
+				}
+				pagetopTimes = pagetopTimes*1 + 1;
+				$("#"+changeAim).text(pagetopTimes);
+			}
 		},
-		error: function(){}
+		error: function(){
+			alert("顶失败了，没顶上去！重新试一下吧");
+		}
 		
 	});
 }

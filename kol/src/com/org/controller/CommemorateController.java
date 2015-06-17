@@ -1,5 +1,7 @@
 package com.org.controller;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
+import com.org.common.CommonConstant;
 import com.org.common.UserConstant;
 import com.org.services.busi.CommemorateService;
 import com.org.services.busi.CommentsService;
@@ -26,6 +29,7 @@ import com.org.util.SpringUtil;
 @Controller
 public class CommemorateController extends SmpHttpServlet implements CommonController{
 	private static final long serialVersionUID = -3498132823103396194L;
+	private static AtomicInteger topTimes = new AtomicInteger(0);
 
 	public void addCommemorate(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
@@ -51,6 +55,29 @@ public class CommemorateController extends SmpHttpServlet implements CommonContr
 		//JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
 //			String userId = sessionUser.getString("id");
 		this.forward("/channel/addCommemorate.jsp", request, response);
+		return;
+	}
+	
+	public void topOnce(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
+		HttpSession session = request.getSession();
+		JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
+		//String userId = sessionUser.getString("id");
+		// 量大可采用这种方式
+//		if(topTimes.addAndGet(1) > 100){
+//		}
+		// 现在只要一个一个增加就好了
+		String aimid = request.getParameter("id");
+		CommemorateService service = (CommemorateService)SpringUtil.getBean("commemorateService");
+		//JSONObject res = service.getCommemorateById(aimid);
+		boolean topRes = service.addOneTop(aimid);
+		
+		String res = "";
+		if(topRes){
+			log.info("top success。。。" );
+			res = "success";
+		}
+		this.write(res, CommonConstant.ENCODE_DEFAULT, response);
 		return;
 	}
 	

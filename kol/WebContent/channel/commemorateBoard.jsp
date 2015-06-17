@@ -34,7 +34,7 @@
 	<%@ include file="/common/menu.jsp"%>
 	<div class="container">
 		<div class="comwidth">
-			<c:forEach var="commemorate" items="${commemorateArray }">
+			<c:forEach var="commemorate" items="${commemorateArray }" varStatus="ind">
 				<h1 style="text-align:left; padding-left:20px;">
 					<fmt:parseDate var="dateTemp" value="${commemorate.createDate }" pattern="yyyyMMddHHmmss" />
 					<fmt:parseDate var="commemorateBDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMdd" />
@@ -46,11 +46,11 @@
 					<div>
 						${createDate }
 						<i>被查看次数：${commemorate.viewTimes}</i>
-						<i>被顶次数：${commemorate.topTimes}</i>
+						<i>被顶次数：<span id="topTimes_${ind.index }">${commemorate.topTimes}</span></i>
 					</div>
 					<%-- <div><img alt="" src="${commemorate.filePath }"></div> --%>
 					<br />
-					<a href="javascript:void(0);" class="topOnce" onclick="topOnce('${commemorate.id }');">顶一下</a>
+					<a href="javascript:void(0);" class="topOnce" onclick="topOnce('${commemorate.id }', 'topTimes_${ind.index }');">顶一下</a>
 				</h1>
 			</c:forEach>
 			<div class="clear"></div>
@@ -67,7 +67,6 @@
 <script type="text/javascript" src="/js/business.js"></script>
 
 <script type="text/javascript">
-
 	
 </script>
 </html>
