@@ -29,7 +29,6 @@ public class DreamsController extends SmpHttpServlet implements CommonController
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, limit);
 		// 假设查询到的永远只有100条数据，每列分25条数据
 		request.setAttribute("testimonialsArray", testimonialsArray);
-		request.setAttribute("ohmg", "true");
 		
 		this.redirect("/index.jsp", response);
 		return;

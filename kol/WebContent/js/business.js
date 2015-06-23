@@ -64,3 +64,34 @@ function topOnce(id, changeAim) {
 		
 	});
 }
+
+function openComments(testimonialsId) {
+	var commentsBtn = $d("maskDiv").dialogComments(testimonialsId);
+	$("#"+commentsBtn).click(function() {
+		//alert("commentsBtn");
+		formTo("commentsForm", "/comments/saveComments.do");
+	});
+}
+
+function openTestimonials() {
+	var currentChannelId = '${currentChannelId}';
+	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
+	$("#"+submitBtnId).click(function() {
+		formTo("commentsForm", "/testimonials/saveContents.do");
+	});
+}
+
+function showAddCommemorate(){
+	cancelBubble();
+	//$("#addCommemorate").css("borderRight", "1px solid #ccc");
+	$("#addCommemorate").slideDown();
+}
+
+function hideAddCommemorate(){
+	cancelBubble();
+	$("#addCommemorate").slideUp();
+}
+
+function addCommemorate(){
+	window.location.href="/channel/addCommemorate.jsp";
+}

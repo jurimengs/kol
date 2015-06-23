@@ -29,15 +29,25 @@
 <script type="text/javascript">DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <!--修复IE6下PNG图片背景透明-->
+
+<style type="text/css">
+#banner {
+}
+#banner div {
+position:absolute;
+}
+
+</style>
 </head>
 
 <body>
 	<div id="banner">
-		<div id="slideBox" class="slideBox">
-			<div class="bd">
-				<a id="enter" href="javascript:void(0);" onclick="turnToIndex()"><img src="/images/commemorate1.jpg"></a>
+		<c:set var="bannerArray" value="${fn:split('images/commemorate1.gif,images/commemorate1.gif,images/commemorate1.gif', ',') }" />
+		<c:forEach var="banner" items="${bannerArray }">
+			<div>
+			<a id="enter" href="javascript:void(0);"><img src="/${banner}"></a>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 </body>
 
@@ -50,10 +60,34 @@
 function enter(){
 	$("#enter").click();
 }
-setTimeout("enter()", 4000);
-/* var ohmg = "${ohmg}";
-if(ohmg == "null" || !!! ohmg){
-	turnToIndex();
-} */
+
+$(function(){
+	//var imgCount = $("#banner div").length;
+	//alert(imgCount);
+	$("#banner div").each(function(i){
+		// 循环是倒着来的， 所以应该反过来算
+		if(i == 0){
+			// 如果是第一张
+			$(this).click(function(){
+				cancelBubble();
+				turnToIndex();
+			});
+		} else {
+			$(this).click(function(){
+				cancelBubble();
+				next(this);
+			});
+		}
+		
+	});
+});
+
+function next(obj){
+	//alert(obj.tagName);
+	$(obj).slideUp();
+	$(obj).nextSibling().slideDown();
+}
+
+//setTimeout("enter()", 4000);
 </script>
 </html>
