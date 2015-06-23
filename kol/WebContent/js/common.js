@@ -1,38 +1,6 @@
 
 (function(window){
 	
-	var deviceType = function(){
-		var sUserAgent= navigator.userAgent.toLowerCase();
-		var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
-		var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
-		var bIsMidp= sUserAgent.match(/midp/i) == "midp";
-		var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-		var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
-		var bIsAndroid= sUserAgent.match(/android/i) == "android";
-		var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
-		var bIsWinPhone= sUserAgent.match(/windows mobile/i) == "windows mobile";
-
-		if (bIsIpad) {
-			return "ipad";
-		} else if (bIsIphoneOs) {
-			return "iphone";
-		} else if (bIsMidp) {
-			return "Midp";
-		} else if (bIsUc7) {
-			return "Uc7";
-		} else if (bIsUc) {
-			return "Uc";
-		} else if (bIsAndroid) {
-			return "Android";
-		} else if (bIsCE) {
-			return "CE";
-		} else if (bIsWinPhone) {
-			return "windows mobile";
-		} else {
-			return "PC";
-		}
-	};
-
 	Array.prototype.contains = function(item){
 		for (var i=0; i < this.length; i++) {
 			if (this[i] === item){
@@ -48,6 +16,7 @@
 		if ( window == this ){
 			return new $d(i);
 		}
+		this._$_d = null;
 		if(typeof i == "object"){
 			this._$_d = i;
 			this.id = i.id;
@@ -63,6 +32,9 @@
 			this._$_d = i;
 		}
 		this.copyAttr();
+		//判断设备类型
+		this.initDeviceType();
+		
 	},
 	$$ = function(id, fromSession){
 		if(fromSession){
@@ -95,6 +67,38 @@
 		}
 		return this;
 	};
+	
+	$_d.prototype.initDeviceType = function(){
+		var sUserAgent= navigator.userAgent.toLowerCase();
+		var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+		var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+		var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+		var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+		var bIsAndroid= sUserAgent.match(/android/i) == "android";
+		var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+		var bIsWinPhone= sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+		if (bIsIpad) {
+			this.currentDevice = "ipad";
+		} else if (bIsIphoneOs) {
+			this.currentDevice = "iphone";
+		} else if (bIsMidp) {
+			this.currentDevice = "midp";
+		} else if (bIsUc7) {
+			this.currentDevice = "uc7";
+		} else if (bIsUc) {
+			this.currentDevice = "uc";
+		} else if (bIsAndroid) {
+			this.currentDevice = "android";
+		} else if (bIsCE) {
+			this.currentDevice = "ce";
+		} else if (bIsWinPhone) {
+			this.currentDevice = "windows mobile";
+		} else {
+			this.currentDevice = "pc";
+		}
+	};
 
 	$_d.prototype.copyAttrTo = function(from, to) {
 		if(!!! from) {
@@ -104,6 +108,7 @@
 			return false;
 		}
 		for(var k in from) {
+//			alert(to.id+" : " + k + " : "+to.style[k] );
 			to.style[k] = from[k];
 		}
 		return to;
@@ -172,7 +177,15 @@
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
 		document.getElementById("testimonialsId").value=id;
-		$d("modalDiv").adjustCenter({"width":"720px", "marginLeft":"270px"});
+		// 根据设备类型，判断左右间距、对话框宽度等
+		var dialogMarginLeft = "270px";
+		var dialogWidth = "720px";
+		if(this.currentDevice != "pc"){
+			dialogMarginLeft = "1px";
+			dialogWidth = "100%";
+		}
+		
+		$d("modalDiv").adjustCenter({"width":dialogWidth, "marginLeft":dialogMarginLeft});
 		o.style.display = "block";
 		return "commentsBtn";
 	};
@@ -228,7 +241,13 @@
 		if(!! currentChannelId && currentChannelId != "null"){
 			$("#channelId").val(currentChannelId);
 		}
-		$d("modalDiv").adjustCenter({"width":"720px", "marginLeft":"270px"});
+		
+		var args = {"width":"720px", "marginLeft":"270px"};
+		if(this.currentDevice != "pc"){
+			args = {"width":"100%", "marginLeft":"1px", "top":"1px"};
+		}
+		
+		$d("modalDiv").adjustCenter(args);
 		o.style.display = "block";
 		// dialog完成后，将submitBtn 的id返回
 		return "submitBtn";
@@ -269,11 +288,21 @@
 		return "maskContentDiv";
 	};
 	
+	$_d.prototype.debugjsonArgs = function(args){
+		/*var str = "";
+		for(var k in args){
+			str += k +" : "+args[k] + "\n";
+		}
+		alert(str);*/
+	};
+	
 	$_d.prototype.adjustCenter = function(args) {
 		var width = document.body.scrollWidth;
 		// 获取屏幕高度
 		//var height = screen.height ;
 		//alert(height);
+		this.debugjsonArgs(args);
+		
 		var fixed = 20;
 		var realWidth = width - fixed * 2;
 		

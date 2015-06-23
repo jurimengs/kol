@@ -58,43 +58,7 @@
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 0}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
-			
-			<!-- section two -->
-			<section>
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 1}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
-			
-			<!-- section three -->
-			<section class="left">
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 2}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
-				</c:forEach>
-			</section>
-			<!-- section four -->
-			<section>
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<c:set var="positionFlag" value="${(index.count -1) % 4 }" />
-					<c:if test="${positionFlag eq 3}">
-						<%@ include file="/common/articleDiv.jsp"%>
-						<br />
-					</c:if>
+					<%@ include file="/common/articleDiv.jsp"%><br />
 				</c:forEach>
 			</section>
 			<div class="clear">

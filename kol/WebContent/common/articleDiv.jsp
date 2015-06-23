@@ -6,15 +6,15 @@
 <article>
 	<div class="zhuti-bar">
 		<a href="javascript:void(0);" class="zhuti">
-			<strong>${tms.title }:</strong><br />
+			<strong>标题:</strong>${tms.title }<br />
 			<%-- <img src="/images/aimg1.jpg" alt="zhuti"> --%>
 		</a>
-		<p>${tms.contents}</p>
+		<p><strong>内容:</strong>${tms.contents}</p>
 		<p>
 			<span>
 				<fmt:parseDate var="testimonialsDateTemp" value="${tms.createDate }" pattern="yyyyMMddHHmmss" />
 				<fmt:formatDate var="testimonialsDate" value="${testimonialsDateTemp }" type="both"/>
-				发表时间：${testimonialsDate }<br/>
+				<strong>发表时间：</strong>${testimonialsDate }<br/>
 			</span>
 			<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
 				评价

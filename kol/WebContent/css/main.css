@@ -63,12 +63,13 @@ header nav li a:active {color: #d75d10;}
 	 margin-bottom: 27px; margin-bottom: .27rem;
 }
 .container h1 span {font-size: 25px; font-size: .25rem; color: #1eb1d0;}
-.container section {
-	float: left; width: 24.11003236245955%; margin-left: 1.18123%; margin-bottom: 1em;
-	background-color: #fff; box-shadow: 0 0 10px #e0e0e0;
-}
 .container section.first {margin-left: 0;}
 .container section a:hover , .container section a:active {text-decoration: underline;}
+.container section {
+	/* float: left; width: 24.11003236245955%; margin-left: 1.18123%; margin-bottom: 1em; */
+	background-color: #fff; box-shadow: 0 0 10px #e0e0e0;
+}
+	
 .zhuti-bar {width: 89.9328859%; margin: 0 auto; padding-top: 16px; padding-top: .16rem;border-bottom: 1px dashed #ccc;}
 .zhuti {display: block;}
 .zhuti img {display: block; width: 100%;}
@@ -98,3 +99,6 @@ footer {
 .foot-nav li {float: right;}
 .foot-nav li a {display: inline-block; margin: 0 9px; margin: 0 .09rem; transition:.4s all;}
 .foot-nav li a:hover,.foot-nav li a:active {color: #d75d10;}
+
+/* @media screen and (max-width:1280px) and (min-width:600px){
+} */
