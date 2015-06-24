@@ -98,6 +98,7 @@
 		} else {
 			this.currentDevice = "pc";
 		}
+		this.currentDevice = "android";
 	};
 
 	$_d.prototype.copyAttrTo = function(from, to) {

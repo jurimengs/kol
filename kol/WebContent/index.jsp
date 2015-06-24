@@ -32,7 +32,7 @@
 <style type="text/css">
 #banner {
 	background-color: grey;
-	position: fixed;
+	position: absolute;
 	width: 100%;
 	height: 100%;
 }
@@ -44,7 +44,18 @@
 	text-align:center;
 	top: 80px;
 }
+#skip {
+	cursor: pointer;
+	position: absolute;
+	bottom: 30px;
+	right: 20px;
+	font: normal 18px/24px solid;
+	width: 100px;
+}
 
+@media screen and (max-width:600px) {
+	img{max-height: 160px; }
+}
 </style>
 </head>
 
@@ -57,6 +68,7 @@
 			</div>
 		</c:forEach>
 	</div>
+	<div id="skip" onclick="turnToIndex();">skip >></div>
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post" >
