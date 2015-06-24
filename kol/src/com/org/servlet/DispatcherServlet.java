@@ -97,6 +97,8 @@ public class DispatcherServlet extends HttpServlet {
 			se.printStackTrace();
 			//request.getSession().removeAttribute(CT.COMP_LOCAL_USER);
 			targetUrl = PageConstant.ERROR;
+			request.setAttribute("respCode", "SYS001");
+			request.setAttribute("respMsg", se.getMessage());
 			try {
 				this.forward(targetUrl, request, response);		
 			} catch (Exception e) {
