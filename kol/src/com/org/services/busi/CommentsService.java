@@ -21,7 +21,7 @@ import com.org.util.SpringUtil;
 @Service
 public class CommentsService {
 	private final String sql_insert = "insert into kol_comment (testimonials_id, user_id, contents, create_date, update_date) values (?,?,?,?,?)";
-	private final String sql_getById = "select * from kol_comment where testimonials_id = ?";
+	private final String sql_getById = "select * from kol_comment where testimonials_id = ? order by create_date desc";
 	public synchronized JSONObject saveComments(String testimonialsId, String commentContent, String userId){
 		String createDate = DateUtil.getDate(DateUtil.DATE_FORMAT_SHORT_DATE);
 		

@@ -17,7 +17,7 @@
 				<strong>发表时间：</strong>${testimonialsDate }<br/>
 			</span>
 			<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-				评价
+				发表评论
 			</a>
 			&nbsp;
 			<a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
