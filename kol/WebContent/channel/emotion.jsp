@@ -52,11 +52,11 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
+			<div class="h1style zhuti-bar">
 				你是否有过让你<span>抓狂</span>到无法淡定的经历？ 你是否面对自己的<span>女神</span>无法HOLD住? 快来看看大家是怎么<span>解决</span>的吧！
 				<br />
 				<div style="text-align:left;"><a style=" color:#ccc;" href="javascript:void(0);"></a></div>
-			</h1>
+			</div>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">

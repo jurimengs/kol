@@ -82,37 +82,42 @@
 
 <div id="movmenu">
 	<div class="topnav">
-		<c:if test="${empty sessionUser }">
-			<a class="btn" href="javascript:void(0);">登录</a>
-			<a class="btn" href="javascript:void(0);">注册</a>
-		</c:if>
-		<c:if test="${!empty sessionUser }">
-			欢迎${sessionUser.loginName }<a class="btn" href="javascript:void(0);">完善资料</a>
-		</c:if>
-		<a class="btn" onclick="switchMenu(this);" class="switchDivBtn">菜单</a>
+		<div>
+			<c:if test="${empty sessionUser }">
+				<a class="btn" href="javascript:void(0);">登录</a>
+				<a class="btn" href="javascript:void(0);">注册</a>
+			</c:if>
+			<c:if test="${!empty sessionUser }">
+				欢迎${sessionUser.loginName }
+			</c:if>
+		</div>
+		<div>
+			<a class="btn" href="javascript:void(0);">完善资料</a> &nbsp; <a class="btn" onclick="switchMenu(this);" class="switchDivBtn">菜单</a>
+		</div>
 	</div>
 	<div id="menudiv">
-		<div onclick="turnTo('/channel/commemorateBoard.do');"<c:if test="${currentChannelId eq '5' }">class="currentChannel"</c:if>>
-			纪念板
-		</div>
-		<div onclick="turnToOther();" <c:if test="${currentChannelId eq '3' }">class="currentChannel"</c:if>>
-			其他
-		</div>
-		<div onclick="turnToCareer();" <c:if test="${currentChannelId eq '2' }">class="currentChannel"</c:if>>
-			职场
-		</div>
-		<div onclick="turnToEmotion();" <c:if test="${currentChannelId eq '1' }">class="currentChannel"</c:if>>
-			情感
-		</div>
-		<div onclick="turnToLife();" <c:if test="${currentChannelId eq '0' }">class="currentChannel"</c:if>>
-			生活
+		<div onclick="openTestimonials();">
+			发表感言
 		</div>
 		<div onclick="turnToIndex();" <c:if test="${currentChannelId eq 'home' }">class="currentChannel"</c:if>>
 			首页
 		</div>
-		<div onclick="openTestimonials();">
-			发表感言
+		<div onclick="turnToLife();" <c:if test="${currentChannelId eq '0' }">class="currentChannel"</c:if>>
+			生活
 		</div>
+		<div onclick="turnToEmotion();" <c:if test="${currentChannelId eq '1' }">class="currentChannel"</c:if>>
+			情感
+		</div>
+		<div onclick="turnToCareer();" <c:if test="${currentChannelId eq '2' }">class="currentChannel"</c:if>>
+			职场
+		</div>
+		<div onclick="turnToOther();" <c:if test="${currentChannelId eq '3' }">class="currentChannel"</c:if>>
+			其他
+		</div>
+		<div onclick="turnTo('/channel/commemorateBoard.do');"<c:if test="${currentChannelId eq '5' }">class="currentChannel"</c:if>>
+			纪念板
+		</div>
+		
 	</div>
 </div>
 

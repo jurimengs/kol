@@ -52,9 +52,9 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
-				生活象百味罐，<span>酸</span>的让人精神饱满，<span>甜</span>的让人幸福快乐，<span>苦</span>的让人痛苦万分，而<span>辣</span>的，让你想起了什么？
-			</h1>
+			<div class="h1style zhuti-bar">
+				生活象百味罐，<span>酸</span>的让人精神饱满，<span>甜</span>的让人幸福快乐，<span>苦</span>的让人回忆起过去，而<span>百味</span>，却正是人生的特色
+			</div>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">

@@ -52,9 +52,9 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
+			<div class="h1style zhuti-bar">
 				还有什么<span>事</span>呢？ 我忘记了什么<span>事</span>好象？ 到底是什么呢？让<span>其它</span>来容纳你的人生百科！
-			</h1>
+			</div>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">

@@ -52,9 +52,9 @@
 	</div>
 	<div class="container">
 		<div class="comwidth">
-			<h1>
+			<div class="h1style zhuti-bar">
 				也许你满腹<span>牢骚</span>无处抱怨， 也许你无法<span>忍受</span>你的同事， 也许老板让你<span>无奈</span>到了极点。来跟大家诉<span>诉苦</span>吧，你需要排解！
-			</h1>
+			</div>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">

@@ -59,10 +59,12 @@
 				感知生活<span>100%</span>了解您、<span>No.1</span>
 				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
 			</h1> -->
-			<h1>
+			<section>
+			<div class="h1style zhuti-bar">
 				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>时光</span>飞逝光阴似箭时间如白驹过隙，
 				<span>让我们</span>记录你的人生，留下属于你的每时每刻
-			</h1>
+			</div>
+			</section>
 			<!-- section one -->
 			<section class="first left">
 				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
@@ -78,10 +80,10 @@
 
 <form id="channelForm" action="/channel/life.do" method="post" >
 </form>
-
 <c:if test="${! empty commemorate }">
 <fmt:parseDate var="commemorateDateTemp" value="${commemorate.commemorateDate }" pattern="yyyyMMdd" />
 <fmt:formatDate var="commemorateDate" value="${commemorateDateTemp }" type="both"/>
+
 </c:if>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
@@ -96,8 +98,8 @@ jQuery(".slideBox").slide({
 });
 
 function createCommemorateDiv(){
-	if(!! "${commemorateDateTemp}"){
-		var maskContentDiv = $d("maskDiv").dialogCommemorate();
+	if(!! "${commemorateDateTemp}" && "null" != "${commemorateDateTemp}"){
+		var maskContentDiv = $d("maskDiv").commonDialog();
 		var imgHtml = "<table width='100%' class='commemorateDiv'>";
 		imgHtml += "<tr>";
 		imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
@@ -106,11 +108,11 @@ function createCommemorateDiv(){
 		// 底行
 		imgHtml += "<tr>";
 		imgHtml += "<td>";
-		imgHtml += "被查看次数：${commemorate.viewTimes} 被顶次数：${commemorate.topTimes}";
+		imgHtml += "被查看次数：${commemorate.viewTimes eq '' ? 0 : commemorate.viewTimes} 被顶次数：<span id='topTimes_home'>${commemorate.topTimes}</span>";
 		imgHtml += "<br>";
 		imgHtml += "${createDate}";
 		imgHtml += "<br>";
-		imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\');">顶一下</a>';
+		imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\', \'topTimes_home\');">顶一下</a>';
 		imgHtml += "</td>";
 		imgHtml += "</tr>";
 		imgHtml += "</table>";

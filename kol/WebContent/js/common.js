@@ -254,9 +254,9 @@
 	};
 	
 	/**
-	 * 首页纪念板
+	 * 普通对话框，内容需要调用处填充
 	 */
-	$_d.prototype.dialogCommemorate = function(args) {
+	$_d.prototype.commonDialog = function(args) {
 		// 经过属性复制后,已经有一切属性
 		var o = $$(this.id);
 		if(!! o){
@@ -280,9 +280,13 @@
 			'</div>';
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
-		this.copyAttrTo(args, $$("modalDiv"));
-		//alert(screen.availWidth);
-		$d("modalDiv").adjustCenter();
+		
+		var args = {"width":"100%", "marginLeft":"1px", "top":"1px", "marginTop":"1px", "height":"100%"};
+		/*if(this.currentDevice != "pc"){
+			args = {"width":"100%", "marginLeft":"1px", "top":"1px", "marginTop":"1px"};
+		}*/
+		
+		$d("modalDiv").adjustCenter(args);
 		o.style.display = "block";
 		// dialog完成后，将maskContentDiv 的id返回, 便于页面向其添加内容
 		return "maskContentDiv";
