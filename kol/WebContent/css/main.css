@@ -60,7 +60,7 @@ header nav li a:active {color: #d75d10;}
 .container h1 {
 	width: 100%; padding: 28px 0; padding: .28rem 0; line-height: 1; text-align: center;
 	font-size: 18px; font-size: .18rem; font-weight: normal; color: #3f3f3f; background-color: #fff;
-	 margin-bottom: 27px; margin-bottom: .27rem;
+	margin-bottom: 27px; margin-bottom: .27rem;
 }
 .container h1 span {font-size: 25px; font-size: .25rem; color: #1eb1d0;}
 .container section.first {margin-left: 0;}

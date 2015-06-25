@@ -35,7 +35,7 @@
 </style>
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
 	<%@ include file="/common/menu.jsp"%>
 	<%-- <div id="banner">
 		<div id="slideBox" class="slideBox">
