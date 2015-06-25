@@ -68,7 +68,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$("#addCommemorate").slideDown();
+	$(".addCommemorate").slideDown();
 });
 </script>
 </html>
