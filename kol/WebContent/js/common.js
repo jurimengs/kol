@@ -22,8 +22,8 @@
 			this.id = i.id;
 		} else if(typeof i == "string"){
 			if(!!! fromSession){
-				// 如果fromSession为空, 则默认方案为从缓存取
-				fromSession = true;
+				// 如果fromSession为空, 则默认方案为不从缓存取
+				fromSession = false;
 			}
 			this._$_d = $$(i, fromSession);
 			this.id = i;
@@ -38,16 +38,17 @@
 	},
 	$$ = function(id, fromSession){
 		if(fromSession){
-			var o = document.getElementById(id);
-			if(!!! o) {
-				return null;
-			}
 			if(!! session[id]){
 				//alert("已缓存");
+				return session[id];
 			} else {
+				var o = document.getElementById(id);
+				if(!!! o) {
+					return null;
+				}
 				session[id] = o;
+				return session[id];
 			}
-			return session[id];
 		}
 		return document.getElementById(id);
 	};
@@ -98,7 +99,6 @@
 		} else {
 			this.currentDevice = "pc";
 		}
-		this.currentDevice = "android";
 	};
 
 	$_d.prototype.copyAttrTo = function(from, to) {
@@ -109,7 +109,6 @@
 			return false;
 		}
 		for(var k in from) {
-//			alert(to.id+" : " + k + " : "+to.style[k] );
 			to.style[k] = from[k];
 		}
 		return to;
