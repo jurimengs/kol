@@ -95,3 +95,53 @@ function hideAddCommemorate(){
 function addCommemorate(){
 	window.location.href="/channel/addCommemorate.jsp";
 }
+$(function(){
+	//alert($(".zhuti-bar").eq(0).html());
+	//alert($(".zhuti-bar").eq(1).offset().top);
+	$("#nextTestimonialDiv").click(function(){
+		var currentIndex = $("#currentIndex").val();
+		if(currentIndex >= ($(".zhuti-bar").length -1)) {
+			alert("没有了");
+			return false;
+		}
+		var nextIndex = currentIndex*1 + 1;
+		// 当前置为 nextIndex
+		$("#currentIndex").val(nextIndex);
+		$("html,body").animate({scrollTop:$(".zhuti-bar").eq(nextIndex).offset().top},1000);//1000是ms,也可以用slow代替
+	});
+	
+	$("#prevTestimonialDiv").click(function(){
+		var currentIndex = $("#currentIndex").val();
+		if(currentIndex <= 1) {
+			alert("没有了");
+			return false;
+		}
+		var nextIndex = currentIndex*1 - 1;
+		// 当前置为 nextIndex
+		$("#currentIndex").val(nextIndex);
+		$("html,body").animate({scrollTop:$(".zhuti-bar").eq(nextIndex).offset().top},1000);//1000是ms,也可以用slow代替
+	});
+	
+	$("#totopTestimonialDiv").click(function(){
+		var totop = 0;
+		if($(".zhuti-bar").length-1 > 0) {
+			totop = $(".zhuti-bar").eq(1).offset().top;
+		}
+		var nextIndex = 1;
+		// 当前置为 nextIndex
+		$("#currentIndex").val(nextIndex);
+		$("html,body").animate({scrollTop: totop},1000);//1000是ms,也可以用slow代替
+	});
+	
+	$("#toendTestimonialDiv").click(function(){
+		var total = $(".zhuti-bar").length;
+		if(total-1 <=0) {
+			alert("没有了");
+			return false;
+		}
+		var toend = $(".zhuti-bar").eq(total-1).offset().top;
+		// 当前置为 nextIndex
+		$("#currentIndex").val(total);
+		$("html,body").animate({scrollTop: toend},1000);//1000是ms,也可以用slow代替
+	});
+});

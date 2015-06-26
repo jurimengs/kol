@@ -35,5 +35,29 @@
 
 <body>
 	测试页面
+	<%@ include file="/common/menu.jsp"%>
+	<div class="container">
+		<div class="comwidth">
+			<!-- <h1>
+				感知生活<span>100%</span>了解您、<span>No.1</span>
+				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
+			</h1> -->
+			<section>
+			<div class="h1style zhuti-bar">
+				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>时光</span>飞逝光阴似箭时间如白驹过隙，
+				<span>让我们</span>记录你的人生，留下属于你的每时每刻
+			</div>
+			</section>
+			<!-- section one -->
+			<section class="first left">
+				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
+					<%@ include file="/common/articleDiv.jsp"%><br />
+				</c:forEach>
+			</section>
+			<div class="clear">
+			</div>
+		</div>
+	</div>
+	<%@ include file="/common/footer.jsp"%> 
 </body>
 </html>

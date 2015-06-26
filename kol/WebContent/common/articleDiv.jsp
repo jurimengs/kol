@@ -9,7 +9,7 @@
 			<strong>标题:</strong>${tms.title }<br />
 			<%-- <img src="/images/aimg1.jpg" alt="zhuti"> --%>
 		</a>
-		<p><strong>内容:</strong>${tms.contents}</p>
+		<div class="contents"><strong>内容:</strong>${tms.contents}</div>
 		<p>
 			<span>
 				<fmt:parseDate var="testimonialsDateTemp" value="${tms.createDate }" pattern="yyyyMMddHHmmss" />

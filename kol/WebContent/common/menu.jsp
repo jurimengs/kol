@@ -24,7 +24,7 @@
 }
 
 .topnav {
-	color: #2e3136; padding-left: 24px;
+	color: #2e3136;
 }
 /* 菜单的响应式 CSS*/
 @media screen and (max-width: 600px) {
