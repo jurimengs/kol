@@ -90,14 +90,6 @@
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
 
-// 
-jQuery(".slideBox").slide({
-	mainCell : ".bd ul",
-	interTime : "3000",
-	delayTime : "2000",
-	autoPlay : true
-});
-
 function createCommemorateDiv(){
 	if(!! "${commemorateDateTemp}" && "null" != "${commemorateDateTemp}"){
 		var maskContentDiv = $d("maskDiv").commonDialog();

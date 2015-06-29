@@ -50,7 +50,14 @@
 	bottom: 30px;
 	right: 20px;
 	font: normal 18px/24px solid;
-	width: 100px;
+	color: white;
+}
+#welcome {
+	position: absolute;
+	bottom: 60px;
+	font: normal 18px/24px solid;
+	right: 20px;
+	color: white;
 }
 
 @media screen and (max-width:600px) {
@@ -61,7 +68,7 @@
 
 <body>
 	<div id="banner">
-		<c:set var="bannerArray" value="${fn:split('images/commemorate1.gif,images/commemorate2.gif,images/commemorate1.gif', ',') }" />
+		<c:set var="bannerArray" value="${fn:split('images/commemorate1.png,images/commemorate2.gif,images/commemorate1.gif', ',') }" />
 		<c:forEach var="banner" items="${bannerArray }" varStatus="ind">
 			<div id="imgdiv_${ind.index }">
 				<img src="/${banner}">
@@ -69,6 +76,7 @@
 		</c:forEach>
 	</div>
 	<div id="skip" onclick="turnToIndex();">skip >></div>
+	<div id="welcome">人生百科，让你的人生变得阳光起来！</div>
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post" >

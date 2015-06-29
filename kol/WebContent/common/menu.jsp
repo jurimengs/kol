@@ -16,15 +16,19 @@
 }
 
 #menudiv {
-	display: none; background-color: #2e3138; color: #ccc;
+	display: none; background-color: #2e3138; color: #ccc; position:absolute; z-index: 103;
 }
 
-#menudiv div{
+#menudiv div span{
 	padding-left: 24px;
+	width: 100%;
 }
 
 .topnav {
 	color: #2e3136;
+}
+.topnav div span{
+	padding-left: 15px;
 }
 /* 菜单的响应式 CSS*/
 @media screen and (max-width: 600px) {
@@ -83,6 +87,7 @@
 <div id="movmenu">
 	<div class="topnav">
 		<div>
+			<span>
 			<c:if test="${empty sessionUser }">
 				<a class="btn" href="javascript:void(0);">登录</a>
 				<a class="btn" href="javascript:void(0);">注册</a>
@@ -90,32 +95,32 @@
 			<c:if test="${!empty sessionUser }">
 				欢迎${sessionUser.loginName }
 			</c:if>
+			<a class="btn" href="javascript:void(0);">完善资料</a> &nbsp;
+			</span>
 		</div>
-		<div>
-			<a class="btn" href="javascript:void(0);">完善资料</a> &nbsp; <a class="btn" onclick="switchMenu(this);" class="switchDivBtn">菜单</a>
-		</div>
+		<div><span><a onclick="switchMenu(this);" class="switchDivBtn">菜单</a></span></div>
 	</div>
 	<div id="menudiv">
 		<div onclick="openTestimonials();">
-			发表感言
+			<span>发表感言</span>
 		</div>
 		<div onclick="turnToIndex();" <c:if test="${currentChannelId eq 'home' }">class="currentChannel"</c:if>>
-			首页
+			<span>首页</span>
 		</div>
 		<div onclick="turnToLife();" <c:if test="${currentChannelId eq '0' }">class="currentChannel"</c:if>>
-			生活
+			<span>生活</span>
 		</div>
 		<div onclick="turnToEmotion();" <c:if test="${currentChannelId eq '1' }">class="currentChannel"</c:if>>
-			情感
+			<span>情感</span>
 		</div>
 		<div onclick="turnToCareer();" <c:if test="${currentChannelId eq '2' }">class="currentChannel"</c:if>>
-			职场
+			<span>职场</span>
 		</div>
 		<div onclick="turnToOther();" <c:if test="${currentChannelId eq '3' }">class="currentChannel"</c:if>>
-			其他
+			<span>其他</span>
 		</div>
 		<div onclick="turnTo('/channel/commemorateBoard.do');"<c:if test="${currentChannelId eq '5' }">class="currentChannel"</c:if>>
-			纪念板
+			<span>纪念板</span>
 		</div>
 		
 	</div>
