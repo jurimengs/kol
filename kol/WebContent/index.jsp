@@ -68,7 +68,7 @@
 
 <body>
 	<div id="banner">
-		<c:set var="bannerArray" value="${fn:split('images/commemorate1.png,images/commemorate2.gif,images/commemorate1.gif', ',') }" />
+		<c:set var="bannerArray" value="${fn:split('images/commemorate1.png,images/commemorate2.gif', ',') }" />
 		<c:forEach var="banner" items="${bannerArray }" varStatus="ind">
 			<div id="imgdiv_${ind.index }">
 				<img src="/${banner}">

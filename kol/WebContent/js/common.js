@@ -240,6 +240,9 @@
 		document.body.appendChild(o);
 		if(!! currentChannelId && currentChannelId != "null"){
 			$("#channelId").val(currentChannelId);
+		} else {
+			// 不设置默认值，就是要让人家选
+			//$("#channelId").val(0);
 		}
 		
 		var args = {"width":"720px", "marginLeft":"270px"};
