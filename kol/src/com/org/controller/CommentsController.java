@@ -41,7 +41,7 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 		CommentsService commentsService = (CommentsService)SpringUtil.getBean("commentsService");
 		commentsService.saveComments(testimonialsId, commentContent, userId);
 		
-		this.forward("/channel/home.do", request, response);
+		this.forward("/comments/queryComments.do", request, response);
 	}
 	
 	public void queryComments(HttpServletRequest request,HttpServletResponse response) 
