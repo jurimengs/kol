@@ -7,7 +7,7 @@
  */
 /*公共部分*/
 html {font-size: 625%;}
-body {width: 100%; font-size: 12px; font-size: .12rem; background: url(../images/bg.jpg);}
+body {width: 100%; font-size: 14px; font-size: .14rem; background: url(../images/bg.jpg);}
 .comwidth {margin: 0 auto;}
 .contents {white-space: normal; overflow-x: hidden; line-height: 25px;}
 /*导航栏*/

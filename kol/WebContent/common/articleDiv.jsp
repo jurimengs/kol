@@ -5,7 +5,7 @@
 
 <article>
 	<div class="zhuti-bar">
-		<a href="javascript:void(0);" class="zhuti">
+		<a href="/comments/queryComments.do?testimonialsId=${tms.id }" class="zhuti">
 			<strong>标题:</strong>${tms.title }<br />
 			<%-- <img src="/images/aimg1.jpg" alt="zhuti"> --%>
 		</a>
@@ -20,9 +20,12 @@
 				发表评论
 			</a>
 			&nbsp;
-			<a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
+			<a href="/comments/queryComments.do?testimonialsId=${tms.id }">
 				查看所有评价
 			</a>
+			<%-- <a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
+				查看所有评价
+			</a> --%>
 		</p>
 	</div>
 </article>

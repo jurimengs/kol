@@ -1,7 +1,9 @@
 package com.org.services.busi;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -22,6 +24,10 @@ import com.org.util.SpringUtil;
 public class TestimonialsService {
 	private final String sql_insert = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title) values (?,?,?,?,?,?)";
 	private final String sql_getById = "select * from kol_testimonials where id = ?";
+	private final static List<String> secretColumn = new ArrayList<String>();
+	static {
+		secretColumn.add("id");
+	}
 	
 	public synchronized JSONObject saveContents(String userId, String contents, String channelId, String title){
 		String createDate = DateUtil.getDate(DateUtil.DATE_FORMAT_SHORT_DATE);
@@ -52,7 +58,7 @@ public class TestimonialsService {
 		params.put(1, Integer.valueOf(id));
 		JSONObject testimonial = new JSONObject();
 		try {
-			testimonial = commonDao.querySingle(sql_getById, params);
+			testimonial = commonDao.querySingle(sql_getById, params, secretColumn);
 		} catch (SvcException e) {
 			e.printStackTrace();
 		}

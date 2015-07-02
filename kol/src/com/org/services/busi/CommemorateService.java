@@ -1,7 +1,9 @@
 package com.org.services.busi;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
@@ -27,7 +29,7 @@ public class CommemorateService {
 	private final String getLimitCommemorate = "select a.id, a.user_id, a.comments, a.view_times, a.create_date, a.update_date, a.commemorate_date, a.top_times, a.file_id, b.file_path from kol_commemorate_board a left join kol_files b on a.file_id = b.id order by a.id desc limit ?";
 	private final String saveCommemorate = "insert into kol_commemorate_board (user_id, comments, file_id, commemorate_date, create_date, update_date) values (?, ?, ?, ?, ?, ?)";
 	private final String addOneTop = "update kol_commemorate_board set top_times=top_times+1 where id =?";
-
+	
 	/**
 	 * 查询指定记录
 	 * @param id
@@ -40,7 +42,7 @@ public class CommemorateService {
 		params.put(2, DateUtil.getDateStringByFormat(DateUtil.yyyyMMdd));
 		JSONObject res = new JSONObject();
 		try {
-			res = commonDao.querySingle(getCommemorateById, params);
+			res = commonDao.querySingle(getCommemorateById, params, null);
 		} catch (SvcException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +79,7 @@ public class CommemorateService {
 		params.put(1, DateUtil.getDateStringByFormat(DateUtil.yyyyMMdd));
 		params.put(2, Integer.valueOf(topTimesGoal));
 		params.put(3, Integer.valueOf(count));
-		JSONArray testimonials = commonDao.queryJSONArray(getCurrentCommemorate, params);
+		JSONArray testimonials = commonDao.queryJSONArray(getCurrentCommemorate, params, null);
 		return testimonials;
 	}
 	
@@ -90,7 +92,7 @@ public class CommemorateService {
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(count));
-		JSONArray commemorate = commonDao.queryJSONArray(getLimitCommemorate, params);
+		JSONArray commemorate = commonDao.queryJSONArray(getLimitCommemorate, params, null);
 		return commemorate;
 	}
 

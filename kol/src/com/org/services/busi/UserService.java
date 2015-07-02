@@ -93,8 +93,9 @@ public class UserService {
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, loginName);
 		//params.put(2, MD5.getMD5(LoginPwd));
-		JSONObject fullUserInfo = commonDao.isExist(sql, params);
-		return fullUserInfo;
+//		JSONObject fullUserInfo = commonDao.isExist(sql, params);
+//		return fullUserInfo;
+		return null;
 	}
 
 	public JSONObject searchFullUserInfoComp(String loginName){
@@ -104,8 +105,9 @@ public class UserService {
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, loginName);
 		//params.put(2, MD5.getMD5(LoginPwd));
-		JSONObject fullUserInfo = commonDao.isExist(sql, params);
-		return fullUserInfo;
+//		JSONObject fullUserInfo = commonDao.isExist(sql, params);
+//		return fullUserInfo;
+		return null;
 	}
 
 	

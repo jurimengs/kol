@@ -1,5 +1,6 @@
 package com.org.dao;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
@@ -17,6 +18,8 @@ import net.sf.json.JSONObject;
 import com.org.model.reflect.ReflectDbModel;
 import com.org.services.HikaricpMysqlDataSourceService;
 import com.org.util.StringUtil;
+import com.org.utils.ByteUtil;
+import com.org.utils.DesUtil;
 
 // TODO 重新做分页
 public class BaseDao {
@@ -74,10 +77,11 @@ public class BaseDao {
 	 * @param sql
 	 * @param params
 	 * @param collumToUpper 是否遵守驼峰
+	 * @param secretColumn 是否有加密列的需求
 	 * @return
 	 * @throws SQLException
 	 */
-	protected JSONArray queryList(String sql, Map<Integer, Object> params, boolean collumToUpper) throws SQLException{
+	protected JSONArray queryList(String sql, Map<Integer, Object> params, boolean collumToUpper, List<String> secretColumn) throws SQLException{
 		JSONArray list = new JSONArray();
 		java.sql.Connection connection = null;
 		ResultSet rs = null;
@@ -94,14 +98,27 @@ public class BaseDao {
 			int columnCounts = rsmd.getColumnCount();
 			//
 			JSONObject jo = null;
+			String key = "";
+			String value = null;
 			while (rs.next()) {
 				jo = new JSONObject();
 				for (int i = 1; i <= columnCounts; i++) {
-					String key = rsmd.getColumnName(i);
 					//  转实例名
 					key = StringUtil.toEntityName(rsmd.getColumnName(i), collumToUpper);
-					Object value = rs.getObject(i);
-					value = (value == null) ? "" : value.toString();
+					value = (rs.getObject(i) == null) ? "" : rs.getObject(i).toString();
+					if(secretColumn != null && secretColumn.contains(key)){
+						// 如果这列需要加密 
+						byte[] valueByte;
+						try {
+							valueByte = DesUtil.encryptMode(value.getBytes("UTF-8"));
+							// 从数据库取出前， 先执行加密
+							value = ByteUtil.bytes2HexStr(valueByte);
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+							
+						}
+						
+					}
 					jo.put(key, value);
 				}
 				list.add(jo);
@@ -125,8 +142,8 @@ public class BaseDao {
 		}
 	}
 
-	protected JSONArray queryList(String sql, Map<Integer, Object> params) throws SQLException{
-		return queryList(sql, params, true);		
+	protected JSONArray queryList(String sql, Map<Integer, Object> params, List<String> secretColumn) throws SQLException{
+		return queryList(sql, params, true, secretColumn);		
 	}
 	
 	protected void setStatmentParams(PreparedStatement ps, Map<Integer, Object> params) throws SQLException{

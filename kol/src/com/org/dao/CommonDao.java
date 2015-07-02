@@ -3,6 +3,7 @@ package com.org.dao;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +16,11 @@ import com.org.exception.SvcException;
 
 @Repository
 public class CommonDao extends BaseDao {
-	public JSONObject querySingle(String sql, Map<Integer, Object> params)
+	public JSONObject querySingle(String sql, Map<Integer, Object> params, List<String> secretColumn)
 			throws SvcException {
 		JSONObject jo = null;
 		try {
-			JSONArray list = queryList(sql, params);
+			JSONArray list = queryList(sql, params, secretColumn);
 			if (list.size() > 1) {
 				throw new SvcException(
 						"Common Dao : result counts more than single");
@@ -66,10 +67,10 @@ public class CommonDao extends BaseDao {
 		return null;
 	}
 
-	public JSONArray queryJSONArray(String sql, Map<Integer, Object> params) {
+	public JSONArray queryJSONArray(String sql, Map<Integer, Object> params, List<String> secretColumn) {
 		JSONArray list = null;
 		try {
-			list = queryList(sql, params);
+			list = queryList(sql, params, secretColumn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -79,10 +80,10 @@ public class CommonDao extends BaseDao {
 		return list;
 	}
 
-	public JSONArray queryJSONArray(String sql) {
+	public JSONArray queryJSONArray(String sql, List<String> secretColumn) {
 		JSONArray list = null;
 		try {
-			list = queryList(sql, null);
+			list = queryList(sql, null, secretColumn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -212,10 +213,10 @@ public class CommonDao extends BaseDao {
 	// return null;
 	// }
 
-	public JSONObject isExist(String sql, Map<Integer, Object> params) {
+	public JSONObject isExist(String sql, Map<Integer, Object> params, List<String> secretColumn) {
 		JSONObject user = null;
 		try {
-			user = querySingle(sql, params);
+			user = querySingle(sql, params, secretColumn);
 		} catch (SvcException e) {
 			e.printStackTrace();
 		}

@@ -57,7 +57,7 @@ public class CommentsService {
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, Integer.valueOf(id));
-		commentsArray = commonDao.queryJSONArray(sql_getById, params);
+		commentsArray = commonDao.queryJSONArray(sql_getById, params, null);
 		res.put("commentsArray", commentsArray);
 		return res;
 	}
