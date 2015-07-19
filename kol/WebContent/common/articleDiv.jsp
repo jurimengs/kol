@@ -7,7 +7,9 @@
 	<div class="zhuti-bar">
 		<a href="/comments/queryComments.do?testimonialsId=${tms.id }" class="zhuti">
 			<strong>标题:</strong>${tms.title }<br />
-			<%-- <img src="/images/aimg1.jpg" alt="zhuti"> --%>
+			<c:if test="${! empty tms.filePath }">
+				<img class="testim_img" src="${tms.filePath }" />
+			</c:if>
 		</a>
 		<div class="contents"><strong>内容:</strong>${tms.contents}</div>
 		<p>

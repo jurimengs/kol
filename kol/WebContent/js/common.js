@@ -211,7 +211,7 @@
 						'<div class="pop_title" style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
 					'</div>' +
 					'<div class="modal-body" id="maskContentDiv">&nbsp;'+
-						'<form action="" id="commentsForm" method="post">&nbsp;'+
+						'<form action="" id="commentsForm" enctype="multipart/form-data" method="post">&nbsp;'+
 							'<input type="hidden" id="deviceType" name="deviceType" placeholder="主题" />'+
 							'主题:'+
 							'<br />'+
@@ -225,6 +225,10 @@
 								'<option value="2">工作频道</option>'+
 								'<option value="3">其他频道</option>'+
 							'</select>'+
+							'<br />'+
+							'要不要来张图片:' +
+							'<br />'+
+							'<input type="file" id="picFile" name="picFile" placeholder="可心来张图片？" />'+
 							'<br />'+
 							'您的感言:'+
 							'<br />'+

@@ -39,14 +39,14 @@ public class ChannelService {
 	}
 	
 	public JSONArray getTestimonialsByChannelId(String channelId, String limit){
-		String sql = "select * from kol_testimonials where channel_id = ? order by id desc limit ?";
+		String sql = "select a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where channel_id = ? order by a.id desc limit ?";
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, channelId);
 		params.put(2, Integer.valueOf(limit));
 		if(StringUtils.isEmpty(channelId)){
 			params = new HashMap<Integer, Object>();
-			sql = "select * from kol_testimonials order by id desc limit ?";
+			sql = "select a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id order by id desc limit ?";
 			params.put(1, Integer.valueOf(limit));
 		}
 		JSONArray testimonials = commonDao.queryJSONArray(sql, params, secretColumn);

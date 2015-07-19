@@ -77,7 +77,14 @@ function openTestimonials() {
 	var currentChannelId = '${currentChannelId}';
 	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
-		formTo("commentsForm", "/testimonials/saveContents.do");
+		if(!! $("#picFile").val()) {
+			// 有图片上传
+			formTo("commentsForm", "/testimonials/saveContents.do");
+		} else {
+			// 无图片上传
+			$("#commentsForm").prop("enctype", "");
+			formTo("commentsForm", "/testimonials/saveContentsNoPic.do");
+		}
 	});
 }
 

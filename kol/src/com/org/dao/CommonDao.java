@@ -3,7 +3,6 @@ package com.org.dao;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,14 @@ import com.org.exception.SvcException;
 
 @Repository
 public class CommonDao extends BaseDao {
+	
+	/**
+	 * @param sql
+	 * @param params
+	 * @param secretColumn 加密字段列表。指定的列将被加密
+	 * @return
+	 * @throws SvcException
+	 */
 	public JSONObject querySingle(String sql, Map<Integer, Object> params, List<String> secretColumn)
 			throws SvcException {
 		JSONObject jo = null;

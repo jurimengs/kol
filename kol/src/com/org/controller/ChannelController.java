@@ -33,7 +33,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "Ê×Ò³");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.HOME);
 		
-		String t_limit = "100";
+		String t_limit = "10";
 		String topTimesGoal = SmpPropertyUtil.getValue("business", "topTimesGoal");
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);

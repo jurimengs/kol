@@ -76,6 +76,7 @@ CREATE TABLE `kol_testimonials` (
   `contents` varchar(5000) NOT NULL,
   `create_date` varchar(14) NOT NULL,
   `update_date` varchar(14) DEFAULT NULL,
+  `file_id` varchar(20) DEFAULT NULL,
   `channel_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
@@ -126,6 +127,17 @@ CREATE TABLE `kol_commemorate_board` (
 -- ----------------------------
 DROP TABLE IF EXISTS `kol_files`;
 CREATE TABLE `kol_files` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL, -- 创建者ID
+  `file_path` varchar(200),-- 纪念描述
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `kol_files` 发表感言的图片
+-- ----------------------------
+DROP TABLE IF EXISTS `kol_testimonials_files`;
+CREATE TABLE `kol_testimonials_files` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL, -- 创建者ID
   `file_path` varchar(200),-- 纪念描述

@@ -22,14 +22,14 @@ import com.org.util.SpringUtil;
  */
 @Service
 public class TestimonialsService {
-	private final String sql_insert = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title) values (?,?,?,?,?,?)";
+	private final String sql_insert = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title, file_id) values (?,?,?,?,?,?,?)";
 	private final String sql_getById = "select * from kol_testimonials where id = ?";
 	private final static List<String> secretColumn = new ArrayList<String>();
 	static {
 		secretColumn.add("id");
 	}
 	
-	public synchronized JSONObject saveContents(String userId, String contents, String channelId, String title){
+	public synchronized JSONObject saveContents(String userId, String contents, String channelId, String title, String fileId){
 		String createDate = DateUtil.getDate(DateUtil.DATE_FORMAT_SHORT_DATE);
 		
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
@@ -40,6 +40,7 @@ public class TestimonialsService {
 		params.put(4, createDate);
 		params.put(5, Integer.valueOf(channelId));
 		params.put(6, title);
+		params.put(7, fileId);
 		
 		JSONObject res = new JSONObject();
 		try {
