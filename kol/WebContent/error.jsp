@@ -42,7 +42,7 @@
 		<div class="cells screen-height ">
 			<div class="cell-6">&nbsp;</div>
 			<div class="cell-20 bg-login-user" style="height:200px; padding:10px;">
-			<div class="text-center" style="padding:10px;">登录错误</div>
+			<div class="text-center" style="padding:10px;">系统异常</div>
 	      <div class="form-list">
 	      	<label class="form-label t-right">错误码：</label>
 	        <div class="form-content">

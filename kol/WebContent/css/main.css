@@ -57,7 +57,7 @@ header nav li a:active {color: #d75d10;}
 
 /*主页面*/
 
-.container {padding-bottom: 104px; padding-bottom: 1.04rem;}
+.container {}
 .container h1 {
 	width: 100%; padding: 28px 0; padding: .28rem 0; line-height: 1; text-align: center;
 	font-size: 18px; font-size: .18rem; font-weight: normal; color: #3f3f3f; background-color: #fff;
