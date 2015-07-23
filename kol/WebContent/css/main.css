@@ -9,7 +9,7 @@
 html {font-size: 625%;}
 body {width: 100%; font-size: 14px; font-size: .14rem; background: url(../images/bg.jpg);}
 .comwidth {margin: 0 auto;}
-.contents {white-space: normal; overflow-x: hidden; line-height: 25px;}
+.contents {white-space: normal; word-warp:break-word; overflow-x: hidden; line-height: 25px;}
 /*导航栏*/
 .tucaoba {color: white;}
 header {line-height: 55px; background-color: #2e3138;}
@@ -58,6 +58,7 @@ header nav li a:active {color: #d75d10;}
 /*主页面*/
 
 .container {}
+.testim_img {max-width:30%;}
 .container h1 {
 	width: 100%; padding: 28px 0; padding: .28rem 0; line-height: 1; text-align: center;
 	font-size: 18px; font-size: .18rem; font-weight: normal; color: #3f3f3f; background-color: #fff;

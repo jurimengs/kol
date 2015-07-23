@@ -67,6 +67,7 @@
 </head>
 
 <body>
+<%-- 有建议显示不需要引导页
 	<div id="banner">
 		<c:set var="bannerArray" value="${fn:split('images/commemorate1.png,images/commemorate2.gif', ',') }" />
 		<c:forEach var="banner" items="${bannerArray }" varStatus="ind">
@@ -76,7 +77,7 @@
 		</c:forEach>
 	</div>
 	<div id="skip" onclick="turnToIndex();">skip >></div>
-	<div id="welcome">人生百科，让你的人生变得阳光起来！</div>
+	<div id="welcome">人生百科，让你的人生变得阳光起来！</div> --%>
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post" >
@@ -85,7 +86,8 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
-
+turnToIndex();
+/* 
 $(function(){
 	//var imgCount = $("#banner div").length;
 	//alert(imgCount);
@@ -113,7 +115,7 @@ function next(obj){
 	$(obj).next().fadeIn();
 	//$(obj).prev().slideDown();
 }
-
+ */
 //setTimeout("enter()", 4000);
 </script>
 </html>
