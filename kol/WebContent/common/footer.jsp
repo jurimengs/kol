@@ -2,15 +2,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<footer style="margin: 0px 60px;">
+<footer>
 	<div class="comwidth">
+		<br>
 		<p class="fl">
 			人生BAI科 © 2015 www.rsbk.cc 版权所有
 			<span>
 				|
 			</span>
-			<a href="javascript:void(0);">
-				联系我们
+			<a href="/channel/friendLink.do">
+				友情链接
 			</a>
 		</p>
 		<ul class="foot-nav fr">
@@ -19,14 +20,14 @@
 					排行榜
 				</a>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="javascript:void(0);">
 					标签搜索
 				</a>
 				<span>
 					|
 				</span>
-			</li>
+			</li> -->
 			<li>
 				<a href="javascript:void(0);">
 					联系我们
@@ -35,14 +36,14 @@
 					|
 				</span>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="javascript:void(0);">
 					积分获取
 				</a>
 				<span>
 					|
 				</span>
-			</li>
+			</li> -->
 			<li>
 				<a href="javascript:void(0);">
 					关于我们
@@ -51,11 +52,30 @@
 					|
 				</span>
 			</li>
+			<li>
+				<a href="javascript:void(0);">
+					友情链接
+				</a>
+				<span>
+					|
+				</span>
+			</li>
 		</ul>
-		<div class="clear">
+		<br>
+		<br>
+		<div class="clear"></div>
+		<div>感谢所有为本站公益性质作出贡献的人们！</div>
+		<br>
+		<div>特别鸣谢：<a href="http://www.alsovalue.com" target="_blank">上海翱思网络科技有限公司</a> 为本站全程策划设计!</div>
+		<br>
+		<div>
+			<div>友情链接：</div>
+			<div class="friend_div">
+				<a href="http://www.greencash.com.cn" target="_blank"><img src="/files/friendlink/green_cash.jpg" /></a>
+				<div class="friend_link" style="text-align:center;">绿银金融</div>
+			</div>
 		</div>
-		感谢所有为本站公益性质作出贡献的人们！<br>
-		特别鸣谢：<a href="www.alsovalue.com" target="_blank">上海翱思网络科技有限公司</a>为本站全程策划设计!
+		<br>
 		<div style="position:absolute;"><div>本站微信公众号：</div><img style="max-width:100px;" src="/weixin/images/rsbk_weixin.jpg" /></div>
 		<div style="position:absolute;float: left; left: 200px;"><div>扫描下载安卓app：</div><img style="max-width:100px;" src="/app/images/rsbk_app.jpg" /></div>
 	</div>

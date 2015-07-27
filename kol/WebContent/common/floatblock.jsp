@@ -5,8 +5,19 @@
 	position: fixed; z-index: 100; right:5px; top: 40%;
 }
 #prevTestimonialDiv, #nextTestimonialDiv, #totopTestimonialDiv, #toendTestimonialDiv {
-	background-color: #6eb4d6;
-	cursor: pointer;
+	width: 43px; height: 38px;
+}
+#totopTestimonialDiv {
+	background: url(/images/to_top.png);
+}
+#prevTestimonialDiv {
+	background: url(/images/privious.png);
+}
+#nextTestimonialDiv {
+	background: url(/images/next.png);
+}
+#toendTestimonialDiv {
+	background: url(/images/to_bottom.png);
 }
 
 #currentIndex {
@@ -25,16 +36,16 @@
 }
 </style>
 <div id="floatBlock">
-	<div id="totopTestimonialDiv">回顶部</div>
+	<div id="totopTestimonialDiv"></div>
 	<div class="whiteline-10"></div>
-	<div id="prevTestimonialDiv">上一个</div>
+	<div id="prevTestimonialDiv"></div>
 	<div class="whiteline-50"></div>
 	<div id="currentIndexDiv">
 		当前：
 		<br>
 		<input id="currentIndex" value="1">
 	</div>
-	<div id="nextTestimonialDiv">下一个</div>
+	<div id="nextTestimonialDiv"></div>
 	<div class="whiteline-10"></div>
-	<div id="toendTestimonialDiv">到最后</div>
+	<div id="toendTestimonialDiv"></div>
 </div>

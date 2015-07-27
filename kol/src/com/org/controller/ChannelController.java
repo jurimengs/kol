@@ -134,6 +134,24 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		return;
 	}
 	
+	/*
+	 * ”—¡¥
+	 */
+	public void friendLink(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
+		log.info("”—¡¥°£°£°£" );
+		HttpSession session = request.getSession();
+		session.setAttribute(CommonConstant.CHANNEL_NAME, "”—«È¡¥Ω”");
+		//session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.COMMEMORATE_BOARD);
+		
+//		CommemorateService commemorateService = (CommemorateService) SpringUtil.getBean("commemorateService");
+//		JSONArray resultArray = commemorateService.getLimitCommemorate("50");
+//		request.setAttribute("commemorateArray", resultArray);
+		
+		this.forward("/channel/friendLink.jsp", request, response);
+		return;
+	}
+	
 	private Log log = LogFactory.getLog(ChannelController.class);
 
 	@Override

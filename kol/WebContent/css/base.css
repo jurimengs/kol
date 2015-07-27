@@ -81,6 +81,13 @@ a:hover {
 .topOnce{
 	font-size: 14px;
 }
+.friend_link {
+	color: #0012ff;
+}
+.friend_div {
+	width: 100px;
+	border: 1px solid #ccc;
+}
 i{
 	font-size: 12px;
 }

@@ -8,7 +8,7 @@
 /*公共部分*/
 html {font-size: 625%;}
 body {width: 100%; font-size: 14px; font-size: .14rem; background: url(../images/bg.jpg);}
-.comwidth {margin: 0 auto;}
+.comwidth {margin: 0px 60px;}
 .contents {white-space: normal; word-warp:break-word; overflow-x: hidden; line-height: 25px;}
 /*导航栏*/
 .tucaoba {color: white;}
@@ -97,7 +97,7 @@ header nav li a:active {color: #d75d10;}
 /*页脚部分*/
 footer {
 	clear: both; border-top: 1px solid #d5d5d5; font-size: 14px;
-	font-size: .14rem; line-height: 49px; line-height: .49rem; color: #535353; background-color: #ddd;
+	color: #535353; background-color: #ddd;
 }
 .foot-nav li {float: right;}
 .foot-nav li a {display: inline-block; margin: 0 9px; margin: 0 .09rem; transition:.4s all;}
