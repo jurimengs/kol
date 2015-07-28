@@ -53,7 +53,13 @@
 				<div>
 				发言内容：<br />
 				${tms.contents }
-				<span style="font: 14px/24px solid; display:block; padding-top: 10px;">
+				<span style="display:block; padding-top: 10px;">
+					<fmt:parseDate var="testimonialsDateTemp" value="${tms.createDate }" pattern="yyyyMMddHHmmss" />
+					<fmt:formatDate var="testimonialsDate" value="${testimonialsDateTemp }" type="both"/>
+					<strong>发表时间：</strong>${testimonialsDate }<br/>
+				</span>
+			
+				<span style="display:block; padding-top: 10px;">
 					<a href="javascript:void(0);" style="font:normal 12px/24px;" onclick="openComments('${tms.id}');">
 						发表评论
 					</a>
@@ -66,7 +72,9 @@
 				<c:forEach var="comment" items="${commentsArray }">
 					<fmt:parseDate var="dateTemp" value="${comment.createDate }" pattern="yyyyMMddHHmmss" />
 					<fmt:formatDate var="createDate" value="${dateTemp }" type="both"/>
-					${comment.contents } <br /> ${createDate } <br /><br />
+					<div class="zhuti-bar">
+						${comment.contents } <br /> ${createDate } <br />
+					</div>
 				</c:forEach>
 				</div>
 			</h1>
