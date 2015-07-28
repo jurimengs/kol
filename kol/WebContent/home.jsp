@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/mask.css">
-<link rel="stylesheet" href="/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
+<link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
 
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>

@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/mask.css">
-<link rel="stylesheet" href="/css/pad.css" media="only screen and (min-width : 768px) and (max-width : 1200px)">
+<link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
 
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
