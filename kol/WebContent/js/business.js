@@ -73,8 +73,7 @@ function openComments(testimonialsId) {
 	});
 }
 
-function openTestimonials() {
-	var currentChannelId = '${currentChannelId}';
+function openTestimonials(currentChannelId) {
 	var submitBtnId = $d("maskDiv").dialogTestimonials(currentChannelId);
 	$("#"+submitBtnId).click(function() {
 		if(!! $("#picFile").val()) {

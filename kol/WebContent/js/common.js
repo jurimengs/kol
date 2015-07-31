@@ -178,14 +178,14 @@
 		document.body.appendChild(o);
 		document.getElementById("testimonialsId").value=id;
 		// 根据设备类型，判断左右间距、对话框宽度等
-		var dialogMarginLeft = "270px";
-		var dialogWidth = "720px";
+		args = {"width":"720px", "marginLeft":"270px"};
+		
 		if(this.currentDevice != "pc"){
-			dialogMarginLeft = "1px";
-			dialogWidth = "100%";
+			args = {"width":"100%", "marginLeft":"1px", "top":"1px"};
 		}
 		
-		$d("modalDiv").adjustCenter({"width":dialogWidth, "marginLeft":dialogMarginLeft});
+		
+		$d("modalDiv").adjustCenter(args);
 		o.style.display = "block";
 		return "commentsBtn";
 	};
@@ -227,7 +227,6 @@
 							'</select>'+
 							'<br />'+
 							'要不要来张图片:' +
-							'<br />'+
 							'<input type="file" id="picFile" name="picFile" placeholder="可心来张图片？" />'+
 							'<br />'+
 							'您的感言:'+
@@ -246,7 +245,7 @@
 			$("#channelId").val(currentChannelId);
 		} else {
 			// 不设置默认值，就是要让人家选
-			//$("#channelId").val(0);
+			$("#channelId").val(0);
 		}
 		
 		var args = {"width":"720px", "marginLeft":"270px"};
@@ -257,6 +256,13 @@
 		$d("modalDiv").adjustCenter(args);
 		o.style.display = "block";
 		// dialog完成后，将submitBtn 的id返回
+		var topTemp = $("#modalDiv").css("top");
+		$("#testimonialsContent").focus(function(){
+			$d("modalDiv").css("top", "-10px");
+		});
+		$("#testimonialsContent").focusout(function(){
+			$d("modalDiv").css("top", topTemp);
+		});
 		return "submitBtn";
 	};
 	

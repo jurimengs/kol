@@ -76,7 +76,7 @@
 				<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
 			</li>
 			<li>
-				<a href="javascript:void(0);" onclick="openTestimonials();">发表感言</a>
+				<a href="javascript:void(0);" onclick="openTestimonials('${currentChannelId}');">发表感言</a>
 			</li>
 		</ul>
 	</nav>
@@ -101,7 +101,7 @@
 		<div><span><a onclick="switchMenu(this);" class="switchDivBtn">菜单</a></span></div>
 	</div>
 	<div id="menudiv">
-		<div onclick="openTestimonials();">
+		<div onclick="openTestimonials('${currentChannelId}');">
 			<span>发表感言</span>
 		</div>
 		<div onclick="turnToIndex();" <c:if test="${currentChannelId eq 'home' }">class="currentChannel"</c:if>>
