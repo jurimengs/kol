@@ -10,7 +10,7 @@
 <title>人生百科-评论</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/main.css">
