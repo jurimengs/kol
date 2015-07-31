@@ -182,6 +182,14 @@
 		
 		if(this.currentDevice != "pc"){
 			args = {"width":"100%", "marginLeft":"1px", "top":"1px"};
+			// 为手机处理
+			var topTemp = $("#modalDiv").css("top");
+			$("#testimonialsContent").focus(function(){
+				$d("modalDiv").css("top", "-50px");
+			});
+			$("#testimonialsContent").focusout(function(){
+				$d("modalDiv").css("top", topTemp);
+			});
 		}
 		
 		
@@ -242,6 +250,9 @@
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
 		if(!! currentChannelId && currentChannelId != "null"){
+			if(currentChannelId == "home") {
+				currentChannelId = "0";
+			}
 			$("#channelId").val(currentChannelId);
 		} else {
 			// 不设置默认值，就是要让人家选
@@ -251,18 +262,18 @@
 		var args = {"width":"720px", "marginLeft":"270px"};
 		if(this.currentDevice != "pc"){
 			args = {"width":"100%", "marginLeft":"1px", "top":"1px"};
+			// 为手机处理
+			var topTemp = $("#modalDiv").css("top");
+			$("#testimonialsContent").focus(function(){
+				$d("modalDiv").css("top", "-50px");
+			});
+			$("#testimonialsContent").focusout(function(){
+				$d("modalDiv").css("top", topTemp);
+			});
 		}
 		
 		$d("modalDiv").adjustCenter(args);
 		o.style.display = "block";
-		// dialog完成后，将submitBtn 的id返回
-		var topTemp = $("#modalDiv").css("top");
-		$("#testimonialsContent").focus(function(){
-			$d("modalDiv").css("top", "-10px");
-		});
-		$("#testimonialsContent").focusout(function(){
-			$d("modalDiv").css("top", topTemp);
-		});
 		return "submitBtn";
 	};
 	
