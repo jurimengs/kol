@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>人生百科</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
+<title>人生百科 WEB人生百科 webrsbk 提高你的人生高度 工作频道 生活频道 纪念版 纪念 创造人生价值 创造社会价值</title>
+<meta name="description" content="人生百科,WEB人生百科,webrsbk,提高你的人生高度,工作频道,生活频道,纪念版,创造人生价值,创造社会价值">
+<meta name="keywords" content="人生百科">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <link rel="stylesheet" href="/css/base.css">
@@ -61,8 +61,8 @@
 			</h1> -->
 			<section>
 			<div class="h1style zhuti-bar">
-				人生的每一次经历，<span>都是</span>一笔宝贵的财富，<span>时光</span>飞逝光阴似箭时间如白驹过隙，
-				<span>让我们</span>记录你的人生，留下属于你的每时每刻
+				人生的每一次经历，<span>都是</span>一笔宝贵的财富，提高你的<span>人生</span>高度，
+				让<em><span> 人生百科 </span></em>记录你的足迹，留下属于你的每时每刻
 			</div>
 			</section>
 			<!-- section one -->
