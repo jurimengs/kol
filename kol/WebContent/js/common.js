@@ -163,7 +163,6 @@
 							'<form action="" id="commentsForm" method="post">&nbsp;'+
 							'<input type="hidden" id="deviceType" name="deviceType" />'+
 							'<input type="hidden" id="testimonialsId" name="testimonialsId" />'+
-							'<br />'+
 							'请输入内容:'+
 							'<br />'+
 							'<textarea class="maskContent" id="content" name="commentContent" placeholder="内容"></textarea>'+

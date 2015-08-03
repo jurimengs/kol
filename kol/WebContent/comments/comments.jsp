@@ -61,7 +61,7 @@
 			
 				<span style="display:block; padding-top: 10px;">
 					<a href="javascript:void(0);" style="font:normal 12px/24px;" onclick="openComments('${tms.id}');">
-						发表评论
+						发表高见
 					</a>
 				</span>
 				</div>

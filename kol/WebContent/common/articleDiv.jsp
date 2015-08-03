@@ -19,11 +19,11 @@
 				<strong>发表时间：</strong>${testimonialsDate }<br/>
 			</span>
 			<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-				发表评论
+				发表高见
 			</a>
 			&nbsp;
 			<a href="/comments/queryComments.do?testimonialsId=${tms.id }">
-				查看所有评价
+				查看所有评价(${tms.commentCounts })
 			</a>
 			<%-- <a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
 				查看所有评价

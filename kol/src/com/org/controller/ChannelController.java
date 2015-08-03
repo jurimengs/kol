@@ -33,9 +33,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CHANNEL_NAME, "首页");
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.HOME);
 		
-		String t_limit = "10";
 		String topTimesGoal = SmpPropertyUtil.getValue("business", "topTimesGoal");
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
+		String t_limit = "10";
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
 		
 		// 纪念板的第一个
@@ -60,7 +60,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.LIFE);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.LIFE);
+		String t_limit = "10";
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
 		this.forward("/channel/life.jsp", request, response);
@@ -75,7 +77,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.EMOTION);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.EMOTION);
+		String t_limit = "10";
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
 		// 如果是必需要长期存放于session的, 则使用session. 否则只要使用request就行了
@@ -93,7 +97,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.CAREER);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.CAREER);
+		String t_limit = "10";
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
 		//this.redirect("/channel/career.jsp", response);
@@ -109,7 +115,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		session.setAttribute(CommonConstant.CURRENT_CHANNEL_ID, CommonConstant.OTHER);
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.OTHER);
+		String t_limit = "10";
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
 		this.forward("/channel/other.jsp", request, response);

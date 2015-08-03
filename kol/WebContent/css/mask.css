@@ -49,7 +49,7 @@
 }
 
 .modal-content,.modal-body,.message-box .message-content {
-	padding: 20px;
+	padding: 0px 20px 10px 20px;
 	background: #fff;
 	border-bottom: 1px solid #ccc;
 	overflow:auto;
