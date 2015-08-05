@@ -11,7 +11,22 @@
 				<img class="testim_img" src="${tms.filePath }" />
 			</c:if>
 		</a>
-		<div class="contents"><strong>内容:</strong>${tms.contents}</div>
+		<div class="contents">
+			<strong>内容:</strong>
+			<c:set var="contentsLength" value="${fn:length(tms.contents)}" />
+			<c:set var="hideWordsLength" value="200" />
+			<c:if test="${contentsLength <= hideWordsLength}">
+				<div id="contentsDiv">${tms.contents}</div>
+			</c:if>
+			<c:if test="${contentsLength > hideWordsLength}">
+				<c:set var="shortWords" value="${fn:substring(tms.contents, 0, hideWordsLength) }" />
+				<div class="shortWordsDiv">
+					${shortWords}...
+					<a href="javascript:void(0);" class="btn btn-blue" onclick="showallwords(this)">展开</a>
+					<input type="hidden" value="${tms.contents }">
+				</div>
+			</c:if>
+		</div>
 		<p>
 			<span>
 				<fmt:parseDate var="testimonialsDateTemp" value="${tms.createDate }" pattern="yyyyMMddHHmmss" />

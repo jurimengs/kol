@@ -151,3 +151,9 @@ $(function(){
 		$("html,body").animate({scrollTop: toend},1000);//1000是ms,也可以用slow代替
 	});
 });
+
+function showallwords(obj){
+	var allwords = $(obj).next().val();
+	//$(obj).parent().empty();
+	$(obj).parent().text(allwords);
+}
