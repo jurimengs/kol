@@ -34,6 +34,10 @@ header nav a {font-size: 18px; font-size: .18rem; color: #acb0bc;}
 	line-height: 26px; line-height: .26rem; color: #2e3136; background-color: #aab0be;
 }
 
+.btn-blue {
+	background-color: #98cbf6;
+}
+
 .currentChannel {
 	background-color: #d75d10;
 }

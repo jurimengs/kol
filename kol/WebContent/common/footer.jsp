@@ -68,11 +68,15 @@
 		<br>
 		<div>特别鸣谢：<a href="http://www.alsovalue.com" target="_blank">上海翱思网络科技有限公司</a> 为本站全程策划设计!</div>
 		<br>
-		<div>
+		<div style="height: 100px; background-color: #ccc;">
 			<div>友情链接：</div>
 			<div class="friend_div">
 				<a href="http://www.greencash.com.cn" target="_blank"><img src="/files/friendlink/green_cash.jpg" /></a>
 				<div class="friend_link" style="text-align:center;">绿银金融</div>
+			</div>
+			<div class="friend_div">
+				<a href="http://cy.shang.cn/" target="_blank"><img src="/files/friendlink/cyshang.jpg" /></a>
+				<div class="friend_link" style="text-align:center;">创业加盟</div>
 			</div>
 		</div>
 		<br>

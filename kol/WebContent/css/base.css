@@ -82,12 +82,17 @@ a:hover {
 	font-size: 14px;
 }
 .friend_link {
-	color: #0012ff;
+	color: #4499ee;
 }
 .friend_div {
 	width: 100px;
-	border: 1px solid #ccc;
+	float: left;
+	padding-right: 10px;
 }
 i{
 	font-size: 12px;
+}
+.totop {
+	box-shadow:2px 2px 2px 2px #ccc; /* html 5 阴影效果*/
+	background: url(../images/totop.jpg) no-repeat 100% 0;
 }

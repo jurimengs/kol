@@ -61,7 +61,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.LIFE, t_limit);
 		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
@@ -78,7 +78,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.EMOTION, t_limit);
 		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
@@ -98,7 +98,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.CAREER, t_limit);
 		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 
@@ -116,7 +116,7 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(CommonConstant.OTHER, t_limit);
 		
 		request.setAttribute("testimonialsArray", testimonialsArray);
 

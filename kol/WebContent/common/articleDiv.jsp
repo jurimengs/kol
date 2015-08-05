@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <article>
-	<div class="zhuti-bar">
+	<div class="zhuti-bar <c:if test="${tms.totop eq '0'}">totop</c:if>">
 		<a href="/comments/queryComments.do?testimonialsId=${tms.id }" class="zhuti">
 			<strong>标题:</strong>${tms.title }<br />
 			<c:if test="${! empty tms.filePath }">
@@ -18,8 +18,8 @@
 				<fmt:formatDate var="testimonialsDate" value="${testimonialsDateTemp }" type="both"/>
 				<strong>发表时间：</strong>${testimonialsDate }<br/>
 			</span>
-			<a href="javascript:void(0);" onclick="openComments('${tms.id}');">
-				发表高见
+			<a href="javascript:void(0);" class="btn btn-blue" onclick="openComments('${tms.id}');">
+				留言
 			</a>
 			&nbsp;
 			<a href="/comments/queryComments.do?testimonialsId=${tms.id }">

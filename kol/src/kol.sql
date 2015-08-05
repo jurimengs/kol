@@ -145,3 +145,20 @@ CREATE TABLE `kol_testimonials_files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- ----------------------------
+-- Table structure for `kol_testimonials_totop` 置顶
+-- ----------------------------
+DROP TABLE IF EXISTS `kol_testimonials_totop`;
+CREATE TABLE `kol_testimonials_totop` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `contents` varchar(5000) NOT NULL,
+  `create_date` varchar(14) NOT NULL,
+  `update_date` varchar(14) DEFAULT NULL,
+  `file_id` varchar(20) DEFAULT NULL,
+  `channel_id` bigint(20) DEFAULT NULL,
+  `title` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+

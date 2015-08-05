@@ -56,4 +56,9 @@ public class CommonConstant {
 	 */
 	public static final String SERVLET = "servlet-dispatcher";
 		
+	/**
+	 * ÖÃ¶¥Ìû
+	 */
+	public static final String TOP_TESTIMONIAL = "topTestimonal";
+	
 }

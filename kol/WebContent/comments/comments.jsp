@@ -60,8 +60,8 @@
 				</span>
 			
 				<span style="display:block; padding-top: 10px;">
-					<a href="javascript:void(0);" style="font:normal 12px/24px;" onclick="openComments('${tms.id}');">
-						发表高见
+					<a href="javascript:void(0);" class="btn btn-blue" onclick="openComments('${tms.id}');">
+						留言
 					</a>
 				</span>
 				</div>
