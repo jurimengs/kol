@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.org.common.CommonConstant;
@@ -23,7 +24,7 @@ import com.org.util.SpringUtil;
 @Service
 public class TestimonialsService {
 	private final String sql_insert = "insert into kol_testimonials (user_id, contents, create_date, update_date, channel_id, title, file_id) values (?,?,?,?,?,?,?)";
-	private final String sql_getById = "select * from kol_testimonials where id = ?";
+	private final String sql_getById = "select a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where a.id = ?";
 	private final static List<String> secretColumn = new ArrayList<String>();
 	static {
 		secretColumn.add("id");
@@ -38,6 +39,9 @@ public class TestimonialsService {
 		params.put(2, contents);
 		params.put(3, createDate);
 		params.put(4, createDate);
+		if (StringUtils.isEmpty(channelId)) {
+			channelId = "0";
+		}
 		params.put(5, Integer.valueOf(channelId));
 		params.put(6, title);
 		params.put(7, fileId);

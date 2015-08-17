@@ -51,19 +51,22 @@
 			<c:set var="commentsArray" value="${res.commentsArray }" scope="page" />
 			<h1>
 				<div>
-				发言内容：<br />
-				${tms.contents }
-				<span style="display:block; padding-top: 10px;">
+				<div>发言内容：</div>
+				<div>${tms.contents }</div>
+				<c:if test="${! empty tms.filePath }">
+					<div><img class="testim_img" src="${tms.filePath }" /></div>
+				</c:if>
+				<div style="padding-top: 10px;">
 					<fmt:parseDate var="testimonialsDateTemp" value="${tms.createDate }" pattern="yyyyMMddHHmmss" />
 					<fmt:formatDate var="testimonialsDate" value="${testimonialsDateTemp }" type="both"/>
 					<strong>发表时间：</strong>${testimonialsDate }<br/>
-				</span>
-			
-				<span style="display:block; padding-top: 10px;">
+				</div>
+				
+				<div style="padding-top: 10px;">
 					<a href="javascript:void(0);" class="btn btn-blue" onclick="openComments('${tms.id}');">
 						留言
 					</a>
-				</span>
+				</div>
 				</div>
 			</h1>
 			<h1>

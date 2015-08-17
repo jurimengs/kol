@@ -249,7 +249,7 @@
 		o = getObjFromHtml(h);
 		document.body.appendChild(o);
 		if(!! currentChannelId && currentChannelId != "null"){
-			if(currentChannelId == "home") {
+			if(currentChannelId == "6") {
 				currentChannelId = "0";
 			}
 			$("#channelId").val(currentChannelId);

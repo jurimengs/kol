@@ -72,7 +72,7 @@
 			<li <c:if test="${currentChannelId eq '0' }">class="currentChannel"</c:if>>
 				<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
 			</li>
-			<li <c:if test="${currentChannelId eq 'home' }">class="currentChannel"</c:if>>
+			<li <c:if test="${currentChannelId eq '6' }">class="currentChannel"</c:if>>
 				<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
 			</li>
 			<li>
@@ -104,7 +104,7 @@
 		<div onclick="openTestimonials('${currentChannelId}');">
 			<span>发表感言</span>
 		</div>
-		<div onclick="turnToIndex();" <c:if test="${currentChannelId eq 'home' }">class="currentChannel"</c:if>>
+		<div onclick="turnToIndex();" <c:if test="${currentChannelId eq '6' }">class="currentChannel"</c:if>>
 			<span>首页</span>
 		</div>
 		<div onclick="turnToLife();" <c:if test="${currentChannelId eq '0' }">class="currentChannel"</c:if>>

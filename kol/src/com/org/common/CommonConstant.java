@@ -18,7 +18,7 @@ public class CommonConstant {
 	/**
 	 * Ê×Ò³ index
 	 */
-	public static final String HOME = "home";
+	public static final String HOME = "6";
 	/**
 	 * Ê×Ò³ index
 	 */
