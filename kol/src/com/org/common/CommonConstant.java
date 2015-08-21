@@ -60,5 +60,13 @@ public class CommonConstant {
 	 * 置顶帖
 	 */
 	public static final String TOP_TESTIMONIAL = "topTestimonal";
+	/**
+	 * 注册类型: 系统
+	 */
+	public static final String REGIST_TYPE_SYS = "0";
+	/**
+	 * 注册类型: 用户
+	 */
+	public static final String REGIST_TYPE_PERSON = "1";
 	
 }

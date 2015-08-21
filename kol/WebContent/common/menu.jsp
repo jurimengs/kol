@@ -49,7 +49,13 @@
 				<a class="btn" href="javascript:void(0);">注册</a>
 			</c:if>
 			<c:if test="${!empty sessionUser }">
-				欢迎您,${sessionUser.loginName }<a class="btn" href="javascript:void(0);">完善资料</a>
+				欢迎您,${sessionUser.loginName }
+				<c:if test="${sessionUser.registType ne '1' }">
+					<a class="btn" onclick="turnTo('/user/toRegist.do');" href="javascript:void(0);">完善资料</a>
+				</c:if>
+				<c:if test="${sessionUser.registType eq '1' }">
+					<a class="btn" onclick="turnTo('/user/loginOut.do');" href="javascript:void(0);">退出</a>
+				</c:if>
 			</c:if>
 		</div>
 		<ul class="fr">

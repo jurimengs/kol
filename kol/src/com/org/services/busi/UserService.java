@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import com.org.common.CommonConstant;
 import com.org.common.UserConstant;
 import com.org.dao.CommonDao;
+import com.org.exception.SvcException;
 import com.org.util.MD5;
 import com.org.util.SpringUtil;
 import com.org.utils.UserUtil;
@@ -24,6 +25,8 @@ import com.org.utils.UserUtil;
  */
 @Service
 public class UserService {
+	private static String getUserByLoginName = "select * from kol_user where login_name = ?";
+	
 	public JSONObject checkLogin(String loginName, String LoginPwd){
 		// 先查session有没有用户　
 		JSONObject result = new JSONObject();
@@ -121,6 +124,22 @@ public class UserService {
 		return null;
 	}
 	
+	public JSONObject getUserByLoginName(String loginName){
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, loginName);
+		
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		JSONObject res = new JSONObject();
+		try {
+			res = commonDao.querySingle(getUserByLoginName, params, null);
+		} catch (SvcException e) {
+			e.printStackTrace();
+			res.put(CommonConstant.RESP_CODE, "DB00001");
+			res.put(CommonConstant.RESP_MSG, "数据库查询异常");
+		}
+		return res;
+	}
+	
 	public boolean saveUser(String loginName, String mail, String mobile, String registType, String nickName, String pwd){
 		String sql = "insert into kol_user (login_name, mail, mobile, regist_type, nick_name, pwd) values (?,?,?,?,?,?)";
 		
@@ -147,7 +166,7 @@ public class UserService {
 	
 	public JSONObject createTempUser(){
 		JSONObject user = new JSONObject();
-		String loginName = UserUtil.randomLoginName(), mail ="", mobile="", registType="", nickName="", pwd="";
+		String loginName = UserUtil.randomLoginName(), mail ="", mobile="", registType="0", nickName="", pwd="";
 		user.put(UserConstant.LOGIN_NAME, loginName);
 		user.put(UserConstant.MAIL, mail);
 		user.put(UserConstant.MOBILE, mobile);

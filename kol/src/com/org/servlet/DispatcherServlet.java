@@ -98,7 +98,11 @@ public class DispatcherServlet extends HttpServlet {
 			//request.getSession().removeAttribute(CT.COMP_LOCAL_USER);
 			targetUrl = PageConstant.ERROR;
 			request.setAttribute("respCode", "SYS001");
-			request.setAttribute("respMsg", "ϵͳ�쳣 "+se.getMessage());
+			if(StringUtils.isEmpty(se.getMessage())) {
+				request.setAttribute("respMsg", se.getCause().getMessage());
+			} else {
+				request.setAttribute("respMsg", se.getMessage());
+			}
 			try {
 				this.forward(targetUrl, request, response);		
 			} catch (Exception e) {
