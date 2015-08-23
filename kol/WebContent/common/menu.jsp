@@ -45,11 +45,11 @@
 	<nav id="pcmenu" class="fr">
 		<div class="btn-gp fr">
 			<c:if test="${empty sessionUser }">
-				<a class="btn" href="javascript:void(0);">登录</a>
-				<a class="btn" href="javascript:void(0);">注册</a>
+				<a class="btn" href="/user/toLogin.do">登录</a>
+				<a class="btn" href="/user/toRegist.do">注册</a>
 			</c:if>
 			<c:if test="${!empty sessionUser }">
-				欢迎您,${sessionUser.loginName }
+				欢迎您：${sessionUser.loginName }
 				<c:if test="${sessionUser.registType ne '1' }">
 					<a class="btn" onclick="turnTo('/user/toRegist.do');" href="javascript:void(0);">完善资料</a>
 				</c:if>

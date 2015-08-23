@@ -97,6 +97,7 @@ CREATE TABLE `kol_user` (
   `mobile` varchar(20) DEFAULT NULL,
   `regist_type` varchar(1) DEFAULT '' COMMENT '0ϵͳע 1ûע',
   `nick_name` varchar(50) DEFAULT NULL,
+  `pwd` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_name` (`login_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

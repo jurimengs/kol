@@ -33,7 +33,7 @@
 <!--修复IE6下PNG图片背景透明-->
 <style type="text/css">
 @media screen and (max-width: 600px) {
-	.rightDiv {
+	.mainDiv {
 		width: 100%;
 		padding-top: 80px;
 		margin-left: 120px;
@@ -43,15 +43,12 @@
 </head>
 
 <body>
-	<div class="topDiv">
-		&nbsp;
-	</div>
+	<%@ include file="/common/topDiv.jsp"%>
 	<div class="bg">
-		<div class="rightDiv">
+		<div class="mainDiv">
 			<div class="div-signup">
 				<dl>
 					<dd>
-						<a href="/login.jsp" >已有账号,直接登录</a>
 						<a href="javascript:void(0);" onclick="turnToIndex();" >不注册,先看看</a>
 					</dd>
 				</dl>
@@ -77,6 +74,11 @@
 						</dd>
 					</dl>
 				</form>
+				<dl>
+					<dd>
+						<a href="/login.jsp" >已有账号,直接登录</a>
+					</dd>
+				</dl>
 			</div>
 			<%@ include file="/common/index_words.jsp"%>
 		</div>

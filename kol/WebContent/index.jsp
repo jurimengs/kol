@@ -86,7 +86,11 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
-turnToIndex();
+//turnToIndex();
+// 默认进入登录页面
+formTo("channelForm", "/user/toLogin.do");
+
+
 /* 
 $(function(){
 	//var imgCount = $("#banner div").length;

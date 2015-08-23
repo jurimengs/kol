@@ -33,7 +33,7 @@
 <style type="text/css">
 
 @media screen and (max-width: 600px) {
-	.rightDiv {
+	.mainDiv {
 		width: 100%;
 		padding-top: 80px;
 		margin-left: 120px;
@@ -43,16 +43,13 @@
 </head>
 
 <body>
-	<div class="topDiv">
-		&nbsp;
-	</div>
+	<%@ include file="/common/topDiv.jsp"%>
 	<div class="bg">
-		<div class="rightDiv">
+		<div class="mainDiv">
 			<div class="div-signup">
 				<dl>
 					<dd>
-						<a href="/regist.jsp" >注册</a>
-						<a href="javascript:void(0);" onclick="turnToIndex();" >不注册,先看看</a>
+						<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,先随便看看</a>
 					</dd>
 				</dl>
 				<form method="post"
@@ -74,6 +71,11 @@
 						</dd>
 					</dl>
 				</form>
+				<dl>
+					<dd>
+						<a href="/regist.jsp" >还没有账号？点这里注册</a>
+					</dd>
+				</dl>
 			</div>
 			<%@ include file="/common/index_words.jsp"%>
 		</div>

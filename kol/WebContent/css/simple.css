@@ -25,9 +25,9 @@ h1 {
 	float: right;
 }
 .topDiv {
-	height: 100px;
+	height: 60px;
 }
-.rightDiv {
+.mainDiv {
 	width: 980px;
 	padding-top: 80px;
 	margin-left: 120px;

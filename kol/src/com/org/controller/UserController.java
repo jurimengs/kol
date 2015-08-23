@@ -48,7 +48,7 @@ public class UserController extends SmpHttpServlet implements CommonController{
 		
 		UserService uService = (UserService)SpringUtil.getBean("userService");
 		JSONObject user = uService.getUserByLoginName(loginName);
-		if(!user.isEmpty()) {
+		if(user != null && !user.isEmpty()) {
 			if(user.getString(UserConstant.PWD).equals(MD5.getMD5(password))) {
 				session.setAttribute(UserConstant.SESSION_USER, user);
 			} else {
@@ -57,12 +57,14 @@ public class UserController extends SmpHttpServlet implements CommonController{
 				request.setAttribute("respMsg", "密码错误");
 					
 				this.forward("/error.jsp", request, response);
+				return;
 			}
 		} else {
 			request.setAttribute("respCode", "USER001");
-			request.setAttribute("respMsg", "该用户不存在");
+			request.setAttribute("respMsg", "该用户不存在, <a href='/user/toRegist.do'>请去这里注册</a>, 或者<a href='javascript:void(0);' onclick='history.back();'>返回</a>");
 				
 			this.forward("/error.jsp", request, response);
+			return;
 		}
 		
 		this.forward("/channel/home.do", request, response);
@@ -88,6 +90,7 @@ public class UserController extends SmpHttpServlet implements CommonController{
 		String registType = CommonConstant.REGIST_TYPE_PERSON;
 		String nickName = "";
 		String password = request.getParameter("password");
+		password = MD5.getMD5(password);
 		
 		UserService uService = (UserService)SpringUtil.getBean("userService");
 		JSONObject user = uService.getUserByLoginName(loginName);
