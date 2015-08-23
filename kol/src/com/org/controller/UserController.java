@@ -30,7 +30,7 @@ public class UserController extends SmpHttpServlet implements CommonController{
 		if(sessionUser != null && !sessionUser.isEmpty()) {
 			request.getSession(true).removeAttribute(UserConstant.SESSION_USER);
 		}
-		this.forward("/user/toLogin.do", request, response);
+		this.redirect("/user/toLogin.do", response);
 		return;
 	}
 	
@@ -53,21 +53,21 @@ public class UserController extends SmpHttpServlet implements CommonController{
 				session.setAttribute(UserConstant.SESSION_USER, user);
 			} else {
 
-				request.setAttribute("respCode", "SEC001");
-				request.setAttribute("respMsg", "密码错误");
+				session.setAttribute("respCode", "SEC001");
+				session.setAttribute("respMsg", "密码错误");
 					
-				this.forward("/error.jsp", request, response);
+				this.redirect("/error.jsp", response);
 				return;
 			}
 		} else {
-			request.setAttribute("respCode", "USER001");
-			request.setAttribute("respMsg", "该用户不存在, <a href='/user/toRegist.do'>请去这里注册</a>, 或者<a href='javascript:void(0);' onclick='history.back();'>返回</a>");
-				
-			this.forward("/error.jsp", request, response);
+			session.setAttribute("respCode", "USER001");
+			session.setAttribute("respMsg", "该用户不存在, <a href='/user/toRegist.do'>请去这里注册</a>, 或者<a href='javascript:void(0);' onclick='history.back();'>返回</a>");
+
+			this.redirect("/error.jsp", response);
 			return;
 		}
-		
-		this.forward("/channel/home.do", request, response);
+
+		this.redirect("/channel/home.do", response);
 		return;
 	}
 
@@ -77,8 +77,8 @@ public class UserController extends SmpHttpServlet implements CommonController{
 //		String sessionId = request.getSession().getId();
 //		System.err.println(sessionId);
 //		String tempSecurityKey = SecurityUtil.createPersionalKey(sessionId);
-		
-		this.forward("/login.jsp", request, response);
+
+		this.redirect("/login.jsp", response);
 		return;
 	}
 	
@@ -102,8 +102,7 @@ public class UserController extends SmpHttpServlet implements CommonController{
 		} else {
 			throw new SvcException("该用户已经被注册,请尝试更换用户名");
 		}
-		
-		this.forward("/channel/home.do", request, response);
+		this.redirect("/channel/home.do", response);
 		return;
 	}
 	

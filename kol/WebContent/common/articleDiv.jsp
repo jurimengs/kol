@@ -12,9 +12,10 @@
 			</c:if>
 		</a>
 		<div class="contents">
+			<c:if test="${tms.totop ne '0'}">
 			<strong>内容:</strong>
 			<c:set var="contentsLength" value="${fn:length(tms.contents)}" />
-			<c:set var="hideWordsLength" value="200" />
+			<c:set var="hideWordsLength" value="60" />
 			<c:if test="${contentsLength <= hideWordsLength}">
 				<div id="contentsDiv">${tms.contents}</div>
 			</c:if>
@@ -43,6 +44,7 @@
 			<%-- <a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
 				查看所有评价
 			</a> --%>
+			</c:if>
 		</p>
 	</div>
 </article>
