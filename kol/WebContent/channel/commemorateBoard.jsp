@@ -71,4 +71,5 @@ $(function(){
 	$(".addCommemorate").slideDown();
 });
 </script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>

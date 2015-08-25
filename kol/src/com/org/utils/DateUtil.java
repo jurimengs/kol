@@ -26,10 +26,25 @@ import java.util.List;
  */
 public class DateUtil
 {
+    /**
+     * yyyyMM
+     */
     public static final String yyyyMM     = "yyyyMM";
+    /**
+     * yyyyMMdd
+     */
     public static final String yyyyMMdd = "yyyyMMdd";
+    /**
+     * yyyy-MM-dd
+     */
     public static final String DATE_FORMAT_DAY = "yyyy-MM-dd";
+    /**
+     * yyyy-MM-dd HH:mm:ss
+     */
     public static final String DATE_FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * yyyyMMddHHmmss
+     */
     public static final String yyyyMMddHHmmss = "yyyyMMddHHmmss";
 
     /**
@@ -53,6 +68,10 @@ public class DateUtil
         return df.format(new Date());
     }
 
+    /**
+     * 
+     * @return yyyyMMdd
+     */
     public static String getCurrentShortDateStr()
     {
         SimpleDateFormat df = new SimpleDateFormat(yyyyMMdd);// 设置日期格式

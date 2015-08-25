@@ -57,7 +57,7 @@
 					action="/user/login.do" accept-charset="UTF-8">
 					<dl>
 						<dd>
-							<input type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
+							<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
 						</dd>
 					</dl>
 					<dl>
@@ -89,31 +89,5 @@
 </form>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
-<script type="text/javascript">
-	function createCommemorateDiv() {
-		if (!!"${commemorateDateTemp}" && "null" != "${commemorateDateTemp}") {
-			var maskContentDiv = $d("maskDiv").commonDialog();
-			var imgHtml = "<table width='100%' class='commemorateDiv'>";
-			imgHtml += "<tr>";
-			imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
-			imgHtml += "<td>${commemorate.comments}</td>";
-			imgHtml += "</tr>";
-			// 底行
-			imgHtml += "<tr>";
-			imgHtml += "<td>";
-			imgHtml += "被查看次数：${commemorate.viewTimes eq '' ? 0 : commemorate.viewTimes} 被顶次数：<span id='topTimes_home'>${commemorate.topTimes}</span>";
-			imgHtml += "<br>";
-			imgHtml += "${createDate}";
-			imgHtml += "<br>";
-			imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\', \'topTimes_home\');">顶一下</a>';
-			imgHtml += "</td>";
-			imgHtml += "</tr>";
-			imgHtml += "</table>";
-			var imgObj = getObjFromHtml(imgHtml);
-			$d(maskContentDiv).append(imgObj);
-		}
-	}
-
-	createCommemorateDiv();
-</script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>
