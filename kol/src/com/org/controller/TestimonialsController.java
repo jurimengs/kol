@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import com.org.common.CommonConstant;
 import com.org.common.PageConstant;
+import com.org.common.UserConstant;
 import com.org.services.busi.FileService;
 import com.org.services.busi.TestimonialsService;
 import com.org.servlet.CommonController;
@@ -29,11 +30,9 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 	public void saveContents(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 
-		//JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
-//			String userId = sessionUser.getString("id");
+		JSONObject sessionUser = (JSONObject)request.getSession().getAttribute(UserConstant.SESSION_USER);
+		String userId = sessionUser.getString("id");
 		
-		// TODO
-		String userId = "1";
 		String fileId = "";
 		
 		// ±£¥ÊÕº∆¨–≈œ¢
@@ -83,11 +82,9 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 	public void saveContentsNoPic(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException, IOException{
 
-		//JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
-//			String userId = sessionUser.getString("id");
+		JSONObject sessionUser = (JSONObject)request.getSession().getAttribute(UserConstant.SESSION_USER);
+		String userId = sessionUser.getString("id");
 		
-		// TODO
-		String userId = "1";
 		String contents = request.getParameter("testimonialsContent");
 		String channelId = request.getParameter("channelId");
 		String title = request.getParameter("testimonialsTitle");
