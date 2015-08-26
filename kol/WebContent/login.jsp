@@ -89,16 +89,7 @@
 </form>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
-<script type="text/javascript" src="/js/listener.js"></script>
-<script type="text/javascript" >
-if(typeof(EventSource)!=="undefined"){
-	var source=new EventSource("/messagePush/push.do");
-	source.onmessage=function(event) {
-		//document.getElementById("result").innerHTML+=event.data + "<br />";
-		alert("" + event.data);
-	};
-}else{
-	alert("Sorry, your browser does not support server-sent events...");
-}
+<script type="text/javascript">
 </script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>
