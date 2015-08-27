@@ -76,7 +76,7 @@ if(typeof(EventSource)!=="undefined"){
 	source.onmessage=function(event) {
 		//document.getElementById("result").innerHTML+=event.data + "<br />";
 		var jsonResult = eval("("+event.data+")");
-		alert(jsonResult.date);
+		//alert(jsonResult.date);
 	};
 }else{
 	alert("Sorry, your browser does not support server-sent events...");

@@ -24,10 +24,15 @@ import com.org.utils.DateUtil;
 public class MessagePushController extends SmpHttpServlet implements CommonController{
 	private static final long serialVersionUID = -2554067244094241952L;
 
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	public void push(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		try {
-			Thread.sleep(5000);
 			response.setHeader("Content-Type", "text/event-stream");
 			response.setHeader("Cache-Control", "no-cache");
 			response.setCharacterEncoding ("UTF-8");
