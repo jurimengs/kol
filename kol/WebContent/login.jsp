@@ -46,13 +46,15 @@
 	<%@ include file="/common/topDiv.jsp"%>
 	<div class="login_bg">
 		<div class="mainDiv">
-			<%@ include file="/common/index_words.jsp"%>
-			<div class="div-signup">
+			<div class="div-enter">
 				<dl>
 					<dd>
 						旁门左道<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
 					</dd>
 				</dl>
+			</div>
+			<%@ include file="/common/index_words.jsp"%>
+			<div class="div-signup">
 				<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
 					<dl>
 						<dd>
@@ -72,7 +74,7 @@
 				</form>
 				<dl>
 					<dd>
-						人间正道是沧桑:<a href="/regist.jsp" >点这里注册</a>
+						人间正道是沧桑:<a href="/regist.jsp" >还是注册吧</a>
 					</dd>
 				</dl>
 			</div>
