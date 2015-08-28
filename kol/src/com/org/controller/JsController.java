@@ -42,6 +42,7 @@ public class JsController extends SmpHttpServlet implements CommonController{
 	
 	public void jsListener(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		log.info("jsListener...");
 		String userId = "";
 		if(request.getSession(true).getAttribute(UserConstant.SESSION_USER) != null) {
 			JSONObject user = (JSONObject) request.getSession(true).getAttribute(UserConstant.SESSION_USER);
@@ -61,7 +62,6 @@ public class JsController extends SmpHttpServlet implements CommonController{
 		js.save(userId, browserName, browserVersion, operateName, operateDateTime, 
 				currentPage, userAgent, localAddr, remoteAddr);
 		
-		log.info("jsListener..."+browserName);
 	}
 	
 	private Log log = LogFactory.getLog(JsController.class);

@@ -189,17 +189,6 @@ SANDPAY.aop.before("turnToIndex",UserOperate, {
 SANDPAY.aop.before("turnTo",UserOperate, {
 	"operate":"统一跳转函数"
 });
-SANDPAY.aop.before("testListener",UserOperate, {
-	"operate":"testListener"
-});
-
-//监控JS 读卡
-try {
-	SANDPAY.aop.before("_readCardInfo",UserOperate, {
-		"operate":"\u8BFB\u5361"
-	}, PSA);
-} catch (e) {
-}
 
 /*
 // 目标切入函数必需在listener.js文件加载前加载, 或与listener.js一同加载

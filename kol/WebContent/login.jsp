@@ -43,6 +43,36 @@
 .loginBtn {
 	width: 100%;
 }
+
+.div-signup div {
+	width: 100%;
+}
+
+#loginDiv {
+	height: 280px;
+}
+
+.enterDiv {
+	height: 180px;
+	margin-top: 100px;
+	text-align: center;
+}
+
+.enterDiv a {
+	text-decoration: none;
+}
+
+.toregistDiv {
+	margin-top: 100px;
+	text-align: center;
+	opacity: 0.3;
+}
+
+.toregistDiv:hover {
+	opacity: 0.6;
+}
+
+
 </style>
 </head>
 
@@ -77,15 +107,18 @@
 						</dl>
 					</form>
 				</div>
-				<div id="enterDiv">
+				<div id="enterDiv" class="enterDiv">
 					<!-- 直接进入 -->
 					<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
-					(旁门左道)
-				</div>
-					<dd>
+					<br>
+					<span style="font-size: 12px;">(旁门左道, 少走为妙)</span>
+					<div class="toregistDiv">
 						<a href="javascript:void(0);" onclick="showHide('loginDiv', 'enterDiv' );" >登录</a>
-						<a href="/regist.jsp" >注册</a>(人间正道是沧桑)
-					</dd>
+						<a href="/regist.jsp" >注册</a>
+						<br>
+						<span style="font-size: 12px;">(人间正道是沧桑,沧桑的道路是注册)</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
