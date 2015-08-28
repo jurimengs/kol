@@ -18,23 +18,32 @@ h1 {
 	width: 100%; border-radius: 5px; font-size: 16px; padding: 10px; margin-top: 10px;
 }
 .form-signup {
-	width: 280px;
+	width: 100%;
 	right: 0px;
 }
 .div-signup {
-	float: right;
+	width: 250px;
 }
 .topDiv {
 	height: 60px;
 }
 .mainDiv {
-	width: 980px;
-	padding-top: 80px;
+	width: 100%;
+	padding-top: 65px;
 	margin-left: 120px;
+	position: relative;
+}
+.mainDiv div {
+	float: left;
 }
 	
 .bg {
 	background-color: #f7f7f7;
+}
+
+.login_bg {
+	background-color: #f7f7f7;
+	height: 450px;
 }
 dd{
 	margin: 0px;

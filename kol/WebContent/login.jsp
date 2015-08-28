@@ -44,17 +44,16 @@
 
 <body>
 	<%@ include file="/common/topDiv.jsp"%>
-	<div class="bg">
+	<div class="login_bg">
 		<div class="mainDiv">
+			<%@ include file="/common/index_words.jsp"%>
 			<div class="div-signup">
 				<dl>
 					<dd>
-						<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,先随便看看</a>
+						旁门左道<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
 					</dd>
 				</dl>
-				<form method="post"
-					class="form-signup" autocomplete="off"
-					action="/user/login.do" accept-charset="UTF-8">
+				<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
 					<dl>
 						<dd>
 							<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
@@ -73,11 +72,10 @@
 				</form>
 				<dl>
 					<dd>
-						<a href="/regist.jsp" >还没有账号？点这里注册</a>
+						人间正道是沧桑:<a href="/regist.jsp" >点这里注册</a>
 					</dd>
 				</dl>
 			</div>
-			<%@ include file="/common/index_words.jsp"%>
 		</div>
 	</div>
 	<!-- /.container -->
