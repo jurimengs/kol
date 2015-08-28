@@ -7,8 +7,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>人生百科 WEB人生百科 webrsbk 提高你的人生高度 工作频道 生活频道 纪念版 纪念 创造人生价值
-	创造社会价值 人生百科注册页面</title>
+<title>人生百科 WEB人生百科 webrsbk 人生百科登录页面</title>
 <meta name="description"
 	content="人生百科,WEB人生百科,webrsbk,提高你的人生高度,工作频道,生活频道,纪念版,创造人生价值,创造社会价值">
 <meta name="keywords" content="人生百科">
@@ -32,6 +31,7 @@
 <![endif]-->
 <!--修复IE6下PNG图片背景透明-->
 <style type="text/css">
+
 @media screen and (max-width: 600px) {
 	.mainDiv {
 		width: 100%;
@@ -39,19 +39,22 @@
 		margin-left: 120px;
 	}
 }
+
+.loginBtn {
+	width: 100%;
+}
 </style>
 </head>
 
 <body>
 	<%@ include file="/common/topDiv.jsp"%>
-	<div class="bg">
+	<div class="login_bg">
 		<div class="mainDiv">
+			<div class="div-enter">
+			&nbsp;
+			</div>
+			<%@ include file="/common/index_words.jsp"%>
 			<div class="div-signup">
-				<dl>
-					<dd>
-						<a href="javascript:void(0);" onclick="turnToIndex();" >不注册,先看看</a>
-					</dd>
-				</dl>
 				<form method="post" class="form-signup" autocomplete="off" action="/user/regist.do" accept-charset="UTF-8">
 					<dl>
 						<dd>
@@ -70,17 +73,11 @@
 					</dl>
 					<dl>
 						<dd>
-							<button type="submit" class="btn btn-signup">快速注册</button>
+							<button type="submit" class="btn btn-signup loginBtn">快速注册</button>
 						</dd>
 					</dl>
 				</form>
-				<dl>
-					<dd>
-						<a href="/login.jsp" >已有账号,直接登录</a>
-					</dd>
-				</dl>
 			</div>
-			<%@ include file="/common/index_words.jsp"%>
 		</div>
 	</div>
 	<!-- /.container -->
@@ -93,6 +90,10 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
+function showHide(showid, hideid){
+	$("#"+showid).fadeIn();
+	$("#"+hideid).hide();
+}
 </script>
 <script type="text/javascript" src="/js/listener.js"></script>
 </html>

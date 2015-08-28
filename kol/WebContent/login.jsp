@@ -40,8 +40,8 @@
 	}
 }
 
-.btn-a {
-width: 50%;
+.loginBtn {
+	width: 100%;
 }
 </style>
 </head>
@@ -69,9 +69,10 @@ width: 50%;
 						</dl>
 						<dl>
 							<dd>
-								<a href="javascript:void(0);" onclick="document.getElementById('submitBtn').click();" class="btn btn-signup btn-a">登录</a>
+								<button type="submit" id="loginBtn" class="loginBtn btn btn-signup">登录</button>
+								<!-- <a href="javascript:void(0);" onclick="document.getElementById('submitBtn').click();" class="btn btn-signup btn-a">登录</a>
 								<button type="submit" id="submitBtn" style="display:none;"></button>
-								<a href="/regist.jsp" class="btn btn-signup btn-a">注册</a>
+								<a href="/regist.jsp" class="btn btn-signup btn-a">注册</a> -->
 							</dd>
 						</dl>
 					</form>
