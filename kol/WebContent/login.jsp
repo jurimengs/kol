@@ -39,6 +39,10 @@
 		margin-left: 120px;
 	}
 }
+
+.btn-a {
+width: 50%;
+}
 </style>
 </head>
 
@@ -47,36 +51,40 @@
 	<div class="login_bg">
 		<div class="mainDiv">
 			<div class="div-enter">
-				<dl>
-					<dd>
-						旁门左道<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
-					</dd>
-				</dl>
+			&nbsp;
 			</div>
 			<%@ include file="/common/index_words.jsp"%>
 			<div class="div-signup">
-				<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
-					<dl>
-						<dd>
-							<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
-						</dd>
-					</dl>
-					<dl>
-						<dd>
-							<input type="password" data-autocheck-url="/signup_check/password" aria-label="Create a password" placeholder="Create a password" class="textfield" name="password">
-						</dd>
-					</dl>
-					<dl>
-						<dd>
-							<button type="submit" class="btn btn-signup">登录</button>
-						</dd>
-					</dl>
-				</form>
-				<dl>
+				<div id="loginDiv" style="display: none; ">
+					<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
+						<dl>
+							<dd>
+								<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
+							</dd>
+						</dl>
+						<dl>
+							<dd>
+								<input type="password" data-autocheck-url="/signup_check/password" aria-label="Create a password" placeholder="Create a password" class="textfield" name="password">
+							</dd>
+						</dl>
+						<dl>
+							<dd>
+								<a href="javascript:void(0);" onclick="document.getElementById('submitBtn').click();" class="btn btn-signup btn-a">登录</a>
+								<button type="submit" id="submitBtn" style="display:none;"></button>
+								<a href="/regist.jsp" class="btn btn-signup btn-a">注册</a>
+							</dd>
+						</dl>
+					</form>
+				</div>
+				<div id="enterDiv">
+					<!-- 直接进入 -->
+					<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
+					(旁门左道)
+				</div>
 					<dd>
-						人间正道是沧桑:<a href="/regist.jsp" >还是注册吧</a>
+						<a href="javascript:void(0);" onclick="showHide('loginDiv', 'enterDiv' );" >登录</a>
+						<a href="/regist.jsp" >注册</a>(人间正道是沧桑)
 					</dd>
-				</dl>
 			</div>
 		</div>
 	</div>
@@ -90,6 +98,10 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
+function showHide(showid, hideid){
+	$("#"+showid).fadeIn();
+	$("#"+hideid).hide();
+}
 </script>
 <script type="text/javascript" src="/js/listener.js"></script>
 </html>
