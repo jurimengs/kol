@@ -73,6 +73,7 @@
 			</section>
 			<div class="clear">
 			</div>
+			<%@ include file="/common/page.jsp"%> 
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp"%> 
@@ -117,4 +118,5 @@ function createCommemorateDiv(){
 createCommemorateDiv();
 
 </script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>

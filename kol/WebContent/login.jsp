@@ -39,45 +39,87 @@
 		margin-left: 120px;
 	}
 }
+
+.loginBtn {
+	width: 100%;
+}
+
+.div-signup div {
+	width: 100%;
+}
+
+#loginDiv {
+	height: 280px;
+}
+
+.enterDiv {
+	height: 180px;
+	margin-top: 100px;
+	text-align: center;
+}
+
+.enterDiv a {
+	text-decoration: none;
+}
+
+.toregistDiv {
+	margin-top: 100px;
+	text-align: center;
+	opacity: 0.3;
+}
+
+.toregistDiv:hover {
+	opacity: 0.6;
+}
+
+
 </style>
 </head>
 
 <body>
 	<%@ include file="/common/topDiv.jsp"%>
-	<div class="bg">
+	<div class="login_bg">
 		<div class="mainDiv">
-			<div class="div-signup">
-				<dl>
-					<dd>
-						<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,先随便看看</a>
-					</dd>
-				</dl>
-				<form method="post"
-					class="form-signup" autocomplete="off"
-					action="/user/login.do" accept-charset="UTF-8">
-					<dl>
-						<dd>
-							<input type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
-						</dd>
-					</dl>
-					<dl>
-						<dd>
-							<input type="password" data-autocheck-url="/signup_check/password" aria-label="Create a password" placeholder="Create a password" class="textfield" name="password">
-						</dd>
-					</dl>
-					<dl>
-						<dd>
-							<button type="submit" class="btn btn-signup">登录</button>
-						</dd>
-					</dl>
-				</form>
-				<dl>
-					<dd>
-						<a href="/regist.jsp" >还没有账号？点这里注册</a>
-					</dd>
-				</dl>
+			<div class="div-enter">
+			&nbsp;
 			</div>
 			<%@ include file="/common/index_words.jsp"%>
+			<div class="div-signup">
+				<div id="loginDiv" style="display: none; ">
+					<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
+						<dl>
+							<dd>
+								<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
+							</dd>
+						</dl>
+						<dl>
+							<dd>
+								<input type="password" data-autocheck-url="/signup_check/password" aria-label="Create a password" placeholder="Create a password" class="textfield" name="password">
+							</dd>
+						</dl>
+						<dl>
+							<dd>
+								<button type="submit" id="loginBtn" class="loginBtn btn btn-signup">登录</button>
+								<!-- <a href="javascript:void(0);" onclick="document.getElementById('submitBtn').click();" class="btn btn-signup btn-a">登录</a>
+								<button type="submit" id="submitBtn" style="display:none;"></button>
+								<a href="/regist.jsp" class="btn btn-signup btn-a">注册</a> -->
+							</dd>
+						</dl>
+					</form>
+				</div>
+				<div id="enterDiv" class="enterDiv">
+					<!-- 直接进入 -->
+					<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
+					<br>
+					<span style="font-size: 12px;">(旁门左道, 少走为妙)</span>
+					<div class="toregistDiv">
+						<a href="javascript:void(0);" onclick="showHide('loginDiv', 'enterDiv' );" >登录</a>
+						<a href="/regist.jsp" >注册</a>
+						<br>
+						<span style="font-size: 12px;">(人间正道是沧桑,沧桑的道路是注册)</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- /.container -->
@@ -90,30 +132,10 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
-	function createCommemorateDiv() {
-		if (!!"${commemorateDateTemp}" && "null" != "${commemorateDateTemp}") {
-			var maskContentDiv = $d("maskDiv").commonDialog();
-			var imgHtml = "<table width='100%' class='commemorateDiv'>";
-			imgHtml += "<tr>";
-			imgHtml += "<td rowspan='3'><img style='max-height:450px;' src='${commemorate.filePath}'></td>";
-			imgHtml += "<td>${commemorate.comments}</td>";
-			imgHtml += "</tr>";
-			// 底行
-			imgHtml += "<tr>";
-			imgHtml += "<td>";
-			imgHtml += "被查看次数：${commemorate.viewTimes eq '' ? 0 : commemorate.viewTimes} 被顶次数：<span id='topTimes_home'>${commemorate.topTimes}</span>";
-			imgHtml += "<br>";
-			imgHtml += "${createDate}";
-			imgHtml += "<br>";
-			imgHtml += '<a href="javascript:void(0);" class="topOnce" onclick="topOnce(\'${commemorate.id }\', \'topTimes_home\');">顶一下</a>';
-			imgHtml += "</td>";
-			imgHtml += "</tr>";
-			imgHtml += "</table>";
-			var imgObj = getObjFromHtml(imgHtml);
-			$d(maskContentDiv).append(imgObj);
-		}
-	}
-
-	createCommemorateDiv();
+function showHide(showid, hideid){
+	$("#"+showid).fadeIn();
+	$("#"+hideid).hide();
+}
 </script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>

@@ -42,6 +42,7 @@ CREATE TABLE `kol_comment` (
   `create_date` varchar(14) NOT NULL,
   `update_date` varchar(14) NOT NULL,
   `user_id` bigint(20) NOT NULL,
+  'user_ip' varchar(200),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -79,6 +80,7 @@ CREATE TABLE `kol_testimonials` (
   `file_id` varchar(20) DEFAULT NULL,
   `channel_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
+  'user_ip' varchar(200),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -120,6 +122,7 @@ CREATE TABLE `kol_commemorate_board` (
   `update_date` varchar(14) NOT NULL,
   `commemorate_date` varchar(8) DEFAULT NULL, -- 展示日期
   `top_times` bigint(20) DEFAULT 0, -- 被顶次数
+  'user_ip' varchar(200),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -159,8 +162,30 @@ CREATE TABLE `kol_testimonials_totop` (
   `file_id` varchar(20) DEFAULT NULL,
   `channel_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
+  'user_ip' varchar(200),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `kol_testimonials_totop` 置顶
+-- ----------------------------
+DROP TABLE IF EXISTS `kol_operate_tracking`;
+CREATE TABLE `kol_operate_tracking` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `browser_name` varchar(100),
+  `browser_version` varchar(20),
+  `operate_name` varchar(200) NOT NULL,
+  `operate_date` varchar(14) NOT NULL,
+  `current_page` varchar(100),
+  `user_agent` varchar(100),
+  `local_addr` varchar(50),
+  `remote_addr` varchar(50),
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 --------------------- TODO resource
 DROP TABLE IF EXISTS `t_contact`;

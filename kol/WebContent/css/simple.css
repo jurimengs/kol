@@ -1,40 +1,63 @@
+body{
+	margin: 0;
+}
 h1 {
 	font-family:"Microsoft Yahei";
 	color: #333;
 }
-.btn {
-	border: 0 none;
-	-moz-user-select: none;
-	cursor: pointer;
-	line-height: 20px;
-	font-weight: bold;
-	position: relative;
-	white-space: nowrap;
-}
 .btn-signup {
-	text-align: center; background-color: #60b044; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#8add6d, #60b044);
+	text-align: center; 
+	background-color: #60b044; 
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15); 
+	background-image: linear-gradient(#8add6d, #60b044);
 }
-.btn, input[type="text"], input[type="password"] {
-	width: 100%; border-radius: 5px; font-size: 16px; padding: 10px; margin-top: 10px;
+.btn {
+	border: 0px ; 
+	border-radius: 5px; 
+	font-size: 16px; 
+	padding: 10px; 
+	margin-top: 10px;
+}
+.btn-a {
+	text-decoration: none; color: #333;
+}
+input[type="text"], input[type="password"] {
+	border: 0px ;width: 92%; border-radius: 5px; font-size: 16px; padding: 10px; margin-top: 10px;
 }
 .form-signup {
-	width: 280px;
+	width: 100%;
 	right: 0px;
 }
 .div-signup {
-	float: right;
+	width: 250px;
+	position: relative;
+	padding: 20px;
+	background-color: #f7f7f7;
+	/* opacity:0.5; */
+}
+.div-enter {
+	
+	width: 250px;
 }
 .topDiv {
 	height: 60px;
 }
 .mainDiv {
-	width: 980px;
-	padding-top: 80px;
-	margin-left: 120px;
+	width: 100%;
+	padding-top: 65px;
+	position: relative;
+}
+.mainDiv div {
+	float: left;
 }
 	
 .bg {
 	background-color: #f7f7f7;
+}
+
+.login_bg {
+	background-color: #ccc;
+	height: 450px;
 }
 dd{
 	margin: 0px;

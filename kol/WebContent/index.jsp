@@ -122,4 +122,5 @@ function next(obj){
  */
 //setTimeout("enter()", 4000);
 </script>
+<script type="text/javascript" src="/js/listener.js"></script>
 </html>
