@@ -564,3 +564,19 @@ function getEvent(){
     }
     return null;
 }
+
+function getYYYYMMDD () {
+	// 当前日期
+	var cdate = new Date();
+	var Y = cdate.getFullYear();
+	var M = cdate.getMonth() + 1; // getMonth的值是0-11的
+	if(M <= 9) {
+		M = "0"+M;
+	}
+	var D = cdate.getDate();
+	if(D <= 9) {
+		D = "0"+D;
+	}
+	
+	return Y+M+D;
+};
