@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class UserDao extends BaseDao{
 	public void queryUserInfo(String sql, Map<Integer, Object> params){
 		try {
