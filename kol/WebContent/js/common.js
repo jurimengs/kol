@@ -580,3 +580,8 @@ function getYYYYMMDD () {
 	
 	return Y+M+D;
 };
+
+function getCurrentTimeMillis () {
+	// 当前日期
+	return new Date().getTime();
+};

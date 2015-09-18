@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.UUID"%>
 
-<!DOCTYPE html>
-<%@ include file="/common/common.jsp"%>
+<!doctype html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />    
 <meta name="format-detection" content="telephone=no" />  
 <title>管理货架</title>
-<link href="/www/css/shelf.css?v=2" rel="stylesheet" type="text/css">
+<link href="/www/css/shelf.css?v=3" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" charset="utf-8" src="/www/cordova.js"></script>
 <script type="text/javascript" charset="utf-8" src="/www/index.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/common.js?v=3"></script>
 
 <script type="text/javascript" charset="utf-8">
     function loadImage() {
@@ -53,7 +54,13 @@
             //获取本地图片并显示在屏幕
             navigator.camera.getPicture(onLoadImageLocalSuccess, onLoadImageFail, {
                 destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                                         // 剪裁后的图片不知道在哪里
+                quality: 50,
+                sourceType: 0,
+                allowEdit: true, // 剪裁框
+                targetWidth: 1000, 
+                targetHeight: 1000
             });
     	}catch(e) {
     		$("#errmsg").val(e);
@@ -62,9 +69,8 @@
     //本地图片选择成功后回调此函数
     function onLoadImageLocalSuccess(imageURI) {
     	try{
-
-            $("#getImageLocal").attr("src", imageURI);
-            $("#getImageLocal").show();
+    		var srcPath = imageURI.substring(0, imageURI.indexOf('?'));
+    		onLoadImageUploadSuccess(srcPath);
     	}catch(e) {
     		$("#errmsg").val(e);
     	}
@@ -87,6 +93,7 @@
     }
     //图片拍照成功后回调此函数
     function onLoadImageUploadSuccess(imageURI) {
+    	//alert(imageURI);
     	try{
 
             //此处执行文件上传的操作，上传成功后执行下面代码
@@ -109,7 +116,8 @@
                 	var fileName = imageURI.substring(startLocation, imageURI.length);
                     navigator.notification.progressStop();//停止进度条
                     var forSavePath = "/files/" + getYYYYMMDD()+"/"+fileName;
-                    var serverFileName = "http://192.168.22.171:7080"+ forSavePath;
+                    // v 是为了消除缓存
+                    var serverFileName = "http://192.168.22.171:7080"+ forSavePath +"?v="+getCurrentTimeMillis();
                     $("#exampPic").attr("src", serverFileName);
                     // 这个值是要保存到数据库的
                     $("#picPath").val(forSavePath);
@@ -135,54 +143,44 @@
 </head>
 
 <body>
-<!-- 
-<p>
-    <input type="button" value="本地图片" onclick="loadImageLocal();"/>
-    <img src="" id="getImageLocal" onclick="document.getElementById('imageLocalUrl').value=this.src;"  style="display: none;width: 120px;height: 120px;"/>
-</p>
-<p>
-    <input type="text" value="" id="imageLocalUrl" width="320"/>
-</p>
- -->
 <ul>
 	<li class="head clear">
-        <div class="top_module_left flo_left"><a href="javascript:void(0);" onclick="">返回</a></div>
-        <div class="top_module_f"><a href="javascript:void(0);" onclick="">编辑</a></div>
+        <div class="top_module_left flo_left"><a href="#">返回</a></div>
+        <div class="top_module_f">修改商品信息</div>
         <!--<div class="top_module_right"><a href="#">管理</a></div>-->
     </li>
     <li class="main_mod clear">
-    	<!--mod1-->
-    	<ul class="mod_public_whole  flo_left">
-        	<li class="marg_rig_6">
-            	<div class="pos_rel flo_left" >
-                	<div class="pos_obso inp_squre_sel"></div>
-                	<div class="squre_avter"><img onclick="alert(this.src); loadImageUpload();" id="exampPic" src="${goods.picPath}" width="100%" height="100%"></div>
-                </div>
-                <div class="pos_rel flo_right descrip_rig">
-                	<h5>${goods.goodsName}</h5>
-                    <font><span class="fen">￥</span>${goods.goodsPrice}<span class="fen"></span></font>
-                </div>
-                <div class="amount">
-                	<div class="flo_left"><a href="#"><img src="/www/images/plus_duck.png" width="15" height="15" ></a></div>
-                    <div class="amo_f">${goods.goodsCounts}</div>
-                    <div class="amo_right"><a href="#"><img src="/www/images/minus_gray.png" width="15" height="15"></a></div>
-                </div>
-				
+        <!--modify-->
+        <ul class="mod_public_auto_h flo_left">
+        	<li class="mod_line">商品价格<span class="clo_gray flo_right">${goods.goodsPrice}</span></li>
+            <li class="mod_line">数量<span class="clo_gray flo_right">${goods.goodsCounts}</span></li>
+            <li class="mod_pic">
+              <div class="flo_left">
+              	<img id="exampPic" onclick="alert(this.src);" src="${goods.picPath}" width="150" height="150">
+              </div> 
+              <div class="flo_left">
+              	<input onclick="loadImageLocal();" class="btn_local_pic" type="button" value="本地图片">
+              </div>
+              <div class="flo_right" style="margin-top:12px;cursor:pointer;">
+              	<img onclick="loadImageUpload();" src="/www/images/photo.png" width="43" height="35">
+              </div>
             </li>
-        </ul>
+        </ul><!--modify over-->
     </li>
     <li class="footer clear">
-    
-                <form action="/goods/save.do" method="post">
-                	<input type="hidden" id="id" name="id" value="${goods.id}"> 
-                	<input type="hidden" id="goodsName" name="goodsName" value="${goods.goodsName}"> 
-                	<input type="hidden" id="picPath" name="picPath" value="${goods.picPath}"> 
-                	<input type="hidden" id="goodsCounts" name="goodsCounts" value="${goods.goodsCounts}"> 
-                	<input type="hidden" id="goodsPrice" name="goodsPrice" value="${goods.goodsPrice}"> 
-    	<div class="flo_left" style="margin-left:10px;"><input name="" type="radio" value="全选">全选 </div><div class="flo_right" style="margin-right:10px;"><input name="" class="btn_change_val" type="text" value="一键改价" onfocus="if (value =='一键改价'){value =''}" onblur="if (value ==''){value='一键改价'}"><strong style="color:#F30;">￥299.<span class="fen">00</span></strong>
-    	<input name="" class="btn_collect" type="submit" value="收款(2)"></div>
-                </form>
-                
+    	<div class="flo_left" style="margin-left:10px;">
+    		<input name="" class="btn_public btn_cancel"type="button" value="取消">
+    	</div>
+    	<div class="flo_right" style="margin-right:10px;">
+    		<form action="/goods/save.do" method="post">
+               	<input type="hidden" id="id" name="id" value="${goods.id}"> 
+               	<input type="hidden" id="goodsName" name="goodsName" value="${goods.goodsName}"> 
+               	<input type="hidden" id="picPath" name="picPath" value="${goods.picPath}"> 
+               	<input type="hidden" id="goodsCounts" name="goodsCounts" value="${goods.goodsCounts}"> 
+               	<input type="hidden" id="goodsPrice" name="goodsPrice" value="${goods.goodsPrice}">
+               	<input name="" class="btn_public btn_sunmit" type="submit" value="提交"> 
+            </form>
+    	</div>
     </li>
 </ul>
 
