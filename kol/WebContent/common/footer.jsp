@@ -53,8 +53,8 @@
 				</span>
 			</li>
 			<li>
-				<a href="javascript:void(0);">
-					友情链接
+				<a href="/authors.jsp">
+					本站团队
 				</a>
 				<span>
 					|
