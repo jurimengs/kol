@@ -36,10 +36,10 @@ public class ChannelService {
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, channelId);
 		params.put(2, Integer.valueOf(limit));
-		String getTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where channel_id = ? order by a.id desc limit ?";
+		String getTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where channel_id = ? and a.is_top is null order by a.id desc limit ?";
 		if(StringUtils.isEmpty(channelId)){
 			params = new HashMap<Integer, Object>();
-			getTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id order by id desc limit ?";
+			getTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where a.is_top is null order by a.id desc limit ?";
 			params.put(1, Integer.valueOf(limit));
 		}
 		JSONArray testimonials = commonDao.queryJSONArray(getTestimonialsByChannelId_limit, params, secretColumn);
@@ -62,13 +62,13 @@ public class ChannelService {
 			testimonials = (JSONArray)dataTemp;
 			return testimonials;
 		}
-		String getTopedTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials_totop a left join kol_testimonials_files b on a.file_id=b.id where channel_id = ? order by a.id desc limit 3";
+		String getTopedTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where channel_id = ? and a.is_top='0' order by a.id desc limit 3";
 		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, channelId);
 		if(StringUtils.isEmpty(channelId)){
 			params = new HashMap<Integer, Object>();
-			getTopedTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials_totop a left join kol_testimonials_files b on a.file_id=b.id order by id desc limit 3";
+			getTopedTestimonialsByChannelId_limit = "select (select count(1) from kol_comment c where c.testimonials_id = a.id) comment_counts, a.*, b.file_path from kol_testimonials a left join kol_testimonials_files b on a.file_id=b.id where a.is_top='0' order by a.id desc limit 3";
 		}
 		testimonials = commonDao.queryJSONArray(getTopedTestimonialsByChannelId_limit, params, secretColumn);
 		CommonContainer.saveData(CommonConstant.TOP_TESTIMONIAL+channelId, testimonials);

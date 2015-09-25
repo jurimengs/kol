@@ -75,7 +75,7 @@ public class CommonDao extends BaseDao {
 	}
 
 	public JSONArray queryJSONArray(String sql, Map<Integer, Object> params, List<String> secretColumn) {
-		JSONArray list = null;
+		JSONArray list = new JSONArray();
 		try {
 			list = queryList(sql, params, secretColumn);
 		} catch (SQLException e) {

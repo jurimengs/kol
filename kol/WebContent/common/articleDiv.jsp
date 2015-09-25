@@ -4,15 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <article>
-	<div class="zhuti-bar <c:if test="${tms.totop eq '0'}">totop</c:if>">
+	<div class="zhuti-bar <c:if test="${tms.isTop eq '0'}">totop</c:if>">
 		<a href="/comments/queryComments.do?testimonialsId=${tms.id }" class="zhuti">
 			<strong>标题:</strong>${tms.title }<br />
 			<c:if test="${! empty tms.filePath }">
 				<img class="testim_img" src="${tms.filePath }" />
 			</c:if>
 		</a>
+		<c:if test="${tms.isTop ne '0'}">
 		<div class="contents">
-			<c:if test="${tms.totop ne '0'}">
 			<strong>内容:</strong>
 			<c:set var="contentsLength" value="${fn:length(tms.contents)}" />
 			<c:set var="hideWordsLength" value="60" />
@@ -44,7 +44,7 @@
 			<%-- <a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
 				查看所有评价
 			</a> --%>
-			</c:if>
 		</p>
+		</c:if>
 	</div>
 </article>

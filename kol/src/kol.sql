@@ -80,6 +80,7 @@ CREATE TABLE `kol_testimonials` (
   `file_id` varchar(20) DEFAULT NULL,
   `channel_id` bigint(20) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
+  `is_top` varchar(2) DEFAULT NULL, -- 是否置顶  0: 是 
   'user_ip' varchar(200),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

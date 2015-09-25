@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -50,12 +51,20 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 //		JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
 //			String userId = sessionUser.getString("id");
 		
+//		String isTop = request.getParameter("isTop");// 实际参数的值是testimonialsId的3dex加密
 		String testimonialsId = request.getParameter("testimonialsId");// 实际参数的值是testimonialsId的3dex加密
 		byte[] srcBytes = DesUtil.decryptMode(ByteUtil.hex2Bytes(testimonialsId));
 		testimonialsId = new String(srcBytes, "UTF-8");
 		
 		CommentsService commentsService = (CommentsService)SpringUtil.getBean("commentsService");
-		JSONObject res = commentsService.getCommentsByTesTimonialId(testimonialsId);
+		JSONObject res = new JSONObject();
+//		if(StringUtils.isNotEmpty(isTop) && isTop.equals("0")) {
+//			// 置顶帖
+//			res = commentsService.getCommentsByTopTesTimonialId(testimonialsId);
+//		} else {
+			res = commentsService.getCommentsByTesTimonialId(testimonialsId);
+//		}
+		
 		request.setAttribute("res", res);
 
 		this.forward("/comments/comments.jsp", request, response);

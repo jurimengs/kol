@@ -61,4 +61,22 @@ public class CommentsService {
 		res.put("commentsArray", commentsArray);
 		return res;
 	}
+	
+	public JSONObject getCommentsByTopTesTimonialId(String id){
+		
+		TestimonialsService ts = (TestimonialsService) SpringUtil.getBean("testimonialsService");
+		
+		JSONObject res = new JSONObject();
+		JSONObject tesTimonial = ts.getTopTestimonialById(id);
+		res.put("tesTimonial", tesTimonial);
+		
+		JSONArray commentsArray = new JSONArray();
+		
+		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		Map<Integer , Object> params = new HashMap<Integer, Object>();
+		params.put(1, Integer.valueOf(id));
+		commentsArray = commonDao.queryJSONArray(sql_getCommentsById, params, null);
+		res.put("commentsArray", commentsArray);
+		return res;
+	}
 }
