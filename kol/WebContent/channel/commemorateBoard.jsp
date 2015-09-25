@@ -50,7 +50,7 @@
 					</div>
 					<%-- <div><img alt="" src="${commemorate.filePath }"></div> --%>
 					<br />
-					<a href="javascript:void(0);" class="topOnce" onclick="topOnce('${commemorate.id }', 'topTimes_${ind.index }');">顶一下</a>
+					<a href="javascript:void(0);" class="topOnce" onclick="topOnce('${commemorate.id }', 'topTimes_${ind.index }');">疯狂顶顶顶</a>
 				</h1>
 			</c:forEach>
 			<div class="clear"></div>
