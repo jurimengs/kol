@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.org.exception.SvcException;
 
-//@Repository
+@Repository
 public class CommonDao extends BaseDao {
 	
 	/**

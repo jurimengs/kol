@@ -37,48 +37,23 @@
 
 <body>
 	<%@ include file="/common/menu.jsp"%>
-	<%-- <div id="banner">
-		<div id="slideBox" class="slideBox">
-			<div class="bd">
-				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg,images/banner4.jpg,images/banner5.jpg', ',') }" />
-					<c:forEach var="banner" items="${bannerArray }">
-						<li>
-							<a href="javascript:void(0);">
-								<img src="/${banner}">
-							</a>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-	</div> --%>
 	<div class="container">
 		<div class="comwidth">
-			<!-- <h1>
-				感知生活<span>100%</span>了解您、<span>No.1</span>
-				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
-			</h1> -->
 			<section>
 			<div class="h1style zhuti-bar">
-			<span>坚强的人</span>不在人前流泪， 坚强的人不在人前诉苦， 坚强的人承受所有的压力，在夜深人静的时候默默擦拭伤口。<span>但是再坚强的人</span>，也需要一个懂你的人来听你倾诉， 让我成为那个懂你的人， 我是<span>人生百科</span>--本站献给所有为梦想拼搏在一线的互联网人.
-				<!-- 人生的每一次经历，<span>都是</span>一笔宝贵的财富，提高你的<span>人生</span>高度，
-				让<em><span> 人生百科 </span></em>记录你的足迹，留下属于你的每时每刻 -->
+				策划参与：<span>千秋</span>、<span>神棍</span>、<span>张洲</span><br><br><br><br><br>
+				设计参与：<span>神棍</span>、<span>张洲</span><br><br><br><br><br>
+				美工参与：<span>神棍</span>、<span>云儿</span><br><br><br><br><br>
+				期待更多的朋友加入你的家庭！
+				如有任何建议或意见，请联系jurimengs@163.com
 			</div>
 			</section>
-			<!-- section one -->
 			<section class="first left">
-				<c:forEach var="tms" items="${testimonialsArray }" varStatus="index">
-					<%@ include file="/common/articleDiv.jsp"%><br />
-				</c:forEach>
 			</section>
 			<div class="clear">
 			</div>
-			<%@ include file="/common/page.jsp"%> 
 		</div>
 	</div>
-	<%@ include file="/common/footer.jsp"%> 
-	<%@ include file="/common/floatblock.jsp"%> 
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post" >
