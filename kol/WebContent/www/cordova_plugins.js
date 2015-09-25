@@ -427,6 +427,14 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/mytest/test.js",
+        "id": "myplugin.reflect",
+        "clobbers": [  
+             "navigator.myplugin"  
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.UUID"%>
 
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -10,12 +9,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />    
 <meta name="format-detection" content="telephone=no" />  
 <title>管理货架</title>
-<link href="/www/css/shelf.css?v=3" rel="stylesheet" type="text/css">
-
-<script type="text/javascript" charset="utf-8" src="/www/cordova.js"></script>
+<%@ include file="/common/common.jsp"  %>
+<link href="/www/css/shelf.css?v=<%=b %>" rel="stylesheet" type="text/css">
+<script type="text/javascript" charset="utf-8" src="/www/cordova.js?v=<%=b %>"></script>
 <script type="text/javascript" charset="utf-8" src="/www/index.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/common.js?v=3"></script>
+<script type="text/javascript" charset="utf-8" src="/js/common.js?v=<%=b %>"></script>
 
 <script type="text/javascript" charset="utf-8">
     function loadImage() {
@@ -106,7 +105,8 @@
                 if (progressEvt.lengthComputable) {
                     navigator.notification.progressValue(Math.round(( progressEvt.loaded / progressEvt.total ) * 100));
                 }
-            }
+            };
+            
             var src = imageURI;
             // TODO 这个进度提示应该弄成弹出层
             navigator.notification.progressStart("提醒", "当前上传进度");
@@ -131,12 +131,8 @@
     	}
     }
     
-    function openUrl (url) {
-    	window.location.href = url;
-    }
-    
-    function loadUrl(url){
-    	navigator.app.loadUrl(url);
+    function setValTo(aimId, v){
+    	$("#"+aimId).val(v);
     }
 </script>
 
@@ -152,11 +148,12 @@
     <li class="main_mod clear">
         <!--modify-->
         <ul class="mod_public_auto_h flo_left">
-        	<li class="mod_line">商品价格<span class="clo_gray flo_right">${goods.goodsPrice}</span></li>
-            <li class="mod_line">数量<span class="clo_gray flo_right">${goods.goodsCounts}</span></li>
+        	<li class="mod_line">商品名称<span class="clo_gray flo_right"><input class="short_input" onkeyup="setValTo('goodsName', this.value)" type="text" value="${goods.goodsName}" ></span></li>
+        	<li class="mod_line">商品价格<span class="clo_gray flo_right"><input class="short_input" onkeyup="setValTo('goodsPrice', this.value)" type="text" value="${goods.goodsPrice}" ></span></li>
+            <li class="mod_line">数量<span class="clo_gray flo_right"><input class="short_input" onkeyup="setValTo('goodsCounts', this.value)" type="text" value="${goods.goodsCounts}" ></span></li>
             <li class="mod_pic">
               <div class="flo_left">
-              	<img id="exampPic" onclick="alert(this.src);" src="${goods.picPath}" width="150" height="150">
+              	<img id="exampPic" src="${goods.picPath}" width="150" height="150">
               </div> 
               <div class="flo_left">
               	<input onclick="loadImageLocal();" class="btn_local_pic" type="button" value="本地图片">
@@ -169,7 +166,7 @@
     </li>
     <li class="footer clear">
     	<div class="flo_left" style="margin-left:10px;">
-    		<input name="" class="btn_public btn_cancel"type="button" value="取消">
+    		<input name="" onclick="history.back();" class="btn_public btn_cancel" type="button" value="取消">
     	</div>
     	<div class="flo_right" style="margin-right:10px;">
     		<form action="/goods/save.do" method="post">

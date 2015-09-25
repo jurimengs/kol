@@ -585,3 +585,105 @@ function getCurrentTimeMillis () {
 	// 当前日期
 	return new Date().getTime();
 };
+
+
+
+var pageComponent = {
+	operateFlag : null,
+	checkedClassFlag : "checkbox_div",
+	totalMoneyShowIn : "totalPrice",
+	totalMoney: 0,
+	init : function(){
+		this.totalMoney = 0;
+		this.checkedClassFlag = "checkbox_div";
+		this.totalMoneyShowIn = "totalPrice";
+		this.operateFlag = 0;
+		// 选择框全部隐藏
+		var inp_squre_sel = $(".inp_squre_sel");
+		inp_squre_sel.hide();
+		inp_squre_sel.removeClass(this.checkedClassFlag);
+		inp_squre_sel.css("background-image", "url(/www/images/selected-grey.png)");
+	},
+	multiChoose : function (operateFlag){
+		this.init();
+		this.operateFlag = operateFlag;
+		var all_inp_squre_sel = $(".inp_squre_sel");
+		
+		if("delete" == operateFlag) {
+			$("#recieveMoney").hide();
+			$("#upToShelf").hide();
+			$("#downFromShelf").hide();
+			$("#deleteBtn").show();
+		} else if("recieveMoney" == operateFlag) {
+			$("#recieveMoney").show();
+			$("#upToShelf").hide();
+			$("#deleteBtn").hide();
+			$("#downFromShelf").hide();
+		} else if("upToShelf" == operateFlag) {
+			$("#recieveMoney").hide();
+			$("#upToShelf").show();
+			$("#deleteBtn").hide();
+			$("#downFromShelf").hide();
+		} else if("downFromShelf" == operateFlag) {
+			$("#recieveMoney").hide();
+			$("#upToShelf").hide();
+			$("#deleteBtn").hide();
+			$("#downFromShelf").show();
+		} else if("edit" == operateFlag) {
+			$("#recieveMoney").hide();
+			$("#upToShelf").hide();
+			$("#deleteBtn").hide();
+			$("#downFromShelf").hide();
+			all_inp_squre_sel.css("background-image","url(/www/images/edit.png)");
+		}
+		all_inp_squre_sel.show();
+	},
+	/**
+	 * 如果没有任何操作的情况下, 跳转到
+	 * @param url
+	 */
+	goodsDivClick : function (url, aimObj){
+		if(this.operateFlag == "delete" || this.operateFlag == "recieveMoney" || this.operateFlag == "upToShelf" || this.operateFlag == "downFromShelf") {
+			var inp_squre_sel = $(aimObj).find(".inp_squre_sel");
+			//alert(inp_squre_sel.attr("class"));
+			if(inp_squre_sel.attr("class").indexOf(this.checkedClassFlag) > 0) {
+				// 去除
+				//如果操作是收款
+				if(this.operateFlag == "recieveMoney") {
+					var toAddPrice = $(aimObj).find(".goodsPrice").text();
+					this.minusMoney(toAddPrice);
+					this.setValueTo(this.totalMoneyShowIn);
+				}
+				inp_squre_sel.removeClass(this.checkedClassFlag);
+				inp_squre_sel.css("background-image", "url(/www/images/selected-grey.png)");
+			} else {
+				// 添加
+				//如果操作是收款
+				if(this.operateFlag == "recieveMoney") {
+					var toAddPrice = $(aimObj).find(".goodsPrice").text();
+					this.addMoney(toAddPrice);
+					this.setValueTo(this.totalMoneyShowIn);
+				}
+				inp_squre_sel.addClass(this.checkedClassFlag);
+				inp_squre_sel.css("background-image", "url(/www/images/selected.png)");
+			}
+			return ;
+		}
+		if(this.operateFlag == "edit"){
+			window.location.href = url;
+		}
+	},
+	addMoney : function(money){
+		this.totalMoney += money;
+		return this.totalMoney;
+	},
+	minusMoney : function(money){
+		this.totalMoney -= money;
+		return this.totalMoney;
+	},
+	setValueTo : function(aimId){
+		document.getElementById(aimId).value = this.totalMoney;
+	}
+	
+};
+
