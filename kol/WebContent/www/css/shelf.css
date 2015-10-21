@@ -19,7 +19,7 @@ img{border:0px;}
 }
 .head a{ color:#fff; text-decoration:none; cursor:pointer;}
 .top_module_f{ width:100%; text-align:center; display:block; font-weight:bold; position:absolute;}
-.top_module_left{ width:60px; text-align:center; background:url(/www/images/top_back.png) no-repeat left center; text-indent:15px; margin-left:10px;cursor:pointer;}
+.top_module_left{position:relative; z-index: 1; width:60px; text-align:center; background:url(/www/images/top_back.png) no-repeat left center; text-indent:15px; margin-left:10px;cursor:pointer;}
 .top_module_right{position:absolute;width:60px;right:0px;}
 
 /***main***/

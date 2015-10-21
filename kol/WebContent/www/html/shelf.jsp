@@ -15,7 +15,7 @@
 <%@ include file="/common/common.jsp"%>
 <link href="/www/css/shelf.css?v=<%=b %>" rel="stylesheet" type="text/css">
 <script type="text/javascript" charset="utf-8" src="/www/cordova.js?v=<%=b %>"></script>
-<script type="text/javascript" charset="utf-8" src="/www/index.js"></script>
+<script type="text/javascript" charset="utf-8" src="/www/js/index.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/common.js?v=<%=b %>"></script>
 
@@ -46,15 +46,15 @@ function myTest(){
         <div class="top_module_left flo_left"><a href="#">返回</a></div>
         <div class="top_module_f"><a href="javascript:void(0);" onclick="">货架管理</a></div>
         <div class="top_module_right">
-        	<a href="javascript:void(0);" onclick="showHide('menuDiv')">操作</a>
+        	<a href="javascript:void(0);" onclick="pageComponent.showHide('menuDiv')">操作</a>
         </div>
         <div id="menuDiv" class="drop_down">
         	<ul>
-            	<li onclick="pageComponent.multiChoose('delete');showHide('menuDiv');" class="drop_text"><a href="#">删除</a></li> 
-                <li onclick="pageComponent.multiChoose('recieveMoney');showHide('menuDiv');" class="drop_text"><a href="#">收款</a></li> 
-                <li onclick="pageComponent.multiChoose('upToShelf');showHide('menuDiv');" class="drop_text"><a href="#">上架</a></li> 
-                <li onclick="pageComponent.multiChoose('downFromShelf');showHide('menuDiv');" class="drop_text"><a href="#">下架</a></li> 
-                <li onclick="pageComponent.multiChoose('edit');showHide('menuDiv');" class="drop_text"><a href="#">编辑</a></li> 
+            	<li onclick="pageComponent.multiChoose('delete');" class="drop_text"><a href="#">删除</a></li> 
+                <li onclick="pageComponent.multiChoose('recieveMoney');" class="drop_text"><a href="#">收款</a></li> 
+                <li onclick="pageComponent.multiChoose('upToShelf');" class="drop_text"><a href="#">上架</a></li> 
+                <li onclick="pageComponent.multiChoose('downFromShelf');" class="drop_text"><a href="#">下架</a></li> 
+                <li onclick="pageComponent.multiChoose('edit');" class="drop_text"><a href="#">编辑</a></li> 
             </ul>
         </div>
     </li>
@@ -62,7 +62,7 @@ function myTest(){
     	<!--mod1-->
     	<c:forEach var="goods" items="${goodsArr }" varStatus="ci">
 	    	<ul class="mod_public  flo_left">
-	        	<li class="marg_rig_6" onclick="pageComponent.goodsDivClick('/goods/edit.do?goodsId=${goods.id}', this)">
+	        	<li class="good_li marg_rig_6" onclick="pageComponent.goodsDivClick('/goods/edit.do?goodsId=${goods.id}', this)">
 	            	<div class="pos_rel flo_left" >
 	                	<div class="pos_obso inp_squre_sel"></div>
 	                	<div class="squre_avter"><img src="${goods.picPath}" width="54" height="54"></div>
@@ -80,8 +80,8 @@ function myTest(){
 	        </ul><!--mod1 over-->
         </c:forEach>
     </li>
-    <li class="footer clear">
-    	<div class="flo_left" style="margin-left:10px;"><input name="" type="radio" value="全选">全选 </div>
+    <li class="footer clear" id="footerLi" >
+    	<div class="flo_left" style="margin-left:10px;"><input onclick="pageComponent.checkAll('good_li');" name="" type="checkbox" value="全选">全选 </div>
     	<div id="recieveMoney" class="flo_right" style="margin-right:10px;">
     		<input id="totalPrice" class="short_input" name="" type="text">
     		<input name="" class="btn_public btn_collect" type="button" onclick="myTest();" value="收款">
@@ -100,14 +100,5 @@ function myTest(){
 <a href="javascript:void(0);" onclick="myTest()">myTest</a>
 </body>
 <script type="text/javascript">
-function showHide(aimId){
-	var aimObj = $("#"+ aimId);
-	//alert(aimObj.css("display"));
-	if(aimObj.css("display") != "none") {
-		$("#"+ aimId).hide();
-	} else {
-		$("#"+ aimId).show();
-	}
-}
 </script>
 </html>

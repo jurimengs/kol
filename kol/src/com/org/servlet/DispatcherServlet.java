@@ -87,7 +87,7 @@ public class DispatcherServlet extends HttpServlet {
 			if(StringUtils.isEmpty(mtdName)){
 				aim.post(request, response);
 			} else {
-				Method m = aim.getClass().getMethod(mtdName, new Class<?>[]{HttpServletRequest.class, HttpServletResponse.class});
+				Method m = aim.getClass().getDeclaredMethod(mtdName, new Class<?>[]{HttpServletRequest.class, HttpServletResponse.class});
 				m.invoke(aim, request, response);
 			}
 			//流程执行完，更新tokenParam

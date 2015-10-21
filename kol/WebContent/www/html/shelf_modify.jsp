@@ -12,7 +12,7 @@
 <%@ include file="/common/common.jsp"  %>
 <link href="/www/css/shelf.css?v=<%=b %>" rel="stylesheet" type="text/css">
 <script type="text/javascript" charset="utf-8" src="/www/cordova.js?v=<%=b %>"></script>
-<script type="text/javascript" charset="utf-8" src="/www/index.js"></script>
+<script type="text/javascript" charset="utf-8" src="/www/js/index.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/common.js?v=<%=b %>"></script>
 
@@ -110,14 +110,14 @@
             var src = imageURI;
             // TODO 这个进度提示应该弄成弹出层
             navigator.notification.progressStart("提醒", "当前上传进度");
-            ft.upload(imageURI, encodeURI('http://192.168.22.171:7080/upload.do'), function () {
+            ft.upload(imageURI, encodeURI('http://192.168.22.171:8880/upload.do'), function () {
             	try {
             		var startLocation = imageURI.lastIndexOf("/")+1;
                 	var fileName = imageURI.substring(startLocation, imageURI.length);
                     navigator.notification.progressStop();//停止进度条
                     var forSavePath = "/files/" + getYYYYMMDD()+"/"+fileName;
                     // v 是为了消除缓存
-                    var serverFileName = "http://192.168.22.171:7080"+ forSavePath +"?v="+getCurrentTimeMillis();
+                    var serverFileName = "http://192.168.22.171:8880"+ forSavePath +"?v="+getCurrentTimeMillis();
                     $("#exampPic").attr("src", serverFileName);
                     // 这个值是要保存到数据库的
                     $("#picPath").val(forSavePath);
@@ -140,8 +140,10 @@
 
 <body>
 <ul>
-	<li class="head clear">
-        <div class="top_module_left flo_left"><a href="#">返回</a></div>
+	<li class="head clear" >
+        <div onclick="pageComponent.back();" class="top_module_left flo_left">
+	        <a href="javascript:void(0);">返回</a>
+        </div>
         <div class="top_module_f">修改商品信息</div>
         <!--<div class="top_module_right"><a href="#">管理</a></div>-->
     </li>
@@ -153,7 +155,7 @@
             <li class="mod_line">数量<span class="clo_gray flo_right"><input class="short_input" onkeyup="setValTo('goodsCounts', this.value)" type="text" value="${goods.goodsCounts}" ></span></li>
             <li class="mod_pic">
               <div class="flo_left">
-              	<img id="exampPic" src="${goods.picPath}" width="150" height="150">
+              	<img id="exampPic" src="${goods.picPath}" onclick="alert(this.src);" width="150" height="150">
               </div> 
               <div class="flo_left">
               	<input onclick="loadImageLocal();" class="btn_local_pic" type="button" value="本地图片">
