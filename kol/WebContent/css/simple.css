@@ -1,5 +1,11 @@
 body{
 	margin: 0;
+	padding:0;
+	border:0;
+	outline:0;
+	vertical-align:baseline;
+	background:transparent;
+	font-family:"Microsoft Yahei",Arial,Helvetica,sans-serif;
 }
 h1 {
 	font-family:"Microsoft Yahei";
@@ -61,4 +67,54 @@ input[type="text"], input[type="password"] {
 }
 dd{
 	margin: 0px;
+}
+
+
+
+
+.div_nav {
+	height: 70px; 
+	/* background-color: #eee; */
+}
+.div_nav {
+	padding-left: 152px;
+}
+.div_nav ul, li {
+	margin:12px 53px 0 0; padding:0; list-style-type:none; float: left; color: #666666; font-size:18px;
+}
+/* 登录按钮样式 导航激活样式 */
+.login_li, .li_active {
+	color: #389cdb;
+}
+.login_li {
+	font-size:14px; cursor: pointer;
+}
+/* 导航上方的小logo */
+.logo_small{
+	width: 46px; height: 46px; background: url(../images/logo_small.png) no-repeat; margin-top: -12px;
+}
+
+/* main */
+.div_main {
+	height: 585px; background: #d5d5d5;
+}
+
+.div_main .div_cup {
+	height: 100%; background: url(../images/cup.png) no-repeat right; width: 554px; float: right; margin-right: 20px;
+}
+
+.div_main .div_main_words {
+	height: 100%; float: left; margin: 152px 0 0 152px; 
+}
+
+.td_words_title {
+	font-size: 52px; color: #333333;
+}
+
+.table_main_words {
+	font-size: 16px; color: #5c5d5d;
+}
+
+.span_words_content_a {
+	color: #ff9600;
 }
