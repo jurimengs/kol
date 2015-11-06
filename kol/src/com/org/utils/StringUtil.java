@@ -910,4 +910,7 @@ public class StringUtil {
 
 		return newFieldName;
 	}
+    public static Long getTimestamp(){
+    	return new Date().getTime()/1000;
+    } 
 }
