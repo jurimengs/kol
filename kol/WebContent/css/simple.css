@@ -82,25 +82,25 @@ dd{
 .div_nav ul, li {
 	margin:12px 53px 0 0; padding:0; list-style-type:none; float: left; color: #666666; font-size:18px;
 }
-/* µÇÂ¼°´Å¥ÑùÊ½ µ¼º½¼¤»îÑùÊ½ */
+/* ï¿½ï¿½Â¼ï¿½ï¿½Å¥ï¿½ï¿½Ê½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ */
 .login_li, .li_active {
 	color: #389cdb;
 }
 .login_li {
 	font-size:14px; cursor: pointer;
 }
-/* µ¼º½ÉÏ·½µÄÐ¡logo */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ð¡logo */
 .logo_small{
 	width: 46px; height: 46px; background: url(../images/logo_small.png) no-repeat; margin-top: -12px;
 }
 
 /* main */
 .div_main {
-	height: 585px; background: #d5d5d5;
+	height: 485px; background: #d5d5d5;
 }
 
 .div_main .div_cup {
-	height: 100%; background: url(../images/cup.png) no-repeat right; width: 554px; float: right; margin-right: 20px;
+	height: 100%; background: url(../images/cup.png) no-repeat; width: 554px; position: relative; left: 680px; margin-right: 20px;
 }
 
 .div_main .div_main_words {

@@ -41,9 +41,10 @@
 		<div class="comwidth">
 			<section>
 			<div class="h1style zhuti-bar">
-				策划参与：<span>千秋</span>、<span>神棍</span>、<span>张洲</span><br><br><br><br><br>
-				设计参与：<span>神棍</span>、<span>张洲</span><br><br><br><br><br>
-				美工参与：<span>神棍</span>、<span>云儿</span><br><br><br><br><br>
+				<div>策划参与：</div><span>千秋</span>、<span>张洲</span>、<span>神棍</span><br><br><br><br><br>
+				<div>设计参与：</div><span>张洲</span>、<span>神棍</span><br><br><br><br><br>
+				<div>UI参与：</div><span>张洲</span>、<span>神棍</span><br><br><br><br><br>
+				(排名一定分先后－－排在前面的总是该领域的大牛)
 				期待更多的朋友加入你的家庭！
 				如有任何建议或意见，请联系jurimengs@163.com
 			</div>

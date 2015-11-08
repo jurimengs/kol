@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<%@ include file="/common/common.jsp"%>
 <html>
+<%@ include file="/common/common.jsp"%>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,102 +40,42 @@
 	}
 }
 
-.loginBtn {
-	width: 100%;
-}
-
-.div-signup div {
-	width: 100%;
-}
-
-#loginDiv {
-	height: 280px;
-}
-
-.enterDiv {
-	height: 180px;
-	margin-top: 100px;
-	text-align: center;
-}
-
-.enterDiv a {
-	text-decoration: none;
-}
-
-.toregistDiv {
-	margin-top: 100px;
-	text-align: center;
-	opacity: 0.3;
-}
-
-.toregistDiv:hover {
-	opacity: 0.6;
-}
-
-
 </style>
 </head>
 
 <body>
 	<div id="nav" class="div_nav">
 		<!-- 边距152px -->
+		 
 		<ul>
-			<li>首页</li>
+			<li class="li_active"><div class="logo_small"></div></li>
+			<li class="li_active">首页</li>
 			<li>纪念板</li>
 			<li>先吐为快</li>
 			<li>猜猜我是谁</li>
 			<li>看看别人说</li>
 			<li>加入我们</li>
+			<li class="login_li" onclick='formTo("channelForm", "/user/toLogin.do");'>登录网页版 >></li>
 		</ul>
-		<div onclick='formTo("channelForm", "/user/toLogin.do");'>登录网页版 >></div>
 	</div>
-	
-	
-	<%-- <%@ include file="/common/topDiv.jsp"%>
-	<div class="login_bg">
-		<div class="mainDiv">
-			<div class="div-enter">
-			&nbsp;
-			</div>
-			<%@ include file="/common/index_words.jsp"%>
-			<div class="div-signup">
-				<div id="loginDiv" style="display: none; ">
-					<form method="post" class="form-signup" autocomplete="off" action="/user/login.do" accept-charset="UTF-8">
-						<dl>
-							<dd>
-								<input onclick="" type="text" autofocus="" data-autocheck-url="/signup_check/username" aria-label="Pick a username" placeholder="Pick a username" class="textfield" name="loginName">
-							</dd>
-						</dl>
-						<dl>
-							<dd>
-								<input type="password" data-autocheck-url="/signup_check/password" aria-label="Create a password" placeholder="Create a password" class="textfield" name="password">
-							</dd>
-						</dl>
-						<dl>
-							<dd>
-								<button type="submit" id="loginBtn" class="loginBtn btn btn-signup">登录</button>
-							</dd>
-						</dl>
-					</form>
-				</div>
-				<div id="enterDiv" class="enterDiv">
-					<!-- 直接进入 -->
-					<a href="javascript:void(0);" onclick="turnToIndex();" >不登录,直接进入</a>
-					<br>
-					<span style="font-size: 12px;">(旁门左道, 少走为妙)</span>
-					<div class="toregistDiv">
-						<a href="javascript:void(0);" onclick="showHide('loginDiv', 'enterDiv' );" >登录</a>
-						<a href="/regist.jsp" >注册</a>
-						<br>
-						<span style="font-size: 12px;">(人间正道是沧桑,沧桑的道路是注册)</span>
-					</div>
-				</div>
-			</div>
+	<div id="maindiv" class="div_main">
+		<div class="div_main_words">
+			<table class="table_main_words" cellpadding="3" cellspacing="0">
+				<tr><td colspan="2" class="td_words_title">人生百科 - 放松你我他</td></tr>
+				<tr><td class="span_words_content_a">人生百科</td><td >互联网人的网上家园</td></tr>
+				<tr><td >先吐为快</td><td >在这里没有什么不能明言</td></tr>
+				<tr><td >纪念板</td><td >这里的我们,都会为你的纪念点赞</td></tr>
+				<tr><td >猜猜我是谁</td><td >留下点蛛丝马迹, 让他们快乐的猜翻天</td></tr>
+			</table>
+		</div>
+		<div class="div_cup">
 		</div>
 	</div>
-	<!-- /.container -->
-	<!-- <a href="http://www.alexa.cn">ALEXA</a> -->
-	<div class="marketing-section-depth"></div> --%>
+	<div id="div_foot">
+
+	</div>
+
+	<br />
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post">
