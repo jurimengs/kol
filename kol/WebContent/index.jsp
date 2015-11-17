@@ -31,6 +31,7 @@
 <![endif]-->
 <!--修复IE6下PNG图片背景透明-->
 <style type="text/css">
+a {text-decoration: none; }
 
 @media screen and (max-width: 600px) {
 	.mainDiv {
@@ -48,8 +49,8 @@
 		<!-- 边距152px -->
 		 
 		<ul>
-			<li class="li_active"><div class="logo_small"></div></li>
-			<li class="li_active">首页</li>
+			<li ><div class="logo_small"></div></li>
+			<li class="li_active"><a href="/index.jsp">首页</a></li>
 			<li>纪念板</li>
 			<li>先吐为快</li>
 			<li>猜猜我是谁</li>
@@ -61,9 +62,8 @@
 	<div id="maindiv" class="div_main">
 		<div class="div_main_words">
 			<table class="table_main_words" cellpadding="3" cellspacing="0">
-				<tr><td colspan="2" class="td_words_title">人生百科 - 放松你我他</td></tr>
-				<tr><td class="span_words_content_a">人生百科</td><td >互联网人的网上家园</td></tr>
-				<tr><td >先吐为快</td><td >在这里没有什么不能明言</td></tr>
+				<tr><td colspan="2" class="td_words_title">人生百科 - 我们的网上家园</td></tr>
+				<tr><td class="span_words_content_a">先吐为快</td><td >在这里没有什么不能明言</td></tr>
 				<tr><td >纪念板</td><td >这里的我们,都会为你的纪念点赞</td></tr>
 				<tr><td >猜猜我是谁</td><td >留下点蛛丝马迹, 让他们快乐的猜翻天</td></tr>
 			</table>
@@ -71,10 +71,21 @@
 		<div class="div_cup">
 		</div>
 	</div>
-	<div id="div_foot">
-
+	
+	<div id="mainnextdiv" class="div_main" style="background-color: #357aa9; ">
+		<div style="padding: 200px 0px 0px 985px; " id="">
+			<a href="javascript:void(0);" style="color: #ccc; font-size: 30px;" onclick="turnToIndex();">
+				马上进入<br>join now
+			</a>
+		</div>
 	</div>
-
+	<div id="footer" class="div_main" style="height: 60px;background-color: #999; ">
+		<div class="div_footer_words" id="">
+			<a href="javascript:void(0);" style="color: white; font-size: 14px;" onclick="">
+				关于我们
+			</a>
+		</div>
+	</div>
 	<br />
 </body>
 

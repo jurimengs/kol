@@ -79,7 +79,7 @@
 				<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
 			</li>
 			<li <c:if test="${currentChannelId eq '6' }">class="currentChannel"</c:if>>
-				<a href="javascript:void(0);" onclick="turnToIndex();">首页</a>
+				<a href="/" onclick="">首页</a>
 			</li>
 			<li>
 				<a href="javascript:void(0);" onclick="openTestimonials('${currentChannelId}');">发表感言</a>

@@ -83,13 +83,12 @@ dd{
 	margin:12px 53px 0 0; padding:0; list-style-type:none; float: left; color: #666666; font-size:18px;
 }
 /* ��¼��ť��ʽ ����������ʽ */
-.login_li, .li_active {
+.login_li, .li_active a{
 	color: #389cdb;
 }
 .login_li {
 	font-size:14px; cursor: pointer;
 }
-/* �����Ϸ���Сlogo */
 .logo_small{
 	width: 46px; height: 46px; background: url(../images/logo_small.png) no-repeat; margin-top: -12px;
 }
@@ -99,12 +98,15 @@ dd{
 	height: 485px; background: #d5d5d5;
 }
 
-.div_main .div_cup {
-	height: 100%; background: url(../images/cup.png) no-repeat; width: 554px; position: relative; left: 680px; margin-right: 20px;
+.div_main .div_cup {	
+	height: 100%; background: url(../images/cup.png) no-repeat; width: 554px; position: relative; left: 780px;
 }
 
 .div_main .div_main_words {
 	height: 100%; float: left; margin: 152px 0 0 152px; 
+}
+.div_main .div_footer_words {
+	height: 100%; float: left; margin: 18px 0 0 152px; 
 }
 
 .td_words_title {

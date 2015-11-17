@@ -36,7 +36,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	
 	private Log log = LogFactory.getLog(WxController.class);
 	
-	public void token(HttpServletRequest request, HttpServletResponse response)
+	public void validate(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		log.info("token: " + this.getParamMap(request));
 		String signature = request.getParameter("signature");
