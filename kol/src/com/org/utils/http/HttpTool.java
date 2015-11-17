@@ -9,6 +9,10 @@ public interface HttpTool {
 	public String httpPost(String paramContent, String url,String charset) ;
 	
 	public JSONObject httpPost(JSONObject paramContent, String url,String charset) ;
+	
+	public JSONObject wxHttpsPost(JSONObject paramContent, String url) ;
+
+	public JSONObject wxHttpsGet(JSONObject paramContent, String url) ;
 
 	public String simplePost(JSONObject jsonParam, String remoteUrl, String charSet) ;
 	

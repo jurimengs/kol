@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.ContextLoader;
 
 import com.org.container.CommonContainer;
+import com.org.controller.webapp.utils.WxUtil;
 import com.org.utils.SmpPropertyUtil;
 
 public class ContextLoaderListener implements ServletContextListener{
@@ -65,6 +66,12 @@ public class ContextLoaderListener implements ServletContextListener{
 			mongodbSvc.test();
 		*/
 		
+		//Memcache.test();
+	    // 初始化微信token
+	    //WxUtil.init();
+	    // 开启定时获取token任务
+	    WxUtil.autoRun();
+	    
 		/*12. init guice with mybatis */
 		/*log.info("Integrate Smp With Guice Container Begin....");
 		sc.initGuice(GuiceHelper.createInjector(new SmpMyBatisModule(CT.SMP_GUICE_DSTYPE_C3P0,CT.SMP_GUICE_MYBATIS_EID)));

@@ -1,11 +1,30 @@
 package com.org.utils.http.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.http.HttpEntity;
@@ -31,7 +50,7 @@ import org.apache.http.util.EntityUtils;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
-import com.org.util.JSONUtils;
+import com.org.utils.JSONUtils;
 import com.org.utils.http.HttpTool;
 
 /**
@@ -127,8 +146,6 @@ public class HttpApacheClient implements HttpTool{
 		return httpResult;
 	} 
 	
-	
-	
 	public JSONObject httpPost(JSONObject requestJson, String url,
 			String charset) {
 		JSONObject resultJson = null;
@@ -184,6 +201,14 @@ public class HttpApacheClient implements HttpTool{
 		return resultJson;
 	}
 
+	public JSONObject wxHttpsPost(JSONObject requestJson, String url) {
+		return httpsRequest(url, "POST", requestJson.toString());
+	}
+	
+	public JSONObject wxHttpsGet(JSONObject requestJson, String url) {
+		return httpsRequest(url, "GET", requestJson.toString());
+	}
+	
 	public String simplePost(JSONObject jsonParam, String remoteUrl, String charSet){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		String key ="";
@@ -219,5 +244,183 @@ public class HttpApacheClient implements HttpTool{
 		}
 	    return result;
 	}
-    
+	
+	public JSONObject httpsRequest(String requestUrl, String httpMethod, String defaultStr){
+		JSONObject res = new JSONObject();
+		try {
+			TrustManager[] tm = {new MyX509TrustManager()};
+			SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+			sslContext.init(null, tm, new SecureRandom());
+			SSLSocketFactory sf = sslContext.getSocketFactory();
+			
+			URL url = new URL(requestUrl);
+			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+			conn.setSSLSocketFactory(sf);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setUseCaches(false);
+			conn.setRequestMethod(httpMethod);
+			
+			if(defaultStr != null) {
+				OutputStream os = conn.getOutputStream();
+				os.write(defaultStr.getBytes("UTF-8"));
+				os.close();
+			}
+			
+			InputStream is = conn.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+			BufferedReader br = new BufferedReader(isr);
+			
+			String str = null;
+			StringBuffer sb = new StringBuffer();
+			while((str = br.readLine()) != null){
+				sb.append(str);
+			}
+			br.close();
+			isr.close();
+			is.close();
+			is = null;
+			conn.disconnect();
+			
+			res = JSONObject.fromObject(sb.toString());
+			
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public static void main(String[] args) {
+		/*
+		JSONObject requestJson = new JSONObject();
+		
+		
+		JSONArray buttonASubBtnArray = new JSONArray();
+		JSONObject buttonASubBtnA = new JSONObject();
+		buttonASubBtnA.put("type", "click");
+		buttonASubBtnA.put("name", "对大家说");
+		buttonASubBtnA.put("url", "say_to_others");
+		
+		buttonASubBtnArray.add(buttonASubBtnA);
+		
+		JSONObject buttonA = new JSONObject();
+		buttonA.put("name", "组内玩");
+		buttonA.put("sub_button", buttonASubBtnArray);
+		
+		
+
+		// 第二列菜单做成多子菜单
+		JSONArray buttonBSubBtnArray = new JSONArray();
+		JSONObject buttonBSubBtnA = new JSONObject();
+		buttonBSubBtnA.put("type", "view");
+		buttonBSubBtnA.put("name", "长款甜美风");
+		buttonBSubBtnA.put("url", "http://www.rsbk.cc");
+		
+		JSONObject buttonBSubBtnB = new JSONObject();
+		buttonBSubBtnB.put("type", "view");
+		buttonBSubBtnB.put("name", "迷你南亚款");
+		buttonBSubBtnB.put("url", "http://www.rsbk.cc");
+		buttonBSubBtnArray.add(buttonBSubBtnA);
+		buttonBSubBtnArray.add(buttonBSubBtnB);
+		
+		JSONObject buttonB = new JSONObject();
+		buttonB.put("name", "流行风");
+		buttonB.put("sub_button", buttonBSubBtnArray);
+		
+		JSONObject buttonC = new JSONObject();
+		buttonC.put("type", "click");
+		buttonC.put("name", "今日歌曲");
+		buttonC.put("key", "musicToday"); // 本菜单的标识符. 自定义. click类型必填
+
+		JSONArray buttonArray = new JSONArray();
+		buttonArray.add(buttonA);
+		buttonArray.add(buttonB);
+		buttonArray.add(buttonC);
+		
+		requestJson.put("button", buttonArray); // 微信接口
+		*/
+		
+		
+		JSONObject requestJson = new JSONObject();
+		
+		JSONObject buttonASubA = new JSONObject();
+		buttonASubA.put("type", "click");
+		buttonASubA.put("name", "今日歌曲");
+		buttonASubA.put("key", "V1001_TODAY_MUSIC"); // 本菜单的标识符. 自定义. click类型必填
+		
+		JSONArray buttonASubBtnArray = new JSONArray();
+		buttonASubBtnArray.add(buttonASubA);
+		
+		JSONObject buttonA = new JSONObject();
+		buttonA.put("name", "大家说");
+		buttonA.put("sub_button", buttonASubBtnArray);
+		
+
+		// 第二列菜单做成多子菜单
+		JSONArray buttonBSubBtnArray = new JSONArray();
+		JSONObject buttonBSubBtnA = new JSONObject();
+		buttonBSubBtnA.put("type", "view");
+		buttonBSubBtnA.put("name", "长款甜美风");
+		buttonBSubBtnA.put("url", "http://www.rsbk.cc");
+		
+		JSONObject buttonBSubBtnB = new JSONObject();
+		buttonBSubBtnB.put("type", "view");
+		buttonBSubBtnB.put("name", "迷你南亚款");
+		buttonBSubBtnB.put("url", "http://www.rsbk.cc");
+		buttonBSubBtnArray.add(buttonBSubBtnA);
+		buttonBSubBtnArray.add(buttonBSubBtnB);
+		
+		JSONObject buttonB = new JSONObject();
+		buttonB.put("name", "流行风");
+		buttonB.put("sub_button", buttonBSubBtnArray);
+
+		JSONArray buttonArray = new JSONArray();
+		buttonArray.add(buttonA);
+		buttonArray.add(buttonB);
+		requestJson.put("button", buttonArray); // 微信接口
+		
+		JSONObject buttonC = new JSONObject();
+		buttonC.put("type", "click");
+		buttonC.put("name", "新品上市");
+		buttonC.put("url", "http://www.rsbk.cc");
+		
+		
+		HttpApacheClient c = new HttpApacheClient();
+		String requestUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=CLDhSR_unsgoG7LH1A8Tv6DITPykDoqEeo88VoVLv_9sjZdc-k0hdw5U3vXODrYDcrGzlDy-6PuAY6KRWxpWsMafidqgcGi0j3IqqCEzj5kSBVjAEAAJD";
+		JSONObject jsonObject = c.wxHttpsPost(requestJson, requestUrl);
+		System.out.println("=======> "+jsonObject.toString());
+	}
+	
+	public class MyX509TrustManager implements X509TrustManager {
+
+		// 检查客户端证书
+		public void checkClientTrusted(X509Certificate[] chain, String authType)
+				throws CertificateException {
+			
+		}
+		
+		// 检查服务端证书
+		public void checkServerTrusted(X509Certificate[] chain, String authType)
+				throws CertificateException {
+			
+		}
+		
+		//返回受信任的X509数组
+		public X509Certificate[] getAcceptedIssuers() {
+			return null;
+		}
+		
+	}
 }

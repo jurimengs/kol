@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -23,6 +21,9 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import com.org.log.LogUtil;
+import com.org.log.impl.LogUtilMg;
+import com.org.util.CT;
 
 /**
  * @author Nano
@@ -60,7 +61,7 @@ public class XmlUtils {
 			in = new ByteArrayInputStream(xmlContent.getBytes(encode));
 			return read(in);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			LogUtil.log(CT.LOG_CATEGORY_ERR, "字符串编码错误", e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);		
 		}
 	     return null;
 	}
@@ -82,7 +83,7 @@ public class XmlUtils {
 			FileInputStream in = new FileInputStream(file);
 			return read(in);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LogUtil.log(CT.LOG_CATEGORY_ERR, "没有找到指定的文件", e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);				
 		}
 		return null;
 	}
@@ -101,7 +102,7 @@ public class XmlUtils {
 	        try {
 				docWriter.output(xmlDoc, byteRep);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LogUtil.log(CT.LOG_CATEGORY_ERR, "xml格式转化错误", e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);				
 			} 
 	        return byteRep.toString(); 
 	 } 
@@ -112,9 +113,9 @@ public class XmlUtils {
 		try {
 			 doc = sb.build(in);
 		} catch (JDOMException e) {
-			e.printStackTrace();
+			LogUtil.log(CT.LOG_CATEGORY_ERR, "jdom解析错误", e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);				
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtil.log(CT.LOG_CATEGORY_ERR, "读取xml数据流操作错误", e, LogUtilMg.LOG_ERROR, CT.LOG_PATTERN_ERR);				
 		} 
 		return doc;
 	}

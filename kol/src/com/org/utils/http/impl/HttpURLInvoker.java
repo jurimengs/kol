@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
-import com.org.util.JSONUtils;
+import com.org.utils.JSONUtils;
 import com.org.utils.http.HttpTool;
 /**
  * @author Nano
@@ -198,6 +198,16 @@ public class HttpURLInvoker implements HttpTool {
 	 */
 	public String simplePost(JSONObject jsonParam, String remoteUrl,
 			String charSet) {
+		return null;
+	}
+
+	public JSONObject wxHttpsPost(JSONObject paramContent, String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public JSONObject wxHttpsGet(JSONObject paramContent, String url) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
