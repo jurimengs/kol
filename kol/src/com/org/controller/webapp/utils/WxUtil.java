@@ -1,4 +1,4 @@
-package com.org.utils;
+package com.org.controller.webapp.utils;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -6,21 +6,31 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import com.org.controller.WxMenu;
+import com.org.controller.webapp.model.WxMenu;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
+import com.org.utils.JSONUtils;
+import com.org.utils.SHA1Util;
+import com.org.utils.SmpPropertyUtil;
 import com.org.utils.http.HttpTool;
 import com.org.utils.http.impl.HttpApacheClient;
 
-
 public class WxUtil {
-	private final static String TOKEN = "sandpay123"; // 配置到配置文件
-	private static String WX_TOKEN = "wxToken"; // 微信端的token
+	public static String WX_TOKEN = "wxToken"+SmpPropertyUtil.getValue("wx", "appid"); // 微信端的token key
+	public static String ENTER_CHATING_ROOM = "enterChatingroom";
+	public static String EXIT_CHATING_ROOM = "exitChatingroom";
+
+	private static Log log = LogFactory.getLog(WxUtil.class);
+	private static final String TOKEN = "sandpay123"; // 配置到配置文件
+	private static final String ACCESS_TOKEN_KEY = "access_token";
 	private static String WX_TICKET = "wxTicket"; // 微信端的ticket
 	private static int CACHE_TIME = 7000; // 微信端的ticket
 
@@ -57,14 +67,9 @@ public class WxUtil {
 		HttpTool http = new HttpApacheClient();
 		JSONObject responseJson = http.httpPost(requestJson, remoteUrl, CT.ENCODE_UTF8);
 
-		// TODO 存放到memcache
-//		try {
-//			Memcache.getInstance().setValue(WX_TOKEN, CACHE_TIME, responseJson.getString("access_token"));
-//			return responseJson.getString("access_token");
-//		} catch (CacheClientException e) {
-//			e.printStackTrace();
-//		}
-		return null;
+		// 存放到memcache
+		Memcache.getInstance().setValue(WX_TOKEN, CACHE_TIME, responseJson.getString(ACCESS_TOKEN_KEY));
+		return responseJson.getString(ACCESS_TOKEN_KEY);
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class WxUtil {
 		String remoteUrl = SmpPropertyUtil.getValue("wx", "wx_ticket_url");
 		String type = SmpPropertyUtil.getValue("wx", "type_for_ticket");
 
-		requestJson.put("access_token", token); // 微信接口
+		requestJson.put(ACCESS_TOKEN_KEY, token); // 微信接口
 		requestJson.put("type", type);
 
 		HttpTool http = new HttpApacheClient();
@@ -85,22 +90,18 @@ public class WxUtil {
 
 		if (0 == responseJson.getInt("errcode")) {
 			// 获取成功
-			// TODO 存放到memcache
-//			try {
-//				Memcache.getInstance().setValue(WX_TICKET, CACHE_TIME, responseJson.getString("ticket"));
-//				return true;
-//			} catch (CacheClientException e) {
-//				e.printStackTrace();
-				return false;
-//			}
+			// 存放到memcache
+			Memcache.getInstance().setValue(WX_TICKET, CACHE_TIME, responseJson.getString("ticket"));
+			return true;
 		} else {
 			LogUtil.log(WxUtil.class, "initTicket 失败：" + responseJson.get("errmsg"), null, LogUtilMg.LOG_DEBUG, CT.LOG_PATTERN_NULL);
 			return false;
 		}
 	}
 
-	public static boolean init() {
+	public static boolean wxInit() {
 		String token = initToken();
+		log.info("wxInit token: "+token);
 		boolean res = false;
 		if (StringUtils.isNotEmpty(token)) {
 			res = initTicket(token);
@@ -113,20 +114,9 @@ public class WxUtil {
 	 * @return
 	 */
 	public static String getToken() {
-		//
-		return null;
-		//return Memcache.getInstance().getValue(WX_TOKEN);
+		return Memcache.getInstance().getValue(WX_TOKEN);
 	}
 
-	/**
-	 * 手动拉出来的token
-	 * 
-	 * @return
-	 */
-	public static String getTemporaryToken() {
-		return "nYKE_6lhfOWxN2rrCSZPlMNhVMctLhMwddYA926KIzNIsRhNIrdRdw7QlVWBiR5OnIwNgfgA-MXWpgjhvydD55HDh3alPj5SPdWgBTszoaYTQMeAIACZV";
-	}
-	
 	/**
 	 * 
 	 * @param timeInterval
@@ -194,8 +184,7 @@ public class WxUtil {
 	 */
 	public static String localSign(String timestamp, String noncestr, String url) {
 		StringBuffer temp = new StringBuffer();
-		//String ticket = Memcache.getInstance().getValue(WX_TICKET);
-		String ticket = "";
+		String ticket = Memcache.getInstance().getValue(WX_TICKET);
 		// jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg&noncestr=Wm3WZYTPz0wzccnW&timestamp=1414587457&url=http://mp.weixin.qq.com?params=value
 		temp.append("jsapi_ticket=").append(ticket).append("&");
 		temp.append("noncestr=").append(noncestr).append("&");
@@ -204,53 +193,103 @@ public class WxUtil {
 
 		return SHA1Util.sha1(temp.toString());
 	}
-/*
-	private class TimerManager {
+	
+	public static void deleteBottomMenu() {
+		HttpTool http = new HttpApacheClient();
+		String token = Memcache.getInstance().getValue(WX_TOKEN);
+		// 先删除：
+		StringBuffer deleteUrl = new StringBuffer(SmpPropertyUtil.getValue("wx", "wx_delete_bottommenu_url"));
+		deleteUrl.append(token);
+		String res = http.httpGet(deleteUrl.toString(), CT.ENCODE_UTF8);
+		System.out.println("=====delete> "+res);
+	}
+	
+	public static void createBottomMenu() {
+		HttpTool http = new HttpApacheClient();
+		String token = Memcache.getInstance().getValue(WX_TOKEN);
 
-		// 时间间隔
-		private static final long PERIOD_DAY = 7000 * 1000;
 
-		public TimerManager() {
-			Calendar calendar = Calendar.getInstance();
+		JSONObject requestJson = new JSONObject();
+		
+		JSONObject buttonASubA = new JSONObject();
+		buttonASubA.put("type", "click");
+		buttonASubA.put("name", "进入聊天室");
+		buttonASubA.put("key", ENTER_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
+		
+		JSONObject buttonASubB = new JSONObject();
+		buttonASubB.put("type", "click");
+		buttonASubB.put("name", "退出聊天室");
+		buttonASubB.put("key", EXIT_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
+		
+		JSONArray buttonASubBtnArray = new JSONArray();
+		buttonASubBtnArray.add(buttonASubA);
+		buttonASubBtnArray.add(buttonASubB);
+		
+		JSONObject buttonA = new JSONObject();
+		buttonA.put("name", "大家说");
+		buttonA.put("sub_button", buttonASubBtnArray);
+		
 
-			*//*** 定制每日2:00执行方法 ***//*
-			calendar.set(Calendar.HOUR_OF_DAY, 2);
-			calendar.set(Calendar.MINUTE, 0);
-			calendar.set(Calendar.SECOND, 0);
+		// 第二列菜单做成多子菜单
+		JSONArray buttonBSubBtnArray = new JSONArray();
+		JSONObject buttonBSubBtnA = new JSONObject();
+		buttonBSubBtnA.put("type", "view");
+		buttonBSubBtnA.put("name", "长款甜美风");
+		buttonBSubBtnA.put("url", "http://www.rsbk.cc");
+		
+		JSONObject buttonBSubBtnB = new JSONObject();
+		buttonBSubBtnB.put("type", "view");
+		buttonBSubBtnB.put("name", "迷你南亚款");
+		buttonBSubBtnB.put("url", "http://www.rsbk.cc");
+		buttonBSubBtnArray.add(buttonBSubBtnA);
+		buttonBSubBtnArray.add(buttonBSubBtnB);
+		
+		JSONObject buttonB = new JSONObject();
+		buttonB.put("name", "流行风");
+		buttonB.put("sub_button", buttonBSubBtnArray);
 
-			Date date = calendar.getTime(); // 第一次执行定时任务的时间
 
-			// 如果第一次执行定时任务的时间 小于 当前的时间
-			// 此时要在 第一次执行定时任务的时间 加一天，以便此任务在下个时间点执行。如果不加一天，任务会立即执行。
-			 要的就是立即执行
-			    if (date.before(new Date())) {
-				    date = this.addDay(date, 1);
-			    }
-			
+		JSONObject buttonC = new JSONObject();
+		buttonC.put("type", "view");
+		buttonC.put("name", "长款甜美风");
+		buttonC.put("url", "http://www.rsbk.cc");
+		
+		
+		JSONArray buttonArray = new JSONArray();
+		buttonArray.add(buttonA);
+		buttonArray.add(buttonB);
+		buttonArray.add(buttonC);
+		requestJson.put("button", buttonArray); // 微信接口
+		
+		
+		StringBuffer createUrl = new StringBuffer(SmpPropertyUtil.getValue("wx", "wx_create_bottommenu_url"));
+		createUrl.append(token);
 
-			Timer timer = new Timer();
+		JSONObject responseJson = http.wxHttpsPost(requestJson, createUrl.toString());
 
-			NFDFlightDataTimerTask task = new NFDFlightDataTimerTask();
-			// 安排指定的任务在指定的时间开始进行重复的固定延迟执行。
-			timer.schedule(task, date, PERIOD_DAY);
+		if (0 == responseJson.getInt("errcode")) {
+			LogUtil.log(WxUtil.class, "createBottomMenu 成功：" + responseJson.get("errmsg"), null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_NULL);
+		} else {
+			LogUtil.log(WxUtil.class, "createBottomMenu 失败：" + responseJson.get("errmsg"), null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_NULL);
 		}
-
-		// 增加或减少天数
-		public Date addDay(Date date, int num) {
-			Calendar startDT = Calendar.getInstance();
-			startDT.setTime(date);
-			startDT.add(Calendar.DAY_OF_MONTH, num);
-			return startDT.getTime();
-		}
-
-	}*/
-
+	
+	}
+	
 	private static class WxTimerTask extends TimerTask {
 		@Override
 		public void run() {
+			boolean res = WxUtil.wxInit();
 			System.out.println("执行定时获取微信任务");
-			LogUtil.log(WxTimerTask.class, "执行定时获取微信任务", null, LogUtilMg.LOG_DEBUG, CT.LOG_PATTERN_NULL);
-			init();
+			LogUtil.log(WxTimerTask.class, "执行定时获取微信任务", null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_NULL);
+
+			boolean anyTimes = Boolean.valueOf(SmpPropertyUtil.getValue("wx", "create_menu_by_interval"));
+			if(anyTimes && res) {
+				// 初始化菜单
+				createBottomMenu();
+				// 初始化用户基本信息
+				WxUserContainer.initUserInfo();
+			}
+			
 		}
 	}
 

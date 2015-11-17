@@ -11,11 +11,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
+import com.org.controller.webapp.utils.WxUtil;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
 import com.org.util.CT;
 import com.org.utils.StringUtil;
-import com.org.utils.WxUtil;
 import com.org.utils.XmlUtils;
 
 

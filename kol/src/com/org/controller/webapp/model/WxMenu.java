@@ -1,4 +1,4 @@
-package com.org.controller;
+package com.org.controller.webapp.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,10 +42,10 @@ public class WxMenu {
 		if(!isInit) {
 			String ss = "人生百科";
 			String aa = "toTest.do";
-			String bb = "西瓜";
-			String cc = "老鼠";
+			String bb = "wxtest.jsp";
+			String cc = "baidu";
 			String ss_link = "<a href=\"http://www.rsbk.cc\">"+ss+"</a>";
-			String aa_link = "<a href=\"http://payment-test.sandpay.com.cn/wx/toTest.do \">"+aa+"</a>";
+			String aa_link = "<a href=\"http://payment-test.sandpay.com.cn/webapp/wx/toTest.do \">"+aa+"</a>";
 			String bb_link = "<a href=\"http://payment-test.sandpay.com.cn/www/html/wxtest.jsp \">"+bb+"</a>";
 			String cc_link = "<a href=\"http://www.baidu.com\">"+cc+"</a>";
 			menuMap.put(MD5.getMD5(ss), ss_link);
