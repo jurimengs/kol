@@ -17,6 +17,7 @@ import com.org.controller.webapp.model.WxMenu;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
+import com.org.utils.JSONUtils;
 import com.org.utils.SHA1Util;
 import com.org.utils.SmpPropertyUtil;
 import com.org.utils.http.HttpTool;
@@ -25,6 +26,7 @@ import com.org.utils.http.impl.HttpApacheClient;
 public class WxUtil {
 	public static String WX_TOKEN = "wxToken"+SmpPropertyUtil.getValue("wx", "appid"); // 微信端的token key
 	public static String ENTER_CHATING_ROOM = "enterChatingroom";
+	public static String EXIT_CHATING_ROOM = "exitChatingroom";
 
 	private static Log log = LogFactory.getLog(WxUtil.class);
 	private static final String TOKEN = "sandpay123"; // 配置到配置文件
@@ -87,10 +89,10 @@ public class WxUtil {
 		JSONObject responseJson = http.httpPost(requestJson, remoteUrl, CT.ENCODE_UTF8);
 
 		if (0 == responseJson.getInt("errcode")) {
-		// 获取成功
-		// 存放到memcache
-		Memcache.getInstance().setValue(WX_TICKET, CACHE_TIME, responseJson.getString("ticket"));
-		return true;
+			// 获取成功
+			// 存放到memcache
+			Memcache.getInstance().setValue(WX_TICKET, CACHE_TIME, responseJson.getString("ticket"));
+			return true;
 		} else {
 			LogUtil.log(WxUtil.class, "initTicket 失败：" + responseJson.get("errmsg"), null, LogUtilMg.LOG_DEBUG, CT.LOG_PATTERN_NULL);
 			return false;
@@ -214,8 +216,14 @@ public class WxUtil {
 		buttonASubA.put("name", "进入聊天室");
 		buttonASubA.put("key", ENTER_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
 		
+		JSONObject buttonASubB = new JSONObject();
+		buttonASubB.put("type", "click");
+		buttonASubB.put("name", "退出聊天室");
+		buttonASubB.put("key", EXIT_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
+		
 		JSONArray buttonASubBtnArray = new JSONArray();
 		buttonASubBtnArray.add(buttonASubA);
+		buttonASubBtnArray.add(buttonASubB);
 		
 		JSONObject buttonA = new JSONObject();
 		buttonA.put("name", "大家说");

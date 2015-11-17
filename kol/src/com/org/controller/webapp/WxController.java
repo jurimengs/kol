@@ -98,7 +98,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 			String nick = WxUserContainer.getUserBaseInfo(msgFromOpenid).getString("nickname") ;
 			Map<String, Boolean> chatingUsersMap = WxUserContainer.getChatingOpenidsMap();
 			// 判断下是否在聊天室
-			if(chatingUsersMap.get(msgFromOpenid)) {
+			if(chatingUsersMap.containsKey(msgFromOpenid) && chatingUsersMap.get(msgFromOpenid)) {
 				// 直接回复success， 由客服接口去发送消息
 				returnStr = "success";
 				// 这是获取所有的用户
@@ -106,12 +106,13 @@ public class WxController extends SmpHttpServlet implements CommonController{
 				// JSONObject data = userListJson.getJSONObject("data");
 				// JSONArray openidList = data.getJSONArray("openid");
 				JSONArray chatingUserArray = WxUserContainer.getChatingUser();
+				// 从组中除去发信息者自己
+				chatingUserArray.remove(msgFromOpenid);
 				log.info("openidList ====>"+chatingUserArray);
 				
-				int nextOpenidIndex = 0;
-				String content = nick + "说: "+xmlJson.getString("Content");
-				// 递归操作
-				pushMessage(chatingUserArray, content, nextOpenidIndex);
+				String content = nick + "说:\n"+xmlJson.getString("Content");
+				// 从0开始递归发送，实现群发
+				pushMassMessage(msgFromOpenid, chatingUserArray, content, 0);
 			} else {
 				returnStr = WxUtil.createMenu(xmlJson);
 			}
@@ -123,16 +124,21 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	}
 	
 	private String dealEvent(JSONObject xmlJson) {
-//		String ToUserName = xmlJson.getString("ToUserName");
-//		String CreateTime = xmlJson.getString("CreateTime");
-//		String MsgType = xmlJson.getString("MsgType");
 		String FromUserName = xmlJson.getString("FromUserName");
 		String Event = xmlJson.getString("Event");
 		String EventKey = xmlJson.getString("EventKey"); // 对应自定义的key 值
 		log.info("EventKey ====>" + EventKey);
 		// 拿事件类型 和 点击的按钮key值判断 可以决定业务类型
-		if(Event.equals("CLICK") && "V1001_TODAY_MUSIC".equals(EventKey)) {
-			pushMessage(FromUserName, "您已进入聊天室, 可以和大家聊天啦");
+		if(Event.equals("CLICK")) {
+			if(WxUtil.ENTER_CHATING_ROOM.equals(EventKey)) {
+				// 加入聊天室
+				WxUserContainer.joininChatingRoom(FromUserName);
+				pushMessage(FromUserName, "您已进入聊天室, 可以和大家聊天啦");
+			} else if(WxUtil.EXIT_CHATING_ROOM.equals(EventKey)) {
+				// 加入聊天室
+				WxUserContainer.exitChatingRoom(FromUserName);
+				pushMessage(FromUserName, "您已退出聊天室");
+			}
 		}
 		return "";
 	}
@@ -144,12 +150,13 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	 * @param nextOpenid
 	 * @return
 	 */
-	public void pushMessage(JSONArray openidList, String content, int nextOpenid){
+	public void pushMassMessage(String msgFromOpenid, JSONArray openidList, String content, int nextOpenid){
 		if(nextOpenid >= openidList.size()) {
-			log.info("递归完成完成");
+			log.info("递归完成");
 			return ;
 		}
 		String toOpenid = openidList.getString(nextOpenid);
+		
 		// 调用客服接口发送消息 
 		String url = SmpPropertyUtil.getValue("wx", "wx_send_message_by_service");
 		url = url.concat(Memcache.getInstance().getValue(WxUtil.WX_TOKEN));
@@ -173,7 +180,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		// 下一个openid的索引
 		nextOpenid ++;
 		// 递归发送
-		pushMessage(openidList, content, nextOpenid);
+		pushMassMessage(msgFromOpenid, openidList, content, nextOpenid);
 
 	}
 	
@@ -191,8 +198,6 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		JSONObject contentTemp = new JSONObject();
 		contentTemp.put("content", content);
-		// 加入聊天室
-		WxUserContainer.joininChatingRoom(toOpenid);
 		
 		JSONObject paramContent = new JSONObject();
 		paramContent.put("touser", toOpenid);

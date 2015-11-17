@@ -51,10 +51,10 @@ public class WxUserContainer {
 		CHATING_USER_LIST.put(openid, true);
 	}
 	
-	public static void leaveChatingRoom(String openid){
+	public static void exitChatingRoom(String openid){
 		if(CHATING_USER_LIST.containsKey(openid)) {
-			//CHATING_USER_LIST.remove(openid);
-			CHATING_USER_LIST.put(openid, false);
+			CHATING_USER_LIST.remove(openid);
+			//CHATING_USER_LIST.put(openid, false);
 		}
 	}
 	
