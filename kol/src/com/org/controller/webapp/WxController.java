@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,12 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		boolean signResult = WxUtil.checkSignature(signature, timestamp, nonce);
 		if(!signResult) {
 			log.info("验签错误");
+			return;
+		}
+		String echostr = request.getParameter("echostr");
+		if(StringUtils.isNotEmpty(echostr)) {
+			// 表示是首次验签
+			this.write(echostr, CT.ENCODE_UTF8, response);
 			return;
 		}
 		

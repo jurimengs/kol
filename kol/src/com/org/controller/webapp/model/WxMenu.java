@@ -42,22 +42,17 @@ public class WxMenu {
 		if(!isInit) {
 			String ss = "人生百科";
 			String aa = "toTest.do";
-			String bb = "wxtest.jsp";
 			String cc = "baidu";
 			String ss_link = "<a href=\"http://www.rsbk.cc\">"+ss+"</a>";
-			String aa_link = "<a href=\"http://payment-test.sandpay.com.cn/webapp/wx/toTest.do \">"+aa+"</a>";
-			String bb_link = "<a href=\"http://payment-test.sandpay.com.cn/www/html/wxtest.jsp \">"+bb+"</a>";
+			String aa_link = "<a href=\"http://www.rsbk.cc/wx/toTest.do \">"+aa+"</a>";
 			String cc_link = "<a href=\"http://www.baidu.com\">"+cc+"</a>";
 			menuMap.put(MD5.getMD5(ss), ss_link);
 			menuMap.put(MD5.getMD5(aa), aa_link);
-			menuMap.put(MD5.getMD5(bb), bb_link);
 			menuMap.put(MD5.getMD5(cc), cc_link);
 			
 			all += ss_link;
 			all += "\n";
 			all += aa_link;
-			all += "\n";
-			all += bb_link;
 			all += "\n";
 			all += cc_link;
 			all += "\n";

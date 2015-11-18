@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +16,6 @@ import com.org.controller.webapp.model.WxMenu;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
-import com.org.utils.JSONUtils;
 import com.org.utils.SHA1Util;
 import com.org.utils.SmpPropertyUtil;
 import com.org.utils.http.HttpTool;
@@ -203,64 +201,13 @@ public class WxUtil {
 		String res = http.httpGet(deleteUrl.toString(), CT.ENCODE_UTF8);
 		System.out.println("=====delete> "+res);
 	}
-	
+		
 	public static void createBottomMenu() {
 		HttpTool http = new HttpApacheClient();
 		String token = Memcache.getInstance().getValue(WX_TOKEN);
 
-
-		JSONObject requestJson = new JSONObject();
-		
-		JSONObject buttonASubA = new JSONObject();
-		buttonASubA.put("type", "click");
-		buttonASubA.put("name", "进入聊天室");
-		buttonASubA.put("key", ENTER_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
-		
-		JSONObject buttonASubB = new JSONObject();
-		buttonASubB.put("type", "click");
-		buttonASubB.put("name", "退出聊天室");
-		buttonASubB.put("key", EXIT_CHATING_ROOM); // 本菜单的标识符. 自定义. click类型必填
-		
-		JSONArray buttonASubBtnArray = new JSONArray();
-		buttonASubBtnArray.add(buttonASubA);
-		buttonASubBtnArray.add(buttonASubB);
-		
-		JSONObject buttonA = new JSONObject();
-		buttonA.put("name", "大家说");
-		buttonA.put("sub_button", buttonASubBtnArray);
-		
-
-		// 第二列菜单做成多子菜单
-		JSONArray buttonBSubBtnArray = new JSONArray();
-		JSONObject buttonBSubBtnA = new JSONObject();
-		buttonBSubBtnA.put("type", "view");
-		buttonBSubBtnA.put("name", "长款甜美风");
-		buttonBSubBtnA.put("url", "http://www.rsbk.cc");
-		
-		JSONObject buttonBSubBtnB = new JSONObject();
-		buttonBSubBtnB.put("type", "view");
-		buttonBSubBtnB.put("name", "迷你南亚款");
-		buttonBSubBtnB.put("url", "http://www.rsbk.cc");
-		buttonBSubBtnArray.add(buttonBSubBtnA);
-		buttonBSubBtnArray.add(buttonBSubBtnB);
-		
-		JSONObject buttonB = new JSONObject();
-		buttonB.put("name", "流行风");
-		buttonB.put("sub_button", buttonBSubBtnArray);
-
-
-		JSONObject buttonC = new JSONObject();
-		buttonC.put("type", "view");
-		buttonC.put("name", "长款甜美风");
-		buttonC.put("url", "http://www.rsbk.cc");
-		
-		
-		JSONArray buttonArray = new JSONArray();
-		buttonArray.add(buttonA);
-		buttonArray.add(buttonB);
-		buttonArray.add(buttonC);
-		requestJson.put("button", buttonArray); // 微信接口
-		
+		String menuStr = SmpPropertyUtil.getValue("wx_botton_menu", "menu");
+		JSONObject requestJson = JSONObject.fromObject(menuStr);
 		
 		StringBuffer createUrl = new StringBuffer(SmpPropertyUtil.getValue("wx", "wx_create_bottommenu_url"));
 		createUrl.append(token);
