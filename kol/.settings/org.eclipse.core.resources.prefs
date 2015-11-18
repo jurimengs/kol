@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/index.jsp=UTF-8
 encoding//src/com/org=gbk
 encoding//src/com/org/connection/HikaricpMysqlConnection.java=gbk
 encoding//src/com/org/controller/webapp/WxController.java=UTF-8
