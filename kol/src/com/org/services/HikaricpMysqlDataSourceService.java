@@ -24,7 +24,7 @@ public class HikaricpMysqlDataSourceService {
 	
 	public static HikaricpMysqlDataSourceService getInstance(){
 		if(hds == null){
-			hds = new HikaricpMysqlDataSourceService();
+			//hds = new HikaricpMysqlDataSourceService();
 		}
 		return hds;
 	}
