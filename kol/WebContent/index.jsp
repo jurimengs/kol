@@ -68,20 +68,16 @@ a {text-decoration: none; }
 				<tr><td >猜猜我是谁</td><td >留下点蛛丝马迹, 让他们快乐的猜翻天</td></tr>
 			</table>
 		</div>
-		<div class="div_cup">
-		</div>
 	</div>
 	
-	<div id="mainnextdiv" class="div_main" style="background-color: #357aa9; ">
-		<div style="padding: 200px 0px 0px 985px; " id="">
-			<a href="javascript:void(0);" style="color: #ccc; font-size: 30px;" onclick="turnToIndex();">
-				马上进入<br>join now
-			</a>
-		</div>
+	<div id="mainnextdiv" class="div_enter">
+		<a href="javascript:void(0);" onclick="turnToIndex();">
+			马上进入<br>join now
+		</a>
 	</div>
-	<div id="footer" class="div_main" style="height: 60px;background-color: #999; ">
+	<div id="footer" class="div_footer">
 		<div class="div_footer_words" id="">
-			<a href="javascript:void(0);" style="color: white; font-size: 14px;" onclick="">
+			<a href="javascript:void(0);" onclick="">
 				关于我们
 			</a>
 		</div>

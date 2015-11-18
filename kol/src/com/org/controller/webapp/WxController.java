@@ -43,7 +43,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	private Log log = LogFactory.getLog(WxController.class);
 
 	/**
-	 * µÚÒ»´ÎÎ¢ĞÅÑéÖ¤µÄÊ±ºòĞèÒªÓÃÕâ¸öÄ£¿é. ÕâÊÇÒ»¸öÄ£°å·½·¨.
+	 * ç¬¬ä¸€æ¬¡å¾®ä¿¡éªŒè¯çš„æ—¶å€™éœ€è¦ç”¨è¿™ä¸ªæ¨¡å—. è¿™æ˜¯ä¸€ä¸ªæ¨¡æ¿æ–¹æ³•.
 	 * @param request
 	 * @param response
 	 * @throws Exception
@@ -56,7 +56,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		boolean signResult = WxUtil.checkSignature(signature, timestamp, nonce);
 		if(!signResult) {
-			log.info("ÑéÇ©´íÎó");
+			log.info("éªŒç­¾é”™è¯¯");
 			return;
 		}
 		String echostr = request.getParameter("echostr");
@@ -80,45 +80,45 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		boolean signResult = WxUtil.checkSignature(signature, timestamp, nonce);
 		if(!signResult) {
-			log.info("ÑéÇ©´íÎó");
+			log.info("éªŒç­¾é”™è¯¯");
 			return;
 		}
 		
 		JSONObject xmlJson = XmlUtils.getDocumentFromRequest(request);
-		log.info("ÊÕµ½Î¢ĞÅ·şÎñÆ÷µÄÏûÏ¢£ºxmlJson=====> " + xmlJson);
-		// TODO Î¢ĞÅ·şÎñÆ÷ÍÆËÍµÄËùÓĞ²Ù×÷¶¼»áÍùÕâÀïÍÆËÍ¡£ ËùÒÔ£¬ Òª¶¨ÖÆÒ»¸öÂ·ÓÉ¹æÔò
-		// xmlJson ÓĞÒ»¸ö×Ö¶Î½Ğ MsgType £¬ ËüµÄÀàĞÍÓĞºÜ¶àÖÖ£º event ±íÊ¾ÊÇÊÂ¼ş/ text ±íÊ¾ÊÇÎÄ±¾ÏûÏ¢ µÈ
+		log.info("æ”¶åˆ°å¾®ä¿¡æœåŠ¡å™¨çš„æ¶ˆæ¯ï¼šxmlJson=====> " + xmlJson);
+		// TODO å¾®ä¿¡æœåŠ¡å™¨æ¨é€çš„æ‰€æœ‰æ“ä½œéƒ½ä¼šå¾€è¿™é‡Œæ¨é€ã€‚ æ‰€ä»¥ï¼Œ è¦å®šåˆ¶ä¸€ä¸ªè·¯ç”±è§„åˆ™
+		// xmlJson æœ‰ä¸€ä¸ªå­—æ®µå« MsgType ï¼Œ å®ƒçš„ç±»å‹æœ‰å¾ˆå¤šç§ï¼š event è¡¨ç¤ºæ˜¯äº‹ä»¶/ text è¡¨ç¤ºæ˜¯æ–‡æœ¬æ¶ˆæ¯ ç­‰
 		String returnStr = "";
 		if(xmlJson.getString("MsgType").equals("event")) {
 			returnStr = dealEvent(xmlJson);
 		} else if(xmlJson.getString("MsgType").equals("text")) {
-			// ·¢ÏûÏ¢µÄÈË
+			// å‘æ¶ˆæ¯çš„äºº
 			String msgFromOpenid = xmlJson.getString("FromUserName");
-			// ·¢ÏûÏ¢ÕßµÄêÇ³Æ
+			// å‘æ¶ˆæ¯è€…çš„æ˜µç§°
 			String nick = WxUserContainer.getUserBaseInfo(msgFromOpenid).getString("nickname") ;
 			Map<String, Boolean> chatingUsersMap = WxUserContainer.getChatingOpenidsMap();
-			// ÅĞ¶ÏÏÂÊÇ·ñÔÚÁÄÌìÊÒ
+			// åˆ¤æ–­ä¸‹æ˜¯å¦åœ¨èŠå¤©å®¤
 			if(chatingUsersMap.containsKey(msgFromOpenid) && chatingUsersMap.get(msgFromOpenid)) {
-				// Ö±½Ó»Ø¸´success£¬ ÓÉ¿Í·ş½Ó¿ÚÈ¥·¢ËÍÏûÏ¢
+				// ç›´æ¥å›å¤successï¼Œ ç”±å®¢æœæ¥å£å»å‘é€æ¶ˆæ¯
 				returnStr = "success";
-				// ÕâÊÇ»ñÈ¡ËùÓĞµÄÓÃ»§
+				// è¿™æ˜¯è·å–æ‰€æœ‰çš„ç”¨æˆ·
 				// JSONObject userListJson = WxUserContainer.getUserList();
 				// JSONObject data = userListJson.getJSONObject("data");
 				// JSONArray openidList = data.getJSONArray("openid");
 				JSONArray chatingUserArray = WxUserContainer.getChatingUser();
-				// ´Ó×éÖĞ³ıÈ¥·¢ĞÅÏ¢Õß×Ô¼º
+				// ä»ç»„ä¸­é™¤å»å‘ä¿¡æ¯è€…è‡ªå·±
 				chatingUserArray.remove(msgFromOpenid);
 				log.info("openidList ====>"+chatingUserArray);
 				
-				String content = nick + "Ëµ:\n"+xmlJson.getString("Content");
-				// ´Ó0¿ªÊ¼µİ¹é·¢ËÍ£¬ÊµÏÖÈº·¢
+				String content = nick + "è¯´:\n"+xmlJson.getString("Content");
+				// ä»0å¼€å§‹é€’å½’å‘é€ï¼Œå®ç°ç¾¤å‘
 				pushMassMessage(msgFromOpenid, chatingUserArray, content, 0);
 			} else {
 				returnStr = WxUtil.createMenu(xmlJson);
 			}
 		}
 		
-		System.out.println("ÏìÓ¦µÄ: " + returnStr);
+		System.out.println("å“åº”çš„: " + returnStr);
 		this.write(returnStr, CT.ENCODE_UTF8, response);
 		return;
 	}
@@ -126,25 +126,25 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	private String dealEvent(JSONObject xmlJson) {
 		String FromUserName = xmlJson.getString("FromUserName");
 		String Event = xmlJson.getString("Event");
-		String EventKey = xmlJson.getString("EventKey"); // ¶ÔÓ¦×Ô¶¨ÒåµÄkey Öµ
+		String EventKey = xmlJson.getString("EventKey"); // å¯¹åº”è‡ªå®šä¹‰çš„key å€¼
 		log.info("EventKey ====>" + EventKey);
-		// ÄÃÊÂ¼şÀàĞÍ ºÍ µã»÷µÄ°´Å¥keyÖµÅĞ¶Ï ¿ÉÒÔ¾ö¶¨ÒµÎñÀàĞÍ
+		// æ‹¿äº‹ä»¶ç±»å‹ å’Œ ç‚¹å‡»çš„æŒ‰é’®keyå€¼åˆ¤æ–­ å¯ä»¥å†³å®šä¸šåŠ¡ç±»å‹
 		if(Event.equals("CLICK")) {
 			if(WxUtil.ENTER_CHATING_ROOM.equals(EventKey)) {
-				// ¼ÓÈëÁÄÌìÊÒ
+				// åŠ å…¥èŠå¤©å®¤
 				WxUserContainer.joininChatingRoom(FromUserName);
-				pushMessage(FromUserName, "ÄúÒÑ½øÈëÁÄÌìÊÒ, ¿ÉÒÔºÍ´ó¼ÒÁÄÌìÀ²");
+				pushMessage(FromUserName, "æ‚¨å·²è¿›å…¥èŠå¤©å®¤, å¯ä»¥å’Œå¤§å®¶èŠå¤©å•¦");
 			} else if(WxUtil.EXIT_CHATING_ROOM.equals(EventKey)) {
-				// ¼ÓÈëÁÄÌìÊÒ
+				// åŠ å…¥èŠå¤©å®¤
 				WxUserContainer.exitChatingRoom(FromUserName);
-				pushMessage(FromUserName, "ÄúÒÑÍË³öÁÄÌìÊÒ");
+				pushMessage(FromUserName, "æ‚¨å·²é€€å‡ºèŠå¤©å®¤");
 			}
 		}
 		return "";
 	}
 	
 	/**
-	 * µİ¹é·¢ËÍÏûÏ¢¸øÓÃ»§ÁĞ±íÖĞµÄÓÃ»§
+	 * é€’å½’å‘é€æ¶ˆæ¯ç»™ç”¨æˆ·åˆ—è¡¨ä¸­çš„ç”¨æˆ·
 	 * @param openidList
 	 * @param content
 	 * @param nextOpenid
@@ -152,18 +152,18 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	 */
 	public void pushMassMessage(String msgFromOpenid, JSONArray openidList, String content, int nextOpenid){
 		if(nextOpenid >= openidList.size()) {
-			log.info("µİ¹éÍê³É");
+			log.info("é€’å½’å®Œæˆ");
 			return ;
 		}
 		String toOpenid = openidList.getString(nextOpenid);
 		
-		// µ÷ÓÃ¿Í·ş½Ó¿Ú·¢ËÍÏûÏ¢ 
+		// è°ƒç”¨å®¢æœæ¥å£å‘é€æ¶ˆæ¯ 
 		String url = SmpPropertyUtil.getValue("wx", "wx_send_message_by_service");
 		url = url.concat(Memcache.getInstance().getValue(WxUtil.WX_TOKEN));
 		
 		JSONObject contentTemp = new JSONObject();
 		contentTemp.put("content", content);
-		// ¼ÓÈëÁÄÌìÊÒ
+		// åŠ å…¥èŠå¤©å®¤
 		WxUserContainer.joininChatingRoom(toOpenid);
 		
 		JSONObject paramContent = new JSONObject();
@@ -174,25 +174,25 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		HttpTool http = new HttpApacheClient();
 		JSONObject pushResult = http.wxHttpsPost(paramContent, url);
 		if(pushResult.getString("errcode").equals("0")) {
-			// ÍÆËÍ³É¹¦
-			log.info("¿Í·ş½Ó¿ÚÏûÏ¢·¢ËÍ³É¹¦£¬ÓÃ»§id£º" + toOpenid);
+			// æ¨é€æˆåŠŸ
+			log.info("å®¢æœæ¥å£æ¶ˆæ¯å‘é€æˆåŠŸï¼Œç”¨æˆ·idï¼š" + toOpenid);
 		}
-		// ÏÂÒ»¸öopenidµÄË÷Òı
+		// ä¸‹ä¸€ä¸ªopenidçš„ç´¢å¼•
 		nextOpenid ++;
-		// µİ¹é·¢ËÍ
+		// é€’å½’å‘é€
 		pushMassMessage(msgFromOpenid, openidList, content, nextOpenid);
 
 	}
 	
 	/**
-	 * ·¢ËÍÏûÏ¢¸øÖ¸¶¨ÓÃ»§
+	 * å‘é€æ¶ˆæ¯ç»™æŒ‡å®šç”¨æˆ·
 	 * @param toOpenid
 	 * @param content
 	 * @return
 	 */
 	public JSONObject pushMessage(String toOpenid, String content){
 
-		// µ÷ÓÃ¿Í·ş½Ó¿Ú·¢ËÍÏûÏ¢ 
+		// è°ƒç”¨å®¢æœæ¥å£å‘é€æ¶ˆæ¯ 
 		String url = SmpPropertyUtil.getValue("wx", "wx_send_message_by_service");
 		url = url.concat(Memcache.getInstance().getValue(WxUtil.WX_TOKEN));
 		
@@ -211,7 +211,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		return returns;
 	}
 	/**
-	 * Õâ¸ö½Ó¿ÚÊÇÉ¼µÂµÄÎ¢ĞÅºÅ
+	 * è¿™ä¸ªæ¥å£æ˜¯æ‰å¾·çš„å¾®ä¿¡å·
 	 * @param request
 	 * @param response
 	 * @throws Exception
@@ -225,15 +225,15 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		boolean signResult = WxUtil.checkSignature(signature, timestamp, nonce);
 		if(!signResult) {
-			log.info("ÑéÇ©´íÎó");
+			log.info("éªŒç­¾é”™è¯¯");
 			return;
 		}
 		
 		JSONObject xmlJson = XmlUtils.getDocumentFromRequest(request);
-		// {"ToUserName":"gh_b35778044c48","FromUserName":"oUwjLwpYv0pkCC424mOxcBG24CVY","CreateTime":"1446189462","MsgType":"text","Content":"Å¶","MsgId":"6211336443510120964"}
+		// {"ToUserName":"gh_b35778044c48","FromUserName":"oUwjLwpYv0pkCC424mOxcBG24CVY","CreateTime":"1446189462","MsgType":"text","Content":"å“¦","MsgId":"6211336443510120964"}
 		String returnStr = WxUtil.createMenu(xmlJson);
 		
-		System.out.println("ÏìÓ¦µÄ: " + returnStr);
+		System.out.println("å“åº”çš„: " + returnStr);
 		this.write(returnStr, CT.ENCODE_UTF8, response);
 		return;
 	}
@@ -242,10 +242,10 @@ public class WxController extends SmpHttpServlet implements CommonController{
 			throws Exception {
 		log.info("toTest: " + this.getParamMap(request));
 		String token = WxUtil.getToken();
-		String timestamp = String.valueOf(StringUtil.getTimestamp()); // ±ØÌî£¬Éú³ÉÇ©ÃûµÄÊ±¼ä´Á
-		String nonceStr = UUID.randomUUID().toString(); // ±ØÌî£¬Ç©Ãû£¬¼û¸½Â¼1
+		String timestamp = String.valueOf(StringUtil.getTimestamp()); // å¿…å¡«ï¼Œç”Ÿæˆç­¾åçš„æ—¶é—´æˆ³
+		String nonceStr = UUID.randomUUID().toString(); // å¿…å¡«ï¼Œç­¾åï¼Œè§é™„å½•1
 		String url = request.getRequestURL().toString();
-		String signature = WxUtil.localSign(timestamp, nonceStr, url); // ±ØÌî£¬ĞèÒªÊ¹ÓÃµÄJS½Ó¿ÚÁĞ±í£¬ËùÓĞJS½Ó¿ÚÁĞ±í¼û¸½Â¼2
+		String signature = WxUtil.localSign(timestamp, nonceStr, url); // å¿…å¡«ï¼Œéœ€è¦ä½¿ç”¨çš„JSæ¥å£åˆ—è¡¨ï¼Œæ‰€æœ‰JSæ¥å£åˆ—è¡¨è§é™„å½•2
 		String appid = SmpPropertyUtil.getValue("wx", "appid");
 		
 		request.setAttribute("timestamp", timestamp);
@@ -261,10 +261,10 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	public void getCacheToken(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String token = WxUtil.getToken();
-		String timestamp = String.valueOf(StringUtil.getTimestamp()); // ±ØÌî£¬Éú³ÉÇ©ÃûµÄÊ±¼ä´Á
-		String nonceStr = UUID.randomUUID().toString(); // ±ØÌî£¬Ç©Ãû£¬¼û¸½Â¼1
+		String timestamp = String.valueOf(StringUtil.getTimestamp()); // å¿…å¡«ï¼Œç”Ÿæˆç­¾åçš„æ—¶é—´æˆ³
+		String nonceStr = UUID.randomUUID().toString(); // å¿…å¡«ï¼Œç­¾åï¼Œè§é™„å½•1
 		String url = request.getRequestURL().toString();
-		String signature = WxUtil.localSign(timestamp, nonceStr, url); // ±ØÌî£¬ĞèÒªÊ¹ÓÃµÄJS½Ó¿ÚÁĞ±í£¬ËùÓĞJS½Ó¿ÚÁĞ±í¼û¸½Â¼2
+		String signature = WxUtil.localSign(timestamp, nonceStr, url); // å¿…å¡«ï¼Œéœ€è¦ä½¿ç”¨çš„JSæ¥å£åˆ—è¡¨ï¼Œæ‰€æœ‰JSæ¥å£åˆ—è¡¨è§é™„å½•2
 		
 		request.setAttribute("timestamp", timestamp);
 		request.setAttribute("nonceStr", nonceStr);

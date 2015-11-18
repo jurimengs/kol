@@ -72,6 +72,14 @@ dd{
 
 
 
+
+
+
+
+
+
+
+
 .div_nav {
 	height: 70px; 
 	/* background-color: #eee; */
@@ -95,18 +103,28 @@ dd{
 
 /* main */
 .div_main {
-	height: 485px; background: #d5d5d5;
+	height: 485px; background: #d5d5d5 url(../images/cup.png) no-repeat right 0;
 }
 
-.div_main .div_cup {	
-	height: 100%; background: url(../images/cup.png) no-repeat; width: 554px; position: relative; left: 780px;
+.div_enter {
+	height: 485px; background: #5da2d1;
+}
+.div_enter a {
+	float: right; margin: 190px 130px 0 0;  color: white; color: #ccc; font-size: 30px;
+}
+
+.div_footer {
+	height: 60px; background: #999;
+}
+.div_footer a{
+	float: left; margin: 20px 0 0 152px; color: white; font-size: 14px;
 }
 
 .div_main .div_main_words {
-	height: 100%; float: left; margin: 152px 0 0 152px; 
+	float: left; margin: 152px 0 0 152px; 
 }
 .div_main .div_footer_words {
-	height: 100%; float: left; margin: 18px 0 0 152px; 
+	float: left; margin: 18px 0 0 152px; 
 }
 
 .td_words_title {
@@ -115,6 +133,9 @@ dd{
 
 .table_main_words {
 	font-size: 16px; color: #5c5d5d;
+}
+.table_main_words tr td {
+	padding: 5px;
 }
 
 .span_words_content_a {
