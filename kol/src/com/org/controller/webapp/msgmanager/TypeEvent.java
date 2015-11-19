@@ -14,7 +14,7 @@ import com.org.controller.webapp.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeEvent extends MessageManager implements Event {
+public class TypeEvent extends ServiceMessageManager implements Event {
 	private Log log = LogFactory.getLog(TypeEvent.class);
 	private JSONObject xmlJson;
 
@@ -36,23 +36,16 @@ public class TypeEvent extends MessageManager implements Event {
 			if(WxUtil.ENTER_CHATING_ROOM.equals(EventKey)) {
 				// 加入聊天室
 				WxUserContainer.joininChatingRoom(FromUserName);
-				
-				JSONObject contentTemp = new JSONObject();
-				contentTemp.put("content", "您已进入聊天室, 可以和大家聊天啦");
-				paramContent.put("touser", FromUserName);
-				paramContent.put("msgtype", "text");
-				paramContent.put("text", contentTemp);
+				// 回复文本消息
+				paramContent = getTextMessageJson("您已进入聊天室, 可以和大家聊天啦");
 			} else if(WxUtil.EXIT_CHATING_ROOM.equals(EventKey)) {
-				// 加入聊天室
+				// 退出聊天室
 				WxUserContainer.exitChatingRoom(FromUserName);
-				JSONObject contentTemp = new JSONObject();
-				contentTemp.put("content", "您已退出聊天室");
-				
-				paramContent.put("touser", FromUserName);
-				paramContent.put("msgtype", "text");
-				paramContent.put("text", contentTemp);
+				// 回复文本消息
+				paramContent = getTextMessageJson("您已退出聊天室");
 			}
 			
+			paramContent.put("touser", FromUserName);
 			returns = pushMessage(paramContent, "wx_send_message_by_service");
 			if(returns != null && (returns.getInt("errcode")==0)) {
 				log.info("消息推送成功");

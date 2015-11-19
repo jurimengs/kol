@@ -13,13 +13,15 @@ import com.org.utils.http.HttpTool;
 import com.org.utils.http.impl.HttpApacheClient;
 
 /**
- * manager all the message send interface 
+ * 被动回复消息管理接口
+ * passive reply message manager interface 
  * @author Administrator
  *
  */
-public class MessageManager {
-	private Log log = LogFactory.getLog(MessageManager.class);
-	protected MessageManager(){}
+// TODO 
+public class PassiveReplyMessageManager {
+	private Log log = LogFactory.getLog(PassiveReplyMessageManager.class);
+	protected PassiveReplyMessageManager(){}
 
 	/**
 	 * 发送消息给指定用户
@@ -47,24 +49,18 @@ public class MessageManager {
 	 * @param nextOpenid
 	 * @return
 	 */
-	public void pushMassMessage(String msgFromOpenid, JSONArray openidList, String content, int nextOpenid){
+	public void pushMassMessage(JSONArray openidList, JSONObject paramContent, int nextOpenid){
 		if(nextOpenid >= openidList.size()) {
 			log.info("递归完成");
 			return ;
 		}
+		
 		String toOpenid = openidList.getString(nextOpenid);
+		paramContent.put("touser", toOpenid);
 		
 		// 调用客服接口发送消息 
 		String url = SmpPropertyUtil.getValue("wx", "wx_send_message_by_service");
 		url = url.concat(Memcache.getInstance().getValue(WxUtil.WX_TOKEN));
-		
-		JSONObject contentTemp = new JSONObject();
-		contentTemp.put("content", content);
-		
-		JSONObject paramContent = new JSONObject();
-		paramContent.put("touser", toOpenid);
-		paramContent.put("msgtype", "text");
-		paramContent.put("text", contentTemp);
 		
 		HttpTool http = new HttpApacheClient();
 		JSONObject pushResult = http.wxHttpsPost(paramContent, url);
@@ -75,7 +71,36 @@ public class MessageManager {
 		// 下一个openid的索引
 		nextOpenid ++;
 		// 递归发送
-		pushMassMessage(msgFromOpenid, openidList, content, nextOpenid);
+		pushMassMessage(openidList, paramContent, nextOpenid);
 
+	}
+	
+	/**
+	 * 编辑文本消息模板
+	 * @param content
+	 * @return
+	 */
+	public JSONObject getTextMessageJson(String content){
+		JSONObject contentTemp = new JSONObject();
+		contentTemp.put("content", content);
+		
+		JSONObject paramContent = new JSONObject();
+		paramContent.put("msgtype", "text");
+		paramContent.put("text", contentTemp);
+		return paramContent;
+	}
+	
+	/**
+	 * 编辑图文消息模板
+	 * @return
+	 */
+	public JSONObject getNewsMessageJson(String content){
+		JSONObject contentTemp = new JSONObject();
+		contentTemp.put("content", content);
+		
+		JSONObject paramContent = new JSONObject();
+		paramContent.put("msgtype", "text");
+		paramContent.put("text", contentTemp);
+		return paramContent;
 	}
 }

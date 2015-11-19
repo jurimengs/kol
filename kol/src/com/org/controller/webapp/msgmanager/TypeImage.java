@@ -10,15 +10,15 @@ import com.org.controller.webapp.utils.WxUserContainer;
 import com.org.controller.webapp.utils.WxUtil;
 
 /**
- * request from wx , type is "text"
+ * request from wx , type is "image"
  * @author Administrator
  *
  */
-public class TypeText extends ServiceMessageManager implements Event {
+public class TypeImage extends ServiceMessageManager implements Event {
 	//private Log log = LogFactory.getLog(TypeText.class);
 	private JSONObject xmlJson;
 
-	public TypeText(JSONObject xmlJson) {
+	public TypeImage(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
 	}
 
@@ -38,8 +38,10 @@ public class TypeText extends ServiceMessageManager implements Event {
 			chatingUserArray.remove(msgFromOpenid);
 			// 发消息者的昵称
 			String nick = WxUserContainer.getUserBaseInfoFromLocal(msgFromOpenid).getString("nickname") ;
-			String content = nick + ":\n"+xmlJson.getString("Content");
-			JSONObject paramContent = getTextMessageJson(content);
+			
+			String mediaId = nick + ":\n"+xmlJson.getString("MediaId");
+			JSONObject paramContent = getImageMessageJson(mediaId);
+			
 			pushMassMessage(chatingUserArray, paramContent, 0);
 		} else {
 			returnStr = WxUtil.autoReply(xmlJson);

@@ -38,30 +38,6 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	}
 	
 	private Log log = LogFactory.getLog(WxController.class);
-
-	/**
-	 * 第一次微信验证的时候需要用这个模块. 这是一个模板方法.
-	 * @param request
-	 * @param response
-	 * @throws Exception
-	public void validate(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		log.info("token: " + this.getParamMap(request));
-		String signature = request.getParameter("signature");
-		String timestamp = request.getParameter("timestamp");
-		String nonce = request.getParameter("nonce");
-		
-		boolean signResult = WxUtil.checkSignature(signature, timestamp, nonce);
-		if(!signResult) {
-			log.info("验签错误");
-			return;
-		}
-		String echostr = request.getParameter("echostr");
-		
-		this.write(echostr, CT.ENCODE_UTF8, response);
-		return;
-	}
-	*/
 	
 	/**
 	 * @param request
