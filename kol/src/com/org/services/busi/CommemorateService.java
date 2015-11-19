@@ -1,9 +1,7 @@
 package com.org.services.busi;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
@@ -25,7 +23,7 @@ import com.org.utils.DateUtil;
 public class CommemorateService {
 	private final String getCommemorateById = "select * from kol_commemorate_board where id = ? and commemorate_date = ? order by id desc";
 	private final String getCurrentCommemorate = "select a.id, a.user_id, a.comments, a.view_times, a.create_date, a.update_date, a.commemorate_date, a.top_times, a.file_id, b.file_path from kol_commemorate_board a left join kol_files b on a.file_id = b.id where a.commemorate_date = ? and a.top_times >= ? order by a.top_times desc limit ?";
-	private final String getAllCommemorate = "select * from kol_commemorate_board order by id desc";
+	//private final String getAllCommemorate = "select * from kol_commemorate_board order by id desc";
 	private final String getLimitCommemorate = "select a.id, a.user_id, a.comments, a.view_times, a.create_date, a.update_date, a.commemorate_date, a.top_times, a.file_id, b.file_path from kol_commemorate_board a left join kol_files b on a.file_id = b.id order by a.id desc limit ?";
 	private final String saveCommemorate = "insert into kol_commemorate_board (user_id, comments, file_id, commemorate_date, create_date, update_date) values (?, ?, ?, ?, ?, ?)";
 	private final String addOneTop = "update kol_commemorate_board set top_times=top_times+1 where id =?";

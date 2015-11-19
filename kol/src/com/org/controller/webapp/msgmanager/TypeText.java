@@ -49,7 +49,7 @@ public class TypeText extends MessageManager implements Event {
 			// 从0开始递归发送，实现群发
 			pushMassMessage(msgFromOpenid, chatingUserArray, content, 0);
 		} else {
-			returnStr = WxUtil.createMenu(xmlJson);
+			returnStr = WxUtil.autoReply(xmlJson);
 		}
 		return returnStr;
 	}

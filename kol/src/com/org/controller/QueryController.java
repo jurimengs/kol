@@ -13,7 +13,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
-import com.org.Connection;
 import com.org.common.CommonConstant;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
@@ -39,14 +38,14 @@ public class QueryController extends SmpHttpServlet implements CommonController{
 			return ;
 		}
 		
-		Connection con = null;
-		if(con == null){
+		//Connection con = null;
+		//if(con == null){
 			// 尝试从请求中获取数据库参数，动态加载数据源，成功后返回con
 			
-		}
+		//}
 		
 		// 二、执行查询
-		result = con.executeQuery(requestJson);
+		//result = con.executeQuery(requestJson);
 		
 		// 三、返回数据
 		log.info("远程请求返回数据：　" + result.toString());

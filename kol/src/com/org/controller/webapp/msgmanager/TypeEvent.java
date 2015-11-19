@@ -42,8 +42,6 @@ public class TypeEvent extends MessageManager implements Event {
 				paramContent.put("touser", FromUserName);
 				paramContent.put("msgtype", "text");
 				paramContent.put("text", contentTemp);
-				
-				returns = pushMessage(paramContent, "wx_send_message_by_service");
 			} else if(WxUtil.EXIT_CHATING_ROOM.equals(EventKey)) {
 				// ¼ÓÈëÁÄÌìÊÒ
 				WxUserContainer.exitChatingRoom(FromUserName);

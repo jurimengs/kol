@@ -2,6 +2,8 @@ package com.org.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +24,7 @@ import com.org.util.SpringUtil;
 public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 	private static Log log = LogFactory.getLog(DispatcherServlet.class);
+	private static Map<String, Method> mtdContainer = new HashMap<String, Method>();
 	
 	public DispatcherServlet() {
 		super();
@@ -87,7 +90,15 @@ public class DispatcherServlet extends HttpServlet {
 			if(StringUtils.isEmpty(mtdName)){
 				aim.post(request, response);
 			} else {
-				Method m = aim.getClass().getDeclaredMethod(mtdName, new Class<?>[]{HttpServletRequest.class, HttpServletResponse.class});
+				Method m = null;
+				String mtdKey = servletName + mtdName;
+				if(mtdContainer.containsKey(mtdKey)) {
+					m = mtdContainer.get(mtdKey);
+				} else {
+					m = aim.getClass().getDeclaredMethod(mtdName, new Class<?>[]{HttpServletRequest.class, HttpServletResponse.class});
+					mtdContainer.put(servletName + mtdName, m);
+				}
+				
 				m.invoke(aim, request, response);
 			}
 			//流程执行完，更新tokenParam

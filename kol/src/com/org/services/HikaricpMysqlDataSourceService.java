@@ -8,9 +8,6 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.org.container.CommonContainer;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -24,7 +21,7 @@ public class HikaricpMysqlDataSourceService {
 	
 	public static HikaricpMysqlDataSourceService getInstance(){
 		if(hds == null){
-			//hds = new HikaricpMysqlDataSourceService();
+			hds = new HikaricpMysqlDataSourceService();
 		}
 		return hds;
 	}
@@ -86,5 +83,5 @@ public class HikaricpMysqlDataSourceService {
 		this.template = temp;
 	}
 	private DataSource template;
-	private Log log = LogFactory.getLog(HikaricpMysqlDataSourceService.class);
+	//private Log log = LogFactory.getLog(HikaricpMysqlDataSourceService.class);
 }

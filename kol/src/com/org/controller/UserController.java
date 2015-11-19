@@ -9,7 +9,6 @@ import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 
 import com.org.common.CommonConstant;
 import com.org.common.UserConstant;

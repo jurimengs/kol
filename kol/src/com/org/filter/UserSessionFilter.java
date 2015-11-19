@@ -28,7 +28,7 @@ import com.org.utils.SmpPropertyUtil;
  */
 public class UserSessionFilter implements Filter {
 	
-	private String loginPath = null;
+	protected String loginPath = null;
 	
 	public void init(FilterConfig config) throws ServletException {
 		loginPath = config.getServletContext().getContextPath()+ config.getInitParameter("loginPath");

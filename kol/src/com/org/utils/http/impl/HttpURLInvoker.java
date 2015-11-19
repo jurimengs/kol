@@ -127,11 +127,14 @@ public class HttpURLInvoker implements HttpTool {
 		try {
 			LogUtil.log(CT.LOG_CATEGORY_COMMUNICATION, "1.将进行HttpPost请求", null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_COMMUNICATION);
 			
-			Iterator<String> it = requestJson.keySet().iterator();
+			Iterator<?> it = requestJson.keySet().iterator();
 	    	StringBuffer content = new StringBuffer();
 			while(it.hasNext()){
-				String name = it.next();
-				content.append(name).append(CT.SYMBOL_DYH).append(requestJson.getString(name)).append(CT.SYMBOL_ADF);	
+				Object nextObj = it.next();
+				if(nextObj != null) {
+					String name = nextObj.toString();
+					content.append(name).append(CT.SYMBOL_DYH).append(requestJson.getString(name)).append(CT.SYMBOL_ADF);	
+				}
 			}
 			String data = content.substring(0, content.length()-1);
 			
@@ -202,6 +205,11 @@ public class HttpURLInvoker implements HttpTool {
 	}
 
 	public JSONObject wxHttpsPost(JSONObject paramContent, String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public JSONObject wxHttpsPost(String paramContent, String url) {
 		// TODO Auto-generated method stub
 		return null;
 	}

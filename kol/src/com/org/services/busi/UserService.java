@@ -90,8 +90,8 @@ public class UserService {
 	}
 	
 	public JSONObject searchFullUserInfo(String loginName){
-		String sql = "select * from plat_user_extends_info e right join plat_user_info u on e.login_name = u.login_name where u.login_name = ?"; 
-		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		//String sql = "select * from plat_user_extends_info e right join plat_user_info u on e.login_name = u.login_name where u.login_name = ?"; 
+		//CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		//String sql = "select * from plat_user_extends_info where login_name = ?";
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, loginName);
@@ -102,8 +102,8 @@ public class UserService {
 	}
 
 	public JSONObject searchFullUserInfoComp(String loginName){
-		String sql = "select * from plat_company_extends_info e right join plat_company_info u on e.login_name = u.login_name where u.login_name = ?"; 
-		CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
+		//String sql = "select * from plat_company_extends_info e right join plat_company_info u on e.login_name = u.login_name where u.login_name = ?"; 
+		//CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
 		//String sql = "select * from plat_user_extends_info where login_name = ?";
 		Map<Integer , Object> params = new HashMap<Integer, Object>();
 		params.put(1, loginName);

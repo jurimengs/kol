@@ -3,12 +3,9 @@ package com.org.controller.webapp.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class Memcache {
 	
-	private Log log = LogFactory.getLog(Memcache.class);
+	//private Log log = LogFactory.getLog(Memcache.class);
 	private static Memcache memcache = null;
 	private static Map<String, String> container = new HashMap<String, String>();
 	

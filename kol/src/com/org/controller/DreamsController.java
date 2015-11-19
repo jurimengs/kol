@@ -2,7 +2,6 @@ package com.org.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
@@ -23,7 +22,7 @@ public class DreamsController extends SmpHttpServlet implements CommonController
 	public void wish(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("wish¡£¡£¡£" );
-		HttpSession session = request.getSession(true);
+		//HttpSession session = request.getSession(true);
 		ChannelService channelService = (ChannelService) SpringUtil.getBean("channelService");
 		String limit = "20";
 		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, limit);

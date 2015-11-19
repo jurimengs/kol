@@ -54,10 +54,13 @@ public class RequestUtils {
 
 	public static Map<String, String> getParamMap(HttpServletRequest request) {
 		Map<String,String> paramMap = new HashMap<String, String>();
-		Enumeration<String> enumeration = request.getParameterNames();
+		Enumeration<?> enumeration = request.getParameterNames();
 		while(enumeration.hasMoreElements()){
-			String name = enumeration.nextElement();
-            paramMap.put(name, request.getParameter(name));
+			Object nextObj = enumeration.nextElement();
+			if(nextObj != null) {
+				String name = nextObj.toString();
+				paramMap.put(name, request.getParameter(name));
+			}
 		}
 		return paramMap;
 	

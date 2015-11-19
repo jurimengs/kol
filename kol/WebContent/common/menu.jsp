@@ -59,10 +59,10 @@
 			</c:if>
 		</div>
 		<ul class="fr">
-			<li <c:if test="${currentChannelId eq '5' }">class="currentChannel"</c:if>>
+			<%-- <li <c:if test="${currentChannelId eq '5' }">class="currentChannel"</c:if>>
 				<a href="javascript:void(0);" onmouseover="showAddCommemorate();" onclick="turnTo('/channel/commemorateBoard.do');">纪念板</a>
 				<div id="addCommemorate" onclick="addCommemorate();" onmouseout="hideAddCommemorate();" class="addCommemorate">我要纪念</div>
-			</li>
+			</li> --%>
 			<%-- <li <c:if test="${currentChannelId eq '4' }">class="currentChannel"</c:if>>
 				<a href="javascript:void(0);" onclick="turnToTuCaoBa();">吐槽吧</a>
 			</li> --%>
@@ -79,7 +79,10 @@
 				<a href="javascript:void(0);" onclick="turnToLife();">生活</a>
 			</li>
 			<li <c:if test="${currentChannelId eq '6' }">class="currentChannel"</c:if>>
-				<a href="/" onclick="">首页</a>
+				<a href="javascript:void(0);" onclick="turnToIndex();">所有</a>
+			</li>
+			<li>
+				<a href="/" onclick="">回首页</a>
 			</li>
 			<li>
 				<a href="javascript:void(0);" onclick="openTestimonials('${currentChannelId}');">发表感言</a>

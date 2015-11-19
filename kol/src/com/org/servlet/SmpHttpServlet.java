@@ -100,13 +100,16 @@ public class SmpHttpServlet extends HttpServlet {
 			}else if("xml".equalsIgnoreCase(format)){
 				response.setContentType("text/xml;charset="+charset);
 			
-				Iterator<String> its = data.getJSONObject(dataKey).keys();
+				Iterator<?> its = data.getJSONObject(dataKey).keys();
 				rdata = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><root><"+dataKey;
 				
 				while(its.hasNext()){
-					String attrName = its.next();
-					String attrValue = data.getString(attrName);
-					rdata =rdata+" "+attrName+"="+attrValue;
+					Object nextObj = its.next();
+					if(nextObj != null) {
+						String attrName = nextObj.toString();
+						String attrValue = data.getString(attrName);
+						rdata =rdata+" "+attrName+"="+attrValue;
+					}
 				}
 				rdata =rdata+ " /></root>";
 				

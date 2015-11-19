@@ -32,11 +32,11 @@ public class HikaricpMysqlConnection implements Connection<java.sql.Connection> 
 
 	public JSONObject queryList(JSONObject param, String sql) {
 		// µ¥Ò³¼ÇÂ¼Êý
-		Integer pageCounts = Integer.valueOf(param.getString("pageCounts"));
-		param.remove("pageCounts");
+		//Integer pageCounts = Integer.valueOf(param.getString("pageCounts"));
+		//param.remove("pageCounts");
 		// Ò³Âë
-		Integer currentPage = Integer.valueOf(param.getString("currentPage"));
-		param.remove("currentPage");
+		//Integer currentPage = Integer.valueOf(param.getString("currentPage"));
+		//param.remove("currentPage");
 
 		JSONObject sqlParamsJSON = param.getJSONObject("sqlParams");
 		Map<Integer, Object> sqlParams = JSONUtils

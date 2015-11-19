@@ -2,26 +2,19 @@ package com.org.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
-import com.org.common.CommonConstant;
 import com.org.common.UserConstant;
-import com.org.container.CommonContainer;
-import com.org.services.busi.ChannelService;
-import com.org.services.busi.CommemorateService;
 import com.org.services.busi.JsService;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
 import com.org.util.SpringUtil;
 import com.org.utils.DateUtil;
-import com.org.utils.SmpPropertyUtil;
 
 /**
  * ÓÃ»§²Ù×÷¸ú×Ù

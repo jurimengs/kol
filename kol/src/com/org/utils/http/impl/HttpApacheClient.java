@@ -154,10 +154,13 @@ public class HttpApacheClient implements HttpTool{
 			HttpPost httpRequest = new HttpPost(url);
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			
-			Iterator<String> it = requestJson.keySet().iterator();
+			Iterator<?> it = requestJson.keySet().iterator();
 			while(it.hasNext()){
-				String name = it.next();
-				params.add(new BasicNameValuePair(name,requestJson.getString(name)));
+				Object nextObj = it.next();
+				if(nextObj != null) {
+					String name = nextObj.toString();
+					params.add(new BasicNameValuePair(name,requestJson.getString(name)));
+				}
 			}
 			
 			HttpEntity httpentity = new UrlEncodedFormEntity(params, charset);
@@ -203,6 +206,10 @@ public class HttpApacheClient implements HttpTool{
 
 	public JSONObject wxHttpsPost(JSONObject requestJson, String url) {
 		return httpsRequest(url, "POST", requestJson.toString());
+	}
+	
+	public JSONObject wxHttpsPost(String requestJson, String url) {
+		return httpsRequest(url, "POST", requestJson);
 	}
 	
 	public JSONObject wxHttpsGet(JSONObject requestJson, String url) {

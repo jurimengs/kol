@@ -3,7 +3,7 @@ package com.org.utils;
 
 public class ByteUtil {
 
-	private static char[] HEXCHAR = { '0', '1', '2', '3', '4', '5', '6', '7','8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+	//private static char[] HEXCHAR = { '0', '1', '2', '3', '4', '5', '6', '7','8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	
 	//合并字节的数组
 	public static byte[] union(byte[] bs1,byte[] bs2){

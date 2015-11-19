@@ -254,7 +254,6 @@
 			}
 			$("#channelId").val(currentChannelId);
 		} else {
-			// 不设置默认值，就是要让人家选
 			$("#channelId").val(0);
 		}
 		

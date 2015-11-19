@@ -121,17 +121,6 @@ public class JSONUtils {
 		}
 	}
 	
-	public static List<?> getListFromJsonArray(JSONArray ja,Class<?> T){
-		try{
-			 return JSONArray.toList(ja);
-		}catch(Exception e){
-			log.info("JSON数组转集合过程出错...");
-			return null;
-		}
-	}
-	
-	
-	
 	public static Object toBean(String jsonString,Class<?> beanClass){
 		try{
 			JSONObject jsonObject = JSONObject.fromObject(jsonString);

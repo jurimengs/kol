@@ -3,16 +3,18 @@ package com.org.controller.webapp.utils;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.org.controller.webapp.model.WxMenu;
+import com.org.controller.webapp.model.WxAutoReply;
 import com.org.log.LogUtil;
 import com.org.log.impl.LogUtilMg;
 import com.org.util.CT;
@@ -27,18 +29,14 @@ public class WxUtil {
 	public static String EXIT_CHATING_ROOM = "exitChatingroom";
 
 	private static Log log = LogFactory.getLog(WxUtil.class);
-	private static final String TOKEN = "sandpay123"; // 配置到配置文件
+	private static final String LOCAL_TOKEN = SmpPropertyUtil.getValue("wx", "local_token"); // 配置到配置文件
 	private static final String ACCESS_TOKEN_KEY = "access_token";
 	private static String WX_TICKET = "wxTicket"; // 微信端的ticket
 	private static int CACHE_TIME = 7000; // 微信端的ticket
 
-	public static void main(String[] args) throws InterruptedException {
-		//autoRun();
-	}
-
 	public static boolean checkSignature(String signature, String timestamp,
 			String nonce) {
-		String[] paramArr = { TOKEN, timestamp, nonce };
+		String[] paramArr = { LOCAL_TOKEN, timestamp, nonce };
 		Arrays.sort(paramArr);
 
 		String content = paramArr[0].concat(paramArr[1]).concat(paramArr[2]);
@@ -137,9 +135,9 @@ public class WxUtil {
 	 * @param xmlJson
 	 * @return
 	 */
-	public static String createMenu(JSONObject xmlJson) {
+	public static String autoReply(JSONObject xmlJson) {
 		String Content = xmlJson.getString("Content");
-		String menuStr = matchMenu(Content);
+		String menuStr = matchContent(Content);
 
 		String ToUserName = xmlJson.getString("ToUserName");
 		String FromUserName = xmlJson.getString("FromUserName");
@@ -164,12 +162,12 @@ public class WxUtil {
 	 * @param Content
 	 * @return 
 	 */
-	public static String matchMenu(String content) {
-		WxMenu wxMenu = WxMenu.getInstance();
-		if (wxMenu.containsMenu(content)) {
-			return wxMenu.get(content);
+	public static String matchContent(String content) {
+		WxAutoReply autoReply = WxAutoReply.getInstance();
+		if (autoReply.containsMenu(content)) {
+			return autoReply.get(content);
 		}
-		return wxMenu.getAll();
+		return autoReply.getReplyWords();
 	}
 
 	/**
@@ -203,16 +201,42 @@ public class WxUtil {
 	}
 		
 	public static void createBottomMenu() {
+		String submenuKey = "sub_button";
 		HttpTool http = new HttpApacheClient();
 		String token = Memcache.getInstance().getValue(WX_TOKEN);
 
-		String menuStr = SmpPropertyUtil.getValue("wx_botton_menu", "menu");
-		JSONObject requestJson = JSONObject.fromObject(menuStr);
+		JSONArray menuArray = new JSONArray();
+		Properties p = SmpPropertyUtil.getProperties("wx_botton_menu");
+		String[] menuKeys = {"menua", "menub", "menuc"};
+		for (int i = 0; i < menuKeys.length; i++) {
+			// 一级
+			String menuKeyTemp = menuKeys[i];
+			String menuValTemp = p.getProperty(menuKeyTemp);
+			
+			if(StringUtils.isNotEmpty(menuValTemp)) {
+				JSONObject submenuJson = JSONObject.fromObject(menuValTemp);
+				JSONArray submenuArray = new JSONArray();
+				String[] submenuKeys = {"suba","subb","subc","subd","sube"};
+				for (int j = 0; j < submenuKeys.length; j++) {
+					String submenu = p.getProperty(menuKeyTemp+"_"+submenuKeys[j]);
+					if(StringUtils.isNotEmpty(submenu)) {
+						// 如果不为空，
+						submenuArray.add(submenu);
+					}
+				}
+				if(! submenuArray.isEmpty()) {
+					submenuJson.put(submenuKey, submenuArray);
+				}
+				menuArray.add(submenuJson);
+			}
+		}
+		JSONObject menuJson = new JSONObject();
+		menuJson.put("button", menuArray);
 		
 		StringBuffer createUrl = new StringBuffer(SmpPropertyUtil.getValue("wx", "wx_create_bottommenu_url"));
 		createUrl.append(token);
 
-		JSONObject responseJson = http.wxHttpsPost(requestJson, createUrl.toString());
+		JSONObject responseJson = http.wxHttpsPost(menuJson, createUrl.toString());
 
 		if (0 == responseJson.getInt("errcode")) {
 			LogUtil.log(WxUtil.class, "createBottomMenu 成功：" + responseJson.get("errmsg"), null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_NULL);

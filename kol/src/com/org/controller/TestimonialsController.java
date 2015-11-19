@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 import com.org.common.CommonConstant;
@@ -73,7 +71,7 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 		
 		// 保存言论信息
 		TestimonialsService tService = (TestimonialsService)SpringUtil.getBean("testimonialsService");
-		JSONObject res = tService.saveContents(userId, contents, channelId, title, fileId);
+		tService.saveContents(userId, contents, channelId, title, fileId);
 		// TODO 判断结果是否成功. 如果成功，跳转首页
 		response.sendRedirect("/channel/home.do");
 		return;
@@ -91,12 +89,12 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 		
 		TestimonialsService tService = (TestimonialsService)SpringUtil.getBean("testimonialsService");
 		
-		JSONObject res = tService.saveContents(userId, contents, channelId, title, "");
+		tService.saveContents(userId, contents, channelId, title, "");
 		response.sendRedirect("/channel/home.do");
 		return;
 	}
 	
-	private Log log = LogFactory.getLog(TestimonialsController.class);
+	//private Log log = LogFactory.getLog(TestimonialsController.class);
 
 	@Override
 	public void post(HttpServletRequest request, HttpServletResponse response)

@@ -5,9 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 import com.org.services.busi.CommentsService;
@@ -71,7 +68,7 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 		return;
 	}
 	
-	private Log log = LogFactory.getLog(CommentsController.class);
+	//private Log log = LogFactory.getLog(CommentsController.class);
 
 	@Override
 	public void post(HttpServletRequest request, HttpServletResponse response)

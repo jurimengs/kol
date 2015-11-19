@@ -1,12 +1,9 @@
 package com.org.cron;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.org.util.SpringUtil;
 
 public class CronServiceFactory {
-	private Log log = LogFactory.getLog(CronServiceFactory.class);
+	//private Log log = LogFactory.getLog(CronServiceFactory.class);
 	
 	private static CronServiceFactory factory;
 	
