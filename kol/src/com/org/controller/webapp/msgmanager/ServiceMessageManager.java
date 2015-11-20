@@ -33,6 +33,8 @@ public class ServiceMessageManager {
 		// 调用客服接口发送消息 
 		String url = SmpPropertyUtil.getValue("wx", urlKey);
 		url = url.concat(Memcache.getInstance().getValue(WxUtil.WX_TOKEN));
+		log.info("pushMessage url====> " + url);
+		
 		
 		HttpTool http = new HttpApacheClient();
 		JSONObject returns = http.wxHttpsPost(paramContent, url);

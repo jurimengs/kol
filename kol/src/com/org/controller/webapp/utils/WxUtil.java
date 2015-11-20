@@ -33,6 +33,7 @@ public class WxUtil {
 	private static final String ACCESS_TOKEN_KEY = "access_token";
 	private static String WX_TICKET = "wxTicket"; // 微信端的ticket
 	private static int CACHE_TIME = 7000; // 微信端的ticket
+	private static Timer timer = new Timer();
 
 	public static boolean checkSignature(String signature, String timestamp,
 			String nonce) {
@@ -64,7 +65,9 @@ public class WxUtil {
 		JSONObject responseJson = http.httpPost(requestJson, remoteUrl, CT.ENCODE_UTF8);
 
 		// 存放到memcache
+		log.info("存放前====> "+Memcache.getInstance().getValue(WX_TOKEN));
 		Memcache.getInstance().setValue(WX_TOKEN, CACHE_TIME, responseJson.getString(ACCESS_TOKEN_KEY));
+		log.info("存放前====> "+Memcache.getInstance().getValue(WX_TOKEN));
 		return responseJson.getString(ACCESS_TOKEN_KEY);
 	}
 
@@ -123,10 +126,13 @@ public class WxUtil {
 
 		Long timeInterval = Long.valueOf(SmpPropertyUtil.getValue("wx", "time_interval"));
 		Date date = calendar.getTime(); // 第一次执行定时任务的时间
-		Timer timer = new Timer();
 		WxTimerTask task = new WxTimerTask();
 		// 安排指定的任务在指定的时间开始进行重复的固定延迟执行。
 		timer.schedule(task, date, timeInterval * 1000);
+	}
+	
+	public static void cancelAutoRun(){
+		timer.cancel();
 	}
 
 	/**
@@ -250,7 +256,6 @@ public class WxUtil {
 		@Override
 		public void run() {
 			boolean res = WxUtil.wxInit();
-			System.out.println("执行定时获取微信任务");
 			LogUtil.log(WxTimerTask.class, "执行定时获取微信任务", null, LogUtilMg.LOG_INFO, CT.LOG_PATTERN_NULL);
 
 			boolean anyTimes = Boolean.valueOf(SmpPropertyUtil.getValue("wx", "create_menu_by_interval"));

@@ -19,6 +19,9 @@ public class ContextLoaderListener implements ServletContextListener{
 	private ContextLoader contextLoader;
 	
 	public void contextDestroyed(ServletContextEvent arg0) {
+		// È¡Ïûtimer
+		WxUtil.cancelAutoRun();
+		//
 		if (this.contextLoader != null) {
 			this.contextLoader.closeWebApplicationContext(arg0.getServletContext());
 			//KestrelSub.getInstance().stop();

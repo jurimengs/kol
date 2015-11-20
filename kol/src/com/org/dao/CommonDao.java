@@ -129,20 +129,6 @@ public class CommonDao extends BaseDao {
 		return null;
 	}
 
-	// public void addSingle(Object obj){
-	// try {
-	// Entity a = obj.getClass().getAnnotation(Entity.class);
-	// String tableName = a.tableName();
-	// String sql = "insert into "+tableName+" values (?)";
-	// // PreparedStatement ps = con.prepareStatement(sql);
-	// // PreparedStatement ps = con.prepareStatement(sql, new
-	// Class[]{String.class}, id);
-	// // ps.execute();
-	// } catch (Exception e) {
-	// System.out.println(e.getMessage());
-	// }
-	// }
-
 	/**
 	 * 
 	 * @param sql
@@ -191,34 +177,6 @@ public class CommonDao extends BaseDao {
 			ps.close();
 		}
 	}
-
-	// 不建议使�?处理过于复杂
-	// private Map<String, Object> parseObjToTableProperties(Object obj) throws
-	// IllegalArgumentException, IllegalAccessException{
-	// Field[] fds = obj.getClass().getDeclaredFields();
-	// Method md = null;
-	// Map<String, Object> result = new HashMap<String, Object>();
-	// for (int i = 0; i < fds.length; i++) {
-	// try {
-	// String fdName = fds[i].getName();
-	// fdName = String.valueOf(fdName.charAt(0)).toUpperCase() +
-	// fdName.substring(1);
-	// md = obj.getClass().getDeclaredMethod("get"+fdName,
-	// fds[i].getType().getClasses());
-	// String fdValue = md.invoke(obj).toString();
-	// // fdName 再转表字段名
-	// result.put(fdName, fdValue);
-	// } catch (SecurityException e) {
-	// e.printStackTrace();
-	// } catch (NoSuchMethodException e) {
-	// e.printStackTrace();
-	// } catch (InvocationTargetException e) {
-	// e.printStackTrace();
-	// }
-	// System.out.println(fds[i].getName() +"    "+ fds[i].getLong(obj));
-	// }
-	// return null;
-	// }
 
 	public JSONObject isExist(String sql, Map<Integer, Object> params, List<String> secretColumn) {
 		JSONObject user = null;
