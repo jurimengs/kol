@@ -40,7 +40,7 @@
 			<br>
 			描述：<br><textarea class="maskContent" id="comments" name="comments" placeholder="内容"></textarea>
 			<br>
-			配图：<br><input type="text" id="picPath" name="picPath" /><br>
+			配图：<br><input type="file" id="picPath" name="picPath" /><br>
 			<div class="clear"></div>
 			<div class="comwidth">
 				<a href="javascript:void(0);" id="submitBtn" class="btn orange" onclick='formTo("commForm", "/commemorate/addCommemorate.do");'>确认创建</a>
