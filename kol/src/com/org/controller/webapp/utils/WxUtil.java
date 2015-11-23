@@ -121,6 +121,10 @@ public class WxUtil {
 	 * @param timeInterval
 	 */
 	public static void autoRun() {
+		String autoOpen = SmpPropertyUtil.getValue("wx", "auto_open");
+		if(autoOpen.equals("false")) {
+			return;
+		}
 		// 同时启一个定时任务,每两小时执行一次
 		Calendar calendar = Calendar.getInstance();
 

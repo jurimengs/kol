@@ -69,11 +69,8 @@ public class ContextLoaderListener implements ServletContextListener{
 			mongodbSvc.test();
 		*/
 		
-		//Memcache.test();
-	    // 初始化微信token
-	    //WxUtil.init();
 	    // 开启定时获取token任务
-	    //WxUtil.autoRun();
+	    WxUtil.autoRun();
 	    
 		/*12. init guice with mybatis */
 		/*log.info("Integrate Smp With Guice Container Begin....");
