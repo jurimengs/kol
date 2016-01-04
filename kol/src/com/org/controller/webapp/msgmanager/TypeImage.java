@@ -1,6 +1,7 @@
 package com.org.controller.webapp.msgmanager;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -14,7 +15,7 @@ import com.org.controller.webapp.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeImage extends ServiceMessageManager implements Event {
+public class TypeImage extends ServiceMessageManager implements Event, Callable<String> {
 	//private Log log = LogFactory.getLog(TypeText.class);
 	private JSONObject xmlJson;
 
@@ -55,6 +56,12 @@ public class TypeImage extends ServiceMessageManager implements Event {
 
 	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
+	}
+
+	@Override
+	public String call() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

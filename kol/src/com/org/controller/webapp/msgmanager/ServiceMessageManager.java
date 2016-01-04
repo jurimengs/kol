@@ -21,7 +21,7 @@ import com.org.utils.http.impl.HttpApacheClient;
 public class ServiceMessageManager {
 	private Log log = LogFactory.getLog(ServiceMessageManager.class);
 	protected ServiceMessageManager(){}
-
+	
 	/**
 	 * 发送消息给指定用户
 	 * @param toOpenid

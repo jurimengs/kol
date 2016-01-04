@@ -1,6 +1,7 @@
 package com.org.controller.webapp.msgmanager;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -14,7 +15,7 @@ import com.org.controller.webapp.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeText extends ServiceMessageManager implements Event {
+public class TypeText extends ServiceMessageManager implements Event, Callable<String> {
 	//private Log log = LogFactory.getLog(TypeText.class);
 	private JSONObject xmlJson;
 
@@ -35,10 +36,10 @@ public class TypeText extends ServiceMessageManager implements Event {
 		if(chatingUsersMap.containsKey(msgFromOpenid) && chatingUsersMap.get(msgFromOpenid)) {
 			returnStr = WxConstant.RETURN_SUCCESS;
 			// 从组中除去发信息者自己
-			chatingUserArray.remove(msgFromOpenid);
+			//chatingUserArray.remove(msgFromOpenid);
 			// 发消息者的昵称
 			String nick = WxUserContainer.getUserBaseInfoFromLocal(msgFromOpenid).getString("nickname") ;
-			String content = nick + ":\n"+xmlJson.getString("Content");
+			String content = nick + ":\n" + xmlJson.getString("Content");
 			JSONObject paramContent = getTextMessageJson(content);
 			pushMassMessage(chatingUserArray, paramContent, 0);
 		} else {
@@ -53,6 +54,12 @@ public class TypeText extends ServiceMessageManager implements Event {
 
 	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
+	}
+
+	@Override
+	public String call() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

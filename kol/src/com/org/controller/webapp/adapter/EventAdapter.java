@@ -1,5 +1,7 @@
 package com.org.controller.webapp.adapter;
 
+import java.util.concurrent.Callable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -46,6 +48,29 @@ public class EventAdapter {
 		return e;
 	}
 
+
+	
+	public Callable<String> adapterThread(){
+		if(xmlJson == null) {
+			throw new NullPointerException("EventAdapter can not deal an null param request");
+		}
+		Callable<String> e = null;
+		String msgType = xmlJson.getString("MsgType");
+		log.info("请求消息类型====>"+msgType);
+		if(msgType.equals("event")) {
+			e = new TypeEvent(xmlJson);
+		} else if(msgType.equals("text")) {
+			e = new TypeText(xmlJson);
+		} else if(msgType.equals("image")) {
+			e = new TypeImage(xmlJson);
+		} else if(msgType.equals("news")) {
+			e = new TypeNews(xmlJson);
+		} else {
+			throw new NullPointerException("unknown event type : " + msgType);
+		}
+		return e;
+	}
+	
 	public JSONObject getXmlJson() {
 		return xmlJson;
 	}

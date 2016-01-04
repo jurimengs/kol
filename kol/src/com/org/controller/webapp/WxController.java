@@ -1,6 +1,7 @@
 package com.org.controller.webapp;
 
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 import com.org.controller.webapp.adapter.EventAdapter;
+import com.org.controller.webapp.msgmanager.DealThread;
 import com.org.controller.webapp.msgmanager.Event;
 import com.org.controller.webapp.utils.WxUtil;
 import com.org.servlet.CommonController;
@@ -65,9 +67,11 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		JSONObject xmlJson = XmlUtils.getDocumentFromRequest(request);
 		log.info("收到微信服务器的消息：xmlJson=====> " + xmlJson);
-		Event event = new EventAdapter(xmlJson).adapter();
-		String returnStr = event.deal();
-		this.write(returnStr, CT.ENCODE_UTF8, response);
+		//Event event = new EventAdapter(xmlJson).adapter();
+		Callable<String> event = new EventAdapter(xmlJson).adapterThread();
+		DealThread.dealCallable(event);
+		
+		this.write(WxConstant.RETURN_SUCCESS, CT.ENCODE_UTF8, response);
 		return;
 	}
 	
