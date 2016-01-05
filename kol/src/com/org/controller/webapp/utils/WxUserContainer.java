@@ -151,8 +151,9 @@ public class WxUserContainer {
 		for (int i = 0; i < openidList.size(); i++) {
 			openid = openidList.getString(i);
 			// 获取用户的基本信息
-			// TODO应该要在获取到信息后，保存到数据库
+			// TODO 应该要在获取到信息后，保存到数据库
 			userBaseInfo = getUserBaseInfo(openid);
+			System.out.println("====>"+userBaseInfo.toString());
 			GROUP_USER_INFO.put(openid, userBaseInfo);
 		}
 	}
@@ -172,6 +173,11 @@ public class WxUserContainer {
 		return baseInfo;
 	}
 	
+	/**
+	 * 根据openid 向微信查询用户基本信息
+	 * @param openid
+	 * @return
+	 */
 	public static JSONObject getUserBaseInfo(String openid) {
 		String token = Memcache.getInstance().getValue(WxUtil.WX_TOKEN);
 		String remoteUrl = SmpPropertyUtil.getValue("wx", "wx_get_user_baseinfo");

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
@@ -16,6 +15,7 @@ import com.org.controller.webapp.utils.WxUserContainer;
 import com.org.controller.webapp.utils.WxUtil;
 import com.org.dao.CommonDao;
 import com.org.util.SpringUtil;
+import com.org.utils.DateUtil;
 
 /**
  * request from wx , type is "event"
@@ -58,23 +58,46 @@ public class TypeEvent extends ServiceMessageManager implements Event, Callable<
 			if(returns != null && (returns.getInt("errcode")==0)) {
 				log.info("消息推送成功");
 			}
-		} else if(Event.equals("unsubscribe")) {
-			// 用户取消关注
-			// TODO 更新用户关注状态 
+		} else if(Event.equals("unsubscribe") || Event.equals("subscribe")) {
 			
-		} else if(Event.equals("subscribe")) {
-			// TODO 用户关注
-			// 添加用户
-			String addSql = "INSERT INTO wx_user_info (openid, nickname, sex, subscribe, subscribe_time) VALUES (?, ?, ?, ?, ?)";
-			Map<Integer, Object> params = new HashMap<Integer, Object>();
 			CommonDao commonDao = (CommonDao)SpringUtil.getBean("commonDao");
-			try {
-				commonDao.addSingle(addSql, params);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				log.info("subscribe ====> 保存关注用户异常");
+			String sql = "select 1 from wx_user_info where openid = ?";
+			Map<Integer, Object> queryParams = new HashMap<Integer, Object>();
+			queryParams.put(1, FromUserName);
+			
+			JSONObject actual = WxUserContainer.getUserBaseInfo(FromUserName);
+			String subscribe = actual.getString("subscribe");
+			String subscribe_time = DateUtil.getDateStringByFormat(DateUtil.yyyyMMddHHmmss);
+			
+			if(commonDao.isExist(sql, queryParams, null) != null) {
+				// update
+				String updateSql = "update wx_user_info set subscribe=?, subscribe_time=? where openid =?";
+				Map<Integer, Object> params = new HashMap<Integer, Object>();
+				params.put(1, subscribe); // 
+				params.put(2, subscribe_time);
+				params.put(3, FromUserName);
+				commonDao.update(updateSql, params);
+			} else {
+				// insert 
+				String nickname = actual.getString("nickname");
+				String sex = actual.getString("sex");
+				
+				String addSql = "insert into wx_user_info (openid, nickname, sex, subscribe, subscribe_time) VALUES (?, ?, ?, ?, ?)";
+				Map<Integer, Object> params = new HashMap<Integer, Object>();
+				params.put(1, FromUserName); // 
+				params.put(2, nickname);
+				params.put(3, sex);
+				params.put(4, subscribe);
+				params.put(5, subscribe_time);
+				try {
+					commonDao.addSingle(addSql, params);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					log.info("subscribe ====> 保存关注用户异常");
+				}
 			}
 		}
+		// 
 		return WxConstant.RETURN_SUCCESS;
 	}
 	

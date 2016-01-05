@@ -78,22 +78,11 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	// TODO 测试用的
 	public void toTest(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		log.info("toTest: " + this.getParamMap(request));
-		String token = WxUtil.getToken();
-		String timestamp = String.valueOf(StringUtil.getTimestamp()); // 必填，生成签名的时间戳
-		String nonceStr = UUID.randomUUID().toString(); // 必填，签名，见附录1
-		String url = request.getRequestURL().toString();
-		String signature = WxUtil.localSign(timestamp, nonceStr, url); // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-		String appid = SmpPropertyUtil.getValue("wx", "appid");
-		
-		request.setAttribute("timestamp", timestamp);
-		request.setAttribute("nonceStr", nonceStr);
-		request.setAttribute("url", url);
-		request.setAttribute("signature", signature);
-		request.setAttribute("cacheToken", token);
-		request.setAttribute("appId", appid);
-		this.forward("/www/html/wxtest.jsp", request, response);
-		return;
+		JSONObject xmlJson = new JSONObject();
+		xmlJson.put("MsgType", "event");
+
+		Callable<String> event = new EventAdapter(xmlJson).adapterThread();
+		DealThread.dealCallable(event);
 	}
 	
 	// TODO 测试用的
