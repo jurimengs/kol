@@ -2,16 +2,15 @@ package com.org.controller.webapp.adapter;
 
 import java.util.concurrent.Callable;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.org.controller.webapp.msgmanager.Event;
 import com.org.controller.webapp.msgmanager.TypeEvent;
 import com.org.controller.webapp.msgmanager.TypeImage;
 import com.org.controller.webapp.msgmanager.TypeNews;
 import com.org.controller.webapp.msgmanager.TypeText;
-
-import net.sf.json.JSONObject;
 
 /**
  * try to determined whitch event will deal this request
@@ -27,11 +26,11 @@ public class EventAdapter {
 		this.xmlJson = xmlJson;
 	}
 	
-	public Event adapter(){
+	public Callable<?> adapter(){
 		if(xmlJson == null) {
 			throw new NullPointerException("EventAdapter can not deal an null param request");
 		}
-		Event e = null;
+		Callable<?> e = null;
 		String msgType = xmlJson.getString("MsgType");
 		log.info("请求消息类型====>"+msgType);
 		if(msgType.equals("event")) {

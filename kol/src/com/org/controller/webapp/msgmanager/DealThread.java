@@ -11,10 +11,12 @@ import net.sf.json.JSONObject;
 
 public class DealThread {
 	private static ExecutorService executor =  Executors.newCachedThreadPool();
+	private static ExecutorService executorBatchMessage =  Executors.newCachedThreadPool();
 	static {
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			public void run() {
 				executor.shutdown();
+				executorBatchMessage.shutdown();
 			}
 		});
 	}
@@ -53,8 +55,13 @@ public class DealThread {
 	public static <T> Future<T> dealCallable(Callable<T> cc) throws InterruptedException, ExecutionException  {
 		return executor.submit(cc);
 	}
+	
+	public static <T> Future<T> dealBatchMessage(Callable<T> cc) throws InterruptedException, ExecutionException  {
+		return executorBatchMessage.submit(cc);
+	}
 
 	public static void shutdown(){
 		executor.shutdown();
+		executorBatchMessage.shutdown();
 	}
 }

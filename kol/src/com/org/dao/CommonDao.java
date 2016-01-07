@@ -158,15 +158,23 @@ public class CommonDao extends BaseDao {
 		return true;
 	}
 
+	/**
+	 * @param sql
+	 * @param params
+	 * @throws SQLException
+	 */
 	public synchronized <T> void update(String sql, Map<Integer, Object> params)
 			throws SQLException {
 		java.sql.Connection conn = getConnection();
+		// 如果要做事务，批量提交什么的，就要关闭自动提交，在自己想要提交的时候调用commit()
+		//conn.setAutoCommit(false);
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		try {
 			setStatmentParams(ps, params);
 			ps.executeUpdate();
-			conn.commit();
+			//conn.commit();
+			// conn默认的是自动提交，如果使用了conn.commit();，则需要在conn初始化的时候关闭自动提交 conn.setAutoCommit(false);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			conn.setAutoCommit(false);

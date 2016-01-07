@@ -17,7 +17,7 @@ import com.org.controller.webapp.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeNews extends ServiceMessageManager implements Event, Callable<String> {
+public class TypeNews extends ServiceMessageManager implements Callable<String> {
 	private Log log = LogFactory.getLog(TypeNews.class);
 	private JSONObject xmlJson;
 
@@ -26,7 +26,7 @@ public class TypeNews extends ServiceMessageManager implements Event, Callable<S
 	}
 
 	@Override
-	public String deal() {
+	public String call() {
 		String returnStr = "";
 		// 发消息的人
 		String msgFromOpenid = xmlJson.getString("FromUserName");
@@ -60,12 +60,6 @@ public class TypeNews extends ServiceMessageManager implements Event, Callable<S
 
 	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
-	}
-
-	@Override
-	public String call() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

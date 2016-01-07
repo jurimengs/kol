@@ -15,7 +15,7 @@ import com.org.controller.webapp.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeImage extends ServiceMessageManager implements Event, Callable<String> {
+public class TypeImage extends ServiceMessageManager implements Callable<String> {
 	//private Log log = LogFactory.getLog(TypeText.class);
 	private JSONObject xmlJson;
 
@@ -24,7 +24,7 @@ public class TypeImage extends ServiceMessageManager implements Event, Callable<
 	}
 
 	@Override
-	public String deal() {
+	public String call() {
 		// 发消息的人
 		String msgFromOpenid = xmlJson.getString("FromUserName");
 		// 消息要反馈的对象列表
@@ -56,12 +56,6 @@ public class TypeImage extends ServiceMessageManager implements Event, Callable<
 
 	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
-	}
-
-	@Override
-	public String call() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }
