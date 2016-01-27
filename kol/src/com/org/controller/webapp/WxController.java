@@ -14,8 +14,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
-import com.org.controller.webapp.adapter.EventAdapter;
-import com.org.controller.webapp.msgmanager.DealThread;
+import com.org.controller.webapp.rute.RuteAdapter;
+import com.org.controller.webapp.rute.RuteThreadPool;
 import com.org.controller.webapp.utils.WxUtil;
 import com.org.servlet.CommonController;
 import com.org.servlet.SmpHttpServlet;
@@ -26,19 +26,10 @@ import com.org.utils.XmlUtils;
 @Controller
 public class WxController extends SmpHttpServlet implements CommonController{
 	private static final long serialVersionUID = 2156792239072761671L;
+	private Log log = LogFactory.getLog(WxController.class);
 
 	public WxController(){
-		
 	}
-	
-	public void toWxTest(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		log.info("token" + this.getParamMap(request));
-		
-		this.forward("/www/html/wxtest.jsp", request, response);
-		return;
-	}
-	
-	private Log log = LogFactory.getLog(WxController.class);
 	
 	/**
 	 * @param request
@@ -66,22 +57,12 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		JSONObject xmlJson = XmlUtils.getDocumentFromRequest(request);
 		log.info("收到微信服务器的消息：xmlJson=====> " + xmlJson);
-		//Event event = new EventAdapter(xmlJson).adapter();
-		Callable<String> event = new EventAdapter(xmlJson).adapterThread();
-		Future<String> result = DealThread.dealCallable(event);
+		Callable<String> event = RuteAdapter.adapter(xmlJson);
+		Future<String> result = RuteThreadPool.submit(event);
+		//Future<String> result = DealThread.dealCallable(event);
 		
 		this.write(result.get(), CT.ENCODE_UTF8, response);
 		return;
-	}
-	
-	// TODO 测试用的
-	public void toTest(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		JSONObject xmlJson = new JSONObject();
-		xmlJson.put("MsgType", "event");
-
-		Callable<String> event = new EventAdapter(xmlJson).adapterThread();
-		DealThread.dealCallable(event);
 	}
 	
 	// TODO 测试用的
