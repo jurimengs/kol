@@ -30,16 +30,16 @@ public class WxUserController extends SmpHttpServlet implements CommonController
 	
 	public void getUserList(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		JSONObject userlist = WxUserContainer.getUserList();
-		JSONObject data = userlist.getJSONObject("data");
-		String openidList = data.getString("openid");
+//		JSONObject userlist = WxUserContainer.getUserList();
+//		JSONObject data = userlist.getJSONObject("data");
+//		String openidList = data.getString("openid");
 //		for (int i = 0; i < openidList.size(); i++) {
 //			System.out.println(openidList.getString(i));
 //		}
-		openidList = openidList.replace("\"", "").replace("[", "").replace("]", "");
-		request.setAttribute("openidList", openidList);
-		this.forward("/www/html/test_userlist.jsp", request, response);
-		return;
+//		openidList = openidList.replace("\"", "").replace("[", "").replace("]", "");
+//		request.setAttribute("openidList", openidList);
+//		this.forward("/www/html/test_userlist.jsp", request, response);
+//		return;
 	}
 	
 	public void getUserGroup(HttpServletRequest request, HttpServletResponse response)
